@@ -10,43 +10,23 @@ package Util;
  * @author Dagi
  */
 //The following code is applicable while connecting to SQL server only.
- 
-import java.sql.Connection;
- import java.sql.DriverManager;
- 
+import static java.lang.System.out;
+
+import java.sql.*;
+
 public class DBConnection {
- 
-public static Connection createConnection()
- {
- Connection con = null;
- String url = "silva.computing.dundee.ac.uk/16agileteam3db"; //for SQL and oracle or any other db server this url differs. where ravi is the database name and 3306 is the port where mysql is running
- String username = "16agileteam3"; //username of database user
- String password = "0498.at3.8940"; //password
- /*
- U: 16agileteam3
-P: 0498.at3.8940
-D: 16agileteam3db
-S: silva.computing.dundee.ac.uk*/
- 
-try
- {
- try
- {
- Class.forName("com.mysql.jdbc.Driver");// differs from DB server to server
- }
- catch (ClassNotFoundException e)
- {
- e.printStackTrace();
- }
- 
-con = DriverManager.getConnection(url, username, password);
- 
+
+    public static Connection createConnection() {
+        Connection con = null;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+
+            con = DriverManager.getConnection("jdbc:mysql://silva.computing.dundee.ac.uk:3306/16agileteam3db", "16agileteam3", "0498.at3.8940");
+            if(!con.isClosed()) out.println("Success");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return con;
+    }
 }
- catch (Exception e)
- {
- e.printStackTrace();
- }
- 
-return con;
- }
- }

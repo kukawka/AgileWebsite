@@ -12,15 +12,26 @@ and open the template in the editor.
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     </head>
     <body>
-                <nav class="navbar navbar-default">
+        <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">QuizUp</a>
                 <ul class="nav navbar-nav navbar-right">
-                     <li><a href="">Student Log-in</a></li>
-                     </ul>
+                    <li><a href="">Student Log-in</a></li>
+                </ul>
             </div>
-                </nav>
-                
+        </nav>
+        <article>
+            <h3>Login</h3>
+            <form method="POST"  action="Login">
+                <ul>
+                    <li>User Name <input type="text" name="username"></li>
+                    <li>Password <input type="password" name="password"></li>
+                </ul>
+                <br/>
+                <input type="submit" value="Login"> 
+            </form>
+
+        </article>       
         <div>Blaaah</div>
     </body>
 </html>

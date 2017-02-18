@@ -26,9 +26,14 @@ public class Login extends HttpServlet{
             throws ServletException, IOException {
         String userName = request.getParameter("username");
         String password = request.getParameter("password");
-        
+        //String userName= "2" ;
+        //String password="test" ;
         LoginModel loginModel = new LoginModel(); //creating object for LoginDao. This class contains main logic of the application.
-        //String userValidate = loginModel.authenticateLogin(loginModel);
+        boolean validUser = loginModel.authenticateLogin(userName, password);
+        if(validUser){
+        response.sendRedirect("/AgileWebsite/student_index.jsp");
+        }
     }
+    
     }
     
