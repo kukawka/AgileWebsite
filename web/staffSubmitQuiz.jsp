@@ -1,3 +1,4 @@
+<%@page import="java.util.UUID"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -39,11 +40,11 @@
                     <%-- Display per number of questions to be given--%>
                     <%
                     //variables from last page
-                    questionsnumber=request.getAttribute("questionsnumber");
-                    quizID=request.getAttribute("quizID");
-                    creationDate=request.getAttribute("creationDate");
-                    title=request.getAttribute("title");
-                    moduleID=request.getAttribute("moduleID");
+                    int questionsnumber=Integer.parseInt(request.getParameter("questionsnumber"));
+                    UUID quizID=UUID.fromString(request.getParameter("quizID"));
+                    //Date creationDate=request.getParameter("creationDate");
+                    String title=request.getParameter("title");
+                    UUID moduleID=UUID.fromString(request.getParameter("moduleID"));
 
 
                     String questionTextName="questiontext";
