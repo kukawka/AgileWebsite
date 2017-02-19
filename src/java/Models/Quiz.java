@@ -13,11 +13,11 @@ public class Quiz {
     public boolean RegisterQuiz(String title, String moduleID)
     {
     	//prepare query
-        PreparedStatement ps = session.prepare("insert into quiz (title,moduleID) Values(?,?)");
+        //PreparedStatement ps = session.prepare("insert into quiz (title,moduleID) Values(?,?)");
        
         //prepared statement from ^
-        BoundStatement boundStatement = new BoundStatement(ps); 
-        session.execute(  boundStatement.bind(title,moduleID));
+        //BoundStatement boundStatement = new BoundStatement(ps); 
+        //session.execute(  boundStatement.bind(title,moduleID));
 
         return true;
     }
@@ -25,11 +25,11 @@ public class Quiz {
     public boolean SubmitQuestion(UUID questionID, String questionText, String explanationText, boolean valid, UUID quizID)
     {
     	//prepare query
-        PreparedStatement ps = session.prepare("insert into question (questionID,questionText,explanationText,valid,quizID) Values(?,?,?,?,?)");
+        //PreparedStatement ps = session.prepare("insert into question (questionID,questionText,explanationText,valid,quizID) Values(?,?,?,?,?)");
        
         //prepared statement from ^
-        BoundStatement boundStatement = new BoundStatement(ps); 
-        session.execute(  boundStatement.bind(questionID,questionText,explanationText,valid,quizID));
+        //BoundStatement boundStatement = new BoundStatement(ps); 
+        //session.execute(  boundStatement.bind(questionID,questionText,explanationText,valid,quizID));
 
         return true;
     }
@@ -37,12 +37,12 @@ public class Quiz {
     public boolean SubmitAnswer(UUID answerID, String answerText, boolean correct, UUID questionID)
     {
     	//prepare query
-        PreparedStatement ps = session.prepare("insert into answer (answerID,answerText,correct,questionID) Values(?,?,?,?)");
+        //PreparedStatement ps = session.prepare("insert into answer (answerID,answerText,correct,questionID) Values(?,?,?,?)");
        
         //prepared statement from ^
-        BoundStatement boundStatement = new BoundStatement(ps); 
-        session.execute(  boundStatement.bind(answerID,answerText,correct,questionID));
+        //BoundStatement boundStatement = new BoundStatement(ps); 
+        //session.execute(  boundStatement.bind(answerID,answerText,correct,questionID));
 
         return true;
     }
-
+}
