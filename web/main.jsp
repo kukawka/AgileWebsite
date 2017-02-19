@@ -29,6 +29,7 @@
         </nav>
 
         <h1>Hello <%=login.getUsername()%>!</h1>
+        <%=login.getType()%>
 
     </body>
 </html>

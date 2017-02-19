@@ -30,7 +30,7 @@ public class Logout extends HttpServlet {
             LoggedIn login= new LoggedIn();
             login.setLogedout();
             session.setAttribute("LoggedIn", null);
-            RequestDispatcher rd = request.getRequestDispatcher("/student_index.jsp");  
+            RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");  
             rd.forward(request,response);
     }
 }

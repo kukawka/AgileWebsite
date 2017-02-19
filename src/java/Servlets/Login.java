@@ -28,29 +28,25 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         String userName = request.getParameter("username");
         String password = request.getParameter("password");
-        String type = request.getParameter("type");
+        //String type = request.getParameter("type");
         HttpSession session = request.getSession();
 
         //String userName= "2" ;
         //String password="test" ;
         LoginModel loginModel = new LoginModel(); //creating object for LoginDao. This class contains main logic of the application.
-        boolean validUser = loginModel.authenticateLogin(userName, password, type);
-        if (validUser) {
+        String type = loginModel.authenticateLogin(userName, password);
+        if (type!=null) {
             LoggedIn login = new LoggedIn();
             login.setLogedin();
             login.setUsername(userName);
+            login.setType(type);
             session.setAttribute("LoggedIn", login);
             response.sendRedirect("/AgileWebsite/main.jsp");
         } else {
             request.setAttribute("check", false);
-            
-            if (type.equals("staff")) {
-                RequestDispatcher rd = request.getRequestDispatcher("/staff_index.jsp");
+
+                RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
                 rd.forward(request, response);
-            } else{
-                RequestDispatcher rd = request.getRequestDispatcher("/student_index.jsp");
-                rd.forward(request, response);
-            }
 
         }
     }

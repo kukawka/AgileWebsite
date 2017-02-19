@@ -12,6 +12,7 @@ package Beans;
 public class LoggedIn {
     boolean logedin=false;
     String Username=null;
+    String Type=null;
     //String First_name=null ;
     public void LogedIn(){
         
@@ -22,6 +23,13 @@ public class LoggedIn {
     }
     public String getUsername(){
         return Username;
+    }
+    
+    public void setType(String type){//where did that come from?????
+        this.Type=type;
+    }
+    public String getType(){//where did that come from?????
+        return Type;
     }
    
     public void setLogedin(){

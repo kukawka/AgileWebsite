@@ -17,7 +17,7 @@ import java.sql.Statement;
  */
 public class LoginModel {
 
-    public boolean authenticateLogin(String username, String password, String type) {
+    public String authenticateLogin(String username, String password) {
 
         Connection con;
         Statement statement = null;
@@ -25,6 +25,7 @@ public class LoginModel {
 
         String userNameDB = "";
         String passwordDB = "";
+        String typeDB = "";
 
         try {
             con = DBConnection.createConnection(); //establishing connection
@@ -32,26 +33,22 @@ public class LoginModel {
                 return true;
             }*/
             statement = con.createStatement();
-            if (type.equals("staff")) {
-                resultSet = statement.executeQuery("select ID,Password from user where Type='Staff'"); //Here table name is users and userName,password are columns. fetching all the records and storing in a resultSet.
-            } else {
-                resultSet = statement.executeQuery("select ID,Password from user where Type='Student'");
-            }
-            
+            resultSet = statement.executeQuery("select ID,Password, Type from user"); //Here table name is users and userName,password are columns. fetching all the records and storing in a resultSet.
             while (resultSet.next()) // Until next row is present otherwise it return false
             {
                 userNameDB = resultSet.getString("ID"); //fetch the values present in database
                 passwordDB = resultSet.getString("Password");
+                typeDB=resultSet.getString("Type");
 
                 if (username.equals(userNameDB)
                         && password.equals(passwordDB)) {
-                    return true; ////If the user entered values are already present in database, which means user has already registered so I will return SUCCESS message.
+                    return typeDB; ////If the user entered values are already present in database, which means user has already registered so I will return SUCCESS message.
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false; // Just returning appropriate message otherwise
+        return null; // Just returning appropriate message otherwise
     }
 
 }
