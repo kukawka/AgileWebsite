@@ -8,6 +8,7 @@ package Servlets;
 import Beans.LoggedIn;
 import Models.LoginModel;
 import java.io.IOException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,8 +29,8 @@ public class Login extends HttpServlet {
         String userName = request.getParameter("username");
         String password = request.getParameter("password");
         String type = request.getParameter("type");
-        HttpSession session=request.getSession();
-        
+        HttpSession session = request.getSession();
+
         //String userName= "2" ;
         //String password="test" ;
         LoginModel loginModel = new LoginModel(); //creating object for LoginDao. This class contains main logic of the application.
@@ -40,6 +41,17 @@ public class Login extends HttpServlet {
             login.setUsername(userName);
             session.setAttribute("LoggedIn", login);
             response.sendRedirect("/AgileWebsite/main.jsp");
+        } else {
+            request.setAttribute("check", false);
+            
+            if (type.equals("staff")) {
+                RequestDispatcher rd = request.getRequestDispatcher("/staff_index.jsp");
+                rd.forward(request, response);
+            } else{
+                RequestDispatcher rd = request.getRequestDispatcher("/student_index.jsp");
+                rd.forward(request, response);
+            }
+
         }
     }
 

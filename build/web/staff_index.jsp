@@ -10,9 +10,14 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="styles.css"/>
     </head>
+
+
     <body>
-        <nav class="navbar navbar-default">
+
+
+        <nav class="navbar navbar-default" style="border-bottom-left-radius: 0; border-bottom-right-radius: 0;">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">QuizUp</a>
                 <ul class="nav navbar-nav navbar-right">
@@ -21,30 +26,67 @@ and open the template in the editor.
             </div>
         </nav>
 
-        <!--<article>-->
-        <div class="col-md-4"></div> 
-        <div class="col-sm-12 col-md-4" style="padding-top: 15% ;">
-            <div class="thumbnail">
-                <center>
-                    <h3>QuizUp</h3>
-                    <form method="POST"  action="Login">
-                        <div class="form-group">
-                            <label for="username">Username</label>
-                            <input type="text" class="form-control" name="username" id="username">
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" name="password" id="password">
-                        </div>
-                        <input type="hidden" name="type" value="staff">
-                        <button type="submit" class="btn btn-default">Login</button>
-                    </form>
+        <%
+            if ((Boolean) request.getAttribute("check") != null) {
+        %>
+        <style>
+            .alert {
+                padding: 20px;
+                background-color: #ff9800;
+                width: 25%;
+                float: right;
+                border-radius: .25rem;
+                margin-right: 2%;
+                color: white;
+            }
 
-                </center>
+            .close {
+                margin-left: 15px;
+                color: white;
+                font-weight: bold;
+                float: right;
+                font-size: 22px;
+                line-height: 20px;
+                cursor: pointer;
+                transition: 0.3s;
+            }
+
+            .close:hover {
+                color: black;
+            }
+
+        </style>
+
+
+        <div class="alert">
+            <span class="close" onclick="this.parentElement.style.display = 'none';">&times;</span>
+            <strong>Incorrect</strong> username/password. Check if you're on the right login page!
+
+        </div>
+
+        <%
+            }
+        %>
+
+        <div class="login-page">
+            <div class="form">
+                <h3>Staff Login</h3>
+                <form method="POST"  action="Login">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" name="username" id="username">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" name="password" id="password">
+                    </div>
+                    <input type="hidden" name="type" value="staff">
+                    <button type="submit" class="btn btn-default">Login</button>
+                </form>
             </div>
         </div>
-        <div class="col-md-4"></div> 
-        <!--</article> -->
+
+
 
     </body>
 </html>
