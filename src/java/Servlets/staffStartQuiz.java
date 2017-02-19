@@ -29,8 +29,8 @@ import java.util.UUID;
  *
  * @author Administrator
  */
-@WebServlet(name = "staffSubmitQuiz", urlPatterns = {"/staffSubmitQuiz"})
-public class staffSubmitQuiz extends HttpServlet {
+@WebServlet(name = "staffStartQuiz", urlPatterns = {"/staffStartQuiz"})
+public class staffStartQuiz extends HttpServlet {
     Cluster cluster=null;
     public void init(ServletConfig config) throws ServletException {
         // TODO Auto-generated method stub
@@ -51,7 +51,7 @@ public class staffSubmitQuiz extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        /*
+
         String title=request.getParameter("title");
         String moduleID=request.getParameter("moduleID");
 
@@ -61,8 +61,7 @@ public class staffSubmitQuiz extends HttpServlet {
         UUID quizID = randomUUID();
         Date creationDate = new Date();
 
-        int numOfQuestions = request.getParameter("questionsnumber");
-
+        int questionsnumber = request.getParameter("questionsnumber");
 
         /////////////////Check if Quiz can be made/////////////////////////////////////
         boolean check=true;
@@ -72,61 +71,31 @@ public class staffSubmitQuiz extends HttpServlet {
         if (check==true)
         {
 
-             //response.sendRedirect("/Quiz/SubmissionSuccess");
+             //response.sendRedirect("/SubmissionSuccess");
         }
         else
         {
-              //response.sendRedirect("/Quiz/SubmissionError");
+              //response.sendRedirect("/SubmissionError");
         }
-         /////////////////////////////////////////////////////////////////////////////
-         */
+        /////////////////////////////////////////////////////////////////////////////
 
-        numOfQuestions=request.getAttribute("questionsnumber");
-        quizID=request.getAttribute("quizID");
+        RequestDispatcher rd = request.getRequestDispatcher("/staffStartQuiz.jsp")
+        request.setAttribute("title", title);
+        request.setAttribute("moduleID", moduleID);
+        request.setAttribute("available", available);
+        request.setAttribute("quizID", quizID);
+        request.setAttribute("creationDate", creationDate);
+        request.setAttribute("questionsnumber", questionsnumber);
 
+        rd.forward(request, response);
 
-        String questionTextName="questiontext";
-        String explanationTextName="explanationtext";
-        String validName="valid";
-        String answerTextName="answertext";
-        String correctName="correct";
-
-        //Make arrays/vectors to insert question/answer info
-        for (int i=0; i<numOfQuestions; i++)
-        {
-            //post the info of every question
-            UUID questionID = randomUUID(); //get UUID in SQL?
-            //RequestDispatcher rd = request.getRequestDispatcher("/staffSubmitQuiz.jsp")
-            //request.setAttribute("questionID", questionID);
-
-            String questionText = request.getParameter(questiontext+(i+1));
-            String explanationText = request.getParameter(explanationtext+(i+1));
-            String valid = request.getParameter(valid+(i+1); //will be 1 or null
-
-            qz.SubmitQuestion(questionID, questionText, explanationText, valid, quizID);
-
-            for (int j=0; j<4; j++)
-            {
-                //post the info of every answer
-                UUID answerID = randomUUID(); //get UUID in SQL?
-                //RequestDispatcher rd = request.getRequestDispatcher("/staffSubmitQuiz.jsp")
-                //request.setAttribute("answerID", answerID);
-
-                String answerText = request.getParameter(answertext+(i+1)+(j+1));
-                String correct = request.getParameter(correct1+(i+1)+(j+1)); //will be 1 or null
-
-                qz.SubmitAnswer(answerID, answerText, correct, questionID);
-            }
-        }
-
-
-
+        response.sendRedirect("/staffSubmitQuiz");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        RequestDispatcher rd=request.getRequestDispatcher("/staffSubmitQuiz.jsp");
+        RequestDispatcher rd=request.getRequestDispatcher("/staffStartQuiz.jsp");
         rd.forward(request,response);
     }
 
