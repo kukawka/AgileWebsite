@@ -16,24 +16,35 @@ and open the template in the editor.
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">QuizUp</a>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="">Student Log-in</a></li>
+                    <li><a href="student_index.jsp">Student Login</a></li>
                 </ul>
             </div>
         </nav>
-        
-        <article>
-            <h3>Login</h3>
-            <form method="POST"  action="Login">
-                <ul>
-                    <li>Username <input type="text" name="username"></li>
-                    <li>Password <input type="password" name="password"></li>
-                </ul>
-                <br/>
-                <input type="hidden" name="type" value="staff">
-                <input type="submit" value="Login"> 
-            </form>
-        </article> 
-        
-        <div>Blaaah</div>
+
+        <!--<article>-->
+        <div class="col-md-4"></div> 
+        <div class="col-sm-12 col-md-4" style="padding-top: 15% ;">
+            <div class="thumbnail">
+                <center>
+                    <h3>QuizUp</h3>
+                    <form method="POST"  action="Login">
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" name="username" id="username">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" name="password" id="password">
+                        </div>
+                        <input type="hidden" name="type" value="staff">
+                        <button type="submit" class="btn btn-default">Login</button>
+                    </form>
+
+                </center>
+            </div>
+        </div>
+        <div class="col-md-4"></div> 
+        <!--</article> -->
+
     </body>
 </html>
