@@ -4,6 +4,7 @@ import java.util.UUID;
 public class Quiz {
     //Cluster cluster;
 
+
     public Quiz(){
         //initialise variables
         
@@ -17,6 +18,8 @@ public class Quiz {
         //prepared statement from ^
         BoundStatement boundStatement = new BoundStatement(ps); 
         session.execute(  boundStatement.bind(title,moduleID));
+
+        return true;
     }
 
     public boolean SubmitQuestion(UUID questionID, String questionText, String explanationText, boolean valid, UUID quizID)
@@ -27,6 +30,8 @@ public class Quiz {
         //prepared statement from ^
         BoundStatement boundStatement = new BoundStatement(ps); 
         session.execute(  boundStatement.bind(questionID,questionText,explanationText,valid,quizID));
+
+        return true;
     }
 
     public boolean SubmitAnswer(UUID answerID, String answerText, boolean correct, UUID questionID)
@@ -37,5 +42,7 @@ public class Quiz {
         //prepared statement from ^
         BoundStatement boundStatement = new BoundStatement(ps); 
         session.execute(  boundStatement.bind(answerID,answerText,correct,questionID));
+
+        return true;
     }
 
