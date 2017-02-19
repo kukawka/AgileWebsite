@@ -19,7 +19,7 @@ and open the template in the editor.
 
         <nav class="navbar navbar-default" style="border-bottom-left-radius: 0; border-bottom-right-radius: 0;">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">QuizUp</a>
+                <a class="navbar-brand" href="#" style="padding:0%; "><img src='quizlogo.png'  height="60" width="80"></a>
             </div>
         </nav>
 
