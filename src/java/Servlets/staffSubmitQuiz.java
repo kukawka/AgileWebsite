@@ -6,7 +6,7 @@
 
 //package uk.ac.dundee.computing.aec.instagrim.servlets;
 
-import com.datastax.driver.core.Cluster;
+//import com.datastax.driver.core.Cluster;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -31,7 +31,7 @@ import java.util.UUID;
  */
 @WebServlet(name = "staffSubmitQuiz", urlPatterns = {"/staffSubmitQuiz"})
 public class staffSubmitQuiz extends HttpServlet {
-    Cluster cluster=null;
+    //Cluster cluster=null;
     public void init(ServletConfig config) throws ServletException {
         // TODO Auto-generated method stub
         //cluster = CassandraHosts.getCluster();
@@ -81,8 +81,8 @@ public class staffSubmitQuiz extends HttpServlet {
          /////////////////////////////////////////////////////////////////////////////
          */
 
-        numOfQuestions=request.getAttribute("questionsnumber");
-        quizID=request.getAttribute("quizID");
+        int numOfQuestions=Integer.valueOf(request.getParameter("questionsnumber"));
+        UUID quizID=UUID.fromString(request.getParameter("quizID"));
 
 
         String questionTextName="questiontext";
@@ -95,27 +95,49 @@ public class staffSubmitQuiz extends HttpServlet {
         for (int i=0; i<numOfQuestions; i++)
         {
             //post the info of every question
-            UUID questionID = randomUUID(); //get UUID in SQL?
+            UUID questionID = UUID.randomUUID(); //get UUID in SQL?
             //RequestDispatcher rd = request.getRequestDispatcher("/staffSubmitQuiz.jsp")
             //request.setAttribute("questionID", questionID);
 
-            String questionText = request.getParameter(questiontext+(i+1));
-            String explanationText = request.getParameter(explanationtext+(i+1));
-            String valid = request.getParameter(valid+(i+1); //will be 1 or null
-
-            qz.SubmitQuestion(questionID, questionText, explanationText, valid, quizID);
+            String questionText = request.getParameter(questionTextName+(i+1));
+            String explanationText = request.getParameter(explanationTextName+(i+1));
+            String valid = request.getParameter(validName+(i+1)); //will be 1 or null
+            
+            boolean validBool;//=true;
+            if (valid=="1")
+            {
+                validBool=true;
+            }
+            else
+            {
+                validBool=false;
+            }
+            
+            
+            Quiz qz=new Quiz();
+            qz.SubmitQuestion(questionID, questionText, explanationText, validBool, quizID);
 
             for (int j=0; j<4; j++)
             {
                 //post the info of every answer
-                UUID answerID = randomUUID(); //get UUID in SQL?
+                UUID answerID = UUID.randomUUID(); //get UUID in SQL?
                 //RequestDispatcher rd = request.getRequestDispatcher("/staffSubmitQuiz.jsp")
                 //request.setAttribute("answerID", answerID);
 
-                String answerText = request.getParameter(answertext+(i+1)+(j+1));
-                String correct = request.getParameter(correct1+(i+1)+(j+1)); //will be 1 or null
+                String answerText = request.getParameter(answerTextName+(i+1)+(j+1));
+                String correct = request.getParameter(correctName+(i+1)+(j+1)); //will be 1 or null
+                
+                boolean correctBool;//=true;
+                if (correct=="1")
+                {
+                    correctBool=true;
+                }
+                else
+                {
+                    correctBool=false;
+                }
 
-                qz.SubmitAnswer(answerID, answerText, correct, questionID);
+                qz.SubmitAnswer(answerID, answerText, correctBool, questionID);
             }
         }
 

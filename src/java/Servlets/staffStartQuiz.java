@@ -6,7 +6,7 @@
 
 //package uk.ac.dundee.computing.aec.instagrim.servlets;
 
-import com.datastax.driver.core.Cluster;
+//import com.datastax.driver.core.Cluster;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -31,7 +31,7 @@ import java.util.UUID;
  */
 @WebServlet(name = "staffStartQuiz", urlPatterns = {"/staffStartQuiz"})
 public class staffStartQuiz extends HttpServlet {
-    Cluster cluster=null;
+    //Cluster cluster=null;
     public void init(ServletConfig config) throws ServletException {
         // TODO Auto-generated method stub
         //cluster = CassandraHosts.getCluster();
@@ -58,10 +58,10 @@ public class staffStartQuiz extends HttpServlet {
         String available=request.getParameter("available"); //will be 1 or null
 
         //Use UUID, or let SQL auto-increment?
-        UUID quizID = randomUUID();
+        UUID quizID = UUID.randomUUID();
         Date creationDate = new Date();
 
-        int questionsnumber = request.getParameter("questionsnumber");
+        int questionsnumber = Integer.valueOf(request.getParameter("questionsnumber"));
 
         /////////////////Check if Quiz can be made/////////////////////////////////////
         boolean check=true;
@@ -79,7 +79,7 @@ public class staffStartQuiz extends HttpServlet {
         }
         /////////////////////////////////////////////////////////////////////////////
 
-        RequestDispatcher rd = request.getRequestDispatcher("/staffStartQuiz.jsp")
+        RequestDispatcher rd = request.getRequestDispatcher("/staffStartQuiz.jsp");
         request.setAttribute("title", title);
         request.setAttribute("moduleID", moduleID);
         request.setAttribute("available", available);
