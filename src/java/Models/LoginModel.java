@@ -17,7 +17,7 @@ import java.sql.Statement;
  */
 public class LoginModel {
 
-    public boolean authenticateLogin(String username, String password) {
+    public boolean authenticateLogin(String username, String password, String type) {
 
         Connection con;
         Statement statement = null;
@@ -32,9 +32,12 @@ public class LoginModel {
                 return true;
             }*/
             statement = con.createStatement();
-
-            resultSet = statement.executeQuery("select ID,Password from user"); //Here table name is users and userName,password are columns. fetching all the records and storing in a resultSet.
-
+            if (type.equals("staff")) {
+                resultSet = statement.executeQuery("select ID,Password from user where Type='Staff'"); //Here table name is users and userName,password are columns. fetching all the records and storing in a resultSet.
+            } else {
+                resultSet = statement.executeQuery("select ID,Password from user where Type='Student'");
+            }
+            
             while (resultSet.next()) // Until next row is present otherwise it return false
             {
                 userNameDB = resultSet.getString("ID"); //fetch the values present in database
