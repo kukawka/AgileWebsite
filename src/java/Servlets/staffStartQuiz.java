@@ -79,7 +79,7 @@ public class staffStartQuiz extends HttpServlet {
         }
         /////////////////////////////////////////////////////////////////////////////
 
-        RequestDispatcher rd = request.getRequestDispatcher("/staffStartQuiz.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/staffSubmitQuiz.jsp");
         request.setAttribute("title", title);
         request.setAttribute("moduleID", moduleID);
         request.setAttribute("available", available);
