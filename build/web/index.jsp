@@ -10,7 +10,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="styles_index.css"/>
+        <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/styles_index.css"/>
     </head>
 
 
@@ -19,7 +19,7 @@ and open the template in the editor.
 
         <nav class="navbar navbar-default" style="border-bottom-left-radius: 0; border-bottom-right-radius: 0;">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#" style="padding:0%; "><img src='quizlogo.png'  height="60" width="80"></a>
+                <a class="navbar-brand" href="#" style="padding:0%; "><img src='<%= request.getContextPath() %>/css/img/quizlogo.png'  height="60" width="80"></a>
             </div>
         </nav>
 
