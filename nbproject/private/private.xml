@@ -2,15 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/Dagi/Documents/NetBeansProjects/AgileWebsite/web/index.jsp</file>
-            <file>file:/C:/Users/Dagi/Documents/NetBeansProjects/AgileWebsite/src/java/Servlets/Login.java</file>
-            <file>file:/C:/Users/Dagi/Documents/NetBeansProjects/AgileWebsite/web/staff_index.jsp</file>
-            <file>file:/C:/Users/Dagi/Documents/NetBeansProjects/AgileWebsite/src/java/Models/LoginModel.java</file>
-            <file>file:/C:/Users/Dagi/Documents/NetBeansProjects/AgileWebsite/web/WEB-INF/css/styles.css</file>
-            <file>file:/C:/Users/Dagi/Documents/NetBeansProjects/AgileWebsite/web/student_index.jsp</file>
-            <file>file:/C:/Users/Dagi/Documents/NetBeansProjects/AgileWebsite/nbproject/build-impl.xml</file>
-            <file>file:/C:/Users/Dagi/Documents/NetBeansProjects/AgileWebsite/src/java/Util/DBConnection.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
