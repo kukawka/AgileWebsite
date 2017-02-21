@@ -16,11 +16,14 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Dagi
  */
-@WebServlet(name = "StaffLogin", urlPatterns = {"/SatffLogin",})
-public class StaffLogin extends HttpServlet {
+@WebServlet(name = "GetQuizDetails", urlPatterns = {"/GetQuizDetails",})
+public class GetQuizDetails extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int quizID = Integer.parseInt(request.getParameter("quizID"));
+        
     }
+
 }
