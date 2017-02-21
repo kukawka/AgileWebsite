@@ -12,7 +12,7 @@ package Beans;
 public class Question {
     String question="" ;
     String explanation="" ;
-    int correctQuestionID=0 ;
+    int correctAnswerID=0 ;
     String[] answers=new String[4] ;
     
     public void setQuestion(String question){
@@ -31,12 +31,12 @@ public class Question {
         return explanation ;
     }
     
-     public void setCorrectQuestionID(int correctQuestionID){
-        this.correctQuestionID=correctQuestionID ;
+     public void setCorrectAnswerID(int correctQuestionID){
+        this.correctAnswerID=correctQuestionID ;
     }
     
-    public int getCorrectQuestionID(){
-        return correctQuestionID ;
+    public int getCorrectAnswerID(){
+        return correctAnswerID ;
     }
     
      public void setAnswers(String[] answers){

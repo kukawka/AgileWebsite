@@ -1,3 +1,4 @@
+package Models ;
 
 import Beans.Question;
 import Beans.QuizDetails;
@@ -13,19 +14,15 @@ import java.util.UUID;
 public class Quiz {
     //Cluster cluster;
 
-    public Quiz() {
-        //initialise variables
-
-    }
-
-    public QuizDetails getQuiz(int quizID) {
-        QuizDetails quizDetails = null;
+    public QuizDetails getQuiz(int quizID){
+        QuizDetails quizDetails = new QuizDetails();
 
         Connection con;
         Statement statement = null;
+        Statement statement2 = null;
         ResultSet quizRS = null;
         ResultSet questionRS = null;
-        ResultSet answerRS= null;
+        ResultSet answerRS = null;
 
         try {
             con = DBConnection.createConnection(); //establishing connection
@@ -33,35 +30,48 @@ public class Quiz {
                 return true;
             }*/
             statement = con.createStatement();
+            statement2 = con.createStatement();
             quizRS = statement.executeQuery("select Available, Title, CreationDate from quiz where ID = " + quizID);
-            questionRS = statement.executeQuery("select QuestionText, ExplanationText, Valid, QuestionNumber from question where QuizID = " + quizID);
-            
-            quizDetails.setTitle(quizRS.getString("Title")) ;
+            questionRS = statement2.executeQuery("select QuestionText, ExplanationText, Valid, QuestionNumber from question where QuizID = " + quizID);
+
+            quizDetails.setTitle(quizRS.getString("Title"));
             quizDetails.setAvailability(quizRS.getBoolean("Available"));
             quizDetails.setDate(quizRS.getDate("CreationDate").toString());
-            
-            
-            
-             while (questionRS.next()) // Until next row is present otherwise it return false
+
+            ArrayList<Question> questions = new ArrayList<Question>();
+
+            while (questionRS.next()) // Until next row is present otherwise it return false
             {
-                ArrayList<Question> questions = new ArrayList<Question>();
+                Question q = new Question();
+
+                q.setQuestion(quizRS.getString("QuestionText"));
+                q.setExplanation(quizRS.getString("ExplanationText"));
+
                 int questionNumber = quizRS.getInt("QuestionNumber");
-                answerRS = statement.executeQuery("select Available, Title, CreationDate from quiz where ID = " + quizID);
-                /*String userNameDB = resultSet.getString("ID"); //fetch the values present in database
-                passwordDB = resultSet.getString("Password");
-                typeDB = resultSet.getString("Type");*/
-/*
-                if (username.equals(userNameDB)
-                        && password.equals(passwordDB)) {
-                    return typeDB; ////If the user entered values are already present in database, which means user has already registered so I will return SUCCESS message.
+                answerRS = statement.executeQuery("select AnswerText, Correct from answer where QuestionID = " + questionNumber);
+
+                int c = 0;
+                String[] answers = new String[4];
+                while (answerRS.next()) {
+                    boolean correct = answerRS.getBoolean("Correct");
+                    if (correct) {
+                        q.setCorrectAnswerID(c);
+                    }
+                    answers[c] = answerRS.getString("AnswerText");
+                    c++;
                 }
+                q.setAnswers(answers);
+                questions.add(q);
             }
+            quizDetails.setQuestions(questions);
+            
             return quizDetails;
         } catch (SQLException e) {
-            e.printStackTrace();
-        }*/
+            e.printStackTrace();   
+            return null; 
+        }
 
-        return null; // Just returning appropriate message otherwise
+     
 
     }
 

@@ -114,8 +114,8 @@ public class staffSubmitQuiz extends HttpServlet {
             }
             
             
-            Quiz qz=new Quiz();
-            qz.SubmitQuestion(questionID, questionText, explanationText, validBool, quizID);
+            //Quiz qz=new Quiz();
+            //qz.SubmitQuestion(questionID, questionText, explanationText, validBool, quizID);
 
             for (int j=0; j<4; j++)
             {
@@ -137,7 +137,7 @@ public class staffSubmitQuiz extends HttpServlet {
                     correctBool=false;
                 }
 
-                qz.SubmitAnswer(answerID, answerText, correctBool, questionID);
+                //qz.SubmitAnswer(answerID, answerText, correctBool, questionID);
             }
         }
 

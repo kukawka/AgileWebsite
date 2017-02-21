@@ -65,8 +65,8 @@ public class staffStartQuiz extends HttpServlet {
 
         /////////////////Check if Quiz can be made/////////////////////////////////////
         boolean check=true;
-        Quiz qz=new Quiz();
-        check=qz.RegisterQuiz(title, moduleID);
+        //Quiz qz=new Quiz();
+        //check=qz.RegisterQuiz(title, moduleID);
         
         if (check==true)
         {

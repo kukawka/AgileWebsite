@@ -4,6 +4,7 @@
     Author     : Dagi
 --%>
 
+<%@page import="Beans.QuizDetails"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -47,7 +48,19 @@
             </div>
         </form>
 
-
-
+     <%
+            QuizDetails quizDetails = (QuizDetails) session.getAttribute("QuizDetails");
+     %> 
+     <% if (quizDetails!=null){%>
+     
+     <%= quizDetails.getTitle()%>
+     <%= quizDetails.getAvailability()%>
+     <%= quizDetails.getDate()%>
+     
+        <%} else {
+%> <p>fuck this shit</p> 
+<%
+}
+%>
     </body>
 </html>
