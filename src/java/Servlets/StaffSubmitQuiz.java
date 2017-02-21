@@ -30,8 +30,8 @@ import Models.Quiz;
  *
  * @author Administrator
  */
-@WebServlet(name = "staffSubmitQuiz", urlPatterns = {"/staffSubmitQuiz"})
-public class staffSubmitQuiz extends HttpServlet {
+@WebServlet(name = "StaffSubmitQuiz", urlPatterns = {"/StaffSubmitQuiz"})
+public class StaffSubmitQuiz extends HttpServlet {
     //Cluster cluster=null;
     public void init(ServletConfig config) throws ServletException {
         // TODO Auto-generated method stub

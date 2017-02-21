@@ -47,6 +47,16 @@ public class StaffStartQuiz extends HttpServlet {
         String moduleID=request.getParameter("moduleID");
 
         String available=request.getParameter("available"); //will be 1 or null
+        boolean availableBool;
+
+        if (available=="1")
+        {
+            availableBool=true;
+        }
+        else
+        {
+            availableBool=false;
+        }
 
         //Use UUID, or let SQL auto-increment?
         UUID quizID = UUID.randomUUID();
@@ -59,7 +69,7 @@ public class StaffStartQuiz extends HttpServlet {
         /////////////////Check if Quiz can be made/////////////////////////////////////
         boolean check=true;
         Quiz qz=new Quiz();
-        check=qz.RegisterQuiz(title, moduleID);
+        //check=qz.RegisterQuiz(title, moduleID, availableBool, creationDate, quizID);
         
         if (check==true)
         {
