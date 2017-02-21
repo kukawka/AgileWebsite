@@ -1,4 +1,4 @@
-package Models;
+package Models ;
 
 import Beans.Question;
 import Beans.QuizDetails;
@@ -14,7 +14,7 @@ import java.util.UUID;
 public class Quiz {
     //Cluster cluster;
 
-    public QuizDetails getQuiz(int quizID) {
+    public QuizDetails getQuiz(int quizID){
         QuizDetails quizDetails = new QuizDetails();
 
         Connection con;
@@ -24,47 +24,30 @@ public class Quiz {
         ResultSet questionRS = null;
         ResultSet answerRS = null;
 
-        String title = "";
-
         try {
             con = DBConnection.createConnection(); //establishing connection
             /*if (con == null) {
                 return true;
             }*/
             statement = con.createStatement();
-            //statement2 = con.createStatement();
-            quizRS = statement.executeQuery("select Available, Title, CreationDate from quiz where ID=" + quizID);
-            
-             
-            while (quizRS.next()) {
-                title = quizRS.getString("Title");
-                quizDetails.setTitle(title);
-                quizDetails.setAvailability(quizRS.getBoolean("Available"));
-                quizDetails.setDate(quizRS.getDate("CreationDate").toString());
-            }
-            
-           // con.close() ;
-            
+            statement2 = con.createStatement();
+            quizRS = statement.executeQuery("select Available, Title, CreationDate from quiz where ID = " + quizID);
+            questionRS = statement2.executeQuery("select QuestionText, ExplanationText, Valid, QuestionNumber from question where QuizID = " + quizID);
 
-            //con = DBConnection.createConnection();
-            statement = con.createStatement();
-            questionRS = statement.executeQuery("select QuestionText, ExplanationText, Valid, QuestionNumber from question where QuizID = " + quizID);
-
-
-            //quizDetails.setTitle(quizRS.getString("Title"));
+            quizDetails.setTitle(quizRS.getString("Title"));
+            quizDetails.setAvailability(quizRS.getBoolean("Available"));
+            quizDetails.setDate(quizRS.getDate("CreationDate").toString());
 
             ArrayList<Question> questions = new ArrayList<Question>();
-            
 
             while (questionRS.next()) // Until next row is present otherwise it return false
             {
                 Question q = new Question();
 
-                q.setQuestion(questionRS.getString("QuestionText"));
-                q.setExplanation(questionRS.getString("ExplanationText"));
+                q.setQuestion(quizRS.getString("QuestionText"));
+                q.setExplanation(quizRS.getString("ExplanationText"));
 
-                int questionNumber = questionRS.getInt("QuestionNumber");
-                statement = con.createStatement();
+                int questionNumber = quizRS.getInt("QuestionNumber");
                 answerRS = statement.executeQuery("select AnswerText, Correct from answer where QuestionID = " + questionNumber);
 
                 int c = 0;
@@ -80,35 +63,83 @@ public class Quiz {
                 q.setAnswers(answers);
                 questions.add(q);
             }
-            
             quizDetails.setQuestions(questions);
-            con.close();
-            return quizDetails;
             
+            return quizDetails;
         } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
+            e.printStackTrace();   
+            return null; 
         }
+
+     
 
     }
 
-    public boolean RegisterQuiz(String title, String moduleID) {
-        //prepare query
-        //PreparedStatement ps = session.prepare("insert into quiz (title,moduleID) Values(?,?)");
-
-        //prepared statement from ^
-        //BoundStatement boundStatement = new BoundStatement(ps); 
-        //session.execute(  boundStatement.bind(title,moduleID));
-        return true;
+    public int RegisterQuiz(String title, String moduleID, boolean available, Date creationDate, UUID quizID) {
+        Connection con = null;
+        ResultSet rs = null;
+        
+        
+        try{
+            con = DBConnection.createConnection(); //establishing connection
+            Statement statement = con.createStatement();
+            
+            rs = statement.executeQuery("insert into quiz (title, moduleID, available, creationDate) values ('title', 'moduleID', 'available', 'creationDate')");
+            rs = statement.executeQuery("Select ID from quiz where Title = " + title + " AND moduleID = " + moduleID + " AND CreationDate = " + creationDate + ";" );
+            int id;
+            while (rs.next()) // Until next row is present otherwise it return false
+            {
+                //id = rs.getInteger("ID");
+            }
+        }catch(SQLException e){
+            e.printStackTrace();   
+            return -1;
+            
+        }
+        finally{
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+             if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+        return 1;
     }
 
     public boolean SubmitQuestion(UUID questionID, String questionText, String explanationText, boolean valid, UUID quizID) {
-        //prepare query
-        //PreparedStatement ps = session.prepare("insert into question (questionID,questionText,explanationText,valid,quizID) Values(?,?,?,?,?)");
-
-        //prepared statement from ^
-        //BoundStatement boundStatement = new BoundStatement(ps); 
-        //session.execute(  boundStatement.bind(questionID,questionText,explanationText,valid,quizID));
+        Connection con = null;
+        ResultSet rs = null;
+        
+        try{
+            con = DBConnection.createConnection(); //establishing connection
+            Statement statement = con.createStatement();
+            
+            //rs = statement.executeQuery("insert into quiz (title, moduleID, available, creationDate, quizID) values ('title', 'moduleID', 'available', 'creationDate', 'quizID')");
+            //rs = 
+            
+            
+        }catch(SQLException e){
+            e.printStackTrace();   
+            return false;
+            
+        }
+        finally{
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+             if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
         return true;
     }
 
