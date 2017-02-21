@@ -21,7 +21,7 @@
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">QuizUp</a>
-                
+
                 <form class="navbar-form navbar-right" method="POST"  action="Logout">
                     <button type="submit" class="btn btn-default">Log out</button>
                 </form>
@@ -30,6 +30,10 @@
 
         <h1>Hello <%=login.getUsername()%>!</h1>
         <%=login.getType()%>
+        </br>
+        <a href="staffStartQuiz.jsp">Create Quiz</a>
+        <br>
+        <a href="staffEditQuiz.jsp">Edit Quiz</a>
 
     </body>
 </html>
