@@ -20,7 +20,7 @@
        
         <article>
             <h2>Submit a Quiz</h2>
-            <form method="POST"  action="staffStartQuiz">
+            <form method="POST"  action="StaffStartQuiz">
                 <ul>
                     <%-- Quiz Information --%>
                     <h3>Quiz Options:</h3>
