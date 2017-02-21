@@ -8,7 +8,9 @@
     </head>
     <body>
         <header>
-        
+        <%--<h1>InstaGrim ! </h1>
+        <h2>Your world in Black and White</h2>
+        --%>
         </header>
         <nav>
             <ul>
