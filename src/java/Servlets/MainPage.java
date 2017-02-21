@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Krasi
+ * @author Krasi+philipp PairProg
  */
 @WebServlet(name = "MainPage", urlPatterns = {"/MainPage"})
 public class MainPage extends HttpServlet {

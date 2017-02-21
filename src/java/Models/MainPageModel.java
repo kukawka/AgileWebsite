@@ -13,7 +13,7 @@ import java.sql.Statement;
 
 /**
  *
- * @author Krasi
+ * @author Krasi+philipp PairProg
  */
 public class MainPageModel {
     

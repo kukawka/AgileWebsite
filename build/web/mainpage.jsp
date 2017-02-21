@@ -1,7 +1,7 @@
 <%-- 
     Document   : mainpage
     Created on : Feb 21, 2017, 2:26:17 PM
-    Author     : Krasi
+    Author     : Krasi, Philipp, Ivailo
 --%>
 
 <%@page import="java.sql.ResultSet"%>
