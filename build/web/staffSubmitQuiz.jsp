@@ -9,7 +9,9 @@
     </head>
     <body>
         <header>
-       
+        <%--<h1>InstaGrim ! </h1>
+        <h2>Your world in Black and White</h2>
+        --%>
         </header>
         <nav>
             <ul>
@@ -19,7 +21,7 @@
        
         <article>
             <h2>Submit a Quiz</h2>
-            <form method="POST"  action="staffSubmitQuiz">
+            <form method="POST"  action="StaffSubmitQuiz">
                 <ul>
                     <%-- Quiz Information - taken once per quiz
                     <h3>Quiz Options:</h3>
