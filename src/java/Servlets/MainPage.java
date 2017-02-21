@@ -8,6 +8,7 @@ package Servlets;
 import Models.MainPageModel;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,6 +37,8 @@ public class MainPage extends HttpServlet {
             throws ServletException, IOException {
         MainPageModel mnm = new MainPageModel();
         request.setAttribute("POS",mnm.getPOS());
+        RequestDispatcher rd = request.getRequestDispatcher("/mainpage.jsp");
+        rd.forward(request, response);
         
     }
 
