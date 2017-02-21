@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
@@ -14,7 +15,7 @@ import java.util.UUID;
 public class Quiz {
     //Cluster cluster;
 
-      public QuizDetails getQuiz(int quizID) {
+    public QuizDetails getQuiz(int quizID){
         QuizDetails quizDetails = new QuizDetails();
 
         Connection con;
@@ -24,47 +25,30 @@ public class Quiz {
         ResultSet questionRS = null;
         ResultSet answerRS = null;
 
-        String title = "";
-
         try {
             con = DBConnection.createConnection(); //establishing connection
             /*if (con == null) {
                 return true;
             }*/
             statement = con.createStatement();
-            //statement2 = con.createStatement();
-            quizRS = statement.executeQuery("select Available, Title, CreationDate from quiz where ID=" + quizID);
-            
-             
-            while (quizRS.next()) {
-                title = quizRS.getString("Title");
-                quizDetails.setTitle(title);
-                quizDetails.setAvailability(quizRS.getBoolean("Available"));
-                quizDetails.setDate(quizRS.getDate("CreationDate").toString());
-            }
-            
-           // con.close() ;
-            
+            statement2 = con.createStatement();
+            quizRS = statement.executeQuery("select Available, Title, CreationDate from quiz where ID = " + quizID);
+            questionRS = statement2.executeQuery("select QuestionText, ExplanationText, Valid, QuestionNumber from question where QuizID = " + quizID);
 
-            //con = DBConnection.createConnection();
-            statement = con.createStatement();
-            questionRS = statement.executeQuery("select QuestionText, ExplanationText, Valid, QuestionNumber from question where QuizID = " + quizID);
-
-
-            //quizDetails.setTitle(quizRS.getString("Title"));
+            quizDetails.setTitle(quizRS.getString("Title"));
+            quizDetails.setAvailability(quizRS.getBoolean("Available"));
+            quizDetails.setDate(quizRS.getDate("CreationDate").toString());
 
             ArrayList<Question> questions = new ArrayList<Question>();
-            
 
             while (questionRS.next()) // Until next row is present otherwise it return false
             {
                 Question q = new Question();
 
-                q.setQuestion(questionRS.getString("QuestionText"));
-                q.setExplanation(questionRS.getString("ExplanationText"));
+                q.setQuestion(quizRS.getString("QuestionText"));
+                q.setExplanation(quizRS.getString("ExplanationText"));
 
-                int questionNumber = questionRS.getInt("QuestionNumber");
-                statement = con.createStatement();
+                int questionNumber = quizRS.getInt("QuestionNumber");
                 answerRS = statement.executeQuery("select AnswerText, Correct from answer where QuestionID = " + questionNumber);
 
                 int c = 0;
@@ -80,34 +64,67 @@ public class Quiz {
                 q.setAnswers(answers);
                 questions.add(q);
             }
-            
             quizDetails.setQuestions(questions);
-            con.close();
-            return quizDetails;
             
+            return quizDetails;
         } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
+            e.printStackTrace();   
+            return null; 
         }
 
     }
 
-    public int RegisterQuiz(String title, String moduleID, boolean available, Date creationDate, UUID quizID) {
+    /**
+     *Returns 0 for null Quiz ID, the ID for successful registration of the quiz, or -1 for error.
+    **/
+    public int RegisterQuiz(String title, String moduleID, int available, LocalDate creationDate) {        
         Connection con = null;
         ResultSet rs = null;
+        int id=0;        
         
+        try{
+            con = DBConnection.createConnection(); //establishing connection
+            Statement statement = con.createStatement();
+           //////////////////////////////////////
+            System.out.println("title: "+title);
+            System.out.println("moduleID: "+moduleID);
+            System.out.println("creationDate: "+creationDate);
+             System.out.println("available: "+available);
+             ////////////////////////////////////////////////
+            rs = statement.executeQuery("Insert into quiz (Available, Title, CreationDate, moduleID) values ("+available+ "," +title+ "," +creationDate+ "," +moduleID+ ")" );
+            rs = statement.executeQuery("Select ID from quiz where Title = " + title + " AND moduleID = " + moduleID + " AND CreationDate = " + creationDate );
+            con.close();
+            while (rs.next()) // Until next row is present otherwise it returns false
+            {
+                //get quiz id
+                id = rs.getInt("ID");
+                System.out.println("Quiz id: "+id);
+            }
+        }catch(SQLException e){
+            e.printStackTrace();   
+            return -1;
+            
+        }
+        return id;
+    }
+
+    public int SubmitQuestion(String questionText, String explanationText, int quizID, int questionNumber) {
+        Connection con = null;
+        ResultSet rs = null;
+        int id=0;
         
         try{
             con = DBConnection.createConnection(); //establishing connection
             Statement statement = con.createStatement();
             
-            rs = statement.executeQuery("insert into quiz (title, moduleID, available, creationDate) values ('title', 'moduleID', 'available', 'creationDate')");
-            rs = statement.executeQuery("Select ID from quiz where Title = " + title + " AND moduleID = " + moduleID + " AND CreationDate = " + creationDate + ";" );
-            int id;
-            while (rs.next()) // Until next row is present otherwise it return false
+            rs = statement.executeQuery("call insertQuestion where question, explanation, quizID, questNum = " +questionText+ "," +explanationText+ "," +quizID+  "," +questionNumber+ ";");
+            rs = statement.executeQuery("Select ID from question where QuizID = " + quizID + " AND QuestionNumber = " + questionNumber + ";" );
+            
+            while (rs.next()) // Until next row is present otherwise it returns false
             {
-                //id = rs.getInteger("ID");
+                id = rs.getInt("ID");
             }
+            
         }catch(SQLException e){
             e.printStackTrace();   
             return -1;
@@ -117,56 +134,51 @@ public class Quiz {
             if (rs != null) {
                 try {
                     rs.close();
-                } catch (SQLException e) { /* ignored */}
+                } catch (SQLException e) { }
             }
              if (con != null) {
                 try {
                     con.close();
-                } catch (SQLException e) { /* ignored */}
+                } catch (SQLException e) { }
             }
         }
-        return 1;
+        return id;
     }
 
-    public boolean SubmitQuestion(UUID questionID, String questionText, String explanationText, boolean valid, UUID quizID) {
+    public int SubmitAnswer(String answerText, int correct, int questionID, int questionNumber) {
         Connection con = null;
         ResultSet rs = null;
+        int id=0;
         
         try{
             con = DBConnection.createConnection(); //establishing connection
             Statement statement = con.createStatement();
             
-            //rs = statement.executeQuery("insert into quiz (title, moduleID, available, creationDate, quizID) values ('title', 'moduleID', 'available', 'creationDate', 'quizID')");
-            //rs = 
+            rs = statement.executeQuery("call insertAnswer where answer, isCorrect, quizID, questionNum = " +answerText+ "," +correct+ "," +questionID+  "," +questionNumber+ ";");
+            rs = statement.executeQuery("Select ID from answer where QuestionID = " + questionID + " AND AnswerText = " + answerText + ";" );
             
+            while (rs.next()) // Until next row is present otherwise it returns false
+            {
+                id = rs.getInt("ID");
+            }
             
         }catch(SQLException e){
             e.printStackTrace();   
-            return false;
+            return -1;
             
         }
         finally{
             if (rs != null) {
                 try {
                     rs.close();
-                } catch (SQLException e) { /* ignored */}
+                } catch (SQLException e) { }
             }
              if (con != null) {
                 try {
                     con.close();
-                } catch (SQLException e) { /* ignored */}
+                } catch (SQLException e) { }
             }
         }
-        return true;
-    }
-
-    public boolean SubmitAnswer(UUID answerID, String answerText, boolean correct, UUID questionID) {
-        //prepare query
-        //PreparedStatement ps = session.prepare("insert into answer (answerID,answerText,correct,questionID) Values(?,?,?,?)");
-
-        //prepared statement from ^
-        //BoundStatement boundStatement = new BoundStatement(ps); 
-        //session.execute(  boundStatement.bind(answerID,answerText,correct,questionID));
-        return true;
+        return id;
     }
 }

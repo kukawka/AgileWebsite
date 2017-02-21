@@ -16,6 +16,8 @@ import java.util.Date;
 import java.util.UUID;
 //Quiz class
 import Models.Quiz;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -41,39 +43,39 @@ public class StaffStartQuiz extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        HttpSession session=request.getSession();
+        //HttpSession session=request.getSession();
         
         String title=request.getParameter("title");
         String moduleID=request.getParameter("moduleID");
-
         String available=request.getParameter("available"); //will be 1 or null
         boolean availableBool;
+        int availableInt;
 
         if (available=="1")
         {
             availableBool=true;
+            availableInt=1;
         }
         else
         {
             availableBool=false;
+            availableInt=0;
         }
-
-        //Use UUID, or let SQL auto-increment?
-        UUID quizID = UUID.randomUUID();
-        Date creationDate = new Date();
         
-        session.setAttribute("quizID", quizID);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate creationDate = LocalDate.now();
+        //System.out.println(dtf.format(localDate));
+        //Date creationDate = new Date();
 
         int questionsnumber = Integer.valueOf(request.getParameter("questionsnumber"));
 
         /////////////////Check if Quiz can be made/////////////////////////////////////
-        boolean check=true;
+        int quizID=0;
         Quiz qz=new Quiz();
-        //check=qz.RegisterQuiz(title, moduleID, availableBool, creationDate, quizID);
+        quizID = qz.RegisterQuiz(title, moduleID, availableInt, creationDate);
         
-        if (check==true)
+        if (quizID>0)
         {
-
              //response.sendRedirect("/SubmissionSuccess");
         }
         else
@@ -81,27 +83,29 @@ public class StaffStartQuiz extends HttpServlet {
               //response.sendRedirect("/SubmissionError");
         }
         /////////////////////////////////////////////////////////////////////////////
-
-        RequestDispatcher rd = request.getRequestDispatcher("/staffStartQuiz.jsp");
-        request.setAttribute("title", title);
-        request.setAttribute("moduleID", moduleID);
-        request.setAttribute("available", available);
+        
+        
+        RequestDispatcher rd = request.getRequestDispatcher("/staffSubmitQuiz.jsp");
+        //request.setAttribute("title", title);
+        //request.setAttribute("moduleID", moduleID);
+        //request.setAttribute("available", available);
         request.setAttribute("quizID", quizID);
-        request.setAttribute("creationDate", creationDate);
+        //request.setAttribute("creationDate", creationDate);
         request.setAttribute("questionsnumber", questionsnumber);
 
         rd.forward(request, response);
+        
 
-        response.sendRedirect("/staffSubmitQuiz");
+        response.sendRedirect("/staffSubmitQuiz.jsp");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        Quiz qz = new Quiz();
-        HttpSession session = request.getSession();
+        //Quiz qz = new Quiz();
+        //HttpSession session = request.getSession();
         //get UUID from session attribute as an object. convert to string and acquire in UUID form
-        UUID quizID= UUID.fromString(session.getAttribute("quizID").toString()); 
+        //UUID quizID= UUID.fromString(session.getAttribute("quizID").toString()); 
         
         RequestDispatcher rd=request.getRequestDispatcher("/staffStartQuiz.jsp");
         //request.setAttribute("title", qz.getTitle(quizID));
