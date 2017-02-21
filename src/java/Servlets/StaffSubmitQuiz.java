@@ -55,34 +55,41 @@ public class StaffSubmitQuiz extends HttpServlet {
         Quiz qz = new Quiz(); //create new object or use previous? info going into DB, not object
         
         int numOfQuestions=Integer.valueOf(request.getParameter("questionsnumber"));
-        int quizID=Integer.valueOf(request.getParameter("quizID"));
+        UUID quizID=UUID.fromString(request.getParameter("quizID"));
 
         String questionTextName="questiontext";
         String explanationTextName="explanationtext";
-        //String validName="valid";
+        String validName="valid";
         String answerTextName="answertext";
         String correctName="correct";
-        String questionNumberName="questionnumbertext";
 
         //Make arrays/vectors to insert question/answer info
         for (int i=0; i<numOfQuestions; i++)
         {
             //post the info of every question
-            //UUID questionID = UUID.randomUUID(); //get UUID in SQL?
+            UUID questionID = UUID.randomUUID(); //get UUID in SQL?
             //RequestDispatcher rd = request.getRequestDispatcher("/staffSubmitQuiz.jsp")
             //request.setAttribute("questionID", questionID);
-            int questionID=-1;
 
             String questionText = request.getParameter(questionTextName+(i+1));
             String explanationText = request.getParameter(explanationTextName+(i+1));
-            int questionNumber = Integer.valueOf(request.getParameter(questionNumberName+(i+1)));
+            String valid = request.getParameter(validName+(i+1)); //will be 1 or null
             
-            questionID=qz.SubmitQuestion(questionText, explanationText, quizID, questionNumber);
+            boolean validBool;//=true;
+            if (valid=="1")
+            {
+                validBool=true;
+            }
+            else
+            {
+                validBool=false;
+            }
+            qz.SubmitQuestion(questionID, questionText, explanationText, validBool, quizID);
 
             for (int j=0; j<4; j++)
             {
                 //post the info of every answer
-                //UUID answerID = UUID.randomUUID(); //get UUID in SQL?
+                UUID answerID = UUID.randomUUID(); //get UUID in SQL?
                 //RequestDispatcher rd = request.getRequestDispatcher("/staffSubmitQuiz.jsp")
                 //request.setAttribute("answerID", answerID);
 
@@ -90,19 +97,16 @@ public class StaffSubmitQuiz extends HttpServlet {
                 String correct = request.getParameter(correctName+(i+1)+(j+1)); //will be 1 or null
                 
                 boolean correctBool;//=true;
-                int correctInt;
                 if (correct=="1")
                 {
-                    correctInt=1;
                     correctBool=true;
                 }
                 else
                 {
-                    correctInt=0;
                     correctBool=false;
                 }
-                
-                qz.SubmitAnswer(answerText, correctInt, questionID, questionNumber);
+
+                qz.SubmitAnswer(answerID, answerText, correctBool, questionID);
             }
         }
 
