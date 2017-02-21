@@ -33,7 +33,7 @@ public class QuizDetails {
     }
     
       public void setQuestions(ArrayList<Question> questions){
-        this.availability=availability ;
+        this.questions=questions ;
     }
     
     public ArrayList<Question> getQuestions(){

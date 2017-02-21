@@ -56,7 +56,9 @@
      <%= quizDetails.getTitle()%>
      <%= quizDetails.getAvailability()%>
      <%= quizDetails.getDate()%>
-     
+     <%= quizDetails.getQuestions().get(0).getQuestion()%>
+     <%= quizDetails.getQuestions().get(0).getQuestion()%>
+     <%= quizDetails.getQuestions().get(0).getCorrectAnswerID()%>
         <%} else {
 %> <p>fuck this shit</p> 
 <%

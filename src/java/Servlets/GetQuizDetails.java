@@ -36,7 +36,7 @@ public class GetQuizDetails extends HttpServlet {
 
         HttpSession session = request.getSession();
         session.setAttribute("QuizDetails", quizDetails);
-        response.sendRedirect("staffEditQuiz.jsp");
+        response.sendRedirect("staffViewQuiz.jsp");
     }
 
 }

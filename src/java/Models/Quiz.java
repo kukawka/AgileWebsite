@@ -1,4 +1,4 @@
-package Models ;
+package Models;
 
 import Beans.Question;
 import Beans.QuizDetails;
@@ -14,7 +14,7 @@ import java.util.UUID;
 public class Quiz {
     //Cluster cluster;
 
-    public QuizDetails getQuiz(int quizID){
+    public QuizDetails getQuiz(int quizID) {
         QuizDetails quizDetails = new QuizDetails();
 
         Connection con;
@@ -24,30 +24,47 @@ public class Quiz {
         ResultSet questionRS = null;
         ResultSet answerRS = null;
 
+        String title = "";
+
         try {
             con = DBConnection.createConnection(); //establishing connection
             /*if (con == null) {
                 return true;
             }*/
             statement = con.createStatement();
-            statement2 = con.createStatement();
-            quizRS = statement.executeQuery("select Available, Title, CreationDate from quiz where ID = " + quizID);
-            questionRS = statement2.executeQuery("select QuestionText, ExplanationText, Valid, QuestionNumber from question where QuizID = " + quizID);
+            //statement2 = con.createStatement();
+            quizRS = statement.executeQuery("select Available, Title, CreationDate from quiz where ID=" + quizID);
+            
+             
+            while (quizRS.next()) {
+                title = quizRS.getString("Title");
+                quizDetails.setTitle(title);
+                quizDetails.setAvailability(quizRS.getBoolean("Available"));
+                quizDetails.setDate(quizRS.getDate("CreationDate").toString());
+            }
+            
+           // con.close() ;
+            
 
-            quizDetails.setTitle(quizRS.getString("Title"));
-            quizDetails.setAvailability(quizRS.getBoolean("Available"));
-            quizDetails.setDate(quizRS.getDate("CreationDate").toString());
+            //con = DBConnection.createConnection();
+            statement = con.createStatement();
+            questionRS = statement.executeQuery("select QuestionText, ExplanationText, Valid, QuestionNumber from question where QuizID = " + quizID);
+
+
+            //quizDetails.setTitle(quizRS.getString("Title"));
 
             ArrayList<Question> questions = new ArrayList<Question>();
+            
 
             while (questionRS.next()) // Until next row is present otherwise it return false
             {
                 Question q = new Question();
 
-                q.setQuestion(quizRS.getString("QuestionText"));
-                q.setExplanation(quizRS.getString("ExplanationText"));
+                q.setQuestion(questionRS.getString("QuestionText"));
+                q.setExplanation(questionRS.getString("ExplanationText"));
 
-                int questionNumber = quizRS.getInt("QuestionNumber");
+                int questionNumber = questionRS.getInt("QuestionNumber");
+                statement = con.createStatement();
                 answerRS = statement.executeQuery("select AnswerText, Correct from answer where QuestionID = " + questionNumber);
 
                 int c = 0;
@@ -63,15 +80,15 @@ public class Quiz {
                 q.setAnswers(answers);
                 questions.add(q);
             }
-            quizDetails.setQuestions(questions);
             
+            quizDetails.setQuestions(questions);
+            con.close();
             return quizDetails;
+            
         } catch (SQLException e) {
-            e.printStackTrace();   
-            return null; 
+            e.printStackTrace();
+            return null;
         }
-
-     
 
     }
 

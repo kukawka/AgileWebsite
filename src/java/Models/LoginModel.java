@@ -45,6 +45,9 @@ public class LoginModel {
                     return typeDB; ////If the user entered values are already present in database, which means user has already registered so I will return SUCCESS message.
                 }
             }
+            resultSet.close();
+            statement.close();
+            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -18,42 +18,41 @@
             <h1>Edit Quiz</h1>
         </div>
 
-
+     <%
+            QuizDetails quizDetails = (QuizDetails) session.getAttribute("QuizDetails");
+     %> 
 
         <form class="form-horizontal">
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">Title</label>
                 <div class="col-sm-10 col-md-4">
-                    <input type="text" class="form-control" id="inputEmail3">
+                    <input type="text" class="form-control" id="inputEmail3" value="<%= quizDetails.getTitle()%>" disabled>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox"> Availability
+                            <% if (quizDetails.getAvailability()){%>
+                            <input type="checkbox" checked disabled>
+                            <%}else{%> 
+                            <input type="checkbox" disabled><%}%> Availability
                         </label>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button class="btn btn-lg btn-primary">Edit Questions</button>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-default">Save</button>
+                    <button  class="btn btn-lg btn-primary">See Questions</button>
                 </div>
             </div>
         </form>
 
-     <%
-            QuizDetails quizDetails = (QuizDetails) session.getAttribute("QuizDetails");
-     %> 
+                        
+
      <% if (quizDetails!=null){%>
      
-     <%= quizDetails.getTitle()%>
+     
      <%= quizDetails.getAvailability()%>
      <%= quizDetails.getDate()%>
      <%= quizDetails.getQuestions().get(0).getQuestion()%>
