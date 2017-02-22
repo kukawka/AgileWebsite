@@ -6,6 +6,7 @@
 package Servlets;
 
 import Beans.QuizDetails;
+import Models.MainPageModel;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,13 +14,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import Models.Quiz;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Dagi
+ * @author Javi
  */
-@WebServlet(name = "GetQuizDetails", urlPatterns = {"/GetQuizDetails",})
+@WebServlet(name = "GetQuizDetails", urlPatterns = {"/GetQuizDetails","/Quiz"})
 public class GetQuizDetails extends HttpServlet {
 
     @Override
@@ -36,7 +38,15 @@ public class GetQuizDetails extends HttpServlet {
 
         HttpSession session = request.getSession();
         session.setAttribute("QuizDetails", quizDetails);
-        response.sendRedirect("staffViewQuiz.jsp");
+        response.sendRedirect("/AgileWebsite/Quiz");
+    }
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        RequestDispatcher rd = request.getRequestDispatcher("/staffViewQuiz.jsp");
+        rd.forward(request, response);
+        
     }
 
 }
