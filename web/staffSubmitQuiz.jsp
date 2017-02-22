@@ -35,8 +35,8 @@
                     int quizID = (Integer) request.getAttribute("quizID");
                     %>
                     
-                    <input type="hidden" name="quizID" value=<%=questionsnumber%>>
-                    <input type="hidden" name="questionsnumber" value=<%=quizID%>>
+                    <input type="hidden" name="quizID" value=<%=quizID%>>
+                    <input type="hidden" name="questionsnumber" value=<%=questionsnumber%>>
                     <%
                     /*
                     String questionTextName="questiontext";

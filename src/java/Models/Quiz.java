@@ -100,15 +100,8 @@ public class Quiz {
         try {
             con = DBConnection.createConnection(); //establishing connection
             Statement statement = con.createStatement();
-            //////////////////////////////////////
-            
-            /*System.out.println("title: " + title);
-            System.out.println("moduleID: " + moduleID);
-            System.out.println("creationDate: " + creationDate);
-            System.out.println("available: " + available);
-            */
-            ////////////////////////////////////////////////
             PreparedStatement st;
+            
             st = con.prepareStatement("Insert into quiz (Available, Title, CreationDate, moduleID) values (?,?,?,?)");
             st.setInt(1, available);
             st.setString(2, title);
@@ -149,7 +142,6 @@ public class Quiz {
             con = DBConnection.createConnection(); //establishing connection
             Statement statement = con.createStatement();
             
-            
             PreparedStatement st;
             st = con.prepareStatement("call insertQuestion ('" + questionText + "','" + explanationText + "'," + quizID + "," + questionNumber + ")");
             st.setString(1, questionText);
@@ -188,14 +180,25 @@ public class Quiz {
             con = DBConnection.createConnection(); //establishing connection
             Statement statement = con.createStatement();
 
-            rs = statement.executeQuery("call insertAnswer where answer, isCorrect, quizID, questionNum = " + answerText + "," + correct + "," + questionID + "," + questionNumber + ";");
+            
+            PreparedStatement st;
+            st = con.prepareStatement("call insertAnswer ('" + answerText + "','" + correct + "'," + questionID + "," + questionNumber + ")");
+            st.setString(1, answerText);
+            st.setInt(2, correct);
+            st.setInt(3, questionID);
+            st.setInt(4, questionNumber);
+            st.executeUpdate();
+            st.clearParameters();
+            
+            //rs = statement.executeQuery("call insertAnswer where answer, isCorrect, quizID, questionNum = " + answerText + "," + correct + "," + questionID + "," + questionNumber + ";");
             rs = statement.executeQuery("Select ID from answer where QuestionID = " + questionID + " AND AnswerText = " + answerText + ";");
 
+            /*
             while (rs.next()) // Until next row is present otherwise it returns false
             {
                 id = rs.getInt("ID");
             }
-
+            */
             con.close();
 
         } catch (SQLException e) {

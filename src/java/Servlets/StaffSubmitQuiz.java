@@ -56,15 +56,8 @@ public class StaffSubmitQuiz extends HttpServlet {
         
         int numOfQuestions=Integer.valueOf(request.getParameter("questionsnumber"));
         int quizID=Integer.valueOf(request.getParameter("quizID"));
-
-        /*
-        String questionTextName="questiontext";
-        String explanationTextName="explanationtext";
-        String questionNumberName="questionnumbertext";
-        //String validName="valid";
-        String answerTextName="answertext";
-        String correctName="correct";
-        */
+        
+        System.out.println("this is the number of questions: "+numOfQuestions);
 
         //Make arrays/vectors to insert question/answer info
         for (int i=0; i<numOfQuestions; i++)
