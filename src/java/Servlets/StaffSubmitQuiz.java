@@ -73,8 +73,8 @@ public class StaffSubmitQuiz extends HttpServlet {
             
             //int questionNumber = Integer.valueOf(request.getParameter("questionnumbertext"+(i+1)+(j+1)));
             
-            questionID=qz.SubmitQuestion(questionText, explanationText, quizID, i);
-            System.out.println("Question " +i+ " submitted!");
+            questionID=qz.SubmitQuestion(questionText, explanationText, quizID, (i+1));
+            System.out.println("Question " +(i+1)+ " submitted!");
 
             for (int j=0; j<4; j++)
             {
@@ -96,11 +96,11 @@ public class StaffSubmitQuiz extends HttpServlet {
                     correctBool=false;
                 }
                 
-                qz.SubmitAnswer(answerText, correctInt, questionID, i);
-                System.out.println("Answer " +j+ " for Question" +i+ " submitted!");
+                qz.SubmitAnswer(answerText, correctInt, quizID, (i+1));
+                System.out.println("Answer " +(j+1)+ " for Question" +(i+1)+ " submitted!");
                 
             }
-             System.out.println("Quiz submitted!");
+             System.out.println("Quiz " +quizID+ " submitted!");
         }
 
 
