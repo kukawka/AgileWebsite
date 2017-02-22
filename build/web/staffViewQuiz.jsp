@@ -53,21 +53,21 @@
         </form>
 
 
-        <style>
+        <!--<style>
             #panel{
                 visibility: hidden;
             }
-        </style>
+        </style>-->
 
         <% for (int x = 0; x < quizDetails.getQuestions().size(); x++) {%>
 
         <% String[] answers = quizDetails.getQuestions().get(x).getAnswers();%>
 
         <div class="col-sm-offset-2 col-sm-8">
-            <div class="panel panel-default" id="panel">
+            <div class="panel panel-default" id="panel" style=" visibility: hidden;">
                 <!-- Default panel contents -->
 
-                <div class="panel-heading"><h4><%=x + 1%>. <%= quizDetails.getQuestions().get(x).getQuestion()%></h4></div>
+                <div class="panel-heading"><h4><%=x + 1%>. <%= quizDetails.getQuestions().get(x).getQuestionText()%></h4></div>
                 <div class="panel-body">
                     <p><b><h5>Explanation: </b> <%= quizDetails.getQuestions().get(x).getExplanation()%></h5></p>
                 </div>
@@ -85,10 +85,11 @@
         <% }%>
 
         <script>
-            //var panel = document.getElementById("panel");
-            function myFunction() {
+           
+            function myFunction() { 
+                var panel = document.getElementById("panel");
                 //panel.style.display = block;
-                document.getElementById("panel").style.visibility = visible;
+                panel.style.visibility = visible;
             }
             /*
              var panel = document.getElementById('panel');

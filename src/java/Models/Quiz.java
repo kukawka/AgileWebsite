@@ -21,7 +21,6 @@ public class Quiz {
 
         Connection con;
         Statement statement = null;
-        Statement statement2 = null;
         ResultSet quizRS = null;
         ResultSet questionRS = null;
         ResultSet answerRS = null;
@@ -56,7 +55,7 @@ public class Quiz {
             {
                 Question q = new Question();
 
-                q.setQuestion(questionRS.getString("QuestionText"));
+                q.setQuestionText(questionRS.getString("QuestionText"));
                 q.setExplanation(questionRS.getString("ExplanationText"));
 
                 int questionNumber = questionRS.getInt("QuestionNumber");

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Beans;
 
 import java.util.ArrayList;
@@ -16,6 +12,8 @@ public class QuizDetails {
     boolean availability=false ; 
     ArrayList<Question> questions = new ArrayList<Question>();
     String date = "" ;
+    
+    //Encapsulated fields- added a getter and setters for each 
     
     public void setTitle(String title){
         this.title=title ;
