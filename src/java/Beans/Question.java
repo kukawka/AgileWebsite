@@ -25,7 +25,7 @@ public class Question {
         return questionText ;
     }
     
-    public void setExplanation(String explanation){
+    public void setExplanation(String answerExplanation){
         this.answerExplanation=answerExplanation ;
     }
     

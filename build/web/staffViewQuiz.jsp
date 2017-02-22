@@ -22,13 +22,13 @@
             QuizDetails quizDetails = (QuizDetails) session.getAttribute("QuizDetails");
         %> 
 
-        <form class="form-horizontal">
-            <div class="form-group">
+        <form class="form-horizontal" style="width: 100%;">
+            <div class="form-group" style="width: 100%;">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <h3>Title: <%= quizDetails.getTitle()%></h3>
+                    <h3 >Title: <%= quizDetails.getTitle()%></h3>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="width: 100%;">
                 <div class="col-sm-offset-2 col-sm-10">
                     <div class="checkbox">
                         <label>
@@ -40,63 +40,55 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="width: 100%;">
                 <div class="col-sm-offset-2 col-sm-10">
                     <h4>Date: <%= quizDetails.getDate()%></h4>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="width: 100%;">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button  class="btn btn-lg btn-primary" id="button" onclick="myFunction()">See Questions</button>
+                    <input  class="btn btn-lg btn-primary" id='button' onclick="showDiv()" value="See Questions"/>
                 </div>
             </div>
         </form>
 
 
-        <!--<style>
-            #panel{
-                visibility: hidden;
-            }
-        </style>-->
+        <div id="showDiv" style="display: none; background-color: red;">
+            
+            <% for (int x = 0; x < quizDetails.getQuestions().size(); x++) {%>
 
-        <% for (int x = 0; x < quizDetails.getQuestions().size(); x++) {%>
+            <% String[] answers = quizDetails.getQuestions().get(x).getAnswers();%>
 
-        <% String[] answers = quizDetails.getQuestions().get(x).getAnswers();%>
+            <div class="col-sm-offset-2 col-sm-8">
+                <div class="panel panel-default" style="margin-left: -15px;">
+                    <!-- Default panel contents -->
 
-        <div class="col-sm-offset-2 col-sm-8">
-            <div class="panel panel-default" id="panel" style=" visibility: hidden;">
-                <!-- Default panel contents -->
+                    <div class="panel-heading"><h4><%=x + 1%>. <%= quizDetails.getQuestions().get(x).getQuestionText()%></h4></div>
+                    <div class="panel-body">
+                        <p><b><h5>Explanation: </b> <%= quizDetails.getQuestions().get(x).getExplanation()%></h5></p>
+                    </div>
 
-                <div class="panel-heading"><h4><%=x + 1%>. <%= quizDetails.getQuestions().get(x).getQuestionText()%></h4></div>
-                <div class="panel-body">
-                    <p><b><h5>Explanation: </b> <%= quizDetails.getQuestions().get(x).getExplanation()%></h5></p>
-                </div>
+                    <% for (int y = 0; y < 4; y++) {%>
+                    <!-- List group -->
+                    <ul class="list-group">
+                        <li class="list-group-item"> - <%= answers[y]%> <% if (quizDetails.getQuestions().get(x).getCorrectAnswerID() == y) {%> <p style="float:right;">&#10004;</p> <% } %></li>
+                    </ul>
 
-                <% for (int y = 0; y < 4; y++) {%>
-                <!-- List group -->
-                <ul class="list-group">
-                    <li class="list-group-item"> - <%= answers[y]%> <% if (quizDetails.getQuestions().get(x).getCorrectAnswerID() == y) {%> <p style="float:right;">&#10004;</p> <% } %></li>
-                </ul>
+                    <% } %>
+                </div>  
 
-                <% } %>
-            </div>  
+            </div>
+            <% }%>
 
         </div>
-        <% }%>
 
         <script>
-           
-            function myFunction() { 
-                var panel = document.getElementById("panel");
-                //panel.style.display = block;
-                panel.style.visibility = visible;
+
+            function showDiv() {
+                document.getElementById('showDiv').style.display = "block";
+                document.getElementById('button').style.display = "none";
             }
-            /*
-             var panel = document.getElementById('panel');
-             var btn = document.getElementById("button");
-             btn.onclick = function () {
-             panel.style.display = block;
-             }*/
+
         </script>
 
     </body>
