@@ -12,7 +12,7 @@ package Beans;
 public class Question {
     String question="" ;
     String explanation="" ;
-    int correctAnswerID=0 ;
+    int correctAnswerID=-1 ;
     String[] answers=new String[4] ;
     
     public void setQuestion(String question){
@@ -23,7 +23,7 @@ public class Question {
         return question ;
     }
     
-    public void setExplanation(String question){
+    public void setExplanation(String explanation){
         this.explanation=explanation ;
     }
     

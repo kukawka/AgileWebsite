@@ -35,7 +35,7 @@
         <br>
         <form class="navbar-form navbar-right" method="POST"  action="GetQuizDetails">
             <input type="hidden" name="quizID" id="quizID" value="1">
-            <button type="submit" class="btn btn-default">Edit Quiz</button>
+            <button type="submit" class="btn btn-default">Display Quiz</button>
         </form>
         <!--<a href="staffEditQuiz.jsp"></a>-->
 

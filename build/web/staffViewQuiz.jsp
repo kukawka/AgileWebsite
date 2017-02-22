@@ -15,27 +15,26 @@
     </head>
     <body>
         <div class="page-header col-sm-offset-2">
-            <h1>Edit Quiz</h1>
+            <h1>View Quiz</h1>
         </div>
 
-     <%
+        <%
             QuizDetails quizDetails = (QuizDetails) session.getAttribute("QuizDetails");
-     %> 
+        %> 
 
         <form class="form-horizontal">
             <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">Title</label>
-                <div class="col-sm-10 col-md-4">
-                    <input type="text" class="form-control" id="inputEmail3" value="<%= quizDetails.getTitle()%>" disabled>
+                <div class="col-sm-offset-2 col-sm-10">
+                    <h3>Title: <%= quizDetails.getTitle()%></h3>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <div class="checkbox">
                         <label>
-                            <% if (quizDetails.getAvailability()){%>
+                            <% if (quizDetails.getAvailability()) {%>
                             <input type="checkbox" checked disabled>
-                            <%}else{%> 
+                            <%} else {%> 
                             <input type="checkbox" disabled><%}%> Availability
                         </label>
                     </div>
@@ -43,25 +42,61 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button  class="btn btn-lg btn-primary">See Questions</button>
+                    <h4>Date: <%= quizDetails.getDate()%></h4>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button  class="btn btn-lg btn-primary" id="button" onclick="myFunction()">See Questions</button>
                 </div>
             </div>
         </form>
 
-                        
 
-     <% if (quizDetails!=null){%>
-     
-     
-     <%= quizDetails.getAvailability()%>
-     <%= quizDetails.getDate()%>
-     <%= quizDetails.getQuestions().get(0).getQuestion()%>
-     <%= quizDetails.getQuestions().get(0).getQuestion()%>
-     <%= quizDetails.getQuestions().get(0).getCorrectAnswerID()%>
-        <%} else {
-%> <p>fuck this shit</p> 
-<%
-}
-%>
+        <style>
+            #panel{
+                visibility: hidden;
+            }
+        </style>
+
+        <% for (int x = 0; x < quizDetails.getQuestions().size(); x++) {%>
+
+        <% String[] answers = quizDetails.getQuestions().get(x).getAnswers();%>
+
+        <div class="col-sm-offset-2 col-sm-8">
+            <div class="panel panel-default" id="panel">
+                <!-- Default panel contents -->
+
+                <div class="panel-heading"><h4><%=x + 1%>. <%= quizDetails.getQuestions().get(x).getQuestion()%></h4></div>
+                <div class="panel-body">
+                    <p><b><h5>Explanation: </b> <%= quizDetails.getQuestions().get(x).getExplanation()%></h5></p>
+                </div>
+
+                <% for (int y = 0; y < 4; y++) {%>
+                <!-- List group -->
+                <ul class="list-group">
+                    <li class="list-group-item"> - <%= answers[y]%> <% if (quizDetails.getQuestions().get(x).getCorrectAnswerID() == y) {%> <p style="float:right;">&#10004;</p> <% } %></li>
+                </ul>
+
+                <% } %>
+            </div>  
+
+        </div>
+        <% }%>
+
+        <script>
+            //var panel = document.getElementById("panel");
+            function myFunction() {
+                //panel.style.display = block;
+                document.getElementById("panel").style.visibility = visible;
+            }
+            /*
+             var panel = document.getElementById('panel');
+             var btn = document.getElementById("button");
+             btn.onclick = function () {
+             panel.style.display = block;
+             }*/
+        </script>
+
     </body>
 </html>
