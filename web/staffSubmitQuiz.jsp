@@ -38,14 +38,15 @@
                     <input type="hidden" name="quizID" value=<%=questionsnumber%>>
                     <input type="hidden" name="questionsnumber" value=<%=quizID%>>
                     <%
-
+                    /*
                     String questionTextName="questiontext";
                     String explanationTextName="explanationtext";
                     String validName="valid";
 
                     String answerTextName="answertext";
-                    String questionNumberName="questionNumberText";
+                    String questionNumberName="questionnumbertext";
                     String correctName="correct";
+                    */
                     
                         for (int i=0; i<questionsnumber; i++)
                         {
@@ -53,9 +54,9 @@
                         %>
                             <br>
                             <h4>Question <%=i+1%></h4>
-                            <li>Question Text: <input type="text" name=<%=questionTextName+(i+1)%> maxlength="1024"></li>
-                            <li>Explanation Text: <input type="text" name=<%=explanationTextName+(i+1)%>  maxlength="1024"></li>   
-                            <li>Valid: <input type="checkbox" name=<%=validName+(i+1)%> value="1"> Yes</li>
+                            <li>Question Text: <input type="text" name=<%="questiontext"+(i+1)%> maxlength="1024"></li>
+                            <li>Explanation Text: <input type="text" name=<%="explanationtext"+(i+1)%>  maxlength="1024"></li>   
+                            <%--<li>Valid: <input type="checkbox" name=<%="valid"+(i+1)%> value="1"> Yes</li>--%>
                             <br>
 
                             
@@ -67,9 +68,9 @@
                             {
                                 %>
                                     <h5>Answer <%=j+1%>:</h5>
-                                   <li>Answer Text: <input type="text" name=<%=answerTextName+(i+1)+(j+1)%>  maxlength="255"></li>
-                                   <li>Question Number: <input type="number" name=<%=questionNumberName+(i+1)+(j+1)%>  maxlength="1"></li>
-                                   <li>Correct: <input type="checkbox" name=<%=correctName+(i+1)+(j+1)%>  value="1"> Yes</li> 
+                                   <li>Answer Text: <input type="text" name=<%="answertext"+(i+1)+(j+1)%>  maxlength="255"></li>
+                                   <%--<li>Question Number: <input type="number" name=<%="questionnumbertext"+(i+1)+(j+1)%>  maxlength="1"></li>--%>
+                                   <li>Correct: <input type="checkbox" name=<%="correct"+(i+1)+(j+1)%>  value="1"> Yes</li> 
                                     <br>
                                 <%
                             }            
