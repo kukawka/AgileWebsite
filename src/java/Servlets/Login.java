@@ -41,7 +41,7 @@ public class Login extends HttpServlet {
             login.setUsername(userName);
             login.setType(type);
             session.setAttribute("LoggedIn", login);
-            response.sendRedirect("/AgileWebsite/MainPage");
+            response.sendRedirect(request.getContentType()+"/MainPage");
         } else {
             request.setAttribute("check", false);
 

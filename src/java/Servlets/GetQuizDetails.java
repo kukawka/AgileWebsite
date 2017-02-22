@@ -38,7 +38,7 @@ public class GetQuizDetails extends HttpServlet {
 
         HttpSession session = request.getSession();
         session.setAttribute("QuizDetails", quizDetails);
-        response.sendRedirect("/AgileWebsite/Quiz");
+        response.sendRedirect(request.getContentType()+"/Quiz");
     }
     
     @Override
