@@ -19,6 +19,7 @@ public class MainPageModel {
     
     /* Upon mainpage loading the Programmes of Study (PoS) will be pulled from the Database and used to populate the 
      * available buttons in the Nav-bar on the side.
+    COMMENTICO
      * 
     */ 
 public ResultSet getPOS()
