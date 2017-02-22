@@ -4,7 +4,8 @@
     Author     : Krasi, Philipp, Ivailo
 --%>
 
-<%@page import="java.sql.ResultSet"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="Beans.ProgrammeOfStudy"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <HTML>
@@ -20,7 +21,14 @@ $(function() {
  
         e.preventDefault();
     });
- 
+ $(document).ready(function() {                        
+                $('#submit').click(function(event) {  
+                    var programme=$('#pos').val();
+                 $.get('MainPage',{posid:programme},function(responseText) { 
+                      var modules=text(responseText);         
+                    });
+                });
+            });
     //----- CLOSE
     $('[data-popup-close]').on('click', function(e)  {
         var targeted_popup_class = jQuery(this).attr('data-popup-close');
@@ -38,8 +46,7 @@ $(function() {
 <BODY BGCOLOR="c0d13e">
     
     <%
-            // =  request.getAttribute("");
-        %> 
+                  %> 
 <HR>
 <br><br>
 <div class="headerhandler">
@@ -80,11 +87,12 @@ $(function() {
       
    
       <%
-          ResultSet pos = (ResultSet) request.getAttribute("POS");
-          //for (int i = 0; i<pos.g){
+          ArrayList<ProgrammeOfStudy> pos = (ArrayList<ProgrammeOfStudy>) request.getAttribute("POS");
+          for(int i=0;i<pos.size();i++)
+         {
       %>
     <div class="menu-item">
-      <h4><a href="#">Programme of study</a></h4>
+      <h4><a href="#pos"><%=pos.get(i).getName()%></a></h4>
       <ul>
         <li><a class="btn" data-popup-open="popup-1" href="dxd">ModuleID1</a></li>
         <li><a href="#">ModuleID2</a></li>
@@ -92,7 +100,10 @@ $(function() {
       </ul>
 	  <h4><a href="#">All Modules</a></h4>
     </div>
-      
+      <%
+          //if(pos.next().getString("Name")==null) break;
+      }
+      %>
    
 </nav>
 
