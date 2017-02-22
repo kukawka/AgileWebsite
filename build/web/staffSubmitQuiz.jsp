@@ -32,7 +32,7 @@
                     <%
                     //variable from last page
                     int questionsnumber = Integer.parseInt(request.getParameter("questionsnumber"));
-                    int quizID = Integer.parseInt(request.getParameter("quizID"));
+                    int quizID = (Integer) request.getAttribute("quizID");
                     %>
                     
                     <input type="hidden" name="quizID" value=<%=questionsnumber%>>

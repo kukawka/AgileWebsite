@@ -38,13 +38,13 @@ public class GetQuizDetails extends HttpServlet {
 
         HttpSession session = request.getSession();
         session.setAttribute("QuizDetails", quizDetails);
-        response.sendRedirect(request.getContentType()+"/Quiz");
+        response.sendRedirect("/Quiz");
     }
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("/staffViewQuiz.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher(request.getContextPath()+"/staffViewQuiz.jsp");
         rd.forward(request, response);
         
     }

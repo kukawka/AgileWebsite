@@ -41,7 +41,7 @@ public class Login extends HttpServlet {
             login.setUsername(userName);
             login.setType(type);
             session.setAttribute("LoggedIn", login);
-            response.sendRedirect(request.getContentType()+"/MainPage");
+            response.sendRedirect(request.getContextPath()+"/MainPage");
         } else {
             request.setAttribute("check", false);
 
