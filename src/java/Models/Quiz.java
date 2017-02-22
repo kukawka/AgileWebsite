@@ -96,15 +96,17 @@ public class Quiz {
         Connection con = null;
         ResultSet rs = null;
         int id = 0;
-//comment
+
         try {
             con = DBConnection.createConnection(); //establishing connection
             Statement statement = con.createStatement();
             //////////////////////////////////////
-            System.out.println("title: " + title);
+            
+            /*System.out.println("title: " + title);
             System.out.println("moduleID: " + moduleID);
             System.out.println("creationDate: " + creationDate);
             System.out.println("available: " + available);
+            */
             ////////////////////////////////////////////////
             PreparedStatement st;
             st = con.prepareStatement("Insert into quiz (Available, Title, CreationDate, moduleID) values (?,?,?,?)");
@@ -115,15 +117,21 @@ public class Quiz {
             st.setString(4, moduleID);
             st.executeUpdate();
             st.clearParameters();
-            //statement.executeUpdate("Insert into quiz (Available, Title, CreationDate, moduleID) values ("+available+ "," +title+ "," +creationDate+ "," +moduleID+ ")" );
-            rs = statement.executeQuery("Select ID from quiz where Title = " + title + " AND moduleID = " + moduleID + " AND CreationDate = " + creationDate);
-            con.close();
+            
+           //statement.executeUpdate("Insert into quiz (Available, Title, CreationDate, moduleID) values ("+available+ "," +title+ "," +creationDate+ "," +moduleID+ ")" );
+
+            rs = statement.executeQuery("Select ID from quiz where Title = '" + title + "' AND moduleID = " + moduleID + " AND CreationDate = '" + creationDate+"'");
+            
+            
+            
             while (rs.next()) // Until next row is present otherwise it returns false
             {
                 //get quiz id
                 id = rs.getInt("ID");
                 System.out.println("Quiz id: " + id);
             }
+            con.close();
+            
         } catch (SQLException e) {
             e.printStackTrace();
             return -1;
@@ -140,38 +148,39 @@ public class Quiz {
         try {
             con = DBConnection.createConnection(); //establishing connection
             Statement statement = con.createStatement();
-
-            rs = statement.executeQuery("call insertQuestion where question, explanation, quizID, questNum = " + questionText + "," + explanationText + "," + quizID + "," + questionNumber + ";");
-            rs = statement.executeQuery("Select ID from question where QuizID = " + quizID + " AND QuestionNumber = " + questionNumber + ";");
+            
+            
+            PreparedStatement st;
+            st = con.prepareStatement("call insertQuestion ('" + questionText + "','" + explanationText + "'," + quizID + "," + questionNumber + ")");
+            st.setString(1, questionText);
+            st.setString(2, explanationText);
+            st.setInt(3, quizID);
+            st.setInt(4, questionNumber);
+            st.executeUpdate();
+            st.clearParameters();
+            
+            
+            //rs = statement.executeQuery("call insertQuestion ('" + questionText + "','" + explanationText + "'," + quizID + "," + questionNumber + ")");
+            rs = statement.executeQuery("Select ID from question where QuizID = " + quizID + " AND QuestionNumber = " + questionNumber );
 
             while (rs.next()) // Until next row is present otherwise it returns false
             {
                 id = rs.getInt("ID");
             }
+            System.out.println("question id: "+id);
+            
+            con.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
             return -1;
 
-        } finally {
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException e) {
-                }
-            }
-            if (con != null) {
-                try {
-                    con.close();
-                } catch (SQLException e) {
-                }
-            }
         }
         return id;
     }
 
     public int SubmitAnswer(String answerText, int correct, int questionID, int questionNumber) {
-        Connection con = null;
+                Connection con = null;
         ResultSet rs = null;
         int id = 0;
 
@@ -187,24 +196,13 @@ public class Quiz {
                 id = rs.getInt("ID");
             }
 
+            con.close();
+
         } catch (SQLException e) {
             e.printStackTrace();
             return -1;
 
-        } finally {
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException e) {
-                }
-            }
-            if (con != null) {
-                try {
-                    con.close();
-                } catch (SQLException e) {
-                }
-            }
-        }
+        } 
         return id;
     }
 }
