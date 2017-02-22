@@ -96,7 +96,7 @@ public class StaffSubmitQuiz extends HttpServlet {
                     correctBool=false;
                 }
                 
-                qz.SubmitAnswer(answerText, correctInt, quizID, (i+1));
+                qz.SubmitAnswer(answerText, correctInt, questionID);
                 System.out.println("Answer " +(j+1)+ " for Question" +(i+1)+ " submitted!");
                 
             }

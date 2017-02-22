@@ -193,7 +193,7 @@ public class Quiz {
         return id;
     }
 
-    public int SubmitAnswer(String answerText, int correct, int quizID, int questionNumber) {
+    public int SubmitAnswer(String answerText, int correct, int questionNumber) {
                 Connection con = null;
         ResultSet rs = null;
         int id = 0;
@@ -205,11 +205,13 @@ public class Quiz {
             
             PreparedStatement st;
             //st = con.prepareStatement("call insertAnswer ('" + answerText + "','" + correct + "'," + questionID + "," + questionNumber + ")");
-            st = con.prepareStatement("{call insertAnswer (?,?,?,?)}");
+            //st = con.prepareStatement("Insert into quiz (Available, Title, CreationDate, moduleID) values (?,?,?,?)");
+            //st = con.prepareStatement("{call insertAnswer (?,?,?,?)}");
+            st = con.prepareStatement("Insert into answer (AnswerText, Correct, QuestionID) values (?,?,?)");
             st.setString(1, answerText);
             st.setInt(2, correct);
-            st.setInt(3, quizID);
-            st.setInt(4, questionNumber);
+            st.setInt(3, questionNumber);
+            //st.setInt(4, questionNumber);
             st.executeUpdate();
             st.clearParameters();
             
