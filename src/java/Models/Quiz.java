@@ -96,7 +96,7 @@ public class Quiz {
         Connection con = null;
         ResultSet rs = null;
         int id = 0;
-
+//comment
         try {
             con = DBConnection.createConnection(); //establishing connection
             Statement statement = con.createStatement();
