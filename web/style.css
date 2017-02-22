@@ -1,141 +1,71 @@
 *{
   margin: 0px;
   padding: 0px;
+ 
+}
+body {
+background: -webkit-linear-gradient(right, rgba(255,0,0,0), rgb(29, 47, 62));
 }
 .headerhandler{
 	width:100%;
-	
-
-margin-left:1%;
-
+	padding-left:1%;
 }
-.headerhandler h1{color:#fff;
+#navheader{
+	background:#1D2F3E;
+}
+#navheader h4{
+	color:#fff;
+	
+}
+#navheader p{
+	color:#aaa;
+}
+.headerhandler h1{
+	color:#fff;
 	font-family:"Arial Black", Gadget, sans-serif;
 	}
-nav {float:left;
+	
+nav {
+	float:left;
   font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
   line-height: 1.5;
-  margin: 50px auto; /*for display only*/
-  width: 200px;
+  margin: 5% auto; /*for display only*/
+  width: 25%;
+ min-width:400px;
+   position: absolute;
   -webkit-box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
      -moz-box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
           box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
 }
 
-.menu-item {
-  background: #fff;
-  width: 200px; 
-}
-
-* {
-  margin: 0px;
-  padding: 0px;
-}
- 
-body {
-background: -webkit-linear-gradient(right, rgba(255,0,0,0), rgb(29, 47, 62));
-}
- 
-nav {
-  font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
-  line-height: 1.5;
-  margin: 50px auto; /*for display only*/
-  width: 20%;
-  -webkit-box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
-    -moz-box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
-	border-bottom: 1px solid rgba(0,0,0,0.3);
-  border-top: 1px solid rgba(255,255,255,0.2);
-  color: #fff;
-  font-size: 15px;
-  font-weight: 15%;
-  padding: 7px 12px;
-}
- 
-.menu-item {
-  background: #fff;
-  width: 100%; 
-}
-/*Menu Header Styles*/
-.menu-item h4 {
-  color: #fff;
-  font-size: 15px;
-  font-weight: 15%;
-  padding: 3% 7%;
-  background: #152737;
-}
-.menu-item h4 a {
-  color: white;
-  display: block;
-  text-decoration: none;
-  width: 100%;
-}/*First Item Styles*/
-.alpha p {
-	font-size: 13px;
-	padding: 8px 12px;
-	color: #aaa;
-}
-/*ul Styles*/
-.menu-item ul {
-  background: #fff;
-  font-size: 13px;
-  line-height: 30px;
-  height: 0px; /*Collapses the menu*/
-  list-style-type: none;
-  overflow: hidden;
-  padding: 0px;
-
-  -webkit-transition: height 1s ease;
-     -moz-transition: height 1s ease;
-       -o-transition: height 1s ease;
-      -ms-transition: height 1s ease;
-          transition: height 1s ease;
-}
- 
-.menu-item ul a {
-  margin-left: 20px;
-  text-decoration: none;
-  color: #aaa;
-  display: block;
-  width: 200px;
-}
- 
-/*li Styles*/
-.menu-item li {
-  border-bottom: 1px solid #eee;
-}
- 
-.menu-item li:hover {
-  background: #eee;
-}
-
-
-.menu-item:hover ul {
-  height: 93px;
-}
 
 /* Outer */
-.popup p{margin-top:3%;
+.popup p{
+	margin-top:3%;
 font-style: italic;
 color:grey;
 }
-.popup h2{font-style: italic;}
+.popup h2{
+	font-style: italic;
+	}
 
 .popup {
 	font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
     width:100%;
     height:100%;
     display:none;
-    position:fixed;
+    position:absolute;
     top:0px;
     left:0px;
-    background:rgba(0,0,0,0.75);
+
 }
  
 /* Inner */
-.popup-inner {margin-top:4%;
+.popup-inner {
+	margin-top:4%;
 	height:60%;
-    max-width:1200px;
+	min-width:30%;
+	max-width:65%;
     width:100%;
     padding:40px;
     position:absolute;
@@ -147,7 +77,6 @@ color:grey;
     border-radius:3px;
 	border-size:10px;
     background:#fff;
-	
 }
  
 /* Close Button */
@@ -155,7 +84,6 @@ color:grey;
     width:30px;
     height:30px;
     padding-top:4px;
-    display:inline-block;
     position:absolute;
     top:0px;
     right:0px;
@@ -177,61 +105,52 @@ color:grey;
     background:rgba(0,0,0,1);
     text-decoration:none;
 }
-.myButton {
-	margin-top:1%;
-	margin-right:5%;
-	-moz-box-shadow:inset 0px -3px 7px 0px #7f909a;
-	-webkit-box-shadow:inset 0px -3px 7px 0px #7f909a;
-	box-shadow:inset 0px -3px 7px 0px #7f909a;
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #7f909a), color-stop(1, #7f909a));
-	background:-moz-linear-gradient(top, #1d2f3e 5%, #c9e1c1 100%);
-	background:-webkit-linear-gradient(top, #1d2f3e 5%, #c9e1c1 100%);
-	background:-o-linear-gradient(top, #1d2f3e 5%, #7f909a 100%);
-	background:-ms-linear-gradient(top, #1d2f3e 5%,#7f909a 100%);
-	background:linear-gradient(to bottom, #1d2f3e 5%, #7f909a 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#1d2f3e', endColorstr='#7f909a',GradientType=0);
-	background-color:#1d2f3e;
-	border:1px solid #0b0e07;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Trebuchet MS;
-	font-size:15px;
-	font-style:italic;
-	padding:9px 23px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #263666;
-}
-.myButton:hover {
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #7f909a), color-stop(1, #1d2f3e));
-	background:-moz-linear-gradient(top, #7f909a 5%, #1d2f3e 100%);
-	background:-webkit-linear-gradient(top, #7f909a 5%, #1d2f3e 100%);
-	background:-o-linear-gradient(top, #7f909a 5%, #1d2f3e 100%);
-	background:-ms-linear-gradient(top, #7f909a 5%, #1d2f3e 100%);
-	background:linear-gradient(to bottom, #7f909a 5%, #1d2f3e 100%);
-	background-color:#0688fa;
-}
-.myButton:active {
-	position:relative;
-	top:1px;
-}
 
-.handle{
-	padding-top:2%;
-	padding-bottom:2%;
-	
-	border-bottom: 1px solid rgba(0,0,0,0.3);
- border-top: 1px solid rgba(0,0,0,0.3);}
 .footer {
   position: absolute;
   right: 0;
   bottom: 0;
   left: 0;
-  padding: 1rem;
+  padding: 0rem;
  background: -webkit-linear-gradient(left, rgba(255,0,0,0), rgb(29, 47, 62));
   text-align:right;
   font-style: italic;
   border-top: 1px solid rgba(0,0,0,0.3);
 }
-.footer p{color:#fff;
+.footer p{
+	color:#fff;
 }
+
+/* ---- grid ---- */
+
+.grid { 
+float:center;
+position:absolute;
+  background: #DDD;
+  max-width: 500px;
+}
+
+/* clear fix */
+.grid:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+/* ---- .grid-item ---- */
+
+.grid-item {
+  margin-right:1%;
+  margin-bottom:1%;
+  float: left;
+  width: 100px;
+  height: 100px;
+  background: #fff;
+  border: 2px solid #333;
+  border-color: hsla(0, 0%, 0%, 0.7);
+}
+.btn{color:#aaa;
+font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
+font-style:italic;
+}
+

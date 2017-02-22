@@ -37,7 +37,10 @@ public class MainPage extends HttpServlet {
             throws ServletException, IOException {
         MainPageModel mnm = new MainPageModel();
         request.setAttribute("POS",mnm.getPOS());
+        
         RequestDispatcher rd = request.getRequestDispatcher("/mainpage.jsp");
+       // response.setContentType("application/json");
+        //new Gson().toJson(list2, response.getWriter());
         rd.forward(request, response);
         
     }

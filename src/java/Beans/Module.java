@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class Module {
     String name="" ;
     int id=0 ;
-    //ArrayList<QuizDetails> quiz=new ArrayList<QuizDetails>() ;
+    ArrayList<QuizDetails> quiz=new ArrayList<QuizDetails>() ;
     
     public void setName(String name){
         this.name=name ;
@@ -31,13 +31,13 @@ public class Module {
     public int getID(){
         return id ;
     }
-    /*
+    
      public void setQuizzes(ArrayList<QuizDetails> quiz){
         this.quiz=quiz ;
     }
     
     public ArrayList<QuizDetails> getQuizzes(){
         return quiz ;
-    }*/
+    }
 
 }
