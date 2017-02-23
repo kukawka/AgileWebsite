@@ -9,64 +9,56 @@
     </head>
     <body>
         <header>
-        <%--<h1>InstaGrim ! </h1>
-        <h2>Your world in Black and White</h2>
-        --%>
+        <h2>Submit a Quiz</h2>
         </header>
         <nav>
             <ul>
-
+                <%-- nav bar --%>
             </ul>
         </nav>
        
         <article>
-            <h2>Submit a Quiz</h2>
+            
             <form method="POST"  action="StaffSubmitQuiz">
                 
                 <ul>
                     <h3>Question Options:</h3>
-                    <br>
-                    
-
-                    <%-- Display per number of questions to be given--%>
+                    <br>            
                     <%
-                    //variable from last page
+                    //variables from last page
                     int questionsnumber = Integer.parseInt(request.getParameter("questionsnumber"));
                     int quizID = (Integer) request.getAttribute("quizID");
                     %>
                     
                     <input type="hidden" name="quizID" value=<%=quizID%>>
                     <input type="hidden" name="questionsnumber" value=<%=questionsnumber%>>
-                    <%
                     
+                    <%-- Display per number of questions to be given--%>
+                    <%
                         for (int i=0; i<questionsnumber; i++)
                         {
-
+                            //Question Info
                         %>
                             <br>
                             <h4>Question <%=i+1%></h4>
                             <li>Question Text: <input type="text" name=<%="questiontext"+(i+1)%> maxlength="1024"></li>
                             <li>Explanation Text: <input type="text" name=<%="explanationtext"+(i+1)%>  maxlength="1024"></li>   
-                            <%--<li>Valid: <input type="checkbox" name=<%="valid"+(i+1)%> value="1"> Yes</li>--%>
                             <br>
 
                             
                             <%
-                            //Display per number of questions to be given TIMES FOUR
-                            //answer Information
-
+                            //Display per number of questions to be given x4
                             for (int j=0; j<4; j++)
                             {
+                                //Answer Info
                                 %>
-                                    <h5>Answer <%=j+1%>:</h5>
+                                   <h5>Answer <%=j+1%>:</h5>
                                    <li>Answer Text: <input type="text" name=<%="answertext"+(i+1)+(j+1)%>  maxlength="255"></li>
-                                   <%--<li>Question Number: <input type="number" name=<%="questionnumbertext"+(i+1)+(j+1)%>  maxlength="1"></li>--%>
                                    <li>Correct: <input type="checkbox" name=<%="correct"+(i+1)+(j+1)%>  value="1"> Yes</li> 
-                                    <br>
+                                   <br>
                                 <%
                             }            
                         }
-
                     %>
                 </ul>
                 <br/>
