@@ -83,17 +83,15 @@ public class StaffSubmitQuiz extends HttpServlet {
                 String answerText = request.getParameter("answertext"+(i+1)+(j+1));
                 String correct = request.getParameter("correct"+(i+1)+(j+1)); //will be 1 or null
                 
-                boolean correctBool;//=true;
                 int correctInt;
-                if (correct=="1")
+
+                if (correct!=null)
                 {
                     correctInt=1;
-                    correctBool=true;
                 }
                 else
                 {
                     correctInt=0;
-                    correctBool=false;
                 }
                 
                 qz.SubmitAnswer(answerText, correctInt, questionID);
