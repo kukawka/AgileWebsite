@@ -56,15 +56,8 @@ public class StaffSubmitQuiz extends HttpServlet {
         
         int numOfQuestions=Integer.valueOf(request.getParameter("questionsnumber"));
         int quizID=Integer.valueOf(request.getParameter("quizID"));
-
-        /*
-        String questionTextName="questiontext";
-        String explanationTextName="explanationtext";
-        String questionNumberName="questionnumbertext";
-        //String validName="valid";
-        String answerTextName="answertext";
-        String correctName="correct";
-        */
+        
+        System.out.println("this is the number of questions: "+numOfQuestions);
 
         //Make arrays/vectors to insert question/answer info
         for (int i=0; i<numOfQuestions; i++)
@@ -80,8 +73,8 @@ public class StaffSubmitQuiz extends HttpServlet {
             
             //int questionNumber = Integer.valueOf(request.getParameter("questionnumbertext"+(i+1)+(j+1)));
             
-            questionID=qz.SubmitQuestion(questionText, explanationText, quizID, i);
-            System.out.println("Question " +i+ " submitted!");
+            questionID=qz.SubmitQuestion(questionText, explanationText, quizID, (i+1));
+            System.out.println("Question " +(i+1)+ " submitted!");
 
             for (int j=0; j<4; j++)
             {
@@ -103,11 +96,11 @@ public class StaffSubmitQuiz extends HttpServlet {
                     correctBool=false;
                 }
                 
-                qz.SubmitAnswer(answerText, correctInt, questionID, i);
-                System.out.println("Answer " +j+ " for Question" +i+ " submitted!");
+                qz.SubmitAnswer(answerText, correctInt, questionID);
+                System.out.println("Answer " +(j+1)+ " for Question" +(i+1)+ " submitted!");
                 
             }
-             System.out.println("Quiz submitted!");
+             System.out.println("Quiz " +quizID+ " submitted!");
         }
 
 
