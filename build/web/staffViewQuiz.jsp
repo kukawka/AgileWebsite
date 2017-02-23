@@ -26,7 +26,7 @@
         <form class="form-horizontal" style="width: 100%;">
             <div class="form-group" style="width: 100%;">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <h3 >Title: <%= quizDetails.getTitle()%></h3>
+                    <h3>Title: <%= quizDetails.getTitle()%></h3>
                 </div>
             </div>
             <div class="form-group" style="width: 100%;">
