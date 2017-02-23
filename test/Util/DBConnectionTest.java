@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Models;
+package Util;
 
-import Util.DBConnection;
 import java.sql.Connection;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -18,14 +17,13 @@ import static org.junit.Assert.*;
  *
  * @author Dagi
  */
-public class LoginModelTest {
+public class DBConnectionTest {
     
-    public LoginModelTest() {
+    public DBConnectionTest() {
     }
     
     @BeforeClass
     public static void setUpClass() {
-      
     }
     
     @AfterClass
@@ -41,18 +39,13 @@ public class LoginModelTest {
     }
 
     /**
-     * Test of authenticateLogin method, of class LoginModel.
+     * Test of createConnection method, of class DBConnection.
      */
     @Test
-    public void testAuthenticateLogin() {
-        System.out.println("authenticateLogin");
-        String username = "3";
-        String password = "test";
-        LoginModel instance = new LoginModel();
-        String expResult = "Staff";
-        String result = instance.authenticateLogin(username, password);
-        assertEquals("The right user type wasn't returned",expResult, result);
-        assertNotNull("Authentication failed",result) ;
+    public void testCreateConnection() {
+        System.out.println("createConnection");
+        Connection result = DBConnection.createConnection();
+        assertNotNull("The connection was not established",result);
     }
     
 }
