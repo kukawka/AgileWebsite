@@ -96,7 +96,7 @@ public class MainPageModel {
     /* Selecting a module will lead to all quizzes for that module to be pulled from the DB and displayed on the entire page beside the Nav-bar.
  * @params ID of selected module
      */
-    public ArrayList<Quiz> getQuizzes(int ID) {
+    public ArrayList<Quiz> getQuizzes(int ID,String userType) {
           ResultSet resultQuizzes = null;
         Statement statement = null;
         ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
@@ -104,17 +104,36 @@ public class MainPageModel {
             Connection con;
             con = DBConnection.createConnection();
             statement = con.createStatement();
-            resultQuizzes = statement.executeQuery("SELECT ID,Title FROM quiz WHERE moduleID=" + ID);
-            while (resultQuizzes.next()) {
-                if (resultQuizzes != null) {
-                    Quiz quiz = new Quiz();
-                    System.out.println("POS ID:" + ID);
-                    System.out.println("ID: " + resultQuizzes.getInt("ID"));
-                    System.out.println("Name" + resultQuizzes.getString("Title"));
-                    quiz.setID(resultQuizzes.getInt("ID"));
-                    quiz.setName(resultQuizzes.getString("Title"));
-                    //module.setQuizzes(getQuizzes(resultModules.getInt("ID")));
-                    quizzes.add(quiz);
+            if(userType.equals("Staff"))
+            {
+                resultQuizzes = statement.executeQuery("SELECT ID,Title FROM quiz WHERE moduleID=" + ID);
+                while (resultQuizzes.next()) {
+                    if (resultQuizzes != null) {
+                        Quiz quiz = new Quiz();
+                        System.out.println("POS ID:" + ID);
+                        System.out.println("ID: " + resultQuizzes.getInt("ID"));
+                        System.out.println("Name" + resultQuizzes.getString("Title"));
+                        quiz.setID(resultQuizzes.getInt("ID"));
+                        quiz.setName(resultQuizzes.getString("Title"));
+                        //module.setQuizzes(getQuizzes(resultModules.getInt("ID")));
+                        quizzes.add(quiz);
+                    }
+                }
+            }
+            if(userType.equals("Student"))
+            {
+                resultQuizzes = statement.executeQuery("SELECT ID,Title FROM quiz WHERE moduleID=" +ID+" AND Available=1");
+                while (resultQuizzes.next()) {
+                    if (resultQuizzes != null) {
+                        Quiz quiz = new Quiz();
+                        System.out.println("POS ID:" + ID);
+                        System.out.println("ID: " + resultQuizzes.getInt("ID"));
+                        System.out.println("Name" + resultQuizzes.getString("Title"));
+                        quiz.setID(resultQuizzes.getInt("ID"));
+                        quiz.setName(resultQuizzes.getString("Title"));
+                        //module.setQuizzes(getQuizzes(resultModules.getInt("ID")));
+                        quizzes.add(quiz);
+                    }
                 }
             }
             con.close();

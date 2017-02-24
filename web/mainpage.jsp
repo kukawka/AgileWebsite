@@ -1,3 +1,4 @@
+<%@page import="Beans.LoggedIn"%>
 <%@page import="Beans.Quiz"%>
 <%@page import="Beans.Module"%>
 <%@page import="Beans.ProgrammeOfStudy"%>
@@ -93,8 +94,9 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
                     <ul class="nav navbar-nav">
+                        <% LoggedIn login = (LoggedIn) session.getAttribute("LoggedIn");%>
                          <form method="Post" action="MainPage" id='info'>
-                             <p>Information about the user.<i>FirstNameVariable LastNameVariable</i></p>
+                             <p>Information about the user.<i> <br>Username: <%=login.getUsername()%><br>Type: <%=login.getType()%> </i></p>
                                 </form>
                         <li class="active"><a href="mainpage.jsp" >Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
                         <li id="pos" ><a>
@@ -158,13 +160,25 @@
                         %>
 
                          <div class="grid-item">
-                           
-                        <form method="Post" action="MainPage">
-                        <input type="hidden" name="id" value="<%=quiz.get(i).getID()%>"/>
+                             <%if((login.getType()).equals("Staff"))
+                             {
+                                %>
+                             <form method="Post" action="GetQuizDetails">
+                             <% 
+                             }
+                             if((login.getType()).equals("Student"))
+                            { 
+                             %>
+                            <form method="Post" action="MainPage">
+                                <% 
+                             }
+                                %>  
+                        
+                        <input type="hidden" name="quizID" value="<%=quiz.get(i).getID()%>"/>
                         
                         <input type="hidden" name="type" value="GoQuiz"/>
                         <input type="submit" name="info" id="submit2" value="<%=quiz.get(i).getName()%>"/>
-                        <span class="glyphicon glyphicon-edit" id='edit'></span><p>edit:</p>
+                        <!--<span class="glyphicon glyphicon-edit" id='edit'></span><p>edit:</p>-->
                        
                         </form> 
                 </div>
@@ -173,10 +187,7 @@
                                         }
 %>
                          <div class="grid-item">
-                             <form method="Post" action="MainPage">
-                        <input type="hidden" name="id" value="#"/>
-                        
-                        <input type="hidden" name="type" value="GoQuiz"/>
+                             <form method="Get" action="StaffStartQuiz">
                         <input type="submit" name="info" id="submit1" value="CREATE"/>
                        
                        
