@@ -28,8 +28,6 @@ public class GetQuizDetails extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int quizID = Integer.parseInt(request.getParameter("quizID"));
-        //int quizID=2 ;
-
         Quiz quiz = new Quiz();
 
         QuizDetails quizDetails = new QuizDetails() ;

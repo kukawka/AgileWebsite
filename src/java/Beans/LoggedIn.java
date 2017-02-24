@@ -13,22 +13,21 @@ public class LoggedIn {
     boolean logedin=false;
     String Username=null;
     String Type=null;
-    //String First_name=null ;
     public void LogedIn(){
         
     }
     
-    public void setUsername(String name){//where did that come from?????
+    public void setUsername(String name){
         this.Username=name;
     }
     public String getUsername(){
         return Username;
     }
     
-    public void setType(String type){//where did that come from?????
+    public void setType(String type){
         this.Type=type;
     }
-    public String getType(){//where did that come from?????
+    public String getType(){
         return Type;
     }
    
