@@ -46,7 +46,7 @@ public class Quiz {
             }
 
             statement = con.createStatement();
-            questionRS = statement.executeQuery("select QuestionText, ExplanationText, Valid, QuestionNumber from question where QuizID = " + quizID);
+            questionRS = statement.executeQuery("select ID,QuestionText, ExplanationText, Valid, QuestionNumber from question where QuizID = " + quizID);
 
             ArrayList<Question> questions = new ArrayList<Question>();
 
@@ -59,7 +59,7 @@ public class Quiz {
 
                 int questionNumber = questionRS.getInt("QuestionNumber");
                 statement = con.createStatement();
-                answerRS = statement.executeQuery("select AnswerText, Correct from answer where QuestionID = " + questionNumber);
+                answerRS = statement.executeQuery("select AnswerText, Correct from answer where QuestionID = " + questionRS.getInt("ID"));
 
                 int c = 0;
                 String[] answers = new String[4];
@@ -247,4 +247,3 @@ public class Quiz {
         return id;
     }
 }
-

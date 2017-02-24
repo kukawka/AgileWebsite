@@ -46,11 +46,11 @@ public class StaffStartQuiz extends HttpServlet {
 
         if (available==null)
         {
-            availableInt=0;
+            availableInt=1;
         }
         else
         {
-            availableInt=1;
+            availableInt=0;
         }
         
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");

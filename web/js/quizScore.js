@@ -13,14 +13,13 @@ var Quiz = function(){
 
 var qT = document.getElementById('questionTotal');
 var qA = document.getElementById('questionAnswer');
-
 this.correctAnswers = [];
 
-for(i=1; i<=qT.dataset.questionTotal; i++){
-  this.correctAnswers.push({question: i, answer: qA.dataset.questionAnswer});
+for(i=0; i<3; i++){
+  this.correctAnswers.push({question: i+1, answer: qA.dataset.questionAnswer[i] });
 }
 
-  /*this.correctAnswers = [
+  /*this.correctAnswers = [	
     { question: 1, answer: 'a' },
     { question: 2, answer: 'b' },
     { question: 3, answer: 'd' },
