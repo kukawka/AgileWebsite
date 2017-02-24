@@ -1,2 +1,1 @@
 StaffStartQuiz
-staffStartQuiz

@@ -198,4 +198,59 @@ public class Quiz {
         } 
         return id;
     }
+    
+    public int EditQuiz(int quizID) {
+        QuizDetails qDetails = new QuizDetails();
+        //Question questions = new Question();
+        int id = 0;
+        Connection con = null;
+        Statement statement2 = null; //this is what
+        ResultSet QuizRS = null;
+        ResultSet QuestionRS = null;
+        ResultSet AnswerRS = null;
+        String title = " ";
+
+        try {
+            //establishing connection to db
+            con = DBConnection.createConnection();
+            Statement statement = con.createStatement();
+
+            QuizRS = statement.executeQuery("Update quiz (Available, Title) values ('available', 'title')");
+            QuestionRS = statement.executeQuery("Update question (questiontext, explanationtext) values ('questiontext', 'explanationtext')");
+            AnswerRS = statement.executeQuery("Update answer (answertext, correct) values ('answertext', 'correct')");
+
+            while (QuizRS.next()) {
+                title = QuizRS.getString("Title");
+                qDetails.setTitle(title);
+                qDetails.setAvailability(QuizRS.getBoolean("Available"));
+            }
+            
+            ArrayList<Question> question = new ArrayList<Question>();
+            while (QuestionRS.next())
+            {
+                Question questions = new Question();
+                questions.setQuestionText(QuestionRS.getString("QuestionText"));
+                questions.setExplanation(QuestionRS.getString("ExplanationText"));
+             
+                int c = 0;
+            String[] answer = new String[4];
+            while (AnswerRS.next())
+            {
+                boolean correct = AnswerRS.getBoolean("Correct");
+                if (correct)
+                {
+                    questions.setCorrectAnswerID(c);
+                }
+                questions.setAnswers(answer);
+                question.add(questions);    
+            }
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("Error");
+            e.printStackTrace();
+            return -1;
+        }
+        return id;
+    }
 }
