@@ -182,8 +182,12 @@
                         
                             <%
                                         }
-%>
-                         <div class="grid-item">
+                                        if((login.getType()).equals("Staff"))
+                                        {  
+                       
+                            %>  
+                       
+                        <div class="grid-item">
                              <form method="Get" action="StaffStartQuiz">
                         <input type="submit" name="info" id="submit1" value="CREATE"/>
                        
@@ -191,7 +195,8 @@
                         </form> 
                         </div>      
                         <%
-                                    } else {
+                                   }
+                            } else {
 
                                     }
                                 }
