@@ -7,6 +7,8 @@ package Models;
 
 import Util.DBConnection;
 import java.sql.Connection;
+import java.sql.SQLException;
+import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -18,7 +20,9 @@ import static org.junit.Assert.*;
  *
  * @author Dagi
  */
-public class LoginModelTest {
+public class LoginModelTest extends TestCase {
+    
+    private LoginModel instance ;
     
     public LoginModelTest() {
     }
@@ -34,6 +38,7 @@ public class LoginModelTest {
     
     @Before
     public void setUp() {
+        instance = new LoginModel();
     }
     
     @After
@@ -47,8 +52,8 @@ public class LoginModelTest {
     public void testAuthenticateLogin() {
         System.out.println("authenticateLogin");
         String username = "3";
-        String password = "test";
-        LoginModel instance = new LoginModel();
+        String password = "test1";
+       
         String expResult = "Staff";
         String result = instance.authenticateLogin(username, password);
         assertEquals("The right user type wasn't returned",expResult, result);
