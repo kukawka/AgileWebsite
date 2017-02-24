@@ -16,7 +16,7 @@
     <body>
         <div class="page-header col-sm-offset-2">
             <h1>View Quiz</h1>
-            <a href="staffEditQuiz.jsp" class="btn btn-lg btn-primary" id='button' >Edit Questions</a>
+            <a href="staffEditQuiz.jsp" class="btn btn-lg btn-primary" >Edit Questions</a>
         </div>
 
         <%

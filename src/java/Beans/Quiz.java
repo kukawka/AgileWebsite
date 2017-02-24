@@ -5,16 +5,14 @@
  */
 package Beans;
 
-import java.util.ArrayList;
 
 /**
  *
- * @author Krasi
+ * @author Krasi + Philipp
  */
-public class Module {
+public class Quiz {
     String name="" ;
     int id=0 ;
-    //ArrayList<Quiz> quiz=new ArrayList<Quiz>() ;
     
     public void setName(String name){
         this.name=name ;
@@ -29,15 +27,7 @@ public class Module {
     }
     
     public int getID(){
-        return id ;
+        return id;
     }
-    /*
-     public void setQuizzes(ArrayList<Quiz> quiz){
-        this.quiz=quiz ;
-    }
-    
-    public ArrayList<Quiz> getQuizzes(){
-        return quiz ;
-    }
-*/
-}
+
+}   

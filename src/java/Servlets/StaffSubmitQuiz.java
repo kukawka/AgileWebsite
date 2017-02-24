@@ -9,7 +9,6 @@ package Servlets;
 
 //import com.datastax.driver.core.Cluster;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -20,10 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 //import uk.ac.dundee.computing.aec.instagrim.lib.CassandraHosts;
 //import uk.ac.dundee.computing.aec.instagrim.models.User;
 
-//Date and UUID classes
-import java.util.Date;
-import java.util.UUID;
-//Quiz class
+//Quiz
 import Models.Quiz;
 
 /**
@@ -38,8 +34,6 @@ public class StaffSubmitQuiz extends HttpServlet {
         //cluster = CassandraHosts.getCluster();
     }
 
-
-
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -52,21 +46,14 @@ public class StaffSubmitQuiz extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        Quiz qz = new Quiz(); //create new object or use previous? info going into DB, not object
+        Quiz qz = new Quiz();
         
-        int numOfQuestions=Integer.valueOf(request.getParameter("questionsnumber"));
+        int numOfQuestions=Integer.valueOf(request.getParameter("questionsnumber")); 
         int quizID=Integer.valueOf(request.getParameter("quizID"));
-        
-        System.out.println("this is the number of questions: "+numOfQuestions);
 
-        //Make arrays/vectors to insert question/answer info
         for (int i=0; i<numOfQuestions; i++)
         {
-            //post the info of every question
-            //UUID questionID = UUID.randomUUID(); //get UUID in SQL?
-            //RequestDispatcher rd = request.getRequestDispatcher("/staffSubmitQuiz.jsp")
-            //request.setAttribute("questionID", questionID);
-            int questionID=-1;
+            int questionID=-1; //if questionID<0 ssomething is wrong
 
             String questionText = request.getParameter("questiontext"+(i+1));
             String explanationText = request.getParameter("explanationtext"+(i+1));
@@ -79,32 +66,26 @@ public class StaffSubmitQuiz extends HttpServlet {
             for (int j=0; j<4; j++)
             {
                 //post the info of every answer
-
                 String answerText = request.getParameter("answertext"+(i+1)+(j+1));
                 String correct = request.getParameter("correct"+(i+1)+(j+1)); //will be 1 or null
                 
-                boolean correctBool;//=true;
                 int correctInt;
-                if (correct=="1")
+
+                if (correct!=null)
                 {
                     correctInt=1;
-                    correctBool=true;
                 }
                 else
                 {
                     correctInt=0;
-                    correctBool=false;
                 }
                 
                 qz.SubmitAnswer(answerText, correctInt, questionID);
                 System.out.println("Answer " +(j+1)+ " for Question" +(i+1)+ " submitted!");
                 
             }
-             System.out.println("Quiz " +quizID+ " submitted!");
+             System.out.println("Quiz " +quizID+ " information submitted!");
         }
-
-
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

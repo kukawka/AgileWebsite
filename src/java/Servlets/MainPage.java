@@ -5,9 +5,14 @@
  */
 package Servlets;
 
+import Beans.Module;
+import Beans.ProgrammeOfStudy;
 import Models.MainPageModel;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,13 +40,54 @@ public class MainPage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        MainPageModel mnm = new MainPageModel();
-        request.setAttribute("POS",mnm.getPOS());
-        
-        RequestDispatcher rd = request.getRequestDispatcher("/mainpage.jsp");
-       // response.setContentType("application/json");
-        //new Gson().toJson(list2, response.getWriter());
-        rd.forward(request, response);
+       
+         /*System.out.println("In model blaaaaaa");
+        if((request.getParameter("check"))!=null)
+        {
+            if((request.getParameter("id"))==null)
+            {
+            System.out.println("I got here.");
+            Map<String, String> Programmes;
+            Programmes = new LinkedHashMap<>();
+            ArrayList<ProgrammeOfStudy> poses = mnm.getPOS();
+            for(int i=0;i<poses.size();i++)
+            {
+               String pos_id = Integer.toString(poses.get(i).getID());
+               Programmes.put(pos_id,poses.get(i).getName());
+            }
+            String json = new Gson().toJson(Programmes);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
+            
+            }
+            else if ((request.getParameter("id"))!=null)
+            {
+                
+                System.out.println("MODULES.");
+                Map<String, String> Modules;
+                Modules = new LinkedHashMap<>();
+                ArrayList<Module> mods = mnm.getModules(Integer.parseInt(request.getParameter("id")));
+                for(int i=0;i<mods.size();i++)
+                {
+                   String mod_id = Integer.toString(mods.get(i).getID());
+                   Modules.put(mod_id,mods.get(i).getName());
+                }
+                String json = new Gson().toJson(Modules);
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(json);
+            }
+            
+        }
+        else
+        {
+             
+            
+        }*/
+         request.setAttribute("type",null);
+         RequestDispatcher rd = request.getRequestDispatcher("/mainpage.jsp");
+         rd.forward(request, response);
         
     }
 
@@ -56,7 +102,24 @@ public class MainPage extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+        MainPageModel mnm = new MainPageModel();
+        if(request.getParameter("type").equals("Programme of Study"))
+        {
+           request.setAttribute("type","pos");
+           request.setAttribute("items",mnm.getPOS());   
+        }
+        else if(request.getParameter("type").equals("module"))
+        {
+           request.setAttribute("type","module");
+           request.setAttribute("items",mnm.getModules(Integer.parseInt(request.getParameter("id"))));   
+        }
+        else if(request.getParameter("type").equals("quiz"))
+        {
+           request.setAttribute("type","quiz");
+           request.setAttribute("items",mnm.getQuizzes(Integer.parseInt(request.getParameter("id"))));   
+        }
+       RequestDispatcher rd = request.getRequestDispatcher("/mainpage.jsp");
+         rd.forward(request, response);
     }
 
     /**
