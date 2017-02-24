@@ -6,6 +6,7 @@
 package Util;
 
 import java.sql.Connection;
+import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -17,7 +18,8 @@ import static org.junit.Assert.*;
  *
  * @author Dagi
  */
-public class DBConnectionTest {
+public class DBConnectionTest extends TestCase{
+    private Connection result ;
     
     public DBConnectionTest() {
     }
@@ -32,6 +34,7 @@ public class DBConnectionTest {
     
     @Before
     public void setUp() {
+        result = DBConnection.createConnection();
     }
     
     @After
@@ -44,7 +47,7 @@ public class DBConnectionTest {
     @Test
     public void testCreateConnection() {
         System.out.println("createConnection");
-        Connection result = DBConnection.createConnection();
+        
         assertNotNull("The connection was not established",result);
     }
     
