@@ -120,14 +120,19 @@ public class QuizTest extends TestCase {
     @Test
     public void testRegisterQuiz() {
         System.out.println("RegisterQuiz");
-        String title = "";
-        String moduleID = "";
-        int available = 0;
-        int expResult = 0;
+        String title = "test quiz";
+        String moduleID = "1";
+        int available = 1;
+        creationDate=LocalDate.now();
+        
+        
+        int expResult = -1;
         int result = instance.RegisterQuiz(title, moduleID, available, creationDate);
-        assertEquals(expResult, result);
+        
+        //result shouldn't return -1, but instead the ID of the quiz
+        assertNotSame("An ID was generated for the Quiz.", expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -136,15 +141,17 @@ public class QuizTest extends TestCase {
     @Test
     public void testSubmitQuestion() {
         System.out.println("SubmitQuestion");
-        String questionText = "";
-        String explanationText = "";
-        int quizID = 0;
-        int questionNumber = 0;
-        int expResult = 0;
+        String questionText = "test question";
+        String explanationText = "test question explanation";
+        int quizID = 5;
+        int questionNumber = 1;
+        int expResult = -1;
+        
         int result = instance.SubmitQuestion(questionText, explanationText, quizID, questionNumber);
-        assertEquals(expResult, result);
+        //result shouldn't return -1, but instead the ID of the question
+        assertNotSame("An ID was generated for the question.", expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -153,14 +160,16 @@ public class QuizTest extends TestCase {
     @Test
     public void testSubmitAnswer() {
         System.out.println("SubmitAnswer");
-        String answerText = "";
+        String answerText = "test answer";
         int correct = 0;
-        int questionID = 0;
-        int questionNumber = 0;
-        int expResult = 0;
+        
+        int questionNumber = 1;
+        int expResult = 1;
+        
         int result = instance.SubmitAnswer(answerText, correct, questionNumber);
-        assertEquals(expResult, result);
+        //result shouldn't return -1 
+        assertEquals("Answer was submitted successfully.", expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }    
 }

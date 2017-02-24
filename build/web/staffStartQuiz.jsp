@@ -1,10 +1,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="Beans.LoggedIn"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <%--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">--%>
         <title>Submit a Quiz</title>
-        <link rel="stylesheet" type="text/css" href="Styles.css" />
+        <link rel="stylesheet" type="text/css" href="style.css" />
         
         <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -48,7 +49,7 @@
             });</script>
     </head>
     <body bgcolor="c0d13e">
-                <nav class="navbar navbar-inverse sidebar" role="navigation">
+        <nav class="navbar navbar-inverse sidebar" role="navigation">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -61,15 +62,16 @@
                     <a class="navbar-brand" href="#">QuizUp</a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                 <%--
+                
                 <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
                     <ul class="nav navbar-nav">
+                        <% LoggedIn login = (LoggedIn) session.getAttribute("LoggedIn");%>
                          <form method="Post" action="MainPage" id='info'>
-                             <p>Information about the user.<i>FirstNameVariable LastNameVariable</i></p>
+                             <p>Information about the user.<i> <br>Username: <%=login.getUsername()%><br>Type: <%=login.getType()%> </i></p>
                                 </form>
                         <li class="active"><a href="mainpage.jsp" >Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
                         <li id="pos" ><a>
-                                
+                               
                                  <form method="Post" action="MainPage">
                                     <input type="submit" name="type" value="Programme of Study" id="submit">
                                 </form>
@@ -77,24 +79,23 @@
                                     <input type="submit" name="type" value="Favourites" id="submit">
                                 </form>
                                 </a>
-                                
                                 <li class="active"><a href="index.jsp" >Log Out<span style="font-size:16px;"  class="pull-right hidden-xs showopacity glyphicon glyphicon-log-out"></span></a></li>
-                                 --%>
                     </ul>
                 </div>
+              
             </div>
         </nav>
         <header>
-        <h2>Submit a Quiz</h2>
+        
         </header>
        
         <article>
             
           <div class="main">
-           <div class="grid">
             <form method="POST"  action="StaffStartQuiz">
                 <ul>
                     <%-- Quiz Information --%>
+                    <h2>Submit a Quiz</h2>
                     <h3>Quiz Options:</h3>
                     <li>Quiz Title: <input type="text" name="title" minlength="4" required="required"></li>
                     <li>ModuleID: <input type="text" name="moduleID" minlength="1" maxlength="10"  required ="required"></li>
@@ -104,7 +105,9 @@
                 <br/>
                 <input type="submit" value="Start Quiz"> 
             </form>
-           </div>
+            </div>
+                    
+                    
           </div>
 
         </article>

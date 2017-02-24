@@ -1,11 +1,11 @@
-<%@page import="java.util.UUID"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="Beans.LoggedIn"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Submit a Quiz</title>
-        <link rel="stylesheet" type="text/css" href="Styles.css" />
+        <link rel="stylesheet" type="text/css" href="style.css" />
         
         <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -50,7 +50,7 @@
     </head>
     <body>
         <header>
-        <h2>Submit a Quiz</h2>
+        
         </header>
                 <body bgcolor="c0d13e">
                 <nav class="navbar navbar-inverse sidebar" role="navigation">
@@ -66,15 +66,15 @@
                     <a class="navbar-brand" href="#">QuizUp</a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                 <%--
                 <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
                     <ul class="nav navbar-nav">
+                        <% LoggedIn login = (LoggedIn) session.getAttribute("LoggedIn");%>
                          <form method="Post" action="MainPage" id='info'>
-                             <p>Information about the user.<i>FirstNameVariable LastNameVariable</i></p>
+                             <p>Information about the user.<i> <br>Username: <%=login.getUsername()%><br>Type: <%=login.getType()%> </i></p>
                                 </form>
                         <li class="active"><a href="mainpage.jsp" >Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
                         <li id="pos" ><a>
-                                
+                               
                                  <form method="Post" action="MainPage">
                                     <input type="submit" name="type" value="Programme of Study" id="submit">
                                 </form>
@@ -82,9 +82,7 @@
                                     <input type="submit" name="type" value="Favourites" id="submit">
                                 </form>
                                 </a>
-                                
                                 <li class="active"><a href="index.jsp" >Log Out<span style="font-size:16px;"  class="pull-right hidden-xs showopacity glyphicon glyphicon-log-out"></span></a></li>
-                                 --%>
                     </ul>
                 </div>
             </div>
@@ -96,6 +94,7 @@
             <form method="POST"  action="StaffSubmitQuiz">
                 
                 <ul>
+                    <h2>Submit a Quiz</h2>
                     <h3>Question Options:</h3>
                     <br>            
                     <%

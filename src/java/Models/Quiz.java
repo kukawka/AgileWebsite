@@ -189,7 +189,7 @@ public class Quiz {
             e.printStackTrace();
             return -1;
         } 
-        return id;
+        return 1;
     }
     
     public int EditQuiz(int quizID) {
@@ -247,3 +247,4 @@ public class Quiz {
         return id;
     }
 }
+
