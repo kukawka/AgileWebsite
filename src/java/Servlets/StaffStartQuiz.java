@@ -44,13 +44,13 @@ public class StaffStartQuiz extends HttpServlet {
         String available=request.getParameter("available"); //will be 1 or null
         int availableInt;
 
-        if (available.equals("1"))
+        if (available!=null)
         {
-            availableInt=1;
+            availableInt=0;
         }
         else
         {
-            availableInt=0;
+            availableInt=1;
         }
         
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
