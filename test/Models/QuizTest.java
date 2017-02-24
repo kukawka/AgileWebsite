@@ -95,7 +95,9 @@ public class QuizTest extends TestCase {
         QuizDetails result = instance.getQuiz(quizID);
 
         assertEquals("The right title wasn't returned", expResult.getTitle(), result.getTitle());
-        
+        assertEquals("The right title wasn't returned", expResult.getDate(), result.getDate());
+        assertEquals("The right title wasn't returned", expResult.getTitle(), result.getTitle());
+        assertEquals("The right title wasn't returned", expResult.getTitle(), result.getTitle());
         //assertEquals(expResult, result);
         assertNotNull("Database connection failed", result) ;
     }
