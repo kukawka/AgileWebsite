@@ -26,38 +26,20 @@ and open the template in the editor.
         <%
             if ((Boolean) request.getAttribute("check") != null) {
         %>
+        
         <style>
             .alert {
-                padding: 20px;
-                background-color: #ff9800;
-                width: 25%;
+                width: 20%;
                 float: right;
-                border-radius: .25rem;
-                margin-right: 2%;
-                color: white;
+                margin-right: 1%;
+                font-size: 16px;
             }
-
-            .close {
-                margin-left: 15px;
-                color: white;
-                font-weight: bold;
-                float: right;
-                font-size: 22px;
-                line-height: 20px;
-                cursor: pointer;
-                transition: 0.3s;
-            }
-
-            .close:hover {
-                color: black;
-            }
-
         </style>
 
 
-        <div class="alert">
+        <div class="alert alert-warning" role="alert">
             <span class="close" onclick="this.parentElement.style.display = 'none';">&times;</span>
-            <strong>Incorrect</strong> username/password. Check if you're on the right login page!
+            <strong>Incorrect</strong> username/password.
 
         </div>
 

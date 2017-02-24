@@ -86,6 +86,8 @@ public class StaffSubmitQuiz extends HttpServlet {
             }
              System.out.println("Quiz " +quizID+ " information submitted!");
         }
+        RequestDispatcher rd=request.getRequestDispatcher("/staffSubmitQuiz.jsp");
+        rd.forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

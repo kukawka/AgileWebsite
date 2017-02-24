@@ -5,6 +5,7 @@
  */
 package Servlets;
 
+import Beans.LoggedIn;
 import Beans.Module;
 import Beans.ProgrammeOfStudy;
 import Models.MainPageModel;
@@ -19,6 +20,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -115,8 +117,10 @@ public class MainPage extends HttpServlet {
         }
         else if(request.getParameter("type").equals("quiz"))
         {
+           HttpSession session = request.getSession();
+           LoggedIn log = (LoggedIn) session.getAttribute("LoggedIn");
            request.setAttribute("type","quiz");
-           request.setAttribute("items",mnm.getQuizzes(Integer.parseInt(request.getParameter("id"))));   
+           request.setAttribute("items",mnm.getQuizzes(Integer.parseInt(request.getParameter("id")),log.getType()));   
         }
        RequestDispatcher rd = request.getRequestDispatcher("/mainpage.jsp");
          rd.forward(request, response);
