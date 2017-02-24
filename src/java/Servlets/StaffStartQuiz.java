@@ -44,7 +44,7 @@ public class StaffStartQuiz extends HttpServlet {
         String available=request.getParameter("available"); //will be 1 or null
         int availableInt;
 
-        if (available!=null)
+        if (available==null)
         {
             availableInt=0;
         }
