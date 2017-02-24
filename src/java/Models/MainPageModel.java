@@ -7,6 +7,7 @@ package Models;
 
 import Beans.Module;
 import Beans.ProgrammeOfStudy;
+import Beans.Quiz;
 import Util.DBConnection;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -19,104 +20,134 @@ import java.util.ArrayList;
  * @author Krasi+philipp PairProg
  */
 public class MainPageModel {
-    
+
     /* Upon mainpage loading the Programmes of Study (PoS) will be pulled from the Database and used to populate the 
      * available buttons in the Nav-bar on the side.
     COMMENTICO
      * 
-    */ 
-public ArrayList<ProgrammeOfStudy> getPOS()
-    {
-        
+     */
+    public ArrayList<ProgrammeOfStudy> getPOS() {
+
         ResultSet resultPOS = null;
         Statement statement = null;
         ArrayList<ProgrammeOfStudy> poses = new ArrayList<ProgrammeOfStudy>();
-        try
-        {
-           Connection con;
-           con = DBConnection.createConnection();
-           statement = con.createStatement(); 
-           resultPOS = statement.executeQuery("SELECT * FROM programme_of_study");
-           
-           while(resultPOS.next())
-           {
-               if(resultPOS!=null)
-               {
+        try {
+            Connection con;
+            con = DBConnection.createConnection();
+            statement = con.createStatement();
+            resultPOS = statement.executeQuery("SELECT * FROM programme_of_study");
+
+            while (resultPOS.next()) {
+                if (resultPOS != null) {
                     ProgrammeOfStudy pos = new ProgrammeOfStudy();
                     System.out.println("ID: " + resultPOS.getInt("ID"));
                     System.out.println("Name" + resultPOS.getString("Name"));
                     pos.setID(resultPOS.getInt("ID"));
                     pos.setName(resultPOS.getString("Name"));
+                    // pos.setModules(getModules(resultPOS.getInt("ID")));
                     poses.add(pos);
-               }
-           }
-           con.close();
-           return poses;
-           
-        }
-        catch(SQLException e)
-        {
+                }
+            }
+            con.close();
+            return poses;
+
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-       
+
         return null;
     }
-    
-/* Upon selection of a PoS all related modules will be pulled from the DB and used to populate the side Nav-bar further.
+
+    /* Upon selection of a PoS all related modules will be pulled from the DB and used to populate the side Nav-bar further.
  *
-*/
-public ArrayList<Module> getModules(int ID)
-    {
-        
+     */
+    public ArrayList<Module> getModules(int ID) {
+
         ResultSet resultModules = null;
         Statement statement = null;
         ArrayList<Module> modules = new ArrayList<Module>();
-        try
-        {
-           Connection con;
-           con = DBConnection.createConnection();
-           statement = con.createStatement(); 
-           resultModules = statement.executeQuery("SELECT ID,Name FROM module WHERE POS=" + ID);
-           while(resultModules.next())
-           {
-               if(resultModules!=null)
-               {
+        try {
+            Connection con;
+            con = DBConnection.createConnection();
+            statement = con.createStatement();
+            resultModules = statement.executeQuery("SELECT ID,Name FROM module WHERE POS=" + ID);
+            while (resultModules.next()) {
+                if (resultModules != null) {
                     Module module = new Module();
-                    //System.out.println("ID: " + resultPOS.getInt("ID"));
-                    //System.out.println("Name" + resultPOS.getString("Name"));
+                    System.out.println("POS ID:" + ID);
+                    System.out.println("ID: " + resultModules.getInt("ID"));
+                    System.out.println("Name" + resultModules.getString("Name"));
                     module.setID(resultModules.getInt("ID"));
                     module.setName(resultModules.getString("Name"));
+                    //module.setQuizzes(getQuizzes(resultModules.getInt("ID")));
                     modules.add(module);
-               }
-           }
-           con.close();
-           return modules;
-           
-        }
-        catch(SQLException e)
-        {
+                }
+            }
+            con.close();
+            return modules;
+
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-       
+
         return null;
     }
-/* Selecting a module will lead to all quizzes for that module to be pulled from the DB and displayed on the entire page beside the Nav-bar.
+
+    /* Selecting a module will lead to all quizzes for that module to be pulled from the DB and displayed on the entire page beside the Nav-bar.
  * @params ID of selected module
+     */
+    public ArrayList<Quiz> getQuizzes(int ID) {
+          ResultSet resultQuizzes = null;
+        Statement statement = null;
+        ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
+        try {
+            Connection con;
+            con = DBConnection.createConnection();
+            statement = con.createStatement();
+            resultQuizzes = statement.executeQuery("SELECT ID,Title FROM quiz WHERE moduleID=" + ID);
+            while (resultQuizzes.next()) {
+                if (resultQuizzes != null) {
+                    Quiz quiz = new Quiz();
+                    System.out.println("POS ID:" + ID);
+                    System.out.println("ID: " + resultQuizzes.getInt("ID"));
+                    System.out.println("Name" + resultQuizzes.getString("Title"));
+                    quiz.setID(resultQuizzes.getInt("ID"));
+                    quiz.setName(resultQuizzes.getString("Title"));
+                    //module.setQuizzes(getQuizzes(resultModules.getInt("ID")));
+                    quizzes.add(quiz);
+                }
+            }
+            con.close();
+            return quizzes;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+        /*
+        ResultSet resultQuizzes = null;
+        Statement statement = null;
+        ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
+        try {
+            Connection con;
+            con = DBConnection.createConnection();
+            resultQuizzes = statement.executeQuery("SELECT ID,Title FROM quiz WHERE moduleID=1");
+            while (resultQuizzes.next()) {
+                if (resultQuizzes != null) {
+                    Quiz quiz = new Quiz();
+                    quiz.setID(resultQuizzes.getInt("ID"));
+                    quiz.setName(resultQuizzes.getString("Title"));
+                    quizzes.add(quiz);
+                }
+            }
+            con.close();
+            return quizzes;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
 */
-public ResultSet getQuizzes(int ID)
-{   
-    ResultSet resultQuizzes = null;
-    Statement statement = null;
-    try{
-    Connection con;
-    con = DBConnection.createConnection();
-    resultQuizzes = statement.executeQuery("SELECT ID,Title FROM quiz WHERE moduleID="+ID);
-    con.close();
-    return resultQuizzes;
-    
-    }catch(SQLException e){
-        e.printStackTrace();    
     }
-    return null;
-}
 }
