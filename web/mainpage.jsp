@@ -109,8 +109,6 @@
                                 </form>
                                 </a>
                                 <li class="active"><a href="index.jsp" >Log Out<span style="font-size:16px;"  class="pull-right hidden-xs showopacity glyphicon glyphicon-log-out"></span></a></li>
-                        
-
                     </ul>
                 </div>
             </div>
@@ -178,7 +176,6 @@
                         
                         <input type="hidden" name="type" value="GoQuiz"/>
                         <input type="submit" name="info" id="submit2" value="<%=quiz.get(i).getName()%>"/>
-                        <!--<span class="glyphicon glyphicon-edit" id='edit'></span><p>edit:</p>-->
                        
                         </form> 
                 </div>
