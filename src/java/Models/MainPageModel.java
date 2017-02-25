@@ -37,13 +37,11 @@ public class MainPageModel {
             statement = con.createStatement();
             resultPOS = statement.executeQuery("SELECT * FROM programme_of_study");
 
-            while (resultPOS.next()) 
-            {
-                if (resultPOS != null) 
-                {
+            while (resultPOS.next()) {
+                if (resultPOS != null) {
                     ProgrammeOfStudy pos = new ProgrammeOfStudy();
-                     System.out.println("ID: " + resultPOS.getInt("ID"));
-                     System.out.println("Name" + resultPOS.getString("Name"));
+                    System.out.println("ID: " + resultPOS.getInt("ID"));
+                    System.out.println("Name" + resultPOS.getString("Name"));
                     pos.setID(resultPOS.getInt("ID"));
                     pos.setName(resultPOS.getString("Name"));
                     // pos.setModules(getModules(resultPOS.getInt("ID")));
@@ -52,9 +50,11 @@ public class MainPageModel {
             }
             con.close();
             return poses;
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return null;
     }
 
@@ -71,14 +71,12 @@ public class MainPageModel {
             con = DBConnection.createConnection();
             statement = con.createStatement();
             resultModules = statement.executeQuery("SELECT ID,Name FROM module WHERE POS=" + ID);
-            while (resultModules.next()) 
-            {
-                if (resultModules != null) 
-                {
+            while (resultModules.next()) {
+                if (resultModules != null) {
                     Module module = new Module();
-                     System.out.println("POS ID:" + ID);
-                     System.out.println("ID: " + resultModules.getInt("ID"));
-                     System.out.println("Name" + resultModules.getString("Name"));
+                    System.out.println("POS ID:" + ID);
+                    System.out.println("ID: " + resultModules.getInt("ID"));
+                    System.out.println("Name" + resultModules.getString("Name"));
                     module.setID(resultModules.getInt("ID"));
                     module.setName(resultModules.getString("Name"));
                     //module.setQuizzes(getQuizzes(resultModules.getInt("ID")));
