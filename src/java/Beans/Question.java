@@ -3,6 +3,8 @@
  */
 package Beans;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Dagi
@@ -13,8 +15,10 @@ public class Question {
     
     //Refactoring- renamed the field so that it is more descriptive 
     String answerExplanation="" ;
-    int correctAnswerID=-1 ;
-    String[] answers=new String[4] ;
+    //int correctAnswerID=-1 ;
+    ArrayList <Integer> correctAnswers ;
+    ArrayList <String> answers ;  
+    //String[] answers=new String[4] ;
     
     //Refactoring- renamed the method so that it would match up the field and make more sense- the previous name suggested retuning a whole Question object rather than a field
     public void setQuestionText(String questionText){
@@ -33,19 +37,19 @@ public class Question {
         return answerExplanation ;
     }
     
-     public void setCorrectAnswerID(int correctAnswerID){
-        this.correctAnswerID=correctAnswerID ;
+     public void setCorrectAnswers(ArrayList <Integer> correctAnswers){
+        this.correctAnswers=correctAnswers ;
     }
     
-    public int getCorrectAnswerID(){
-        return correctAnswerID ;
+    public ArrayList<Integer> getCorrectAnswers(){
+        return correctAnswers ;
     }
     
-     public void setAnswers(String[] answers){
+     public void setAnswers(ArrayList<String> answers){
         this.answers=answers ;
     }
     
-    public String[] getAnswers(){
+    public ArrayList<String> getAnswers(){
         return answers ;
     }
     
