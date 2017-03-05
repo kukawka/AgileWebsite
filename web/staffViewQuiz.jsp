@@ -92,7 +92,10 @@
         <div class="main">
             <div style="margin-left: 3%;">
                 <div class="page-header">
-                    <h1>View Quiz <a href="staffEditQuiz.jsp" class="btn btn-lg btn-warning" style="margin-left: 5%; color: white;" >Edit Quiz &nbsp;<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></h1>
+                    <h1>View Quiz 
+                        <a href="staffEditQuiz.jsp" class="btn btn-lg btn-warning" style="margin-left: 5%; color: white;" >Edit Quiz &nbsp;<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                        <a href="staffViewResults.jsp" class="btn btn-lg btn-primary" style="margin-left: 0%; color: white;" >View All Results <span class="glyphicon glyphicon-sort-by-order" aria-hidden="true"></span></a>
+                    </h1>
 
                 </div>
 
