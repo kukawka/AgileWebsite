@@ -51,6 +51,7 @@ public class MainPageModelTest extends TestCase {
     /**
      * Test of getPOS method, of class MainPageModel.
      */
+    /*
     @Test
     public void testGetPOS() {
         System.out.println("getPOS");
@@ -101,6 +102,7 @@ public class MainPageModelTest extends TestCase {
     /**
      * Test of getQuizzes method, of class MainPageModel.
      */
+    /*
     @Test
     public void testGetQuizzes() {
         System.out.println("getQuizzes");
@@ -126,5 +128,5 @@ public class MainPageModelTest extends TestCase {
         // TODO review the generated test code and remove the default call to fail.
        // fail("The test case is a prototype.");
     }
-    
+    */
 }
