@@ -48,7 +48,7 @@ public class Quiz {
             statement = con.createStatement();
             questionRS = statement.executeQuery("select ID,QuestionText, ExplanationText, Valid, QuestionNumber from question where QuizID = " + quizID);
 
-            ArrayList<Question> questions = new ArrayList<Question>();
+            ArrayList<Question> questions = new ArrayList<>();
 
             while (questionRS.next()) // Until next row is present otherwise it return false
             {
@@ -62,15 +62,19 @@ public class Quiz {
                 answerRS = statement.executeQuery("select AnswerText, Correct from answer where QuestionID = " + questionRS.getInt("ID"));
 
                 int c = 0;
-                String[] answers = new String[4];
-                while (answerRS.next() && c<4) {
+                //String[] answers = new String[4];
+                ArrayList<String> answers = new ArrayList<>();
+                ArrayList<Integer> correctAnswers = new ArrayList<>();
+                
+                while (answerRS.next()) {
                     boolean correct = answerRS.getBoolean("Correct");
                     if (correct) {
-                        q.setCorrectAnswerID(c);
+                        correctAnswers.add(c);
                     }
-                    answers[c] = answerRS.getString("AnswerText");
+                    answers.add(answerRS.getString("AnswerText"));
                     c++;
                 }
+                q.setCorrectAnswers(correctAnswers);
                 q.setAnswers(answers);
                 questions.add(q);
             }
@@ -211,7 +215,7 @@ public class Quiz {
             QuizRS = statement.executeQuery("Update quiz (Available, Title) values ('available', 'title')");
             QuestionRS = statement.executeQuery("Update question (questiontext, explanationtext) values ('questiontext', 'explanationtext')");
             AnswerRS = statement.executeQuery("Update answer (answertext, correct) values ('answertext', 'correct')");
-
+/*
             while (QuizRS.next()) {
                 title = QuizRS.getString("Title");
                 qDetails.setTitle(title);
@@ -237,7 +241,7 @@ public class Quiz {
                 questions.setAnswers(answer);
                 question.add(questions);    
             }
-            }
+            }*/
             
         } catch (SQLException e) {
             System.out.println("Error");
