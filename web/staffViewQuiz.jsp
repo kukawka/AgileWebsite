@@ -4,6 +4,7 @@
     Author     : Dagi
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="Beans.LoggedIn"%>
 <%@page import="Beans.QuizDetails"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -134,7 +135,7 @@
 
                     <% for (int x = 0; x < quizDetails.getQuestions().size(); x++) {%>
 
-                    <% String[] answers = quizDetails.getQuestions().get(x).getAnswers();%>
+                    <% ArrayList<String> answers = quizDetails.getQuestions().get(x).getAnswers();%>
 
                     <div class="col-sm-8">
                         <div class="panel panel-default" style="margin-left: -15px;">
@@ -145,10 +146,19 @@
                                 <p><b><h5>Explanation: </b> <%= quizDetails.getQuestions().get(x).getExplanation()%></h5></p>
                             </div>
 
-                            <% for (int y = 0; y < 4; y++) {%>
+                            <% for (int y = 0; y < answers.size(); y++) {%>
                             <!-- List group -->
                             <ul class="list-group">
-                                <li class="list-group-item"> - <%= answers[y]%> <% if (quizDetails.getQuestions().get(x).getCorrectAnswerID() == y) {%> <p style="float:right;">&#10004;</p> <% } %></li>
+                                <%boolean isCorrect=false ;
+                                ArrayList <Integer> correctA=quizDetails.getQuestions().get(x).getCorrectAnswers();
+                                for (int i=0; i<correctA.size() ; i++){
+                                    if(correctA.get(i)==y){
+                                        isCorrect=true ;
+                                    }
+                                }
+                                 
+                               %>
+                                <li class="list-group-item"> - <%= answers.get(y)%> <% if (isCorrect) {%> <p style="float:right;">&#10004;</p> <% } %></li>
                             </ul>
 
                             <% } %>
