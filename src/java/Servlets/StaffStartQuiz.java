@@ -90,6 +90,9 @@ public class StaffStartQuiz extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {    
+        String moduleID=request.getParameter("moduleID");
+        request.setAttribute("moduleID", moduleID);
+        
         RequestDispatcher rd=request.getRequestDispatcher("/staffStartQuiz.jsp");
         rd.forward(request,response);
     }
