@@ -123,7 +123,8 @@
                        
                         <div class="grid-item">
                              <form method="Get" action="StaffStartQuiz">
-                        <input type="submit" name="info" id="submit1" value="CREATE"/>
+                                 <input type="hidden" name="moduleID" value="<%=request.getParameter("id")%>">
+                        <input type="submit" name="info" id="submit1" value="CREATE"/>  
                        
                        
                         </form> 
