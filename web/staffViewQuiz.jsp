@@ -98,7 +98,7 @@
         <div class="main">
             <div style="margin-left: 3%;">
                 <div class="page-header">
-                    <h1>View Quiz 
+                    <h1 >View Quiz 
                         <a href="staffEditQuiz.jsp" class="btn btn-lg btn-warning" style="margin-left: 5%; color: white;" >Edit Quiz &nbsp;<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
                         <form method="POST" action="GetResults" style="margin-left: 0%; ">
                             <button type="submit" class="btn btn-lg btn-primary" style="color: white;" >View All Results <span class="glyphicon glyphicon-sort-by-order" aria-hidden="true"></span></button>
