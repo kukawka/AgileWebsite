@@ -48,7 +48,7 @@
             </div>
         </nav>
         <div class="main">
-            <center><h1>Please choose a <i>variable</i> </h1></center><br>
+            <center><h1>Please choose a <i>ffff</i> </h1></center><br>
             <div class="grid">
                  
                 <%

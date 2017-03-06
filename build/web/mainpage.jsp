@@ -5,80 +5,14 @@
 <%@page import="java.util.ArrayList"%>
 <HTML>
     <HEAD>
-        <link rel="stylesheet" type="text/css" href="style.css">
-        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/mainpage_style.css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script src="http://code.jquery.com/jquery-latest.js">   
-        </script>
-        <script>
-            function htmlbodyHeightUpdate() {
-                var height3 = $(window).height()
-                var height1 = $('.nav').height() + 50
-                height2 = $('.main').height()
-                if (height2 > height3) {
-                    $('html').height(Math.max(height1, height3, height2) + 10);
-                    $('body').height(Math.max(height1, height3, height2) + 10);
-                } else
-                {
-                    $('html').height(Math.max(height1, height3, height2));
-                    $('body').height(Math.max(height1, height3, height2));
-                }
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-            }
-            $(document).ready(function () {
-                htmlbodyHeightUpdate()
-                $(window).resize(function () {
-                    htmlbodyHeightUpdate()
-                });
-                $(window).scroll(function () {
-                    height2 = $('.main').height()
-                    htmlbodyHeightUpdate()
-                });
-            });
-            /*
-             $(document).ready(function() {                        
-                             $('#pos').click(function(e) { 
-                              $.get('MainPage',{check:"pos"},function(responseJson) {
-             var $select = $(".grid");                           // Locate HTML DOM element with ID "someselect".
-             $select.find("div").remove();
-             $.each(responseJson, function(key, value){               
-             $('<div class="grid-item" data-int='+key+'>').text(value).appendTo($select);
-                                   }); 
-                                 });
-                             });
-             
-                         });
-             $(document).ready(function() {    
-             $('.grid-item').click(function(a){
-             //var module = $(this).attr("data-int"); //document.getElementsByClassName('.grid-item');
-             var $select = $(".grid");                           // Locate HTML DOM element with ID "someselect"
-             $select.find("div").remove();
-             $('<div class="grid-item">').appendTo($select);//$(this).data("int");
-                              //$.get('MainPage',{check:"pos",id:module},function(responseJson) {
-             //$.each(responseJson, function(key, value){               
-             //   $('<div class="grid-item">').text(value).appendTo($select);
-             //$('<div />',  { id: 'grid-item' },{ html: 'fffff'+ info }).appendTo($item);
-                                     //$("#grid").append('<div class="grid-item">').append('<li>').val(identifier).text(info)); 
-                                  // }); 
-                                // });
-                            });
-                         });
-             */
-        </script>
-        <script>
-            // external js: isotope.pkgd.js
 
-            $('.grid').isotope({
-                itemSelector: '.grid-item',
-                masonry: {
-                    columnWidth: 100
-                }
-            });</script>
         <TITLE>Your Title Here</TITLE>
     </HEAD>
-    <BODY BGCOLOR="c0d13e">
+    <BODY BGCOLOR="fff">
         <nav class="navbar navbar-inverse sidebar" role="navigation">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -114,7 +48,7 @@
             </div>
         </nav>
         <div class="main">
-            <center><h1>Please choose a <i>variable</i> </h1></center><br>
+            <center><h1>Please choose a <i>ffff</i> </h1></center><br>
             <div class="grid">
                  
                 <%
@@ -167,7 +101,7 @@
                              if((login.getType()).equals("Student"))
                             { 
                              %>
-                            <form method="Post" action="MainPage">
+                            <form method="Post" action="TakeQuiz">
                                 <% 
                              }
                                 %>  
@@ -182,16 +116,22 @@
                         
                             <%
                                         }
-%>
-                         <div class="grid-item">
+                                        if((login.getType()).equals("Staff"))
+                                        {  
+                       
+                            %>  
+                       
+                        <div class="grid-item">
                              <form method="Get" action="StaffStartQuiz">
-                        <input type="submit" name="info" id="submit1" value="CREATE"/>
+                                 <input type="hidden" name="moduleID" value="<%=request.getParameter("id")%>">
+                        <input type="submit" name="info" id="submit1" value="CREATE"/>  
                        
                        
                         </form> 
                         </div>      
                         <%
-                                    } else {
+                                   }
+                            } else {
 
                                     }
                                 }
@@ -201,8 +141,44 @@
           
                     </div>
 
+                    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        			<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+        			<script>
+			            // external js: isotope.pkgd.js
 
+			            $('.grid').isotope({
+			                itemSelector: '.grid-item',
+			                masonry: {
+			                    columnWidth: 100
+			                }
+			            });
+
+					function htmlbodyHeightUpdate() {
+		                var height3 = $(window).height()
+		                var height1 = $('.nav').height() + 50
+		                height2 = $('.main').height()
+		                if (height2 > height3) {
+		                    $('html').height(Math.max(height1, height3, height2) + 10);
+		                    $('body').height(Math.max(height1, height3, height2) + 10);
+		                } else
+		                {
+		                    $('html').height(Math.max(height1, height3, height2));
+		                    $('body').height(Math.max(height1, height3, height2));
+		                }
+
+		            }
+		            $(document).ready(function () {
+		                htmlbodyHeightUpdate()
+		                $(window).resize(function () {
+		                    htmlbodyHeightUpdate()
+		                });
+		                $(window).scroll(function () {
+		                    height2 = $('.main').height()
+		                    htmlbodyHeightUpdate()
+		                });
+		            });
+			        </script>
 
                    
-                    </BODY>
-                    </HTML>
+</BODY>
+</HTML>
