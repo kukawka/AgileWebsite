@@ -44,6 +44,12 @@
         </script>
     </head>
     <body>
+                        <%
+                    QuizDetails quizDetails = (QuizDetails) session.getAttribute("QuizDetails");
+                %>
+                <%
+                    int ID = (Integer) session.getAttribute("QuizID");
+                %>
         <nav class="navbar navbar-inverse sidebar" role="navigation" style="position: fixed;">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -94,14 +100,14 @@
                 <div class="page-header">
                     <h1>View Quiz 
                         <a href="staffEditQuiz.jsp" class="btn btn-lg btn-warning" style="margin-left: 5%; color: white;" >Edit Quiz &nbsp;<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                        <a href="staffViewResults.jsp" class="btn btn-lg btn-primary" style="margin-left: 0%; color: white;" >View All Results <span class="glyphicon glyphicon-sort-by-order" aria-hidden="true"></span></a>
+                        <form method="POST" action="GetResults" style="margin-left: 0%; ">
+                            <button type="submit" class="btn btn-lg btn-primary" style="color: white;" >View All Results <span class="glyphicon glyphicon-sort-by-order" aria-hidden="true"></span></button>
+                            <input type="hidden" value="<%= ID%>" id="ID" name="ID">
+                        </form>
                     </h1>
 
                 </div>
-
-                <%
-                    QuizDetails quizDetails = (QuizDetails) session.getAttribute("QuizDetails");
-                %> 
+ 
 
                 <form class="form-horizontal" style="width: 100%;">
                     <div class="form-group" style="width: 100%;">

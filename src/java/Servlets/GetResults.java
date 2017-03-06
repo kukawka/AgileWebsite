@@ -5,46 +5,44 @@
  */
 package Servlets;
 
-import Beans.QuizDetails;
-import Models.MainPageModel;
+import Beans.LoggedIn;
+import Beans.QuizResults;
+import Models.LoginModel;
+import Models.Quiz;
 import java.io.IOException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import Models.Quiz;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Javi
+ * @author Dagi
  */
-@WebServlet(name = "GetQuizDetails", urlPatterns = {"/GetQuizDetails","/Quiz"})
-public class GetQuizDetails extends HttpServlet {
+@WebServlet(name = "GetResults", urlPatterns = {"/GetResults","/QuizResults"})
+public class GetResults extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int quizID = Integer.parseInt(request.getParameter("quizID"));
-        Quiz quiz = new Quiz();
-
-        QuizDetails quizDetails = new QuizDetails() ;
-
-        
-        quizDetails=quiz.getQuiz(quizID);
-
+        int quizID = Integer.parseInt(request.getParameter("ID"));
+        //String type = request.getParameter("type");
         HttpSession session = request.getSession();
-        session.setAttribute("QuizID", quizID);
-        session.setAttribute("QuizDetails", quizDetails);
-        response.sendRedirect("./Quiz");
+
+        QuizResults qResults=new QuizResults() ;
+        Quiz q=new Quiz() ;
+        qResults= q.getQuizResults(quizID);
+            session.setAttribute("QuizResults", qResults);
+            response.sendRedirect("/AgileWebsite/GetResults");
     }
     
-    @Override
+        @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("/staffViewQuiz.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/staffViewResults.jsp");
         rd.forward(request, response);
         
     }
