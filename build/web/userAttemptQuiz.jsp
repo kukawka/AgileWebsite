@@ -17,10 +17,10 @@
     <body>
         <%
         QuizDetails quizDetails = (QuizDetails) session.getAttribute("QuizDetails");
+        String correctAnswers = ""; 
         %>
         <div class="page-header">
-            <h1 style="color:skyblue; margin-left: 45%;"><b><%= quizDetails.getTitle()%></b></h1>
-            <span style="font-size: 20px; color:skyblue; margin-left: 46%;">Date: <%= quizDetails.getDate()%></span>
+            <h1 style="color:black; margin-left: 5%;"><b><%= quizDetails.getTitle()%></b><small style="font-size: 20px; color:lightgrey; margin-left: 5%;">Date: <%= quizDetails.getDate()%></small></h1>
         </div>
         <form class="form-horizontal" style="width: 100%;">
             <div class="form-group" style="width: 100%;">
@@ -28,7 +28,7 @@
             <div class="form-group" style="width: 100%;">
                 <div class="quizContent">
                     <!-- If the quiz exists get the data for the user !!!!!!!! -->
-                    <% if (!quizDetails.getAvailability()) {%>
+                    <% if (quizDetails.getAvailability()) {%>
                     <input  class="btn btn-lg btn-primary" id='button' onclick="showDiv()" value="Start Quiz" style="margin-left: 40%; margin-top: 15%; width: 300px; height: 100px;" />
                     <!-- If the quiz dosn't exist get the data for the user -->
                     <%} else {%> 
@@ -39,14 +39,14 @@
         </form>
 
         <span id="questionTotal" data-question-total=<%=quizDetails.getQuestions().size()%>></span>
-        <div id="showDiv" style="display: none; background-color: skyblue;">
+        <div id="showDiv" style="display: none;">
 
             <% for (int x = 0; x < quizDetails.getQuestions().size(); x++) {%>
 
             <% 
             String[] answers = quizDetails.getQuestions().get(x).getAnswers();
             String abcd = "";
-            String correct = "";
+            
             %>
 
             <!-- Default panel contents -->
@@ -60,19 +60,22 @@
                     if(y.equals(1)) abcd = "b";
                     if(y.equals(2)) abcd = "c";
                     if(y.equals(3)) abcd = "d";
+
                     %>
-                    <li class="quiz-answer" data-quiz-answer=<%=abcd%>><%=abcd%>)<%= answers[y]%>
+                    <li class="quiz-answer" style="background-color: #eaeae1" data-quiz-answer=<%=abcd%>><%=abcd%>)<%= answers[y]%>
                         <%if(quizDetails.getQuestions().get(x).getCorrectAnswerID() == y) {%>
-                        <span id="questionAnswer" data-question-answer="<%=abcd%>"></span>
-                        <%} %>
+                        <%
+                        correctAnswers = correctAnswers + abcd;
+                        }%> 
                     </li>
                     <% } %>
                 </ul>
             </div>
             <% }%>
         </div>
-
+        
         <div class="quiz-result"></div>
+        <span id="questionAnswer" data-question-answer="<%=correctAnswers%>"></span>
         <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
         <script src="<%= request.getContextPath() %>/js/quizScore.js"></script>
 

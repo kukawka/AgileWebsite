@@ -1,19 +1,19 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%-- 
+    Document   : studentModules
+    Created on : 06-Mar-2017, 15:46:22
+    Author     : Javier
+--%>
 <%@page import="Beans.LoggedIn"%>
+<%@page import="Beans.QuizDetails"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Submit a Quiz</title>
+        <title>JSP Page</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/mainpage_style.css"/>
-        
-        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script src="http://code.jquery.com/jquery-latest.js">   
-        </script>
-        
         <script>
             function htmlbodyHeightUpdate() {
                 var height3 = $(window).height()
@@ -40,20 +40,9 @@
                 });
             });
         </script>
-            <script>
-            $('.grid').isotope({
-                itemSelector: '.grid-item',
-                masonry: {
-                    columnWidth: 100
-                }
-            });</script>
     </head>
     <body>
-        <header>
-        
-        </header>
-                <body bgcolor="c0d13e">
-                <nav class="navbar navbar-inverse sidebar" role="navigation">
+        <nav class="navbar navbar-inverse sidebar" role="navigation" style="position: fixed;">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -66,40 +55,49 @@
                     <a class="navbar-brand" href="#">QuizUp</a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                
                 <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <% LoggedIn login = (LoggedIn) session.getAttribute("LoggedIn");%>
-                         <form method="Post" action="MainPage" id='info'>
-                             <p>Information about the user.<i> <br>Username: <%=login.getUsername()%><br>Type: <%=login.getType()%> </i></p>
-                                </form>
+                        <form method="Post" action="MainPage" id='info'>
+                            <p>Information about the user.<i> <br>Username: <%=login.getUsername()%><br>Type: <%=login.getType()%> </i></p>
+                        </form>
                         <li class="active"><a href="mainpage.jsp" >Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
                         <li id="pos" ><a>
-                               
-                                 <form method="Post" action="MainPage">
+
+                                <form method="Post" action="MainPage">
                                     <input type="submit" name="type" value="Programme of Study" id="submit">
                                 </form>
+                                <br>
                                 <form method="Post" action="MainPage">
                                     <input type="submit" name="type" value="Favourites" id="submit">
                                 </form>
-                                </a>
-                                <li class="active"><a href="index.jsp" >Log Out<span style="font-size:16px;"  class="pull-right hidden-xs showopacity glyphicon glyphicon-log-out"></span></a></li>
+                            </a>
+                        <li class="active">
+                            <a>
+                                <form method="POST"  action="Logout">
+                                    <button type="submit" style="float:left; background:none; border:none; margin:0; padding:0;">Log out</button>
+                                    <span style="font-size:16px;"  class="pull-right hidden-xs showopacity glyphicon glyphicon-log-out"></span>
+                                </form>
+                            </a>
+
+                        </li>
+
+
                     </ul>
                 </div>
-                
             </div>
         </nav>
-       
-        <article>
-           <div class="main">
-               <h3>Quiz Created Successfully!</h3>
-           </div>
+        <div class="main">
+            TEST
+        </div>
+        <script>
 
-        </article>
-        <footer>
-            <ul>
-                <%--<li class="footer"><a href="/">Home</a></li>--%>
-            </ul>
-        </footer>
+            function showDiv() {
+                document.getElementById('showDiv').style.display = "block";
+                document.getElementById('button').style.display = "none";
+            }
+
+        </script>
+
     </body>
 </html>
