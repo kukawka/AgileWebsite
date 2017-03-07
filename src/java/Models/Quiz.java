@@ -267,6 +267,8 @@ public class Quiz {
         Statement statement = null;
         ResultSet quizRS = null;
         ResultSet userRS = null;
+        ResultSet stats=null ;
+      
 
         try {
             con = DBConnection.createConnection(); //establishing connection
@@ -288,7 +290,15 @@ public class Quiz {
                     firstnames.add(userRS.getString("Last_Name"));
                 }
             }
+            statement = con.createStatement();
+            stats = statement.executeQuery("select avg(Score) as scoreAvg, max(Score) as scoreMax, min(Score) as scoreMin from completed_quiz where quizID=" + quizID);
 
+            while (stats.next()) {
+                 quizResults.setAverage(stats.getDouble("scoreAvg"));
+                 quizResults.setMaxi(stats.getInt("scoreMin"));
+                 quizResults.setMini(stats.getInt("scoreMax"));
+            }
+            
             quizResults.setAttempts(attempts);
             quizResults.setFirstnames(firstnames);
             quizResults.setMatricNum(matricNum);

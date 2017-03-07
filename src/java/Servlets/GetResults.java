@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "GetResults", urlPatterns = {"/GetResults","/QuizResults"})
 public class GetResults extends HttpServlet {
 
-    @Override
+    /*@Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int quizID = Integer.parseInt(request.getParameter("ID"));
@@ -37,7 +37,7 @@ public class GetResults extends HttpServlet {
         qResults= q.getQuizResults(quizID);
             session.setAttribute("QuizResults", qResults);
             response.sendRedirect("/AgileWebsite/GetResults");
-    }
+    }*/
     
         @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

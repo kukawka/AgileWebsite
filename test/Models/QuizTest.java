@@ -63,6 +63,9 @@ public class QuizTest extends TestCase {
         assertNotEquals("Only one score was returned", 1, result.getScores().size());
         assertNotEquals("Too many scores were returned", 4, result.getScores().size());
         
+        assertNotEquals("The right average wasn't returned ", 67.5, result.getAverage());
+        assertNotEquals("Too many scores were returned", 67.5, result.getAverage());
+        
         QuizResults expResult = new QuizResults();
         //to be continued
 

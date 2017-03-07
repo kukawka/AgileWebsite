@@ -44,12 +44,12 @@
         </script>
     </head>
     <body>
-                        <%
-                    QuizDetails quizDetails = (QuizDetails) session.getAttribute("QuizDetails");
-                %>
-                <%
-                    int ID = (Integer) session.getAttribute("QuizID");
-                %>
+        <%
+            QuizDetails quizDetails = (QuizDetails) session.getAttribute("QuizDetails");
+        %>
+        <%
+            int ID = (Integer) session.getAttribute("QuizID");
+        %>
         <nav class="navbar navbar-inverse sidebar" role="navigation" style="position: fixed;">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -96,48 +96,33 @@
             </div>
         </nav>
         <div class="main">
-            <div style="margin-left: 3%;">
+            <div style="margin-left: 3%; margin-top: 0%; padding-top: 0px;">
                 <div class="page-header">
-                    <h1 >View Quiz 
-                        <a href="staffEditQuiz.jsp" class="btn btn-lg btn-warning" style="margin-left: 5%; color: white;" >Edit Quiz &nbsp;<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                        <form method="POST" action="GetResults" style="margin-left: 0%; ">
-                            <button type="submit" class="btn btn-lg btn-primary" style="color: white;" >View All Results <span class="glyphicon glyphicon-sort-by-order" aria-hidden="true"></span></button>
-                            <input type="hidden" value="<%= ID%>" id="ID" name="ID">
-                        </form>
-                    </h1>
+                    <h1> Quiz Inspector</h1>
+                </div>
+
+                <h2 style="color: #777;"><b>Quiz Title: </b><%= quizDetails.getTitle()%></h2> 
+                <div class="checkbox">
+                    <label style="color: #777;">
+                        <% if (quizDetails.getAvailability()) {%>
+                        <input type="checkbox" checked disabled>Available to Students
+                        <%} else {%> 
+                        <input type="checkbox" disabled>Unavailable to Students<%}%> 
+                    </label>
+                </div>
+                <h4 style="color: #777;">Date of Creation: <%= quizDetails.getDate()%></h4>
+                <br>
+                <div class="list-group" style=" width:30%;">
+                    <button type="button" class="list-group-item list-group-item-info"><a href="staffViewStats.jsp" style="" id="edit">See Statistics <span class="glyphicon glyphicon-stats"</span></a></button>
+                    <!-- <form method="POST" action="GetResults" style="margin-left: 0%; ">-->
+                    <button type="button" class="list-group-item list-group-item-warning"><a href="GetResults" >See All Results <span class="glyphicon glyphicon-sort-by-order" aria-hidden="true"></span></a></button>
+                         <!--<input type="hidden" value="<%= ID%>" id="ID" name="ID">
+                     </form>-->
+                    <button type="button" class="list-group-item-success list-group-item" id="edit"><a href="staffEditQuiz.jsp" style="" id="edit">Edit Quiz &nbsp;<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></button>
+                    <button  class="list-group-item list-group-item-danger active" id='button' onclick="showDiv()" value="See Questions">See All Questions <span class="glyphicon glyphicon-list-alt"</button>
+
 
                 </div>
- 
-
-                <form class="form-horizontal" style="width: 100%;">
-                    <div class="form-group" style="width: 100%;">
-                        <div class="col-sm-10">
-                            <h3>Title: <%= quizDetails.getTitle()%></h3>
-                        </div>
-                    </div>
-                    <div class="form-group" style="width: 100%;">
-                        <div class="col-sm-10">
-                            <div class="checkbox">
-                                <label>
-                                    <% if (quizDetails.getAvailability()) {%>
-                                    <input type="checkbox" checked disabled>
-                                    <%} else {%> 
-                                    <input type="checkbox" disabled><%}%> Availability
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group" style="width: 100%;">
-                        <div class="col-sm-10">
-                            <h4>Date: <%= quizDetails.getDate()%></h4>
-                        </div>
-                    </div>
-                    <div class="form-group" style="width: 100%;">
-                        <div class="col-sm-10">
-                            <input  class="btn btn-lg btn-primary" id='button' onclick="showDiv()" style=" color: white;" value="See Questions"/>
-                        </div>
-                    </div>
-                </form>
 
 
                 <div id="showDiv" style="display: none; background-color: red;">
@@ -158,15 +143,15 @@
                             <% for (int y = 0; y < answers.size(); y++) {%>
                             <!-- List group -->
                             <ul class="list-group">
-                                <%boolean isCorrect=false ;
-                                ArrayList <Integer> correctA=quizDetails.getQuestions().get(x).getCorrectAnswers();
-                                for (int i=0; i<correctA.size() ; i++){
-                                    if(correctA.get(i)==y){
-                                        isCorrect=true ;
+                                <%boolean isCorrect = false;
+                                    ArrayList<Integer> correctA = quizDetails.getQuestions().get(x).getCorrectAnswers();
+                                    for (int i = 0; i < correctA.size(); i++) {
+                                        if (correctA.get(i) == y) {
+                                            isCorrect = true;
+                                        }
                                     }
-                                }
-                                 
-                               %>
+
+                                %>
                                 <li class="list-group-item"> - <%= answers.get(y)%> <% if (isCorrect) {%> <p style="float:right;">&#10004;</p> <% } %></li>
                             </ul>
 
@@ -184,6 +169,8 @@
             function showDiv() {
                 document.getElementById('showDiv').style.display = "block";
                 document.getElementById('button').style.display = "none";
+                var d = document.getElementById("edit");
+                d.className += " active";
             }
 
         </script>

@@ -18,6 +18,36 @@ public class QuizResults {
     ArrayList<String> matricNum=new ArrayList<>() ;
     ArrayList<Integer> attempts=new ArrayList<>() ;
     ArrayList<String> dates=new ArrayList<>() ;
+    double average=0 ;    
+    int maxi=0; 
+    int mini=0 ;
+
+    public double getAverage() {
+        return average;
+    }
+
+    public int getMaxi() {
+        return maxi;
+    }
+
+    public int getMini() {
+        return mini;
+    }
+
+    
+    public void setAverage(double average) {
+        this.average = average;
+    }
+
+    public void setMaxi(int maxi) {
+        this.maxi = maxi;
+    }
+
+    public void setMini(int mini) {
+        this.mini = mini;
+    }
+    
+    
     
     public void setScores(ArrayList<Integer> scores){
         this.scores=scores ;
