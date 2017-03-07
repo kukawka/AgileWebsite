@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <%--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">--%>
         <title>Submit a Quiz</title>
         <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/mainpage_style.css"/>
         
@@ -48,12 +48,8 @@
                 }
             });</script>
     </head>
-    <body>
-        <header>
-        
-        </header>
-                <body bgcolor="c0d13e">
-                <nav class="navbar navbar-inverse sidebar" role="navigation">
+    <body bgcolor="c0d13e">
+        <nav class="navbar navbar-inverse sidebar" role="navigation">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -66,6 +62,7 @@
                     <a class="navbar-brand" href="#">QuizUp</a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
+                
                 <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <% LoggedIn login = (LoggedIn) session.getAttribute("LoggedIn");%>
@@ -85,60 +82,31 @@
                                 <li class="active"><a href="index.jsp" >Log Out<span style="font-size:16px;"  class="pull-right hidden-xs showopacity glyphicon glyphicon-log-out"></span></a></li>
                     </ul>
                 </div>
+              
             </div>
         </nav>
+        <header>
+        
+        </header>
        
         <article>
-           <div class="main">
-           <div class="grid">
-            <form method="POST"  action="StaffSubmitQuiz">
-                
+            
+          <div class="main">
+            <form method="POST"  action="StaffStartQuiz">
                 <ul>
-                    <h2>Submit a Quiz</h2>
-                    <h3>Question Options:</h3>
-                    <br>            
-                    <%
-                    //variables from last page
-                    int questionsnumber = Integer.parseInt(request.getParameter("questionsnumber"));
-                    int quizID = (Integer) request.getAttribute("quizID");
-                    %>
-                    
-                    <input type="hidden" name="quizID" value=<%=quizID%>>
-                    <input type="hidden" name="questionsnumber" value=<%=questionsnumber%>>
-                    
-                    <%-- Display per number of questions to be given--%>
-                    <%
-                        for (int i=0; i<questionsnumber; i++)
-                        {
-                            //Question Info
-                        %>
-                            <br>
-                            <h4>Question <%=i+1%></h4>
-                            <li>Question Text: <input type="text" name=<%="questiontext"+(i+1)%> maxlength="1024"></li>
-                            <li>Explanation Text: <input type="text" name=<%="explanationtext"+(i+1)%>  maxlength="1024"></li>   
-                            <br>
-
-                            
-                            <%
-                            //Display per number of questions to be given x4
-                            for (int j=0; j<4; j++)
-                            {
-                                //Answer Info
-                                %>
-                                   <h5>Answer <%=j+1%>:</h5>
-                                   <li>Answer Text: <input type="text" name=<%="answertext"+(i+1)+(j+1)%>  maxlength="255"></li>
-                                   <li>Correct: <input type="checkbox" name=<%="correct"+(i+1)+(j+1)%>  value="1"> Yes</li> 
-                                   <br>
-                                <%
-                            }            
-                        }
-                    %>
+                    <h2>View Student's Result</h2>
+                        <li>Student ID: <input type="text" name="studentID" minlength="4" required="required"></li>
+                     <input type="hidden" name="quizID" value=<%=request.getAttribute("quizID")%>>
+                    <li>For Quiz: <%=request.getAttribute("quizID")%></li><br>
+                    <%-- Show title instead? --%>
                 </ul>
                 <br/>
-                <input type="submit" value="Submit Quiz"> 
+                <input type="submit" value="Submit"> 
             </form>
-           </div>
-           </div>
+            </div>
+                    
+                    
+          </div>
 
         </article>
         <footer>

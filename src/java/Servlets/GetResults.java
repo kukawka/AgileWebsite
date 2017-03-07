@@ -5,54 +5,44 @@
  */
 package Servlets;
 
-import Beans.QuizDetails;
+import Beans.LoggedIn;
 import Beans.QuizResults;
-import Models.MainPageModel;
+import Models.LoginModel;
+import Models.Quiz;
 import java.io.IOException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import Models.Quiz;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Javi
+ * @author Dagi
  */
-@WebServlet(name = "GetQuizDetails", urlPatterns = {"/GetQuizDetails","/Quiz"})
-public class GetQuizDetails extends HttpServlet {
+@WebServlet(name = "GetResults", urlPatterns = {"/GetResults","/QuizResults"})
+public class GetResults extends HttpServlet {
 
-    @Override
+    /*@Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int quizID = Integer.parseInt(request.getParameter("quizID"));
-        Quiz quiz = new Quiz();
+        int quizID = Integer.parseInt(request.getParameter("ID"));
+        //String type = request.getParameter("type");
+        HttpSession session = request.getSession();
 
-        QuizDetails quizDetails = new QuizDetails() ;
         QuizResults qResults=new QuizResults() ;
-        
-        //get details
-        quizDetails=quiz.getQuiz(quizID);
-        
-        //get results and stats
         Quiz q=new Quiz() ;
         qResults= q.getQuizResults(quizID);
-        
-
-        HttpSession session = request.getSession();
-        session.setAttribute("QuizID", quizID);
-        session.setAttribute("QuizDetails", quizDetails);
-        session.setAttribute("QuizResults", qResults);
-        response.sendRedirect("./Quiz");
-    }
+            session.setAttribute("QuizResults", qResults);
+            response.sendRedirect("/AgileWebsite/GetResults");
+    }*/
     
-    @Override
+        @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("/staffViewQuiz.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/staffViewResults.jsp");
         rd.forward(request, response);
         
     }
