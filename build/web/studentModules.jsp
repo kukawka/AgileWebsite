@@ -139,10 +139,10 @@
 
 
             <div class="Outer">
-                <form method="Post" action="MainPage" style="height: 100%;">
-                    <input type="hidden" name="id" value="<%=mod.get(i).getID()%>"/>
-                    <input class="Inner1" type="submit" name="info" value="<%=mod.get(i).getName()%>"/>
-                </form>
+                <input type="hidden" name="id" value="<%=mod.get(i).getID()%>"/>
+                <button class="Inner1" onclick="showDiv()">
+                    <div style="text-align: center; vertical-align: middle; line-height: 80px;"><%=mod.get(i).getName()%><img src="<%=request.getContextPath()%>/css/img/star.png" alt="Star" height="42" width="42" style="display: none;" id='star'></div>
+                </button>
             </div>
             <%
                     }
@@ -151,5 +151,12 @@
 
         </div>
 
+        <script>
+
+            function showDiv() {
+                document.getElementById('star').style.display = "block";
+            }
+
+        </script>
     </body>
 </html>
