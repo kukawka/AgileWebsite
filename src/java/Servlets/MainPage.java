@@ -122,6 +122,7 @@ public class MainPage extends HttpServlet {
            request.setAttribute("type","quiz");
            request.setAttribute("items",mnm.getQuizzes(Integer.parseInt(request.getParameter("id")),log.getType()));   
         }
+         
        RequestDispatcher rd = request.getRequestDispatcher("/mainpage.jsp");
          rd.forward(request, response);
     }

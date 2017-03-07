@@ -3,8 +3,10 @@
     Created on : 06-Mar-2017, 15:46:22
     Author     : Javier
 --%>
+<%@page import="Beans.Module"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="Beans.LoggedIn"%>
-<%@page import="Beans.QuizDetails"%>
+<%@page import="Beans.ProgrammeOfStudy"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -74,6 +76,13 @@
                             </a>
                         <li class="active">
                             <a>
+                                <form method="Get" action="Modules">
+                                    <input type="submit" value="Modules" id="submit"><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-book"></span>
+                                </form>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a>
                                 <form method="POST"  action="Logout">
                                     <button type="submit" style="float:left; background:none; border:none; margin:0; padding:0;">Log out</button>
                                     <span style="font-size:16px;"  class="pull-right hidden-xs showopacity glyphicon glyphicon-log-out"></span>
@@ -87,17 +96,60 @@
                 </div>
             </div>
         </nav>
+
+        <%
+            ProgrammeOfStudy quizModules = (ProgrammeOfStudy) session.getAttribute("QuizDetails");
+            int ID = (Integer) session.getAttribute("QuizID");
+        %>
+
         <div class="main">
-            TEST
+            <div class="page-header" style="margin-left: 2%;">
+                <h1>Programmes Of Study </h1>
+
+            </div> 
+            <%
+                ArrayList<ProgrammeOfStudy> pos = (ArrayList<ProgrammeOfStudy>) request.getAttribute("pos");
+                for (int i = 0; i < pos.size(); i++) {
+            %>
+            <div class="Outer">
+
+                <form method="Post" action="GetModules" style="height: 100%;">
+
+                    <input type="hidden" name="id" value="<%=pos.get(i).getID()%>"/>
+                    <input type="hidden" name="type" value="module"/>
+                    <input class="Inner" type="submit" name="info" value="<%=pos.get(i).getName()%>"/>
+                </form>
+
+            </div>
+            <%
+                }
+
+                ArrayList<Module> mod = (ArrayList<Module>) request.getAttribute("modules");
+
+                if (mod != null) {
+            %>
+            <div class="page-header" style="margin-left: 2%;">
+                <h2>Modules </h2>
+
+            </div> 
+            <%
+                for (int i = 0; i < mod.size(); i++) {
+            %>
+
+
+
+            <div class="Outer">
+                <form method="Post" action="MainPage" style="height: 100%;">
+                    <input type="hidden" name="id" value="<%=mod.get(i).getID()%>"/>
+                    <input class="Inner1" type="submit" name="info" value="<%=mod.get(i).getName()%>"/>
+                </form>
+            </div>
+            <%
+                    }
+                }
+            %>
+
         </div>
-        <script>
-
-            function showDiv() {
-                document.getElementById('showDiv').style.display = "block";
-                document.getElementById('button').style.display = "none";
-            }
-
-        </script>
 
     </body>
 </html>
