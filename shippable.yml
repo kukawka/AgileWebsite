@@ -3,4 +3,3 @@ jdk: oraclejdk8
 
 build:
  ci:
- - ant
