@@ -111,25 +111,29 @@ public class MainPage extends HttpServlet {
         if(request.getParameter("type").equals("Programme of Study"))
         {
            request.setAttribute("type","pos");
-           request.setAttribute("items",mnm.getPOS());   
+           request.setAttribute("items",mnm.getPOS()); 
+           RequestDispatcher rd = request.getRequestDispatcher("/mainpage.jsp");
+         rd.forward(request, response);
         }
         else if(request.getParameter("type").equals("module"))
         {
            request.setAttribute("type","module");
            request.setAttribute("heading", request.getParameter("info"));
-           request.setAttribute("items",mnm.getModules(Integer.parseInt(request.getParameter("id"))));   
+           request.setAttribute("items",mnm.getModules(Integer.parseInt(request.getParameter("id")))); 
+           RequestDispatcher rd = request.getRequestDispatcher("/mainpage.jsp");
+         rd.forward(request, response);
         }
         else if(request.getParameter("type").equals("quiz"))
         {
            HttpSession session = request.getSession();
            LoggedIn log = (LoggedIn) session.getAttribute("LoggedIn");
-           request.setAttribute("type","quiz");
            request.setAttribute("heading", request.getParameter("info"));
-           ArrayList<Quiz> quizzes =  mnm.getQuizzes(Integer.parseInt(request.getParameter("id")),log.getType());
-           request.setAttribute("items",quizzes);   
+           ArrayList<Quiz> quizzes =  mnm.getQuizzes(Integer.parseInt(request.getParameter("id")),log.getType(),Integer.parseInt(log.getUsername()));
+           request.setAttribute("items",quizzes); 
+           RequestDispatcher rd = request.getRequestDispatcher("/mainpage_quiz.jsp");
+           rd.forward(request, response);
         }
-         RequestDispatcher rd = request.getRequestDispatcher("/mainpage.jsp");
-         rd.forward(request, response);
+         
     }
 
     /**

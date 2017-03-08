@@ -96,16 +96,15 @@ public class MainPageModel {
     /* Selecting a module will lead to all quizzes for that module to be pulled from the DB and displayed on the entire page beside the Nav-bar.
  * @params ID of selected module
      */
-    public ArrayList<Quiz> getQuizzes(int ID,String userType) {
-          ResultSet resultQuizzes = null;
+    public ArrayList<Quiz> getQuizzes(int ID, String userType, int userID) {
+        ResultSet resultQuizzes = null;
         Statement statement = null;
         ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
         try {
             Connection con;
             con = DBConnection.createConnection();
             statement = con.createStatement();
-            if(userType.equals("Staff"))
-            {
+            if (userType.equals("Staff")) {
                 resultQuizzes = statement.executeQuery("SELECT ID,Title FROM quiz WHERE moduleID=" + ID);
                 while (resultQuizzes.next()) {
                     if (resultQuizzes != null) {
@@ -120,9 +119,8 @@ public class MainPageModel {
                     }
                 }
             }
-            if(userType.equals("Student"))
-            {
-                resultQuizzes = statement.executeQuery("SELECT ID,Title FROM quiz WHERE moduleID=" +ID+" AND Available=1");
+            if (userType.equals("Student")) {
+                resultQuizzes = statement.executeQuery("SELECT ID,Title FROM quiz WHERE moduleID=" + ID + " AND Available=1");
                 while (resultQuizzes.next()) {
                     if (resultQuizzes != null) {
                         Quiz quiz = new Quiz();
@@ -134,6 +132,18 @@ public class MainPageModel {
                         //module.setQuizzes(getQuizzes(resultModules.getInt("ID")));
                         quizzes.add(quiz);
                     }
+                }
+                ResultSet completedQuizzes = statement.executeQuery("SELECT quizID FROM completed_quiz WHERE userID=" + userID);
+                ArrayList<Integer> ids = new ArrayList<Integer>();
+                while (completedQuizzes.next()) {
+                    if (completedQuizzes != null) {
+                        ids.add(completedQuizzes.getInt("quizID"));
+                    }
+                }
+                for(int i=0;i<quizzes.size();i++)
+                {
+                    if(ids.contains(quizzes.get(i).getID())) quizzes.get(i).setCompletion(true);
+                    else quizzes.get(i).setCompletion(false);
                 }
             }
             con.close();

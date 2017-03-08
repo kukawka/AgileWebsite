@@ -61,25 +61,6 @@
                 %>
                 <div class="page-header">
                 <h1><%=heading%></h1>
-                <%
-
-                if (request.getAttribute("type")!=null && request.getAttribute("type").equals("quiz")) { // Display the sorting button for quizzes.
-                %>
-                
-                <div class="sort">
-                    <select>
-                        <option value="" disabled selected>Sort quizzes:</option>
-                        <option value="3">Three</option>
-                        <option value="1">One</option>
-                        <option value="1">one</option>
-                        <option value="3">Three</option>
-                        <option value="1">One</option>
-                        <option value="1">one</option>
-                    </select>
-                </div>
-                <%
-                    }
-                %>
             </div><br><div class="grid">
 
                 <%      if (request.getAttribute("type") != null) { //checks if you have chosen a grid button
@@ -111,46 +92,8 @@
                 </div>
                 <%
                     }
-
-                } else if (request.getAttribute("type").equals("quiz")) { // shows all the quizzes to the chosen program of study
-                    ArrayList<Quiz> quiz = (ArrayList<Quiz>) request.getAttribute("items");
-                    if ((login.getType()).equals("Staff")) {   // gives the creation option to the Staff member
-
-                %>  
-
-                <div class="grid-item">
-                    <form method="Get" action="StaffStartQuiz">
-                        <input type="hidden" name="moduleID" value="<%=request.getParameter("id")%>">
-                        <input type="submit" name="info" id="submit1" value="CREATE"/>  
-                    </form> 
-                </div>      
-                <%
-                    }
-                    for (int i = 0; i < quiz.size(); i++) {
-                %>
-                <div class="grid-item">
-                    <%if ((login.getType()).equals("Staff")) { // if the person is Staff it will send them to the quiz details
-                    %>
-                    <form method="Post" action="GetQuizDetails">
-                        <%
-                            }
-                            if ((login.getType()).equals("Student")) {  // if the person is Student it will send them to take the quiz
-                        %>
-                        <form method="Post" action="TakeQuiz">
-                            <%
-                                }
-                            %>  
-                            <input type="hidden" name="quizID" value="<%=quiz.get(i).getID()%>"/>
-                            <input type="submit" name="info" id="submit2" value="<%=quiz.get(i).getName()%>"/>
-                            <div class="btnhandler" >
-                        <span class="glyphicon glyphicon-ok"></span>
-                            <span class="glyphicon glyphicon-remove"></span></div>
-                        </form> 
-                </div>
-                <%
-                            }
-                        }
-                    }
+                }
+            }
                 %>
             </div>
         </div>
