@@ -56,17 +56,17 @@ public class QuizTest extends TestCase {
         System.out.println("getResults");
 
         QuizResults result = instance.getQuizResults(1);
-        
+
         //there're currently 3 scores for the quiz so first of all I need to check if 3 scores are retrieved
         assertEquals("The right number of scores wasn't returned", 3, result.getScores().size());
         assertNotEquals("Not all scores were returned", 2, result.getScores().size());
         assertNotEquals("Only one score was returned", 1, result.getScores().size());
         assertNotEquals("Too many scores were returned", 4, result.getScores().size());
-        
+
         assertNotEquals("The right average wasn't returned ", 67.5, result.getAverage());
-        assertNotEquals("The right max wasn't returned", 87 , result.getMaxi());
-        assertNotEquals("The right max wasn't returned", 39 , result.getMini());
-        
+        assertNotEquals("The right max wasn't returned", 87, result.getMaxi());
+        assertNotEquals("The right max wasn't returned", 39, result.getMini());
+
         QuizResults expResult = new QuizResults();
         //to be continued
 
@@ -182,4 +182,47 @@ public class QuizTest extends TestCase {
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of getResults method, of class Quiz.
+     */
+    @Test
+    public void testGetRelevantResults() {
+        System.out.println("getQuiz");
+        int quizID = 1;
+
+        QuizResults result = instance.getRelevantQuizResults(quizID);
+        QuizResults expResult = new QuizResults();
+        ArrayList<Integer> scores = new ArrayList<>();
+        ArrayList<String> surnames = new ArrayList<>();
+        ArrayList<String> firstnames = new ArrayList<>();
+        ArrayList<String> matricNum = new ArrayList<>();
+        ArrayList<Integer> attempts = new ArrayList<>();
+        ArrayList<String> dates = new ArrayList<>();
+        double average = 72;
+        int maxi = 79;
+        int mini = 65;
+        scores.add(65);
+        scores.add(79);
+        matricNum.add("4");
+        matricNum.add("6");
+        dates.add("2017-03-03");
+        dates.add("2017-02-20");
+        surnames.add("Smith");
+        surnames.add("Burns");
+        expResult.setDates(dates);
+        expResult.setSurnames(surnames);
+        expResult.setMatricNum(matricNum);
+        expResult.setScores(scores);
+
+        assertNotEquals("Too many results were returned", (expResult.getScores().size())+1, result.getScores().size());
+        assertNotEquals("Too few results were returned", (expResult.getScores().size())-1, result.getScores().size());
+        assertEquals("The right number of results wasn't returned", expResult.getScores().size(), result.getScores().size());
+        assertEquals("The right student's data wasn't returned", expResult.getSurnames().get(1), result.getSurnames().get(1));
+        assertEquals("The right date wasn't returned", expResult.getDates().get(1), result.getDates().get(1));
+        assertEquals("The right student wasn't returned", expResult.getMatricNum().get(1), result.getMatricNum().get(1));
+        
+        assertNotNull("Database connection failed", result);
+    }
+
 }
