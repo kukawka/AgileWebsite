@@ -104,7 +104,13 @@
 
         <div class="main">
             <div class="page-header" style="margin-left: 2%;">
-                <h1>Programmes Of Study </h1>
+                
+                    <h1>Programmes Of Study</h1>
+                    <form>
+                        <input class="btn btn-lg btn-primary" id='button' style=" color: white; float: right; position: relative; bottom: 55px; margin-right: 20px; display: none;" value="Submit Choices"/>
+                    </form>
+          
+
 
             </div> 
             <%
@@ -140,9 +146,10 @@
 
             <div class="Outer">
                 <input type="hidden" name="id" value="<%=mod.get(i).getID()%>"/>
-                <button class="Inner1" onclick="showDiv()">
-                    <div style="text-align: center; vertical-align: middle; line-height: 80px;"><%=mod.get(i).getName()%><img src="<%=request.getContextPath()%>/css/img/star.png" alt="Star" height="42" width="42" style="display: none;" id='star'></div>
-                </button>
+                <div class="Inner1" style="text-align: center; vertical-align: middle; line-height: 80px;">
+                    <%=mod.get(i).getName()%><button class="btton" id="<%=mod.get(i).getID()%>" onClick="reply_click(this.id)">&#10003;</button>
+                </div>
+
             </div>
             <%
                     }
@@ -150,13 +157,28 @@
             %>
 
         </div>
+        <style>
 
-        <script>
-
-            function showDiv() {
-                document.getElementById('star').style.display = "block";
+            .btton{
+                height: 100%;
+                border: none;
+                border-radius:0px 10px 10px 0px;
+                background-color: white;
+                float: right;
+                cursor: pointer;
             }
 
+            .btton:hover {
+                background: rgba(101, 217, 80, 0.3);
+
+            }
+        </style>
+        <script>
+            function reply_click(clicked_id)
+            {
+                document.getElementById(clicked_id).style.background = "rgba(101, 217, 80, 0.4)";
+                document.getElementById('button').style.display = "block";
+            }
         </script>
     </body>
 </html>
