@@ -267,8 +267,7 @@ public class Quiz {
         Statement statement = null;
         ResultSet quizRS = null;
         ResultSet userRS = null;
-        ResultSet stats=null ;
-      
+        ResultSet stats = null;
 
         try {
             con = DBConnection.createConnection(); //establishing connection
@@ -294,11 +293,11 @@ public class Quiz {
             stats = statement.executeQuery("select avg(Score) as scoreAvg, max(Score) as scoreMax, min(Score) as scoreMin from completed_quiz where quizID=" + quizID);
 
             while (stats.next()) {
-                 quizResults.setAverage(stats.getDouble("scoreAvg"));
-                 quizResults.setMaxi(stats.getInt("scoreMin"));
-                 quizResults.setMini(stats.getInt("scoreMax"));
+                quizResults.setAverage(stats.getDouble("scoreAvg"));
+                quizResults.setMaxi(stats.getInt("scoreMin"));
+                quizResults.setMini(stats.getInt("scoreMax"));
             }
-            
+
             quizResults.setAttempts(attempts);
             quizResults.setFirstnames(firstnames);
             quizResults.setMatricNum(matricNum);
@@ -312,6 +311,84 @@ public class Quiz {
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
+        }
+
+    }
+
+    public QuizResults getRelevantQuizResults(int quizID) {
+        QuizResults quizResults = new QuizResults();
+
+        ArrayList<Integer> scores = new ArrayList<>();
+        ArrayList<String> surnames = new ArrayList<>();
+        ArrayList<String> firstnames = new ArrayList<>();
+        ArrayList<String> matricNum = new ArrayList<>();
+        ArrayList<Integer> attempts = new ArrayList<>();
+        ArrayList<String> dates = new ArrayList<>();
+
+        Connection con;
+        Statement statement = null;
+        ResultSet quizRS = null;
+        ResultSet userRS = null;
+        ResultSet stats = null;
+        ResultSet modules = null;
+
+        try {
+            con = DBConnection.createConnection(); //establishing connection
+            statement = con.createStatement();
+            modules = statement.executeQuery("select moduleID from quiz where ID=" + quizID);
+            int modID = 0;
+
+            while (modules.next()) {
+                modID = modules.getInt("moduleID");
+            }
+
+            statement = con.createStatement();
+            //quizRS = statement.executeQuery("select Attempts, userID, Score, date from completed_quiz where quizID=1 AND userID IN (Select studentID from student_modules where moduleID=1)");
+            //quizRS = statement.executeQuery("select Attempts, userID, Score, date from completed_quiz where quizID=" + quizID);
+            String sql = "select Attempts, userID, Score, date from completed_quiz where quizID=? AND userID IN (Select studentID from student_modules where moduleID=?)";
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.setInt(2,1);
+            pstmt.setString(1,"1");
+            quizRS = pstmt.executeQuery();
+            
+            while (quizRS.next()) {
+                scores.add(quizRS.getInt("Score"));
+                attempts.add(quizRS.getInt("Attempts"));
+                matricNum.add(quizRS.getString("userID"));
+                dates.add(quizRS.getString("date"));
+
+                statement = con.createStatement();
+                userRS = statement.executeQuery("select First_Name, Last_Name from user where ID = " + quizRS.getString("userID"));
+
+                //there will be one user anyway, but while loop is needed for it to work
+                while (userRS.next()) {
+                    firstnames.add(userRS.getString("First_Name"));
+                    surnames.add(userRS.getString("Last_Name"));
+                }
+            }
+            statement = con.createStatement();
+            stats = statement.executeQuery("select avg(Score) as scoreAvg, max(Score) as scoreMax, min(Score) as scoreMin from completed_quiz where quizID=" + quizID);
+
+            while (stats.next()) {
+                quizResults.setAverage(stats.getDouble("scoreAvg"));
+                quizResults.setMaxi(stats.getInt("scoreMin"));
+                quizResults.setMini(stats.getInt("scoreMax"));
+            }
+
+            quizResults.setAttempts(attempts);
+            quizResults.setFirstnames(firstnames);
+            quizResults.setMatricNum(matricNum);
+            quizResults.setSurnames(surnames);
+            quizResults.setScores(scores);
+            quizResults.setDates(dates);
+
+            con.close();
+            return quizResults;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+            //return new QuizResults() ;
         }
 
     }
