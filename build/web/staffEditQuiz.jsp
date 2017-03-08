@@ -78,7 +78,7 @@
                         <p><b><h5>Explanation: </b> <input value="<%= quizDetails.getQuestions().get(x).getExplanation()%>"> </h5></p>
                     </div>
 
-                    <% for (int y = 0; y < 4; y++) {%>
+                    <% for (int y = 0; y < answers.size(); y++) {%>
                     <!-- List group -->
                     <ul class="list-group">
                         <%boolean isCorrect=false ;

@@ -23,7 +23,7 @@
     </head>
     <body>
         <%
-            QuizResults quizResults = (QuizResults) session.getAttribute("QuizResults");
+            QuizResults quizResults = (QuizResults) session.getAttribute("RelevantQuizResults");
             ArrayList<Integer> scores = quizResults.getScores();
             ArrayList<String> surnames = quizResults.getSurnames();
             ArrayList<String> firstnames = quizResults.getFirstnames();

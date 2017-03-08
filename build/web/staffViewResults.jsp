@@ -1,6 +1,6 @@
 <%-- 
-    Document   : staffViewRelevantResults
-    Created on : Mar 7, 2017, 4:18:00 PM
+    Document   : staffViewResults
+    Created on : Mar 6, 2017, 11:56:38 AM
     Author     : Dagi
 --%>
 
@@ -23,7 +23,7 @@
     </head>
     <body>
         <%
-            QuizResults quizResults = (QuizResults) session.getAttribute("RelevantQuizResults");
+            QuizResults quizResults = (QuizResults) session.getAttribute("QuizResults");
             ArrayList<Integer> scores = quizResults.getScores();
             ArrayList<String> surnames = quizResults.getSurnames();
             ArrayList<String> firstnames = quizResults.getFirstnames();
@@ -35,7 +35,7 @@
             QuizDetails quizDetails = (QuizDetails) session.getAttribute("QuizDetails");
             //QuizDetails quizDetails = new QuizDetails();
             //quizDetails.setTitle("Test");
-        %>
+%>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -57,44 +57,43 @@
     </nav>
     <!--<div class="main">-->
     <div style="margin-left: 5%; margin-right: 5%;" >
-        <div class="page-header">
-            <h1>View Results for: <b><%=quizDetails.getTitle()%></b></h1>
-        </div>
-        <br>
-        <table class="table table-striped">
-            <tr>
-                <th>Matriculation No</th>
-                <th>Firstname</th>
-                <th>Lastname</th> 
-                <th>No of Attempts</th>
-                <th style="background-color: red;">Score</th>
-                <th>Date</th>
-            </tr>
+    <div class="page-header">
+        <h1>View Results for: <b><%=quizDetails.getTitle()%></b></h1>
+    </div>
+    <br>
+    <table class="table table-striped">
+        <tr>
+            <th>Matriculation No</th>
+            <th>Firstname</th>
+            <th>Lastname</th> 
+            <th>No of Attempts</th>
+            <th style="background-color: red;">Score</th>
+            <th>Date</th>
+        </tr>
 
 
-            <%for (int i = 0; i < matricNum.size(); i++) {%>
-            <tr>
-                <td><%= matricNum.get(i)%></td>
-                <td><%= firstnames.get(i)%></td>
-                <td><%= surnames.get(i)%></td> 
-                <td><%= attempts.get(i)%></td>
-                <td><%= scores.get(i)%></td>
-                <td><%= dates.get(i)%></td>
-            </tr>
-            <%}%>
-        </table>
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Filter <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-                <li><button onclick="">Show only relevant students</button></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">Separated link</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">One more separated link</a></li>
-            </ul>
-        </li>
+        <%for (int i = 0; i < matricNum.size(); i++) {%>
+        <tr>
+            <td><%= matricNum.get(i)%></td>
+            <td><%= firstnames.get(i)%></td>
+            <td><%= surnames.get(i)%></td> 
+            <td><%= attempts.get(i)%></td>
+            <td><%= scores.get(i)%></td>
+            <td><%= dates.get(i)%></td>
+        </tr>
+        <%}%>
+    </table>
+<li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Filter <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+        <li><button onclick="">Show only relevant students</button></li>
+        <li><a href="#">Another action</a></li>
+        <li><a href="#">Something else here</a></li>
+        <li role="separator" class="divider"></li>
+        <li><a href="#">Separated link</a></li>
+        <li role="separator" class="divider"></li>
+        <li><a href="#">One more separated link</a></li>
+    </ul>
+</li>
 </body>
 </html>
-
