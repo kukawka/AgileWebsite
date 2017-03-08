@@ -144,29 +144,5 @@ public class MainPageModel {
         }
 
         return null;
-        /*
-        ResultSet resultQuizzes = null;
-        Statement statement = null;
-        ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
-        try {
-            Connection con;
-            con = DBConnection.createConnection();
-            resultQuizzes = statement.executeQuery("SELECT ID,Title FROM quiz WHERE moduleID=1");
-            while (resultQuizzes.next()) {
-                if (resultQuizzes != null) {
-                    Quiz quiz = new Quiz();
-                    quiz.setID(resultQuizzes.getInt("ID"));
-                    quiz.setName(resultQuizzes.getString("Title"));
-                    quizzes.add(quiz);
-                }
-            }
-            con.close();
-            return quizzes;
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-*/
     }
 }

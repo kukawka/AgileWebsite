@@ -5,7 +5,7 @@
     <head>
         <%--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">--%>
         <title>Submit a Quiz</title>
-        <link rel="stylesheet" type="text/css" href="style.css" />
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/mainpage_style.css"/>
         
         <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -98,7 +98,12 @@
                     <h2>Submit a Quiz</h2>
                     <h3>Quiz Options:</h3>
                     <li>Quiz Title: <input type="text" name="title" minlength="4" required="required"></li>
-                    <li>ModuleID: <input type="text" name="moduleID" minlength="1" maxlength="10"  required ="required"></li>
+                    
+                     <input type="hidden" name="moduleID" value=<%=request.getAttribute("moduleID")%>>
+                    <li>ModuleID: <%=request.getAttribute("moduleID")%></li>
+                    
+                    <%--<li>ModuleID: <input type="text" name="moduleID" minlength="1" maxlength="10"  required ="required"></li>--%>
+                    
                     <li>Availability: <input type="checkbox" name="available" value="1"> Yes </li>
                     <li>Number of questions to provide: <input type="number" name="questionsnumber" minlength="1" required="required"></li><br>
                 </ul>

@@ -160,9 +160,9 @@ section{
 /* ---- grid ---- */
 
 .grid { 
-    float:center;
     position:relative;
     background:#fff;
+
 
 }
 
@@ -181,8 +181,8 @@ section{
     margin-right:1%;
     margin-bottom:1%;
     float: left;
-    width: 100px;
-    height: 100px;
+    width:150px;
+    height:50px;
     background: #fff;
     border: 2px solid #333;
     border-color: hsla(0, 0%, 0%, 0.7);
@@ -223,8 +223,8 @@ input#submit2:hover {
     color: #1a1a1a;
     box-shadow: inset 0 0 0 3px #1a1a1a;
 }
-input#submit2{
-    width:100%;
+input#submit2{float:left;
+    width:85%;
     height:100%;
     background:#1a1a1a;
     border-style: solid;
@@ -237,4 +237,16 @@ span#edit{float:right;
 }
 .grid-item p {text-align:right;
 }
-
+.btnhandler{float:left;
+    height:100%;
+    width:13%;
+    margin-top:5px;
+    margin-left:2.5px;
+}
+.grid-item a{
+    float:right;
+    color:black;}
+.sort{
+      position:relative;
+ left:88%;
+bottom:15px;}
