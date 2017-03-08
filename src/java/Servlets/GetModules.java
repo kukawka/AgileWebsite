@@ -28,10 +28,15 @@ public class GetModules extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        String IDs = request.getParameter("moduleChoice");
+        
         MainPageModel mnm = new MainPageModel();
         request.setAttribute("pos", mnm.getPOS());
         request.setAttribute("modules", mnm.getModules(Integer.parseInt(request.getParameter("id"))));
         request.setAttribute("type", "modules");
+        
+        
+        System.out.println(IDs);
         
         RequestDispatcher rd = request.getRequestDispatcher("/studentModules.jsp");
         rd.forward(request, response);

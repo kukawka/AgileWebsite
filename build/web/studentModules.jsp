@@ -104,12 +104,14 @@
 
         <div class="main">
             <div class="page-header" style="margin-left: 2%;">
-                
-                    <h1>Programmes Of Study</h1>
-                    <form>
-                        <input class="btn btn-lg btn-primary" id='button' style=" color: white; float: right; position: relative; bottom: 55px; margin-right: 20px; display: none;" value="Submit Choices"/>
-                    </form>
-          
+
+                <h1>Programmes Of Study</h1>
+                <form method="Post" action="GetModules">
+                    <input type="hidden" name="id" value="<%="2"%>"/>
+                    <input type='hidden' id= 'hiddenField' name="moduleChoice" value='2' />
+                    <input type="submit" class="btn btn-lg btn-primary" id='button' style=" color: white; float: right; position: relative; bottom: 55px; margin-right: 20px; display: none;" value="Submit Choices"/>
+                </form>
+
 
 
             </div> 
@@ -174,10 +176,15 @@
             }
         </style>
         <script>
+            var IDs = "";
+
             function reply_click(clicked_id)
             {
                 document.getElementById(clicked_id).style.background = "rgba(101, 217, 80, 0.4)";
                 document.getElementById('button').style.display = "block";
+                IDs = IDs + " " + clicked_id;
+                alert(IDs);
+                document.getElementById('hiddenField').value = IDs;
             }
         </script>
     </body>
