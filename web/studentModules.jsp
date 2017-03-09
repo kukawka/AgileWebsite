@@ -96,8 +96,11 @@
                 </div>
             </div>
         </nav>
-
+                        
+        
+        
         <%
+
             ProgrammeOfStudy quizModules = (ProgrammeOfStudy) session.getAttribute("QuizDetails");
             int ID = (Integer) session.getAttribute("QuizID");
         %>
@@ -107,11 +110,11 @@
 
                 <h1>Programmes Of Study</h1>
                 <form method="Post" action="GetModules">
-                    <input type="hidden" name="id" value="<%="2"%>"/>
-                    <input type='hidden' id= 'hiddenField' name="moduleChoice" value='2' />
+                    <input type="hidden" name="id" value="<%="1"%>"/> <!-- this value sends you to that pos after submitting choices -->   
+                    <input type='hidden' id= 'hiddenField' name="moduleChoice" value='' />
                     <input type="submit" class="btn btn-lg btn-primary" id='button' style=" color: white; float: right; position: relative; bottom: 55px; margin-right: 20px; display: none;" value="Submit Choices"/>
                 </form>
-
+<%=session.getAttribute("test")%>
 
 
             </div> 

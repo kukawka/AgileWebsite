@@ -35,6 +35,8 @@ public class GetModules extends HttpServlet {
         request.setAttribute("modules", mnm.getModules(Integer.parseInt(request.getParameter("id"))));
         request.setAttribute("type", "modules");
         
+        HttpSession session = request.getSession();
+        session.setAttribute("test", IDs);
         
         System.out.println(IDs);
         
