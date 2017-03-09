@@ -1,7 +1,7 @@
-<%-- 
+<%--
     Document   : staffEditQuiz
     Created on : Feb 21, 2017, 10:13:40 AM
-    Author     : Dagi
+    Author     : Musa
 --%>
 
 <%@page import="java.util.ArrayList"%>
@@ -30,7 +30,7 @@
 
         <form class="form-horizontal">
             <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">Title</label>
+                <label for="inputEmail3" class="col-sm-2 control-label"></label>
                 <div class="col-sm-10 col-md-4">
                     <input type="text" class="form-control" id="inputEmail3" value=" <%= quizDetails.getTitle()%>">
                 </div>
@@ -62,7 +62,7 @@
         </form>
 
 
-
+        <form method="Post" action="StaffEditQuiz">
         <div id="showDiv" style="display: none; background-color: red;">
 
             <% for (int x = 0; x < quizDetails.getQuestions().size(); x++) {%>
@@ -72,10 +72,11 @@
             <div class="col-sm-offset-2 col-sm-8">
                 <div class="panel panel-default" style="margin-left: -15px;">
                     <!-- Default panel contents -->
-
-                    <div class="panel-heading"><h4><%=x + 1%>. <input value="<%= quizDetails.getQuestions().get(x).getQuestionText()%>"> </h4></div>
+                      
+                    <div class="panel-heading"><h4><%=x + 1%>.  <input type="hidden"  name="id<%=x+1%>" value="<%= quizDetails.getQuestions().get(x).getQuestionID()%>">
+                            <input name="QuestionText<%=x+1%>" value="<%= quizDetails.getQuestions().get(x).getQuestionText()%>"> </h4></div>
                     <div class="panel-body">
-                        <p><b><h5>Explanation: </b> <input value="<%= quizDetails.getQuestions().get(x).getExplanation()%>"> </h5></p>
+                        <p><b><h5>Explanation: </b> <input name="ExplanationText<%=x+1%>" value="<%=quizDetails.getQuestions().get(x).getExplanation()%>"> </h5></p>
                     </div>
 
                     <% for (int y = 0; y < answers.size(); y++) {%>
@@ -90,15 +91,19 @@
                                 }
                                  
                                %>
-                        <li class="list-group-item" > <input value="<%= answers.get(y)%>"> <% if (isCorrect) {%> </input> <input type="checkbox" checked > <% } else { %> <input type="checkbox"></li>
+                               
+                        <li class="list-group-item" > <input name="answertext<%=x+1%><%=y+1%>" value="<%= answers.get(y)%>"/> 
+                              <input type="checkbox" name="correct<%=x+1%><%=y+1%>" <% if (isCorrect) {%> checked<% }%>></li>
                     </ul>
 
                     <% }
-                            }%>
+                            %>
                 </div>  
 
             </div>
-            <% }%>
+                            <% }%>
+            <input type="hidden" name="QuestionNumber" value="<%= quizDetails.getQuestions().size()%>">
+          
             <div class="form-group" style="width: 100%;">
                 <div class="col-sm-offset-2 col-sm-10">
                     <input  type = "submit" class="btn btn-lg btn-primary" id='button' value = "Submit"></input>
@@ -113,7 +118,6 @@
             document.getElementById('showDiv').style.display = "block";
             document.getElementById('button').style.display = "none";
         }
-
     </script>
 </body>
 </html>
