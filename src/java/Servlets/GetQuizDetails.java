@@ -25,7 +25,17 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "GetQuizDetails", urlPatterns = {"/GetQuizDetails","/Quiz"})
 public class GetQuizDetails extends HttpServlet {
 
+
+    
     @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        RequestDispatcher rd = request.getRequestDispatcher("/staffViewQuiz.jsp");
+        rd.forward(request, response);
+        
+    }
+
+        @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int quizID = Integer.parseInt(request.getParameter("quizID"));
@@ -51,13 +61,4 @@ public class GetQuizDetails extends HttpServlet {
         session.setAttribute("RelevantQuizResults", relQResults);
         response.sendRedirect("./Quiz");
     }
-    
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("/staffViewQuiz.jsp");
-        rd.forward(request, response);
-        
-    }
-
 }

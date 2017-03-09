@@ -196,62 +196,7 @@ public class Quiz {
         }
         return 1;
     }
-
-    public int EditQuiz(int quizID) {
-        QuizDetails qDetails = new QuizDetails();
-        //Question questions = new Question();
-        int id = 0;
-        Connection con = null;
-        Statement statement2 = null; //this is what
-        ResultSet QuizRS = null;
-        ResultSet QuestionRS = null;
-        ResultSet AnswerRS = null;
-        String title = " ";
-
-        try {
-            //establishing connection to db
-            con = DBConnection.createConnection();
-            Statement statement = con.createStatement();
-
-            QuizRS = statement.executeQuery("Update quiz (Available, Title) values ('available', 'title')");
-            QuestionRS = statement.executeQuery("Update question (questiontext, explanationtext) values ('questiontext', 'explanationtext')");
-            AnswerRS = statement.executeQuery("Update answer (answertext, correct) values ('answertext', 'correct')");
-            /*
-            while (QuizRS.next()) {
-                title = QuizRS.getString("Title");
-                qDetails.setTitle(title);
-                qDetails.setAvailability(QuizRS.getBoolean("Available"));
-            }
-            
-            ArrayList<Question> question = new ArrayList<Question>();
-            while (QuestionRS.next())
-            {
-                Question questions = new Question();
-                questions.setQuestionText(QuestionRS.getString("QuestionText"));
-                questions.setExplanation(QuestionRS.getString("ExplanationText"));
-             
-                int c = 0;
-            String[] answer = new String[4];
-            while (AnswerRS.next())
-            {
-                boolean correct = AnswerRS.getBoolean("Correct");
-                if (correct)
-                {
-                    questions.setCorrectAnswerID(c);
-                }
-                questions.setAnswers(answer);
-                question.add(questions);    
-            }
-            }*/
-
-        } catch (SQLException e) {
-            System.out.println("Error");
-            e.printStackTrace();
-            return -1;
-        }
-        return id;
-    }
-
+    
     public QuizResults getQuizResults(int quizID) {
 
         QuizResults quizResults = new QuizResults();
@@ -390,6 +335,55 @@ public class Quiz {
             return null;
             //return new QuizResults() ;
         }
+    }
+    
+    public int EditQuiz(int quizID) {
+        QuizDetails qDetails = new QuizDetails();
+        Connection con = null;
+        int id = 0;
 
+        //Statement statement = null; 
+        //ResultSet QuizRS = null;
+        //ResultSet QuestionRS = null;
+        //ResultSet AnswerRS = null;
+        boolean available = false;
+        String title = null;
+        String questiontext = null;
+        String explanationtext = null;
+        String answertext = null;
+        boolean correct = false;
+
+        try {
+            //establishing connection to db
+            con = DBConnection.createConnection();
+            PreparedStatement statement1 = con.prepareStatement("UPDATE quiz SET Available = ?, Title = ?");
+            PreparedStatement statement2 = con.prepareStatement("UPDATE question SET questiontext = ?, explanationtext = ?");
+            PreparedStatement statement3 = con.prepareStatement("UPDATE answer SET answertext = ?, correct = ?");
+
+            //QuizRS = statement.executeQuery("UPDATE quiz SET Available = ?, Title = ?");
+            //QuestionRS = statement.executeQuery("UPDATE question SET questiontext = ?, explanationtext = ?");
+            //AnswerRS = statement.executeQuery("UPDATE answer SET answertext = ?, correct = ?");
+            statement1.setBoolean(1, available);
+            statement1.setString(2, title);
+            statement2.setString(1, questiontext);
+            statement2.setString(2, explanationtext);
+            statement3.setString(1, answertext);
+            statement3.setBoolean(2, correct);
+
+            statement1.executeUpdate();
+            statement2.executeUpdate();
+            statement3.executeUpdate();
+            statement1.close();
+            statement2.close();
+            statement3.close();
+
+            con.close();
+            
+        } catch (SQLException e) {
+            System.out.println("Error");
+            e.printStackTrace();
+            return -1;
+        }
+        return id;
     }
 }

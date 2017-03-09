@@ -12,8 +12,8 @@ public class QuizDetails {
     boolean availability=false ; 
     ArrayList<Question> questions = new ArrayList<Question>();
     String date = "" ;
-    
     //Encapsulated fields- added a getter and setters for each 
+    
     
     public void setTitle(String title){
         this.title=title ;

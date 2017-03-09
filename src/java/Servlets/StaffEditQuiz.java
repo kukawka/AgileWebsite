@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.UUID;
 import Models.Quiz;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -33,9 +34,10 @@ public class StaffEditQuiz extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Quiz quiz = new Quiz();
-
+        HttpSession session = request.getSession();
+        
         int numOfQuestions = Integer.valueOf(request.getParameter("QuestionNumber"));
-        int QuizID = Integer.valueOf(request.getParameter("QuizID"));
+        int QuizID = (Integer)session.getAttribute("QuizID");
 
         System.out.println("Number of questions: " + numOfQuestions);
 
@@ -44,9 +46,10 @@ public class StaffEditQuiz extends HttpServlet {
 
             String questionText = request.getParameter("QuestionText" + (i + 1));
             String explanationText = request.getParameter("ExplanationText" + (i + 1));
+            int quizID = Integer.valueOf(request.getParameter("ID" + (i + 1)));
 
             //int questionNumber = Integer.valueOf(request.getParameter("questionnumbertext"+(i+1)+(j+1)));
-            questionID = quiz.SubmitQuestion(questionText, explanationText, QuizID, (i + 1));
+            //questionID = quiz.EditQuiz(quizID, QuizID, (i + 1));
             System.out.println("Question " + (i + 1) + " Updated!");
 
             for (int j = 0; j < 4; j++) {
@@ -62,15 +65,15 @@ public class StaffEditQuiz extends HttpServlet {
                     correctInt = 0;
                 }
 
-                quiz.SubmitAnswer(answerText, correctInt, questionID);
+               //quiz.SubmitAnswer(answerText, correctInt, questionID);
                 System.out.println("Answer " + (j + 1) + " for Question" + (i + 1) + " updated!");
 
             }
             System.out.println("Quiz " + QuizID + " updated!");
             
         }
-        RequestDispatcher rd=request.getRequestDispatcher("./Quiz");
-        rd.forward(request,response);
+   
+        response.sendRedirect("./Quiz");
     }
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

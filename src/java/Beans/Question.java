@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class Question {
     //Refactoring- renamed the field so that it is more descriptive 
     String questionText="" ;
+    int ID;
     
     //Refactoring- renamed the field so that it is more descriptive 
     String answerExplanation="" ;
@@ -27,6 +28,14 @@ public class Question {
     
     public String getQuestionText(){
         return questionText ;
+    }
+    
+    public void setQuestionID(int id){
+        this.ID=id ;
+    }
+    
+    public int getQuestionID(){
+        return ID ;
     }
     
     public void setExplanation(String answerExplanation){
@@ -52,7 +61,4 @@ public class Question {
     public ArrayList<String> getAnswers(){
         return answers ;
     }
-    
-    
-    
 }
