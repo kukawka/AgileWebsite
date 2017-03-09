@@ -113,7 +113,7 @@
                 <h4 style="color: #777;">Date of Creation: <%= quizDetails.getDate()%></h4>
                 <br>
                 <div class="list-group" style=" width:30%;">
-                    <button type="button" class="list-group-item list-group-item-info"><a href="staffViewStats.jsp" style="" id="edit">See Statistics <span class="glyphicon glyphicon-stats"</span></a></button>
+                    <button type="button" class="list-group-item list-group-item-info"><a href="Stats" style="" id="edit">See Statistics <span class="glyphicon glyphicon-stats"</span></a></button>
                     <!-- <form method="POST" action="GetResults" style="margin-left: 0%; ">-->
                     <button type="button" class="list-group-item list-group-item-warning"><a href="GetResults" >See All Results <span class="glyphicon glyphicon-sort-by-order" aria-hidden="true"></span></a></button>
                          <!--<input type="hidden" value="<%= ID%>" id="ID" name="ID">

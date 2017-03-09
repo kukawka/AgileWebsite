@@ -76,7 +76,7 @@
                             0: {side: 'top', label: ''} // Top x-axis.
                         }
                         //y: {
-                            //0: {side: 'left', label: 'Percantage range'} // Top x-axis.
+                        //0: {side: 'left', label: 'Percantage range'} // Top x-axis.
                         //}
                     },
                     bar: {groupWidth: "90%"}
@@ -88,6 +88,24 @@
             }
             ;
         </script>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">QuizUp</a>
+                </div>
+                <ul class="nav nav-tabs">
+                    <li role="presentation" class="active" id="irrel"><a href="#">All Students</a></li>
+                    <li role="presentation"  id="rel"><a href="RelevantStats">Relevant Students Only</a></li>
+
+                    <form class="navbar-form navbar-left">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="ID of a Student">
+                        </div>
+                        <button type="submit" class="btn btn-default">Look Up</button>
+                    </form></ul>
+            </div><!-- /.container-fluid -->
+        </nav>
 
         <div class="main">
             <div style="margin-left: 3%;">
@@ -96,7 +114,7 @@
                 </div>
                 <div id="top_x_div" style="width: 900px; height: 500px;"></div>
                 <br>
-                
+
                 <!-- taken from:
                 https://developers.google.com/chart/interactive/docs/gallery/linechart -->
 
@@ -104,5 +122,5 @@
                 <h3><b>Average Score: </b><%=quizResults.getAverage()%></h3>
                 <h3><b>Minimum Score: </b><%=quizResults.getMini()%></h3>
                 <h3><b>Maximum Score: </b><%=quizResults.getMaxi()%></h3>
-    </body>
-</html>
+                </body>
+                </html>

@@ -366,13 +366,19 @@ public class Quiz {
                     surnames.add(userRS.getString("Last_Name"));
                 }
             }
-            statement = con.createStatement();
-            stats = statement.executeQuery("select avg(Score) as scoreAvg, max(Score) as scoreMax, min(Score) as scoreMin from completed_quiz where quizID=" + quizID);
-
+            //statement = con.createStatement();
+            //stats = statement.executeQuery("select avg(Score) as scoreAvg, max(Score) as scoreMax, min(Score) as scoreMin from completed_quiz where quizID=" + quizID);
+            
+            String sql2 = "select avg(Score) as scoreAvg, max(Score) as scoreMax, min(Score) as scoreMin from completed_quiz where quizID=? AND userID IN (Select studentID from student_modules where moduleID=?)";
+            PreparedStatement pstmt2 = con.prepareStatement(sql2);
+            pstmt2.setInt(2,1);
+            pstmt2.setString(1,"1");
+            stats = pstmt2.executeQuery();
+            
             while (stats.next()) {
                 quizResults.setAverage(stats.getDouble("scoreAvg"));
-                quizResults.setMaxi(stats.getInt("scoreMin"));
-                quizResults.setMini(stats.getInt("scoreMax"));
+                quizResults.setMini(stats.getInt("scoreMin"));
+                quizResults.setMaxi(stats.getInt("scoreMax"));
             }
 
             quizResults.setAttempts(attempts);
