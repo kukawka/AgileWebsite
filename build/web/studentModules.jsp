@@ -98,12 +98,6 @@
         </nav>
                         
         
-        
-        <%
-
-            ProgrammeOfStudy quizModules = (ProgrammeOfStudy) session.getAttribute("QuizDetails");
-            int ID = (Integer) session.getAttribute("QuizID");
-        %>
 
         <div class="main">
             <div class="page-header" style="margin-left: 2%;">
