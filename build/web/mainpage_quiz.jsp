@@ -56,15 +56,16 @@
         <div class="main">
             <div class="page-header">
                 <h1><%=request.getAttribute("heading")%></h1>
+                <% if ((login.getType()).equals("Student")) { %>
                 <div class="sort">
-                    <select>
+                    <select onChange="sortUsingNestedText()">
                         <option value="" disabled selected>Sort quizzes:</option>
-                        <option value="None">Nothing</option>
                         <option value="Ascending">Ascending</option>
                         <option value="Descending">Descending</option>
                         <option value="Completed">Completed</option>
                     </select>
                 </div>
+                <% } %>
             </div><br><div class="grid">
 
                 <%
@@ -97,20 +98,17 @@
                                 }
                             %>  
                             <input type="hidden" name="quizID" value="<%=quiz.get(i).getID()%>"/>
-                            <input type="submit" name="info" id="submit2" value="<%=quiz.get(i).getName()%>"/>
-                            <%
-                                if ((login.getType()).equals("Student")) {
-                            %>
-                            <div class="btnhandler" >
-                                <span class="<% if (quiz.get(i).getCompletion()) { %>
-                                      glyphicon glyphicon-ok
-                                      <% } else { %> glyphicon glyphicon-remove
-                                      <% } %> ">
-                                </span>
-                            </div>
-                            <%
-                                }
-                            %>
+                            <input type="submit" class="name" name="info" id="submit2" value="<%=quiz.get(i).getName()%>"/>
+                            
+                                <% if ((login.getType()).equals("Student") && quiz.get(i).getCompletion()) { %>
+                                <div class="btnhandler" >    
+                                    
+                                <span class="glyphicon glyphicon-ok"></span>
+                                </div>
+                                      <% } %> 
+                                
+                            
+    
                         </form> 
                 </div>
                 <%
@@ -141,6 +139,15 @@
                     $('body').height(Math.max(height1, height3, height2));
                 }
             }
+            
+            function sortUsingNestedText() {
+    var items = $('.grid').children("div").sort(function(a, b) {
+        var vA = $("input.name", a).text();
+        var vB = $("input.name", b).text();
+        return (vA < vB) ? -1 : (vA > vB) ? 1 : 0;
+    });
+    parent.append(items);
+}
             $(document).ready(function () {
                 htmlbodyHeightUpdate()
                 $(window).resize(function () {
