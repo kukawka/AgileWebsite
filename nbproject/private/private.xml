@@ -3,15 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/javis/University/3rd%20Year/2nd%20Semester/Agile/Sprint%202/AgileWebsite/src/java/Models/Modules.java</file>
-            <file>file:/C:/Users/javis/University/3rd%20Year/2nd%20Semester/Agile/Sprint%202/AgileWebsite/src/java/Beans/Module.java</file>
-            <file>file:/C:/Users/javis/University/3rd%20Year/2nd%20Semester/Agile/Sprint%202/AgileWebsite/web/studentModules.jsp</file>
+            <file>file:/C:/Users/javis/University/3rd%20Year/2nd%20Semester/Agile/Sprint%202/AgileWebsite/build/web/staffViewResults.jsp</file>
+            <file>file:/C:/Users/javis/University/3rd%20Year/2nd%20Semester/Agile/Sprint%202/AgileWebsite/build/web/staffViewQuiz.jsp</file>
             <file>file:/C:/Users/javis/University/3rd%20Year/2nd%20Semester/Agile/Sprint%202/AgileWebsite/src/java/Models/Quiz.java</file>
             <file>file:/C:/Users/javis/University/3rd%20Year/2nd%20Semester/Agile/Sprint%202/AgileWebsite/src/java/Beans/ProgrammeOfStudy.java</file>
-            <file>file:/C:/Users/javis/University/3rd%20Year/2nd%20Semester/Agile/Sprint%202/AgileWebsite/src/java/Models/MainPageModel.java</file>
-            <file>file:/C:/Users/javis/University/3rd%20Year/2nd%20Semester/Agile/Sprint%202/AgileWebsite/src/java/Servlets/GetModules.java</file>
             <file>file:/C:/Users/javis/University/3rd%20Year/2nd%20Semester/Agile/Sprint%202/AgileWebsite/web/staffViewQuiz.jsp</file>
-            <file>file:/C:/Users/javis/University/3rd%20Year/2nd%20Semester/Agile/Sprint%202/AgileWebsite/web/mainpage.jsp</file>
             <file>file:/C:/Users/javis/University/3rd%20Year/2nd%20Semester/Agile/Sprint%202/AgileWebsite/src/java/Servlets/GetQuizDetails.java</file>
             <file>file:/C:/Users/javis/University/3rd%20Year/2nd%20Semester/Agile/Sprint%202/AgileWebsite/src/java/Beans/QuizDetails.java</file>
         </group>
