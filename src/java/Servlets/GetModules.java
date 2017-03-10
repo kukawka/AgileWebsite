@@ -5,8 +5,10 @@
  */
 package Servlets;
 
+import Beans.LoggedIn;
 import Beans.QuizDetails;
 import Models.MainPageModel;
+import Models.Modules;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,19 +29,23 @@ public class GetModules extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String IDs = request.getParameter("moduleChoice");
-        
+
         MainPageModel mnm = new MainPageModel();
         request.setAttribute("pos", mnm.getPOS());
         request.setAttribute("modules", mnm.getModules(Integer.parseInt(request.getParameter("id"))));
         request.setAttribute("type", "modules");
-        
+
         HttpSession session = request.getSession();
-        session.setAttribute("test", IDs);
+        LoggedIn login = (LoggedIn) session.getAttribute("LoggedIn");
         
-        System.out.println(IDs);
-        
+        if (IDs != null) 
+        {
+            Modules modules = new Modules();
+            modules.setModules(login.getUsername(), IDs);
+        }
+
         RequestDispatcher rd = request.getRequestDispatcher("/studentModules.jsp");
         rd.forward(request, response);
     }

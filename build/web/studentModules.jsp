@@ -114,7 +114,6 @@
                     <input type='hidden' id= 'hiddenField' name="moduleChoice" value='' />
                     <input type="submit" class="btn btn-lg btn-primary" id='button' style=" color: white; float: right; position: relative; bottom: 55px; margin-right: 20px; display: none;" value="Submit Choices"/>
                 </form>
-<%=session.getAttribute("test")%>
 
 
             </div> 
@@ -185,7 +184,7 @@
             {
                 document.getElementById(clicked_id).style.background = "rgba(101, 217, 80, 0.4)";
                 document.getElementById('button').style.display = "block";
-                IDs = IDs + " " + clicked_id;
+                IDs = IDs + "," + clicked_id;
                 alert(IDs);
                 document.getElementById('hiddenField').value = IDs;
             }
