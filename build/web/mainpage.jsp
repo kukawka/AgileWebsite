@@ -42,6 +42,15 @@
                                     <input type="submit" name="type" value="Favourites" id="submit">
                                 </form>
                             </a>
+
+                        <li class="active">
+                            <a>
+                                <form method="Get" action="Modules">
+                                    <input type="submit" value="Modules" id="submit"><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-book"></span>
+                                </form>
+                            </a>
+                        </li>
+
                         <li class="active"><a href="index.jsp" >Log Out<span style="font-size:16px;"  class="pull-right hidden-xs showopacity glyphicon glyphicon-log-out"></span></a></li>
                     </ul>
                 </div>
@@ -92,6 +101,7 @@
                 </div>
                 <%
                     }
+
                 }
             }
                 %>
@@ -100,13 +110,13 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
         <script>
-          
             $('.grid').isotope({
                 itemSelector: '.grid-item',
                 masonry: {
                     columnWidth: 100
                 }
             });
+
             function htmlbodyHeightUpdate() {
                 var height3 = $(window).height()
                 var height1 = $('.nav').height() + 50
@@ -119,6 +129,7 @@
                     $('html').height(Math.max(height1, height3, height2));
                     $('body').height(Math.max(height1, height3, height2));
                 }
+
             }
             $(document).ready(function () {
                 htmlbodyHeightUpdate()
