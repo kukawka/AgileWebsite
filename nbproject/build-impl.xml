@@ -1361,6 +1361,10 @@ exists or setup the property manually. For example like this:
         <webproject2:test includes="${includes}" testincludes="**/*Test.java"/>
     </target>
     <target depends="init,compile-test,-pre-test-run,-do-test-run" if="have.tests" name="-post-test-run">
+       <mkdir dir="shippable/testresults" />
+       <copy todir="shippable/testresults">
+       <fileset dir="${build.test.results.dir}" />
+       </copy>
         <fail if="tests.failed" unless="ignore.failing.tests">Some tests failed; see details above.</fail>
     </target>
     <target depends="init" if="have.tests" name="test-report"/>
