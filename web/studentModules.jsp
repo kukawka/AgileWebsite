@@ -3,8 +3,10 @@
     Created on : 06-Mar-2017, 15:46:22
     Author     : Javier
 --%>
+<%@page import="Beans.Module"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="Beans.LoggedIn"%>
-<%@page import="Beans.QuizDetails"%>
+<%@page import="Beans.ProgrammeOfStudy"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -74,6 +76,13 @@
                             </a>
                         <li class="active">
                             <a>
+                                <form method="Get" action="Modules">
+                                    <input type="submit" value="Modules" id="submit"><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-book"></span>
+                                </form>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a>
                                 <form method="POST"  action="Logout">
                                     <button type="submit" style="float:left; background:none; border:none; margin:0; padding:0;">Log out</button>
                                     <span style="font-size:16px;"  class="pull-right hidden-xs showopacity glyphicon glyphicon-log-out"></span>
@@ -87,17 +96,98 @@
                 </div>
             </div>
         </nav>
-        <div class="main">
-            TEST
-        </div>
-        <script>
+                        
+        
+        
+        <%
 
-            function showDiv() {
-                document.getElementById('showDiv').style.display = "block";
-                document.getElementById('button').style.display = "none";
+            ProgrammeOfStudy quizModules = (ProgrammeOfStudy) session.getAttribute("QuizDetails");
+            int ID = (Integer) session.getAttribute("QuizID");
+        %>
+
+        <div class="main">
+            <div class="page-header" style="margin-left: 2%;">
+
+                <h1>Programmes Of Study</h1>
+                <form method="Post" action="GetModules">
+                    <input type="hidden" name="id" value="<%="1"%>"/> <!-- this value sends you to that pos after submitting choices -->   
+                    <input type='hidden' id= 'hiddenField' name="moduleChoice" value='' />
+                    <input type="submit" class="btn btn-lg btn-primary" id='button' style=" color: white; float: right; position: relative; bottom: 55px; margin-right: 20px; display: none;" value="Submit Choices"/>
+                </form>
+
+
+            </div> 
+            <%
+                ArrayList<ProgrammeOfStudy> pos = (ArrayList<ProgrammeOfStudy>) request.getAttribute("pos");
+                for (int i = 0; i < pos.size(); i++) {
+            %>
+            <div class="Outer">
+
+                <form method="Post" action="GetModules" style="height: 100%;">
+
+                    <input type="hidden" name="id" value="<%=pos.get(i).getID()%>"/>
+                    <input type="hidden" name="type" value="module"/>
+                    <input class="Inner" type="submit" name="info" value="<%=pos.get(i).getName()%>"/>
+                </form>
+
+            </div>
+            <%
+                }
+
+                ArrayList<Module> mod = (ArrayList<Module>) request.getAttribute("modules");
+
+                if (mod != null) {
+            %>
+            <div class="page-header" style="margin-left: 2%;">
+                <h2>Modules </h2>
+
+            </div> 
+            <%
+                for (int i = 0; i < mod.size(); i++) {
+            %>
+
+
+
+            <div class="Outer">
+                <input type="hidden" name="id" value="<%=mod.get(i).getID()%>"/>
+                <div class="Inner1" style="text-align: center; vertical-align: middle; line-height: 80px;">
+                    <%=mod.get(i).getName()%><button class="btton" id="<%=mod.get(i).getID()%>" onClick="reply_click(this.id)">&#10003;</button>
+                </div>
+
+            </div>
+            <%
+                    }
+                }
+            %>
+
+        </div>
+        <style>
+
+            .btton{
+                height: 100%;
+                border: none;
+                border-radius:0px 10px 10px 0px;
+                background-color: white;
+                float: right;
+                cursor: pointer;
             }
 
-        </script>
+            .btton:hover {
+                background: rgba(101, 217, 80, 0.3);
 
+            }
+        </style>
+        <script>
+            var IDs = "";
+
+            function reply_click(clicked_id)
+            {
+                document.getElementById(clicked_id).style.background = "rgba(101, 217, 80, 0.4)";
+                document.getElementById('button').style.display = "block";
+                IDs = IDs + "," + clicked_id;
+                alert(IDs);
+                document.getElementById('hiddenField').value = IDs;
+            }
+        </script>
     </body>
 </html>

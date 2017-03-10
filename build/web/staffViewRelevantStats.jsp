@@ -22,7 +22,7 @@
     </head>
     <body>
         <%
-            QuizResults quizResults = (QuizResults) session.getAttribute("QuizResults");
+            QuizResults quizResults = (QuizResults) session.getAttribute("RelevantQuizResults");
             //QuizResults quizResults = new QuizResults();
             //quizResults.setT
         %>
@@ -95,8 +95,8 @@
                     <a class="navbar-brand" href="#">QuizUp</a>
                 </div>
                 <ul class="nav nav-tabs">
-                    <li role="presentation" class="active" id="irrel"><a href="#">All Students</a></li>
-                    <li role="presentation"  id="rel"><a href="RelevantStats">Relevant Students Only</a></li>
+                    <li role="presentation"   id="irrel"><a href="Stats">All Students</a></li>
+                    <li role="presentation" class="active" id="rel"><a href="#">Relevant Students Only</a></li>
 
                     <form class="navbar-form navbar-left">
                         <div class="form-group">
@@ -106,7 +106,6 @@
                     </form></ul>
             </div><!-- /.container-fluid -->
         </nav>
-
         <div class="main">
             <div style="margin-left: 3%;">
                 <div class="page-header">

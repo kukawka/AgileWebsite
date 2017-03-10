@@ -5,9 +5,10 @@
  */
 package Servlets;
 
+import Beans.LoggedIn;
 import Beans.QuizDetails;
-import Beans.QuizResults;
 import Models.MainPageModel;
+import Models.Modules;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,42 +23,41 @@ import javax.servlet.http.HttpSession;
  *
  * @author Javi
  */
-@WebServlet(name = "GetQuizDetails", urlPatterns = {"/GetQuizDetails","/Quiz"})
-public class GetQuizDetails extends HttpServlet {
+@WebServlet(name = "GetModules", urlPatterns = {"/GetModules", "/Modules"})
+public class GetModules extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int quizID = Integer.parseInt(request.getParameter("quizID"));
-        Quiz quiz = new Quiz();
 
-        QuizDetails quizDetails = new QuizDetails() ;
-        QuizResults qResults=new QuizResults() ;
-        QuizResults relQResults=new QuizResults() ;
-        
-        //get details
-        quizDetails=quiz.getQuiz(quizID);
-        
-        //get results and stats
-        Quiz q=new Quiz() ;
-        qResults= q.getQuizResults(quizID);
-        relQResults=q.getRelevantQuizResults(quizID);
-        
+        String IDs = request.getParameter("moduleChoice");
+
+        MainPageModel mnm = new MainPageModel();
+        request.setAttribute("pos", mnm.getPOS());
+        request.setAttribute("modules", mnm.getModules(Integer.parseInt(request.getParameter("id"))));
+        request.setAttribute("type", "modules");
 
         HttpSession session = request.getSession();
-        session.setAttribute("QuizID", quizID);
-        session.setAttribute("QuizDetails", quizDetails);
-        session.setAttribute("QuizResults", qResults);
-        session.setAttribute("RelevantQuizResults", relQResults);
-        response.sendRedirect("./Quiz");
+        LoggedIn login = (LoggedIn) session.getAttribute("LoggedIn");
+        
+        if (IDs != null) 
+        {
+            Modules modules = new Modules();
+            modules.setModules(login.getUsername(), IDs);
+        }
+
+        RequestDispatcher rd = request.getRequestDispatcher("/studentModules.jsp");
+        rd.forward(request, response);
     }
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("/staffViewQuiz.jsp");
+        MainPageModel mnm = new MainPageModel();
+        request.setAttribute("pos", mnm.getPOS());
+        RequestDispatcher rd = request.getRequestDispatcher("/studentModules.jsp");
         rd.forward(request, response);
-        
+
     }
 
 }

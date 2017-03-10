@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Dagi
  */
-@WebServlet(name = "GetResults", urlPatterns = {"/GetResults","/QuizResults"})
+@WebServlet(name = "GetResults", urlPatterns = {"/GetResults","/QuizResults","/RelevantResults"})
 public class GetResults extends HttpServlet {
 
     /*@Override
@@ -42,9 +42,16 @@ public class GetResults extends HttpServlet {
         @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //if(request.getContextPath().equals("AgileWebsite/Quiz")){
+        if(request.getServletPath().equals("/GetResults")){
         RequestDispatcher rd = request.getRequestDispatcher("/staffViewResults.jsp");
         rd.forward(request, response);
-        
+        }
+        else if(request.getServletPath().equals("/RelevantResults")){
+            RequestDispatcher rd = request.getRequestDispatcher("/staffViewRelevantResults.jsp");
+        rd.forward(request, response);
+            
+        }
     }
 
 }
