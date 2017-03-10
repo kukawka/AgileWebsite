@@ -6,14 +6,10 @@
 package Servlets;
 
 import Beans.LoggedIn;
-import Beans.Module;
-import Beans.ProgrammeOfStudy;
+import Beans.Quiz;
 import Models.MainPageModel;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -104,27 +100,40 @@ public class MainPage extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        MainPageModel mnm = new MainPageModel();
+         MainPageModel mnm = new MainPageModel();
+        if(request.getParameter("sorting")!=null)
+        {
+            System.out.println("HEFAFSFASFASFASFAS");
+           RequestDispatcher rd = request.getRequestDispatcher("/main.jsp");
+         rd.forward(request, response);
+        }
+       
         if(request.getParameter("type").equals("Programme of Study"))
         {
            request.setAttribute("type","pos");
-           request.setAttribute("items",mnm.getPOS());   
+           request.setAttribute("items",mnm.getPOS()); 
+           RequestDispatcher rd = request.getRequestDispatcher("/mainpage.jsp");
+         rd.forward(request, response);
         }
         else if(request.getParameter("type").equals("module"))
         {
            request.setAttribute("type","module");
-           request.setAttribute("items",mnm.getModules(Integer.parseInt(request.getParameter("id"))));   
+           request.setAttribute("heading", request.getParameter("info"));
+           request.setAttribute("items",mnm.getModules(Integer.parseInt(request.getParameter("id")))); 
+           RequestDispatcher rd = request.getRequestDispatcher("/mainpage.jsp");
+         rd.forward(request, response);
         }
         else if(request.getParameter("type").equals("quiz"))
         {
            HttpSession session = request.getSession();
            LoggedIn log = (LoggedIn) session.getAttribute("LoggedIn");
-           request.setAttribute("type","quiz");
-           request.setAttribute("items",mnm.getQuizzes(Integer.parseInt(request.getParameter("id")),log.getType()));   
+           request.setAttribute("heading", request.getParameter("info"));
+           ArrayList<Quiz> quizzes =  mnm.getQuizzes(Integer.parseInt(request.getParameter("id")),log.getType(),Integer.parseInt(log.getUsername()));
+           request.setAttribute("items",quizzes); 
+           RequestDispatcher rd = request.getRequestDispatcher("/mainpage_quiz.jsp");
+           rd.forward(request, response);
         }
          
-       RequestDispatcher rd = request.getRequestDispatcher("/mainpage.jsp");
-         rd.forward(request, response);
     }
 
     /**

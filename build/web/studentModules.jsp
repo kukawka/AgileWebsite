@@ -97,9 +97,6 @@
             </div>
         </nav>
                         
-        
-        
-      
         <div class="main">
             <div class="page-header" style="margin-left: 2%;">
 
