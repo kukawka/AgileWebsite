@@ -24,7 +24,7 @@
             <div class="page-header" style="margin-left: 2%;">
 
                 <h1>Programmes Of Study</h1>
-                test
+
                 <form method="Post" action="GetModules">
                     <input type="hidden" name="id" value="<%="1"%>"/> <!-- this value sends you to that pos after submitting choices -->   
                     <input type='hidden' id= 'hiddenField' name="moduleChoice" value='' />
