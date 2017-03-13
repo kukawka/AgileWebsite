@@ -6,7 +6,6 @@
 package Servlets;
 
 import Beans.LoggedIn;
-import Beans.QuizDetails;
 import Models.MainPageModel;
 import Models.Modules;
 import java.io.IOException;
@@ -15,7 +14,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import Models.Quiz;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpSession;
 
