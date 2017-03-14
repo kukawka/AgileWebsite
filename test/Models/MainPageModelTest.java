@@ -51,7 +51,7 @@ public class MainPageModelTest extends TestCase {
     /**
      * Test of getPOS method, of class MainPageModel.
      */
-    /*
+    
     @Test
     public void testGetPOS() {
         System.out.println("getPOS");
@@ -102,31 +102,66 @@ public class MainPageModelTest extends TestCase {
     /**
      * Test of getQuizzes method, of class MainPageModel.
      */
-    /*
+    
     @Test
-    public void testGetQuizzes() {
+    public void testGetQuizzesStaff() {
         System.out.println("getQuizzes");
         MainPageModel instance = new MainPageModel();
-        ArrayList<Quiz> expResultStaff = new ArrayList<Quiz>();
-        ArrayList<Quiz> expResultStudent = new ArrayList<Quiz>();
-        ArrayList<Quiz> resultStaff = instance.getQuizzes(1, "Staff");
-        ArrayList<Quiz> resultStudent = instance.getQuizzes(1,"Student");
+        ArrayList<Quiz> expResultStaff = new ArrayList<>();
+        ArrayList<Quiz> resultStaff = instance.getQuizzes(1, "Staff",3);
         System.out.println("Staff: " + resultStaff.get(0).getName());
-        System.out.println("Stduent: " + resultStudent.get(0).getName());
-        qu.setName("QuizTest");
+        qu.setName("WorkingQuiz");
         expResultStaff.add(qu);
-        Quiz qu1 = new Quiz();
-        qu1.setName("fff");
-        expResultStudent.add(qu1);
         System.out.println("Staff_hardcoded: " + expResultStaff.get(0).getName());
-        System.out.println("Stduent_hardcoded: " + expResultStudent.get(0).getName());
         assertEquals("The quizzes are returned",expResultStaff.get(0).getName(),resultStaff.get(0).getName());
-        assertEquals("The quizzes are returned",expResultStudent.get(0).getName(),resultStudent.get(0).getName());
         assertNotNull("Database connection failed", resultStaff) ;
-        assertNotNull("Database connection failed", resultStudent) ;
-        //assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-       // fail("The test case is a prototype.");
     }
-    */
+    public void testGetQuizzesStudent() {
+        System.out.println("getQuizzes");
+        MainPageModel instance = new MainPageModel();
+        ArrayList<Quiz> expResultStudent = new ArrayList<>();
+        ArrayList<Quiz> resultStudent = instance.getQuizzes(1,"Student",2);
+        System.out.println("Student: " + resultStudent.get(0).getName());
+        Quiz qu1 = new Quiz();
+        qu1.setName("WorkingQuiz");
+        expResultStudent.add(qu1);
+        System.out.println("Stduent_hardcoded: " + expResultStudent.get(0).getName());
+        assertEquals("The quizzes are returned",expResultStudent.get(0).getName(),resultStudent.get(0).getName());
+        assertNotNull("Database connection failed", resultStudent) ;
+    }
+    public void testGetQuizzesStudentAvailability() {
+        System.out.println("getQuizzes");
+        MainPageModel instance = new MainPageModel();
+        ArrayList<Quiz> expResultStudent = new ArrayList<>();
+        ArrayList<Quiz> resultStudent = instance.getQuizzes(1,"Student",2);
+        System.out.println("Student: " + resultStudent.get(0).getName());
+        Quiz qu1 = new Quiz();
+        qu1.setName("NotAvailable");
+        expResultStudent.add(qu1);
+        System.out.println("Stduent_hardcoded: " + expResultStudent.get(0).getName());
+        assertNotEquals("The quizzes are returned",expResultStudent.get(0).getName(),resultStudent.get(4).getName());
+        assertNotNull("Database connection failed", resultStudent) ;
+    }
+    public void testGetQuizzesStudentCompleted() {
+        System.out.println("getQuizzes");
+        MainPageModel instance = new MainPageModel();
+        ArrayList<Quiz> expResultStudent = new ArrayList<>();
+        ArrayList<Quiz> resultStudent = instance.getQuizzes(1,"Student",2);
+        System.out.println("Student: " + resultStudent.get(0).getName());
+        Quiz qu1 = new Quiz();
+        qu1.setName("WorkingQuiz");
+        qu1.setCompletion(true);
+        expResultStudent.add(qu1);
+        Quiz qu2= new Quiz();
+        qu2.setName("fff");
+        qu2.setCompletion(false);
+        expResultStudent.add(qu2);
+        System.out.println("Stduent_hardcoded: " + expResultStudent.get(0).getName());
+        assertEquals("The quizzes are returned",expResultStudent.get(0).getName(),resultStudent.get(0).getName());
+        assertEquals("The quizzes are returned",expResultStudent.get(0).getCompletion(),resultStudent.get(0).getCompletion());
+        assertEquals("The quizzes are returned",expResultStudent.get(1).getName(),resultStudent.get(2).getName());
+        assertEquals("The quizzes are returned",expResultStudent.get(1).getCompletion(),resultStudent.get(2).getCompletion());
+        assertNotNull("Database connection failed", resultStudent) ;
+    }
+    
 }

@@ -33,6 +33,7 @@ public class GetQuizDetails extends HttpServlet {
 
         QuizDetails quizDetails = new QuizDetails() ;
         QuizResults qResults=new QuizResults() ;
+        QuizResults relQResults=new QuizResults() ;
         
         //get details
         quizDetails=quiz.getQuiz(quizID);
@@ -40,12 +41,14 @@ public class GetQuizDetails extends HttpServlet {
         //get results and stats
         Quiz q=new Quiz() ;
         qResults= q.getQuizResults(quizID);
+        relQResults=q.getRelevantQuizResults(quizID);
         
 
         HttpSession session = request.getSession();
         session.setAttribute("QuizID", quizID);
         session.setAttribute("QuizDetails", quizDetails);
         session.setAttribute("QuizResults", qResults);
+        session.setAttribute("RelevantQuizResults", relQResults);
         response.sendRedirect("./Quiz");
     }
     

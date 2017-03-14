@@ -4,6 +4,7 @@
     Author     : Dagi
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="Beans.LoggedIn"%>
 <%@page import="Beans.QuizDetails"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -14,6 +15,17 @@
         <title>JSP Page</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/mainpage_style.css"/>
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/viewQuiz.css"/>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <!-- Bootstrap Date-Picker Plugin -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+        <!-- Include Date Range Picker -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script>
             function htmlbodyHeightUpdate() {
@@ -43,6 +55,13 @@
         </script>
     </head>
     <body>
+        <%
+            QuizDetails quizDetails = (QuizDetails) session.getAttribute("QuizDetails");
+            session.setAttribute("Filtered", false);
+        %>
+        <%
+            int ID = (Integer) session.getAttribute("QuizID");
+        %>
         <nav class="navbar navbar-inverse sidebar" role="navigation" style="position: fixed;">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -89,52 +108,70 @@
             </div>
         </nav>
         <div class="main">
-            <div style="margin-left: 3%;">
+            <div style="margin-left: 3%; margin-top: 0%; padding-top: 0px;">
                 <div class="page-header">
-                    <h1>View Quiz <a href="staffEditQuiz.jsp" class="btn btn-lg btn-warning" style="margin-left: 5%; color: white;" >Edit Quiz &nbsp;<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></h1>
-
+                    <h1> Quiz Inspector</h1>
                 </div>
-
-                <%
-                    QuizDetails quizDetails = (QuizDetails) session.getAttribute("QuizDetails");
-                %> 
-
-                <form class="form-horizontal" style="width: 100%;">
-                    <div class="form-group" style="width: 100%;">
-                        <div class="col-sm-10">
-                            <h3>Title: <%= quizDetails.getTitle()%></h3>
-                        </div>
+                <div class="col-md-5 col-lg-5">
+                    <h2 style="color: #fff;"><b>Quiz Title: </b><%= quizDetails.getTitle()%></h2> 
+                    <div class="checkbox">
+                        <label style="color: #fff;">
+                            <% if (quizDetails.getAvailability()) {%>
+                            <input type="checkbox" checked disabled>Available to Students
+                            <%} else {%> 
+                            <input type="checkbox" disabled>Unavailable to Students<%}%> 
+                        </label>
                     </div>
-                    <div class="form-group" style="width: 100%;">
-                        <div class="col-sm-10">
-                            <div class="checkbox">
-                                <label>
-                                    <% if (quizDetails.getAvailability()) {%>
-                                    <input type="checkbox" checked disabled>
-                                    <%} else {%> 
-                                    <input type="checkbox" disabled><%}%> Availability
-                                </label>
+                    <h4 style="color: #fff;">Date of Creation: <%= quizDetails.getDate()%></h4>
+                    <br>
+                </div>
+                <div class="col-md-2 col-lg-2"></div>
+                <div class="col-md-5 col-lg-5">
+                    <div class="list-group" >
+                        <button type="button" class="list-group-item list-group-item-info"><a href="Stats" style="" id="edit">See Statistics <span class="glyphicon glyphicon-stats"</span></a></button>
+                        <!-- <form method="POST" action="GetResults" style="margin-left: 0%; ">-->
+                        <button type="button" class="list-group-item list-group-item-warning"><a href="GetResults" >See All Results <span class="glyphicon glyphicon-sort-by-order" aria-hidden="true"></span></a></button>
+                             <!--<input type="hidden" value="<%= ID%>" id="ID" name="ID">
+                         </form>-->
+                        <button type="button" class="list-group-item-success list-group-item" id="edit"><a href="staffEditQuiz.jsp" style="" id="edit">Edit Quiz &nbsp;<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></button>
+                        <button  class="list-group-item list-group-item-danger active" id='button' onclick="showDiv()" value="See Questions">See All Questions <span class="glyphicon glyphicon-plus"></button>
+                        <button  class="list-group-item list-group-item-danger" data-toggle="modal" data-target="#myModal">Schedule Availability <span class="glyphicon glyphicon-list-alt"</button>
+
+                    </div>
+                </div>
+                <!-- Reference: https://formden.com/blog/date-picker-->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Schedule To Publish</h4>
+                            </div>
+                            <div class="modal-body">
+                                <h4> If your quiz is currently unavailable to Students, you can schedule for it to be published at a particular time in the future.</h4>
+                                <p> Choose a date below:</p>   
+                                <form method="post" action="ScheduleAvailability">
+                                    <div class="form-group"> <!-- Date input -->
+                                        <label class="control-label" for="date">Date</label>
+                                        <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/>
+                                    </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                </form>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group" style="width: 100%;">
-                        <div class="col-sm-10">
-                            <h4>Date: <%= quizDetails.getDate()%></h4>
-                        </div>
-                    </div>
-                    <div class="form-group" style="width: 100%;">
-                        <div class="col-sm-10">
-                            <input  class="btn btn-lg btn-primary" id='button' onclick="showDiv()" style=" color: white;" value="See Questions"/>
-                        </div>
-                    </div>
-                </form>
+                </div>
 
 
                 <div id="showDiv" style="display: none; background-color: red;">
 
                     <% for (int x = 0; x < quizDetails.getQuestions().size(); x++) {%>
 
-                    <% String[] answers = quizDetails.getQuestions().get(x).getAnswers();%>
+                    <% ArrayList<String> answers = quizDetails.getQuestions().get(x).getAnswers();%>
 
                     <div class="col-sm-8">
                         <div class="panel panel-default" style="margin-left: -15px;">
@@ -145,10 +182,19 @@
                                 <p><b><h5>Explanation: </b> <%= quizDetails.getQuestions().get(x).getExplanation()%></h5></p>
                             </div>
 
-                            <% for (int y = 0; y < 4; y++) {%>
+                            <% for (int y = 0; y < answers.size(); y++) {%>
                             <!-- List group -->
                             <ul class="list-group">
-                                <li class="list-group-item"> - <%= answers[y]%> <% if (quizDetails.getQuestions().get(x).getCorrectAnswerID() == y) {%> <p style="float:right;">&#10004;</p> <% } %></li>
+                                <%boolean isCorrect = false;
+                                    ArrayList<Integer> correctA = quizDetails.getQuestions().get(x).getCorrectAnswers();
+                                    for (int i = 0; i < correctA.size(); i++) {
+                                        if (correctA.get(i) == y) {
+                                            isCorrect = true;
+                                        }
+                                    }
+
+                                %>
+                                <li class="list-group-item"> - <%= answers.get(y)%> <% if (isCorrect) {%> <p style="float:right;">&#10004;</p> <% } %></li>
                             </ul>
 
                             <% } %>
@@ -160,11 +206,36 @@
                 </div>
             </div>
         </div>
+
+
+        <!-- Reference: https://formden.com/blog/date-picker-->
+        <script>
+            $(document).ready(function () {
+                var date_input = $('input[name="date"]'); //our date input has the name "date"
+                var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+                date_input.datepicker({
+                    format: 'mm/dd/yyyy',
+                    container: container,
+                    todayHighlight: true,
+                    autoclose: true,
+                })
+            })
+        </script>
         <script>
 
             function showDiv() {
+                var temp=document.getElementById('button').value ;
+                if(temp == "Hide Questions"){
+                   document.getElementById('showDiv').style.display = "none"; 
+                   document.getElementById('button').innerHTML = "Show All Questions <span class='glyphicon glyphicon-plus'>";
+                   document.getElementById('button').value = "See Questions";
+                }
+                else{
+                document.getElementById('button').innerHTML = "Hide Questions <span class='glyphicon glyphicon-minus'>";
                 document.getElementById('showDiv').style.display = "block";
-                document.getElementById('button').style.display = "none";
+                document.getElementById('button').value = "Hide Questions";
+                var d = document.getElementById("edit");
+                d.className += " active";}
             }
 
         </script>
