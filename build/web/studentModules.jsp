@@ -12,11 +12,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Modules</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/mainpage_style.css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-    </head>
+    </head>     
     <body>
         <jsp:include page="/navBar.jsp" />
 
@@ -24,8 +24,9 @@
             <div class="page-header" style="margin-left: 2%;">
 
                 <h1>Programmes Of Study</h1>
+
                 <form method="Post" action="GetModules">
-                    <input type="hidden" name="id" value="<%="1"%>"/> <!-- this value sends you to that pos after submitting choices -->   
+                    <input type="hidden" name="id" value="<%=request.getParameter("id")%>"/> <!-- this value sends you to that pos after submitting choices -->   
                     <input type='hidden' id= 'hiddenField' name="moduleChoice" value='' />
                     <input type="submit" class="btn btn-lg btn-primary" id='button' style=" color: white; float: right; position: relative; bottom: 55px; margin-right: 20px; display: none;" value="Submit Choices"/>
                 </form>
@@ -66,7 +67,19 @@
             <div class="Outer">
                 <input type="hidden" name="id" value="<%=mod.get(i).getID()%>"/>
                 <div class="Inner1" style="text-align: center; vertical-align: middle; line-height: 80px;">
-                    <%=mod.get(i).getName()%><button class="btton" id="<%=mod.get(i).getID()%>" onClick="reply_click(this.id)">&#10003;</button>
+                    <%=mod.get(i).getName()%>
+                    <% if(mod.get(i).getChoice() == 0){ %>
+                    <button class="bttonTrue" id="<%=mod.get(i).getID()%>" onClick="reply_click(this.id)">&#10003;</button>
+                    <% } else { %>
+
+                    <form method="Post" action="GetModules">
+                        <input type="hidden" name="id" value="<%=request.getParameter("id")%>"/> <!-- this value sends you to that pos after submitting choices -->   
+                        <input type='hidden' name="deleteModule" value="<%=mod.get(i).getID()%>" />
+                        <input type="submit" class="bttonFalse" value="&#10007;"/>
+                    </form>
+
+                    <!--<button class="bttonFalse" id="<%=mod.get(i).getID()%>">&#10007;</button>-->
+                    <% } %>
                 </div>
 
             </div>
@@ -78,18 +91,34 @@
         </div>
         <style>
 
-            .btton{
+            .bttonTrue, .bttonFalse{
                 height: 100%;
                 border: none;
-                border-radius:0px 10px 10px 0px;
+                border-radius:0px 8px 8px 0px;
                 background-color: white;
                 float: right;
                 cursor: pointer;
             }
 
-            .btton:hover {
-                background: rgba(101, 217, 80, 0.3);
+            .bttonTrue{
+                color:green;
+            }
 
+            .bttonFalse{
+                color:red;
+                margin-top: -80px;
+                height: 75px;
+            }
+
+            .bttonTrue:hover {
+                background: rgba(101, 217, 80, 0.3);
+                color:black;
+
+            }
+
+            .bttonFalse:hover {
+                background: red;
+                color: white;
             }
         </style>
         <script>

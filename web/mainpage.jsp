@@ -51,7 +51,7 @@
                             </a>
                         </li>
 
-                        <li class="active"><a href="index.jsp" >Log Out<span style="font-size:16px;"  class="pull-right hidden-xs showopacity glyphicon glyphicon-log-out"></span></a></li>
+                        <li class="active"><a href="Logout" >Log Out<span style="font-size:16px;"  class="pull-right hidden-xs showopacity glyphicon glyphicon-log-out"></span></a></li>
                     </ul>
                 </div>
             </div>

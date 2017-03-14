@@ -40,8 +40,6 @@ public class MainPageModel {
             while (resultPOS.next()) {
                 if (resultPOS != null) {
                     ProgrammeOfStudy pos = new ProgrammeOfStudy();
-                    System.out.println("ID: " + resultPOS.getInt("ID"));
-                    System.out.println("Name" + resultPOS.getString("Name"));
                     pos.setID(resultPOS.getInt("ID"));
                     pos.setName(resultPOS.getString("Name"));
                     // pos.setModules(getModules(resultPOS.getInt("ID")));
@@ -61,7 +59,7 @@ public class MainPageModel {
     /* Upon selection of a PoS all related modules will be pulled from the DB and used to populate the side Nav-bar further.
  *
      */
-    public ArrayList<Module> getModules(int ID) {
+    public ArrayList<Module> getModules(int ID, String userID) {
 
         ResultSet resultModules = null;
         Statement statement = null;
@@ -70,16 +68,19 @@ public class MainPageModel {
             Connection con;
             con = DBConnection.createConnection();
             statement = con.createStatement();
+            Statement statement1 = con.createStatement();
             resultModules = statement.executeQuery("SELECT ID,Name FROM module WHERE POS=" + ID);
             while (resultModules.next()) {
                 if (resultModules != null) {
                     Module module = new Module();
-                    System.out.println("POS ID:" + ID);
-                    System.out.println("ID: " + resultModules.getInt("ID"));
-                    System.out.println("Name" + resultModules.getString("Name"));
                     module.setID(resultModules.getInt("ID"));
                     module.setName(resultModules.getString("Name"));
                     //module.setQuizzes(getQuizzes(resultModules.getInt("ID")));
+                    ResultSet choiceResult = statement1.executeQuery("SELECT studentID, moduleID from student_modules where studentID =" + userID + " and moduleID ="+resultModules.getInt("ID"));
+                    if(choiceResult.first() == true)
+                    {
+                        module.setChoice(1);
+                    }
                     modules.add(module);
                 }
             }
@@ -109,9 +110,6 @@ public class MainPageModel {
                 while (resultQuizzes.next()) {
                     if (resultQuizzes != null) {
                         Quiz quiz = new Quiz();
-                        System.out.println("POS ID:" + ID);
-                        System.out.println("ID: " + resultQuizzes.getInt("ID"));
-                        System.out.println("Name" + resultQuizzes.getString("Title"));
                         quiz.setID(resultQuizzes.getInt("ID"));
                         quiz.setName(resultQuizzes.getString("Title"));
                         //module.setQuizzes(getQuizzes(resultModules.getInt("ID")));
@@ -124,9 +122,6 @@ public class MainPageModel {
                 while (resultQuizzes.next()) {
                     if (resultQuizzes != null) {
                         Quiz quiz = new Quiz();
-                        System.out.println("POS ID:" + ID);
-                        System.out.println("ID: " + resultQuizzes.getInt("ID"));
-                        System.out.println("Name" + resultQuizzes.getString("Title"));
                         quiz.setID(resultQuizzes.getInt("ID"));
                         quiz.setName(resultQuizzes.getString("Title"));
                         //module.setQuizzes(getQuizzes(resultModules.getInt("ID")));

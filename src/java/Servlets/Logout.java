@@ -22,15 +22,17 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "Logout", urlPatterns = {"/Logout",})
 public class Logout extends HttpServlet {
-    
+
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session=request.getSession();
-            LoggedIn login= new LoggedIn();
-            login.setLogedout();
-            session.setAttribute("LoggedIn", null);
-            RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");  
-            rd.forward(request,response);
+
+        HttpSession session = request.getSession();
+        LoggedIn login = new LoggedIn();
+        login.setLogedout();
+        session.setAttribute("LoggedIn", null);
+        RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+        rd.forward(request, response);
     }
+
 }

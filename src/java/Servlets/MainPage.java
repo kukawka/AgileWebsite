@@ -25,7 +25,6 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "MainPage", urlPatterns = {"/MainPage"})
 public class MainPage extends HttpServlet {
 
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -38,8 +37,8 @@ public class MainPage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
-         /*System.out.println("In model blaaaaaa");
+
+        /*System.out.println("In model blaaaaaa");
         if((request.getParameter("check"))!=null)
         {
             if((request.getParameter("id"))==null)
@@ -83,10 +82,10 @@ public class MainPage extends HttpServlet {
              
             
         }*/
-         request.setAttribute("type",null);
-         RequestDispatcher rd = request.getRequestDispatcher("/mainpage.jsp");
-         rd.forward(request, response);
-        
+        request.setAttribute("type", null);
+        RequestDispatcher rd = request.getRequestDispatcher("/mainpage.jsp");
+        rd.forward(request, response);
+
     }
 
     /**
@@ -100,40 +99,36 @@ public class MainPage extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         MainPageModel mnm = new MainPageModel();
-        if(request.getParameter("sorting")!=null)
-        {
+        HttpSession session = request.getSession();
+        LoggedIn log = (LoggedIn) session.getAttribute("LoggedIn");
+        
+        MainPageModel mnm = new MainPageModel();
+        if (request.getParameter("sorting") != null) {
             System.out.println("HEFAFSFASFASFASFAS");
-           RequestDispatcher rd = request.getRequestDispatcher("/main.jsp");
-         rd.forward(request, response);
+            RequestDispatcher rd = request.getRequestDispatcher("/main.jsp");
+            rd.forward(request, response);
         }
-       
-        if(request.getParameter("type").equals("Programme of Study"))
-        {
-           request.setAttribute("type","pos");
-           request.setAttribute("items",mnm.getPOS()); 
-           RequestDispatcher rd = request.getRequestDispatcher("/mainpage.jsp");
-         rd.forward(request, response);
+
+        if (request.getParameter("type").equals("Programme of Study")) {
+            request.setAttribute("type", "pos");
+            request.setAttribute("items", mnm.getPOS());
+            RequestDispatcher rd = request.getRequestDispatcher("/mainpage.jsp");
+            rd.forward(request, response);
+        } else if (request.getParameter("type").equals("module")) {
+            request.setAttribute("type", "module");
+            request.setAttribute("heading", request.getParameter("info"));
+            request.setAttribute("items", mnm.getModules(Integer.parseInt(request.getParameter("id")),log.getUsername()));
+            RequestDispatcher rd = request.getRequestDispatcher("/mainpage.jsp");
+            rd.forward(request, response);
+        } else if (request.getParameter("type").equals("quiz")) {
+
+            request.setAttribute("heading", request.getParameter("info"));
+            ArrayList<Quiz> quizzes = mnm.getQuizzes(Integer.parseInt(request.getParameter("id")), log.getType(), Integer.parseInt(log.getUsername()));
+            request.setAttribute("items", quizzes);
+            RequestDispatcher rd = request.getRequestDispatcher("/mainpage_quiz.jsp");
+            rd.forward(request, response);
         }
-        else if(request.getParameter("type").equals("module"))
-        {
-           request.setAttribute("type","module");
-           request.setAttribute("heading", request.getParameter("info"));
-           request.setAttribute("items",mnm.getModules(Integer.parseInt(request.getParameter("id")))); 
-           RequestDispatcher rd = request.getRequestDispatcher("/mainpage.jsp");
-         rd.forward(request, response);
-        }
-        else if(request.getParameter("type").equals("quiz"))
-        {
-           HttpSession session = request.getSession();
-           LoggedIn log = (LoggedIn) session.getAttribute("LoggedIn");
-           request.setAttribute("heading", request.getParameter("info"));
-           ArrayList<Quiz> quizzes =  mnm.getQuizzes(Integer.parseInt(request.getParameter("id")),log.getType(),Integer.parseInt(log.getUsername()));
-           request.setAttribute("items",quizzes); 
-           RequestDispatcher rd = request.getRequestDispatcher("/mainpage_quiz.jsp");
-           rd.forward(request, response);
-        }
-         
+
     }
 
     /**

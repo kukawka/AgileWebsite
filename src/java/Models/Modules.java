@@ -1,11 +1,15 @@
 package Models;
 
+import Beans.Module;
+import Beans.ModuleChoices;
+import Beans.ProgrammeOfStudy;
 import Util.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+import java.util.ArrayList;
 
 public class Modules {
     //Cluster cluster;
@@ -44,5 +48,75 @@ public class Modules {
             e.printStackTrace();
         }
 
+    }
+
+    public void setModulesChoice(String user, String module) {
+        Connection con;
+
+        int mod = Integer.parseInt(module);
+
+        Statement statement = null;
+
+        try {
+            con = DBConnection.createConnection();
+            statement = con.createStatement();
+            PreparedStatement st;
+
+            System.out.println("CHOOOOOIIIIIICEE " + user + ", " + mod);
+
+            st = con.prepareStatement("DELETE from student_modules where studentID = ? and moduleID = ?");
+            st.setString(1, user);
+            st.setInt(2, mod);
+            st.executeUpdate();
+            st.clearParameters();
+
+            con.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public ArrayList<Module> getChoices(String user) {
+
+        ResultSet resultPOS = null;
+        Statement statement = null;
+        ArrayList<Module> modCho = new ArrayList<Module>();
+
+        try {
+            Connection con;
+            con = DBConnection.createConnection();
+            statement = con.createStatement();
+
+            resultPOS = statement.executeQuery("SELECT moduleID FROM student_modules WHERE studentID =" + user);
+
+            while (resultPOS.next()) {
+                if (resultPOS != null) {
+
+                    // int i = resultPOS.getInt("moduleID");
+                    Statement statement1 = con.createStatement();
+                    ResultSet addModules = statement1.executeQuery("SELECT Name FROM module WHERE ID=" + resultPOS.getInt("moduleID"));
+                    while (addModules.next()) {
+                        Module mod = new Module();
+
+                        System.out.println("QQQQQQQ");
+                        System.out.println("Module ID:" + resultPOS.getInt("moduleID"));
+                        System.out.println("Name: " + addModules.getString("Name"));
+
+                        mod.setID(resultPOS.getInt("moduleID"));
+                        mod.setName(addModules.getString("Name"));
+                        modCho.add(mod);
+                    }
+                }
+            }
+            con.close();
+            return modCho;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

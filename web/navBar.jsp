@@ -84,15 +84,7 @@
 
                         <% }%>
 
-                        <li class="active">
-                            <a>
-                                <form method="POST"  action="Logout">
-                                    <button type="submit" style="float:left; background:none; border:none; margin:0; padding:0;">Log out</button>
-                                    <span style="font-size:16px;"  class="pull-right hidden-xs showopacity glyphicon glyphicon-log-out"></span>
-                                </form>
-                            </a>
-
-                        </li>
+                        <li class="active"><a href="Logout" >Log Out<span style="font-size:16px;"  class="pull-right hidden-xs showopacity glyphicon glyphicon-log-out"></span></a></li>
                     </ul>
                 </div>
             </div>
