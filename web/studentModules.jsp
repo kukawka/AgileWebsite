@@ -24,9 +24,9 @@
             <div class="page-header" style="margin-left: 2%;">
 
                 <h1>Programmes Of Study</h1>
-                
+
                 <form method="Post" action="GetModules">
-                    <input type="hidden" name="id" value="<%="1"%>"/> <!-- this value sends you to that pos after submitting choices -->   
+                    <input type="hidden" name="id" value="<%=request.getParameter("id")%>"/> <!-- this value sends you to that pos after submitting choices -->   
                     <input type='hidden' id= 'hiddenField' name="moduleChoice" value='' />
                     <input type="submit" class="btn btn-lg btn-primary" id='button' style=" color: white; float: right; position: relative; bottom: 55px; margin-right: 20px; display: none;" value="Submit Choices"/>
                 </form>
@@ -71,7 +71,14 @@
                     <% if(mod.get(i).getChoice() == 0){ %>
                     <button class="bttonTrue" id="<%=mod.get(i).getID()%>" onClick="reply_click(this.id)">&#10003;</button>
                     <% } else { %>
-                    <button class="bttonFalse" id="<%=mod.get(i).getID()%>" onClick="reply_click(this.id)">&#10007;</button>
+
+                    <form method="Post" action="GetModules">
+                        <input type="hidden" name="id" value="<%=request.getParameter("id")%>"/> <!-- this value sends you to that pos after submitting choices -->   
+                        <input type='hidden' name="deleteModule" value="<%=mod.get(i).getID()%>" />
+                        <input type="submit" class="bttonFalse" value="&#10007;"/>
+                    </form>
+
+                    <!--<button class="bttonFalse" id="<%=mod.get(i).getID()%>">&#10007;</button>-->
                     <% } %>
                 </div>
 
@@ -92,13 +99,15 @@
                 float: right;
                 cursor: pointer;
             }
-            
+
             .bttonTrue{
                 color:green;
             }
-            
+
             .bttonFalse{
                 color:red;
+                margin-top: -80px;
+                height: 75px;
             }
 
             .bttonTrue:hover {
@@ -106,7 +115,7 @@
                 color:black;
 
             }
-            
+
             .bttonFalse:hover {
                 background: red;
                 color: white;

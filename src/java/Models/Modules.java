@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
 public class Modules {
     //Cluster cluster;
 
@@ -37,6 +36,34 @@ public class Modules {
                 st.executeUpdate();
                 st.clearParameters();
             }
+
+            con.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void setModulesChoice(String user, String module) {
+        Connection con;
+
+        int mod = Integer.parseInt(module);
+
+        Statement statement = null;
+
+        try {
+            con = DBConnection.createConnection();
+            statement = con.createStatement();
+            PreparedStatement st;
+
+            System.out.println("CHOOOOOIIIIIICEE " + user + ", " + mod);
+
+            st = con.prepareStatement("DELETE from student_modules where studentID = ? and moduleID = ?");
+            st.setString(1, user);
+            st.setInt(2, mod);
+            st.executeUpdate();
+            st.clearParameters();
 
             con.close();
 

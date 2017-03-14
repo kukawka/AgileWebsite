@@ -29,18 +29,27 @@ public class GetModules extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         LoggedIn login = (LoggedIn) session.getAttribute("LoggedIn");
-        
-        String IDs = request.getParameter("moduleChoice");
 
+        Modules modules = new Modules();
+
+        String IDs = request.getParameter("moduleChoice");
+        
+        String moduleID = request.getParameter("deleteModule");
+        if (moduleID != null) {
+            modules.setModulesChoice(login.getUsername(), moduleID);
+        }
+        
+        if (IDs != null) {
+            modules.setModules(login.getUsername(), IDs);
+        }
+        
         MainPageModel mnm = new MainPageModel();
         request.setAttribute("pos", mnm.getPOS());
+        //request.setAttribute("pos");
         request.setAttribute("modules", mnm.getModules(Integer.parseInt(request.getParameter("id")), login.getUsername()));
         request.setAttribute("type", "modules");
 
-        if (IDs != null) {
-            Modules modules = new Modules();
-            modules.setModules(login.getUsername(), IDs);
-        }
+        
 
         RequestDispatcher rd = request.getRequestDispatcher("/studentModules.jsp");
         rd.forward(request, response);
