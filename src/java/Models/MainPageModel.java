@@ -40,8 +40,6 @@ public class MainPageModel {
             while (resultPOS.next()) {
                 if (resultPOS != null) {
                     ProgrammeOfStudy pos = new ProgrammeOfStudy();
-                    System.out.println("ID: " + resultPOS.getInt("ID"));
-                    System.out.println("Name" + resultPOS.getString("Name"));
                     pos.setID(resultPOS.getInt("ID"));
                     pos.setName(resultPOS.getString("Name"));
                     // pos.setModules(getModules(resultPOS.getInt("ID")));
@@ -75,9 +73,6 @@ public class MainPageModel {
             while (resultModules.next()) {
                 if (resultModules != null) {
                     Module module = new Module();
-                    System.out.println("POS ID:" + ID);
-                    System.out.println("ID: " + resultModules.getInt("ID"));
-                    System.out.println("Name" + resultModules.getString("Name"));
                     module.setID(resultModules.getInt("ID"));
                     module.setName(resultModules.getString("Name"));
                     //module.setQuizzes(getQuizzes(resultModules.getInt("ID")));
@@ -115,9 +110,6 @@ public class MainPageModel {
                 while (resultQuizzes.next()) {
                     if (resultQuizzes != null) {
                         Quiz quiz = new Quiz();
-                        System.out.println("POS ID:" + ID);
-                        System.out.println("ID: " + resultQuizzes.getInt("ID"));
-                        System.out.println("Name" + resultQuizzes.getString("Title"));
                         quiz.setID(resultQuizzes.getInt("ID"));
                         quiz.setName(resultQuizzes.getString("Title"));
                         //module.setQuizzes(getQuizzes(resultModules.getInt("ID")));
@@ -130,9 +122,6 @@ public class MainPageModel {
                 while (resultQuizzes.next()) {
                     if (resultQuizzes != null) {
                         Quiz quiz = new Quiz();
-                        System.out.println("POS ID:" + ID);
-                        System.out.println("ID: " + resultQuizzes.getInt("ID"));
-                        System.out.println("Name" + resultQuizzes.getString("Title"));
                         quiz.setID(resultQuizzes.getInt("ID"));
                         quiz.setName(resultQuizzes.getString("Title"));
                         //module.setQuizzes(getQuizzes(resultModules.getInt("ID")));
