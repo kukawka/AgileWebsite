@@ -37,10 +37,10 @@
 
 
             <div class="Outer">
-                <form method="Post" action="GetModules" style="height: 100%;">
+                <form method="Post" action="MainPage" style="height: 100%;">
 
                     <input type="hidden" name="id" value="<%=mod.get(i).getID()%>"/>
-                    <input type="hidden" name="type" value="module"/>
+                    <input type="hidden" name="type" value="quiz"/>
                     <input class="Inner1" type="submit" name="info" value="<%=mod.get(i).getName()%>"/>
                 </form>
             </div>
