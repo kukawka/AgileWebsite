@@ -27,19 +27,17 @@ public class GetModules extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        HttpSession session = request.getSession();
+        LoggedIn login = (LoggedIn) session.getAttribute("LoggedIn");
+        
         String IDs = request.getParameter("moduleChoice");
 
         MainPageModel mnm = new MainPageModel();
         request.setAttribute("pos", mnm.getPOS());
-        request.setAttribute("modules", mnm.getModules(Integer.parseInt(request.getParameter("id"))));
+        request.setAttribute("modules", mnm.getModules(Integer.parseInt(request.getParameter("id")), login.getUsername()));
         request.setAttribute("type", "modules");
 
-        HttpSession session = request.getSession();
-        LoggedIn login = (LoggedIn) session.getAttribute("LoggedIn");
-        
-        if (IDs != null) 
-        {
+        if (IDs != null) {
             Modules modules = new Modules();
             modules.setModules(login.getUsername(), IDs);
         }

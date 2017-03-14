@@ -24,7 +24,7 @@
             <div class="page-header" style="margin-left: 2%;">
 
                 <h1>Programmes Of Study</h1>
-
+                
                 <form method="Post" action="GetModules">
                     <input type="hidden" name="id" value="<%="1"%>"/> <!-- this value sends you to that pos after submitting choices -->   
                     <input type='hidden' id= 'hiddenField' name="moduleChoice" value='' />
@@ -67,7 +67,12 @@
             <div class="Outer">
                 <input type="hidden" name="id" value="<%=mod.get(i).getID()%>"/>
                 <div class="Inner1" style="text-align: center; vertical-align: middle; line-height: 80px;">
-                    <%=mod.get(i).getName()%><button class="btton" id="<%=mod.get(i).getID()%>" onClick="reply_click(this.id)">&#10003;</button>
+                    <%=mod.get(i).getName()%>
+                    <% if(mod.get(i).getChoice() == 0){ %>
+                    <button class="bttonTrue" id="<%=mod.get(i).getID()%>" onClick="reply_click(this.id)">&#10003;</button>
+                    <% } else { %>
+                    <button class="bttonFalse" id="<%=mod.get(i).getID()%>" onClick="reply_click(this.id)">&#10007;</button>
+                    <% } %>
                 </div>
 
             </div>
@@ -79,18 +84,32 @@
         </div>
         <style>
 
-            .btton{
+            .bttonTrue, .bttonFalse{
                 height: 100%;
                 border: none;
-                border-radius:0px 10px 10px 0px;
+                border-radius:0px 8px 8px 0px;
                 background-color: white;
                 float: right;
                 cursor: pointer;
             }
+            
+            .bttonTrue{
+                color:green;
+            }
+            
+            .bttonFalse{
+                color:red;
+            }
 
-            .btton:hover {
+            .bttonTrue:hover {
                 background: rgba(101, 217, 80, 0.3);
+                color:black;
 
+            }
+            
+            .bttonFalse:hover {
+                background: red;
+                color: white;
             }
         </style>
         <script>
