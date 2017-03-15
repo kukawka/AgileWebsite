@@ -12,12 +12,12 @@ import java.util.ArrayList;
 public class Question {
     //Refactoring- renamed the field so that it is more descriptive 
     String questionText="" ;
+    int ID;
     
     //Refactoring- renamed the field so that it is more descriptive 
     String answerExplanation="" ;
     //int correctAnswerID=-1 ;
-    ArrayList <Integer> correctAnswers ;
-    ArrayList <String> answers ;  
+    ArrayList <Answer> answers ;
     //String[] answers=new String[4] ;
     
     //Refactoring- renamed the method so that it would match up the field and make more sense- the previous name suggested retuning a whole Question object rather than a field
@@ -29,6 +29,14 @@ public class Question {
         return questionText ;
     }
     
+    public void setQuestionID(int id){
+        this.ID=id ;
+    }
+    
+    public int getQuestionID(){
+        return ID ;
+    }
+    
     public void setExplanation(String answerExplanation){
         this.answerExplanation=answerExplanation ;
     }
@@ -37,22 +45,12 @@ public class Question {
         return answerExplanation ;
     }
     
-     public void setCorrectAnswers(ArrayList <Integer> correctAnswers){
-        this.correctAnswers=correctAnswers ;
-    }
     
-    public ArrayList<Integer> getCorrectAnswers(){
-        return correctAnswers ;
-    }
-    
-     public void setAnswers(ArrayList<String> answers){
+     public void setAnswers(ArrayList<Answer> answers){
         this.answers=answers ;
     }
     
-    public ArrayList<String> getAnswers(){
+    public ArrayList<Answer> getAnswers(){
         return answers ;
     }
-    
-    
-    
 }
