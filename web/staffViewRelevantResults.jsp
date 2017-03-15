@@ -56,10 +56,11 @@
                     <li role="presentation" id="irrel"><a href="GetResults">All Students</a></li>
                     <li role="presentation" class="active" id="rel"><a href="#">Relevant Students Only</a></li>
 
-                    <form class="navbar-form navbar-left">
+                    <form class="navbar-form navbar-left"  method="POST" action="LookUpStudentResult">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="ID of a Student">
-                        </div>
+                            <input type="text" class="form-control" placeholder="ID of a Student" name="lookupID">
+                            <input type="hidden" name="relevantStudents" value="yes">
+                        </div>     
                         <button type="submit" class="btn btn-default">Look Up</button>
                     </form>
                     <form class="navbar-form navbar-left">
@@ -130,7 +131,17 @@
                     <tbody class="results">
 
                         <% if (!(Boolean) session.getAttribute("Filtered")) {
-                                for (int i = 0; i < matricNum.size(); i++) {%>
+                                for (int i = 0; i < matricNum.size(); i++) {
+                                    //if ID to be displayed != ID looking for
+                                    System.out.println("lookupID in " + i + ": " + session.getAttribute("lookupID"));
+                                    if (session.getAttribute("lookupID")!=null && !((matricNum.get(i)).equals(session.getAttribute("lookupID"))))
+                                    {
+                                        //do nothing                                                   
+                                    }
+                                    else
+                                    {
+                        
+                        %>
                         <tr>
                             <td class="results"><%= matricNum.get(i)%></td>
                             <td class="results"><%= firstnames.get(i)%></td>
@@ -139,7 +150,7 @@
                             <td class="results" style="background-color: #ffb3b3;"><%= scores.get(i)%></td>
                             <td class="results"><%= dates.get(i)%></td>
                         </tr>
-                        <%}
+                        <%}}session.setAttribute("lookupID", null); //reset matriculation number lookup
                         } else {
                             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                             Date dateTo = sdf.parse((String) session.getAttribute("dateTo"));
