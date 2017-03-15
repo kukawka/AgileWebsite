@@ -5,6 +5,8 @@
  */
 package Servlets;
 
+import Beans.Question;
+import Beans.QuizDetails;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -17,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.UUID;
 import Models.Quiz;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -33,54 +36,55 @@ public class StaffEditQuiz extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Quiz quiz = new Quiz();
+        HttpSession session = request.getSession();
 
         int numOfQuestions = Integer.valueOf(request.getParameter("QuestionNumber"));
-        int QuizID = Integer.valueOf(request.getParameter("QuizID"));
+        int QuizID = (Integer) session.getAttribute("QuizID");
+        QuizDetails quizDetail = (QuizDetails) session.getAttribute("QuizDetails");
+        //int QuizID = Integer.valueOf(request.getParameter("QuizID"));
 
         System.out.println("Number of questions: " + numOfQuestions);
 
+        String title = request.getParameter("title");
+        boolean availability = false;
+        if (request.getParameter("availability") != null) {
+                    availability = true;
+                }
+        
         for (int i = 0; i < numOfQuestions; i++) {
-            int questionID = -1;
-
-            String questionText = request.getParameter("QuestionText" + (i + 1));
-            String explanationText = request.getParameter("ExplanationText" + (i + 1));
-
+            int questionID = Integer.parseInt(request.getParameter("id" + (i)));
+            String questionText = request.getParameter("QuestionText" + (i));
+            String explanationText = request.getParameter("ExplanationText" + (i));
+            //int QuizID = Integer.valueOf(request.getParameter("ID" + (i + 1)));
             //int questionNumber = Integer.valueOf(request.getParameter("questionnumbertext"+(i+1)+(j+1)));
-            questionID = quiz.SubmitQuestion(questionText, explanationText, QuizID, (i + 1));
-            System.out.println("Question " + (i + 1) + " Updated!");
+            // questionID = quiz.EditQuestion(QuizID, (i + 1);
+            quiz.EditQuestion(questionText, explanationText, questionID);
+            System.out.println("Question " + (i) + " Updated!");
 
-            for (int j = 0; j < 4; j++) {
-
-                String answerText = request.getParameter("answertext" + (i + 1) + (j + 1));
-                String correct = request.getParameter("correct" + (i + 1) + (j + 1));
-
-                int correctInt;
-
-                if (correct != null) {
-                    correctInt = 1;
-                } else {
-                    correctInt = 0;
+            for (int j = 0; j < quizDetail.getQuestions().get(i).getAnswers().size(); j++) {
+                int answerID = Integer.parseInt(request.getParameter("answerid" + (i) + "" + (j)));
+                String answerText = request.getParameter("answertext" + (i) + "" + (j));
+                int correct = 0;
+                if (request.getParameter("correct" + (i) + "" + (j)) != null) {
+                    correct = 1;
                 }
 
-                quiz.SubmitAnswer(answerText, correctInt, questionID);
-                System.out.println("Answer " + (j + 1) + " for Question" + (i + 1) + " updated!");
-
+                quiz.EditAnswer(answerText, answerID, correct);
+                System.out.println("Answer " + (j) + " for Question" + (i) + " updated!");
             }
             System.out.println("Quiz " + QuizID + " updated!");
-            
         }
-        RequestDispatcher rd=request.getRequestDispatcher("./Quiz");
-        rd.forward(request,response);
-    }
-    
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
-        RequestDispatcher rd=request.getRequestDispatcher("/staffEditQuiz.jsp");
-        rd.forward(request,response);
+        quiz.EditQuiz(availability, title, QuizID); 
+        session.setAttribute("QuizDetails", quiz.getQuiz(QuizID));
+        response.sendRedirect("./Quiz");
     }
 
-    
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        RequestDispatcher rd = request.getRequestDispatcher("/staffEditQuiz.jsp");
+        rd.forward(request, response);
+    }
+
     @Override
     public String getServletInfo() {
         return "Short description";
