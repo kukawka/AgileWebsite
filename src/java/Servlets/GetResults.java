@@ -43,11 +43,14 @@ public class GetResults extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //if(request.getContextPath().equals("AgileWebsite/Quiz")){
+        HttpSession session = request.getSession();
+        
         if(request.getServletPath().equals("/GetResults")){
         RequestDispatcher rd = request.getRequestDispatcher("/staffViewResults.jsp");
         rd.forward(request, response);
         }
-        else if(request.getServletPath().equals("/RelevantResults")){
+        else if(request.getServletPath().equals("/RelevantResults") || session.getAttribute("relevantStudents")!=null){
+            session.setAttribute("relevantStudents", null);
             RequestDispatcher rd = request.getRequestDispatcher("/staffViewRelevantResults.jsp");
         rd.forward(request, response);
             
