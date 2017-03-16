@@ -33,11 +33,22 @@ public class LookUpStudentResult extends HttpServlet {
         String lookupID=request.getParameter("lookupID");
         session.setAttribute("lookupID", lookupID);
         
+        //System.out.println("lookupID in servlet: " +lookupID);
+        //System.out.println("relevantStudents in servlet bf: " +session.getAttribute("relevantStudents"));
+        
+        if ((request.getParameter("relevantStudents"))==null)
+        {
+            //do nothing
+            response.sendRedirect("GetResults");
+        }
+        else
+        {
+            session.setAttribute("relevantStudents", "yes");  
+            //System.out.println("relevantStudents in servlet In: " +session.getAttribute("relevantStudents"));
+            response.sendRedirect("RelevantResults");
+        }
+    
         //RequestDispatcher rd = request.getRequestDispatcher("/staffViewResults.jsp"); 
-        //rd.forward(request, response);
-        
-        System.out.println("lookupID in servlet: " +lookupID);
-        
-        response.sendRedirect("GetResults");
+        //rd.forward(request, response); 
     }
 }
