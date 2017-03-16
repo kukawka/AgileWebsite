@@ -109,10 +109,10 @@
             </div>
 
             <br>
+            <!-- ref /*Ref: http://codepen.io/anon/pen/rymEZj*/ -->
             <div class="tbl-header">
                 <table cellpadding="0" cellspacing="0" border="0" class="results">
                     <thead class="results">
-                        <!--<table class="table table-bordered">-->
                         <tr class="results">
                             <th class="results">Matriculation No</th>
                             <th class="results">Firstname</th>

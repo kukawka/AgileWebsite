@@ -24,25 +24,10 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "GetResults", urlPatterns = {"/GetResults","/QuizResults","/RelevantResults"})
 public class GetResults extends HttpServlet {
-
-    /*@Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        int quizID = Integer.parseInt(request.getParameter("ID"));
-        //String type = request.getParameter("type");
-        HttpSession session = request.getSession();
-
-        QuizResults qResults=new QuizResults() ;
-        Quiz q=new Quiz() ;
-        qResults= q.getQuizResults(quizID);
-            session.setAttribute("QuizResults", qResults);
-            response.sendRedirect("/AgileWebsite/GetResults");
-    }*/
     
         @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //if(request.getContextPath().equals("AgileWebsite/Quiz")){
         if(request.getServletPath().equals("/GetResults")){
         RequestDispatcher rd = request.getRequestDispatcher("/staffViewResults.jsp");
         rd.forward(request, response);
