@@ -7,7 +7,6 @@ package Servlets;
 
 import Beans.QuizDetails;
 import Beans.QuizResults;
-import Models.MainPageModel;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,7 +34,7 @@ public class GetQuizDetails extends HttpServlet {
         QuizResults qResults=new QuizResults() ;
         QuizResults relQResults=new QuizResults() ;
         
-        //get details
+        //get quiz details
         quizDetails=quiz.getQuiz(quizID);
         
         //get results and stats
@@ -45,6 +44,7 @@ public class GetQuizDetails extends HttpServlet {
         
 
         HttpSession session = request.getSession();
+        //set results, statistics and details of a quiz as session attributes
         session.setAttribute("QuizID", quizID);
         session.setAttribute("QuizDetails", quizDetails);
         session.setAttribute("QuizResults", qResults);

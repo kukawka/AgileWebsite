@@ -23,13 +23,9 @@
     <body>
         <%
             QuizResults quizResults = (QuizResults) session.getAttribute("QuizResults");
-            //QuizResults quizResults = new QuizResults();
-            //quizResults.setT
         %>
         <%
             QuizDetails quizDetails = (QuizDetails) session.getAttribute("QuizDetails");
-            //QuizDetails quizDetails = new QuizDetails();
-            //quizDetails.setTitle("Test");
         %>
         <script type="text/javascript">
             google.charts.load('current', {'packages': ['bar']});
@@ -75,9 +71,6 @@
                         x: {
                             0: {side: 'top', label: ''} // Top x-axis.
                         }
-                        //y: {
-                        //0: {side: 'left', label: 'Percantage range'} // Top x-axis.
-                        //}
                     },
                     bar: {groupWidth: "90%"}
                 };
@@ -88,6 +81,8 @@
             }
             ;
         </script>
+        <!-- The chart was taken from:
+                https://developers.google.com/chart/interactive/docs/gallery/linechart -->
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -115,8 +110,6 @@
                 <div id="top_x_div" style="width: 900px; height: 500px;"></div>
                 <br>
 
-                <!-- taken from:
-                https://developers.google.com/chart/interactive/docs/gallery/linechart -->
 
                 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
                 <h3><b>Average Score: </b><%=quizResults.getAverage()%></h3>

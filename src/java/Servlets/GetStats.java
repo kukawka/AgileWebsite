@@ -23,7 +23,6 @@ public class GetStats extends HttpServlet{
             @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //if(request.getContextPath().equals("AgileWebsite/Quiz")){
         if(request.getServletPath().equals("/Stats")){
         RequestDispatcher rd = request.getRequestDispatcher("/staffViewStats.jsp");
         rd.forward(request, response);
