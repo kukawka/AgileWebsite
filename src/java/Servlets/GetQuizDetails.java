@@ -50,6 +50,7 @@ public class GetQuizDetails extends HttpServlet {
         session.setAttribute("QuizResults", qResults);
         session.setAttribute("RelevantQuizResults", relQResults);
         response.sendRedirect("./Quiz");
+        
     }
     
     @Override

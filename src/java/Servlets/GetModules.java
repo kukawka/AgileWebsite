@@ -8,6 +8,7 @@ package Servlets;
 import Beans.LoggedIn;
 import Models.MainPageModel;
 import Models.Modules;
+import Models.Modules;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,28 +22,33 @@ import javax.servlet.http.HttpSession;
  *
  * @author Javi
  */
-@WebServlet(name = "GetModules", urlPatterns = {"/GetModules", "/Modules"})
+@WebServlet(name = "GetModules", urlPatterns = {"/GetModules", "/Modules", "/EditModules"})
 public class GetModules extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String IDs = request.getParameter("moduleChoice");
-
-        MainPageModel mnm = new MainPageModel();
-        request.setAttribute("pos", mnm.getPOS());
-        request.setAttribute("modules", mnm.getModules(Integer.parseInt(request.getParameter("id"))));
-        request.setAttribute("type", "modules");
-
         HttpSession session = request.getSession();
         LoggedIn login = (LoggedIn) session.getAttribute("LoggedIn");
+
+        Modules modules = new Modules();
+
+        String IDs = request.getParameter("moduleChoice");
         
-        if (IDs != null) 
-        {
-            Modules modules = new Modules();
+        String moduleID = request.getParameter("deleteModule");
+        if (moduleID != null) {
+            modules.setModulesChoice(login.getUsername(), moduleID);
+        }
+        
+        if (IDs != null) {
             modules.setModules(login.getUsername(), IDs);
         }
+        
+        MainPageModel mnm = new MainPageModel();
+        request.setAttribute("pos", mnm.getPOS());
+        //request.setAttribute("pos");
+        request.setAttribute("modules", mnm.getModules(Integer.parseInt(request.getParameter("id")), login.getUsername()));
+        request.setAttribute("type", "modules");
 
         RequestDispatcher rd = request.getRequestDispatcher("/studentModules.jsp");
         rd.forward(request, response);
@@ -51,10 +57,25 @@ public class GetModules extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        HttpSession session = request.getSession();
+        LoggedIn login = (LoggedIn) session.getAttribute("LoggedIn");
         MainPageModel mnm = new MainPageModel();
+        Modules mod = new Modules();
+        
         request.setAttribute("pos", mnm.getPOS());
-        RequestDispatcher rd = request.getRequestDispatcher("/studentModules.jsp");
-        rd.forward(request, response);
+        request.setAttribute("choice", mod.getChoices(login.getUsername()));
+        
+        String s = request.getServletPath();
+        
+        if(s.equals("/Modules"))
+        {
+            RequestDispatcher rd = request.getRequestDispatcher("/studentMainModules.jsp");
+            rd.forward(request, response);
+        } else{
+            RequestDispatcher rd = request.getRequestDispatcher("/studentModules.jsp");
+            rd.forward(request, response);
+        }
 
     }
 
