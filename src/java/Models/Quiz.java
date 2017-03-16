@@ -224,17 +224,13 @@ public class Quiz {
             e.printStackTrace();
         }
     }
-<<<<<<< HEAD
-=======
 
->>>>>>> 5c027d2336e060eca5391222ef645af421aaa1a3
     
     /**
      * @ param the quizID of the Quiz selected
      * @ return results of the Quiz achieved by all students and statistics based on that
      */
-<<<<<<< HEAD
-=======
+
 
 
     public void EditAnswer(String text, int ID, int correct) {
@@ -284,7 +280,6 @@ public class Quiz {
 
 }
 
->>>>>>> 5c027d2336e060eca5391222ef645af421aaa1a3
     public QuizResults getQuizResults(int quizID) {
 
         QuizResults quizResults = new QuizResults();

@@ -3,32 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-<<<<<<< HEAD
-            <file>file:/Users/Dagi/NetBeansProjects/AgileWebsite/web/staffViewRelevantResults.jsp</file>
-            <file>file:/Users/Dagi/NetBeansProjects/AgileWebsite/src/java/Servlets/ScheduleAvailability.java</file>
-            <file>file:/Users/Dagi/NetBeansProjects/AgileWebsite/web/staffViewQuiz.jsp</file>
-=======
             <file>file:/C:/Users/javis/University/3rd%20Year/2nd%20Semester/Agile/Sprint%202/AgileWebsite/src/java/Models/Modules.java</file>
             <file>file:/C:/Users/javis/University/3rd%20Year/2nd%20Semester/Agile/Sprint%202/AgileWebsite/src/java/Beans/Module.java</file>
             <file>file:/C:/Users/javis/University/3rd%20Year/2nd%20Semester/Agile/Sprint%202/AgileWebsite/web/studentModules.jsp</file>
             <file>file:/C:/Users/javis/University/3rd%20Year/2nd%20Semester/Agile/Sprint%202/AgileWebsite/src/java/Servlets/LookUpStudentResult.java</file>
+            <file>file:/C:/Users/javis/University/3rd%20Year/2nd%20Semester/Agile/Sprint%202/AgileWebsite/src/java/Servlets/GetResults.java</file>
+            <file>file:/C:/Users/javis/University/3rd%20Year/2nd%20Semester/Agile/Sprint%202/AgileWebsite/src/java/Models/Quiz.java</file>
             <file>file:/C:/Users/javis/University/3rd%20Year/2nd%20Semester/Agile/Sprint%202/AgileWebsite/src/java/Models/MainPageModel.java</file>
             <file>file:/C:/Users/javis/University/3rd%20Year/2nd%20Semester/Agile/Sprint%202/AgileWebsite/src/java/Servlets/MainPage.java</file>
             <file>file:/C:/Users/javis/University/3rd%20Year/2nd%20Semester/Agile/Sprint%202/AgileWebsite/src/java/Servlets/GetModules.java</file>
->>>>>>> master
-=======
-            <file>file:/Users/Dagi/NetBeansProjects/AgileWebsite/src/java/Beans/QuizDetails.java</file>
-            <file>file:/Users/Dagi/NetBeansProjects/AgileWebsite/src/java/Beans/QuizResults.java</file>
-            <file>file:/Users/Dagi/NetBeansProjects/AgileWebsite/web/staffViewRelevantResults.jsp</file>
-            <file>file:/Users/Dagi/NetBeansProjects/AgileWebsite/src/java/Beans/Question.java</file>
-            <file>file:/Users/Dagi/NetBeansProjects/AgileWebsite/src/java/Servlets/GetQuizDetails.java</file>
-            <file>file:/Users/Dagi/NetBeansProjects/AgileWebsite/web/staffViewResults.jsp</file>
-            <file>file:/Users/Dagi/NetBeansProjects/AgileWebsite/src/java/Servlets/ClearTheFilter.java</file>
-            <file>file:/Users/Dagi/NetBeansProjects/AgileWebsite/web/staffViewQuiz.jsp</file>
-            <file>file:/Users/Dagi/NetBeansProjects/AgileWebsite/src/java/Models/Quiz.java</file>
-            <file>file:/Users/Dagi/NetBeansProjects/AgileWebsite/src/java/Servlets/GetResults.java</file>
->>>>>>> 5c027d2336e060eca5391222ef645af421aaa1a3
+            <file>file:/C:/Users/javis/University/3rd%20Year/2nd%20Semester/Agile/Sprint%202/AgileWebsite/src/java/Servlets/GetQuizDetails.java</file>
         </group>
     </open-files>
 </project-private>
