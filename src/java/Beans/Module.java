@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class Module {
     String name="" ;
     int id=0 ;
+    int choice=0;
     //ArrayList<Quiz> quiz=new ArrayList<Quiz>() ;
     
     public void setName(String name){
@@ -30,6 +31,14 @@ public class Module {
     
     public int getID(){
         return id ;
+    }
+    
+    public void setChoice(int choice){
+        this.choice=choice;
+    }
+    
+    public int getChoice(){
+        return choice;
     }
     /*
      public void setQuizzes(ArrayList<Quiz> quiz){

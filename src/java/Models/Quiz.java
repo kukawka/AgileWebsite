@@ -1,5 +1,6 @@
 package Models;
 
+import Beans.Answer;
 import Beans.Question;
 import Beans.QuizDetails;
 import Beans.QuizResults;
@@ -49,6 +50,7 @@ public class Quiz {
             
             //creating another statement to get all quiz questions 
             statement = con.createStatement();
+            Statement statement1 = con.createStatement();
             questionRS = statement.executeQuery("select ID,QuestionText, ExplanationText, Valid, QuestionNumber from question where QuizID = " + quizID);
 
             ArrayList<Question> questions = new ArrayList<>();
@@ -57,28 +59,25 @@ public class Quiz {
             while (questionRS.next()) 
             {
                 Question q = new Question();
-
+                q.setQuestionID(questionRS.getInt("ID"));
                 q.setQuestionText(questionRS.getString("QuestionText"));
                 q.setExplanation(questionRS.getString("ExplanationText"));
 
-                int questionNumber = questionRS.getInt("QuestionNumber");
-                statement = con.createStatement();
-                answerRS = statement.executeQuery("select AnswerText, Correct from answer where QuestionID = " + questionRS.getInt("ID"));
+                answerRS = statement1.executeQuery("select ID, AnswerText, Correct from answer where QuestionID = " + questionRS.getInt("ID"));
 
                 int c = 0;
                 //Using Array List as both number of answers and the number of correct answers are unspecified
-                ArrayList<String> answers = new ArrayList<>();
+                ArrayList<Answer> answers = new ArrayList<>();
                 ArrayList<Integer> correctAnswers = new ArrayList<>();
 
+
                 while (answerRS.next()) {
-                    boolean correct = answerRS.getBoolean("Correct");
-                    if (correct) {
-                        correctAnswers.add(c);
-                    }
-                    answers.add(answerRS.getString("AnswerText"));
-                    c++;
+                    Answer answer = new Answer();
+                    answer.setCorrect(answerRS.getInt("Correct"));
+                    answer.setID(answerRS.getInt("ID"));
+                    answer.setText(answerRS.getString("AnswerText"));
+                    answers.add(answer);
                 }
-                q.setCorrectAnswers(correctAnswers);
                 q.setAnswers(answers);
                 questions.add(q);
             }
@@ -200,66 +199,85 @@ public class Quiz {
         }
         return 1;
     }
-
-    public int EditQuiz(int quizID) {
-        QuizDetails qDetails = new QuizDetails();
-        //Question questions = new Question();
-        int id = 0;
+ public void EditQuestion(String text, String exp, int ID) {
         Connection con = null;
-        Statement statement2 = null; //this is what
-        ResultSet QuizRS = null;
-        ResultSet QuestionRS = null;
-        ResultSet AnswerRS = null;
-        String title = " ";
 
         try {
             //establishing connection to db
             con = DBConnection.createConnection();
-            Statement statement = con.createStatement();
 
-            QuizRS = statement.executeQuery("Update quiz (Available, Title) values ('available', 'title')");
-            QuestionRS = statement.executeQuery("Update question (questiontext, explanationtext) values ('questiontext', 'explanationtext')");
-            AnswerRS = statement.executeQuery("Update answer (answertext, correct) values ('answertext', 'correct')");
-            /*
-            while (QuizRS.next()) {
-                title = QuizRS.getString("Title");
-                qDetails.setTitle(title);
-                qDetails.setAvailability(QuizRS.getBoolean("Available"));
-            }
-            
-            ArrayList<Question> question = new ArrayList<Question>();
-            while (QuestionRS.next())
-            {
-                Question questions = new Question();
-                questions.setQuestionText(QuestionRS.getString("QuestionText"));
-                questions.setExplanation(QuestionRS.getString("ExplanationText"));
-             
-                int c = 0;
-            String[] answer = new String[4];
-            while (AnswerRS.next())
-            {
-                boolean correct = AnswerRS.getBoolean("Correct");
-                if (correct)
-                {
-                    questions.setCorrectAnswerID(c);
-                }
-                questions.setAnswers(answer);
-                question.add(questions);    
-            }
-            }*/
+            PreparedStatement statement = con.prepareStatement("UPDATE question SET QuestionText = ?, ExplanationText = ? WHERE ID=?");
+
+            //QuizRS = statement.executeQuery("UPDATE quiz SET Available = ?, Title = ?");
+            //QuestionRS = statement.executeQuery("UPDATE question SET questiontext = ?, explanationtext = ?");
+            //AnswerRS = statement.executeQuery("UPDATE answer SET answertext = ?, correct = ?");
+            statement.setString(1, text);
+            statement.setString(2, exp);
+            statement.setInt(3, ID);
+            statement.executeUpdate();
+            statement.close();
+            con.close();
 
         } catch (SQLException e) {
             System.out.println("Error");
             e.printStackTrace();
-            return -1;
         }
-        return id;
     }
+
     
     /**
      * @ param the quizID of the Quiz selected
      * @ return results of the Quiz achieved by all students and statistics based on that
      */
+
+
+    public void EditAnswer(String text, int ID, int correct) {
+        Connection con = null;
+        try {
+            //establishing connection to db
+            con = DBConnection.createConnection();
+
+            PreparedStatement statement = con.prepareStatement("UPDATE answer SET answertext = ?, correct = ? WHERE ID=?");
+            statement.setString(1, text);
+            statement.setInt(2, correct);
+            statement.setInt(3, ID);
+            statement.executeUpdate();
+            statement.close();
+            con.close();
+
+        } catch (SQLException e) {
+            System.out.println("Error");
+            e.printStackTrace();
+
+        }
+    }
+    
+    public void EditQuiz(boolean availability, String title, int id) {
+        Connection con = null; 
+        Byte available;
+        
+        try {
+            //establishing connection to db
+            con = DBConnection.createConnection();
+
+            PreparedStatement statement = con.prepareStatement("UPDATE quiz SET title = ?, available = ? WHERE ID=?");
+            statement.setString(1, title);
+            if(availability) available = 1;
+            else available = 0;
+            statement.setByte(2,available);
+            statement.setInt(3, id);
+            statement.executeUpdate();
+            statement.close();
+            con.close();
+
+        } catch (SQLException e) {
+            System.out.println("Error");
+            e.printStackTrace();
+
+        }
+
+}
+
     public QuizResults getQuizResults(int quizID) {
 
         QuizResults quizResults = new QuizResults();

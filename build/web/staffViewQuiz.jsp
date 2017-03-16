@@ -4,6 +4,7 @@
     Author     : Dagi
 --%>
 
+<%@page import="Beans.Answer"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Beans.LoggedIn"%>
 <%@page import="Beans.QuizDetails"%>
@@ -171,7 +172,7 @@
 
                     <% for (int x = 0; x < quizDetails.getQuestions().size(); x++) {%>
 
-                    <% ArrayList<String> answers = quizDetails.getQuestions().get(x).getAnswers();%>
+                    <% ArrayList<Answer> answers = quizDetails.getQuestions().get(x).getAnswers();%>
 
                     <div class="col-sm-8">
                         <div class="panel panel-default" style="margin-left: -15px;">
@@ -184,17 +185,7 @@
 
                             <% for (int y = 0; y < answers.size(); y++) {%>
                             <!-- List group -->
-                            <ul class="list-group">
-                                <%boolean isCorrect = false;
-                                    ArrayList<Integer> correctA = quizDetails.getQuestions().get(x).getCorrectAnswers();
-                                    for (int i = 0; i < correctA.size(); i++) {
-                                        if (correctA.get(i) == y) {
-                                            isCorrect = true;
-                                        }
-                                    }
-
-                                %>
-                                <li class="list-group-item"> - <%= answers.get(y)%> <% if (isCorrect) {%> <p style="float:right;">&#10004;</p> <% } %></li>
+                            <li class="list-group-item"> - <%=answers.get(y).getText()%> <% if (answers.get(y).getCorrect() == 1) {%> <p style="float:right;">&#10004;</p> <% } %></li>
                             </ul>
 
                             <% } %>

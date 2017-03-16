@@ -3,9 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/Users/Dagi/NetBeansProjects/AgileWebsite/src/java/Beans/QuizDetails.java</file>
+            <file>file:/Users/Dagi/NetBeansProjects/AgileWebsite/src/java/Beans/QuizResults.java</file>
             <file>file:/Users/Dagi/NetBeansProjects/AgileWebsite/web/staffViewRelevantResults.jsp</file>
-            <file>file:/Users/Dagi/NetBeansProjects/AgileWebsite/src/java/Servlets/ScheduleAvailability.java</file>
+            <file>file:/Users/Dagi/NetBeansProjects/AgileWebsite/src/java/Beans/Question.java</file>
+            <file>file:/Users/Dagi/NetBeansProjects/AgileWebsite/src/java/Servlets/GetQuizDetails.java</file>
+            <file>file:/Users/Dagi/NetBeansProjects/AgileWebsite/web/staffViewResults.jsp</file>
+            <file>file:/Users/Dagi/NetBeansProjects/AgileWebsite/src/java/Servlets/ClearTheFilter.java</file>
             <file>file:/Users/Dagi/NetBeansProjects/AgileWebsite/web/staffViewQuiz.jsp</file>
+            <file>file:/Users/Dagi/NetBeansProjects/AgileWebsite/src/java/Models/Quiz.java</file>
+            <file>file:/Users/Dagi/NetBeansProjects/AgileWebsite/src/java/Servlets/GetResults.java</file>
         </group>
     </open-files>
 </project-private>

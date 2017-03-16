@@ -10,6 +10,8 @@ import Beans.ProgrammeOfStudy;
 import Beans.Quiz;
 import java.util.ArrayList;
 import junit.framework.TestCase;
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertNotNull;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -87,7 +89,7 @@ public class MainPageModelTest extends TestCase {
         System.out.println("getModules");
         MainPageModel instance = new MainPageModel();
         ArrayList<Module> expResult = new ArrayList<Module>();
-        ArrayList<Module> result = instance.getModules(1);
+        ArrayList<Module> result = instance.getModules(1,"2");
         //int ID = 1;
         mod.setID(1);
         mod.setName("Module1");
@@ -153,7 +155,7 @@ public class MainPageModelTest extends TestCase {
         qu1.setCompletion(true);
         expResultStudent.add(qu1);
         Quiz qu2= new Quiz();
-        qu2.setName("fff");
+        qu2.setName("asfa");
         qu2.setCompletion(false);
         expResultStudent.add(qu2);
         System.out.println("Stduent_hardcoded: " + expResultStudent.get(0).getName());
