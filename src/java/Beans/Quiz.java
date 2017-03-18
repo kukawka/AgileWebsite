@@ -1,6 +1,5 @@
 package Beans;
 
-
 /**
  *
  * @author Krasi + Philipp
