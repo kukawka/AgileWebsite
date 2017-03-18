@@ -12,6 +12,9 @@ import java.sql.Statement;
  */
 public class LoginModel 
 {
+    /* Verify entered Login credentials.
+     *
+     */
     public String authenticateLogin(String username, String password) 
     {
         Connection con;
@@ -21,12 +24,13 @@ public class LoginModel
         String userNameDB = "";
         String passwordDB = "";
         String typeDB     = "";
-
+        boolean matched   = false;
+        
         try 
         {
             con = DBConnection.createConnection();
             statement = con.createStatement();
-            resultSet = statement.executeQuery("select ID,Password, Type from user"); 
+            resultSet = statement.executeQuery("SELECT ID,Password, Type FROM user"); 
             
             while (resultSet.next())
             {
@@ -36,7 +40,8 @@ public class LoginModel
 
                 if (username.equals(userNameDB) && password.equals(passwordDB)) 
                 {
-                    return typeDB; // User credentials found in DB.
+                    matched = true;// User credential match found in DB.
+                    break;
                 }
             }
             resultSet.close();
@@ -45,7 +50,11 @@ public class LoginModel
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null; // User/Password not found or wrong.
+        
+        if(matched == true)
+            return typeDB;
+        else
+            return null; // User/Password not found or wrong.
     }
 
 }
