@@ -11,112 +11,107 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class Modules {
-    //Cluster cluster;
-
-    /**
-     * @ param the ID of the Quiz selected
-     * @ return the details of the Quiz
+public class Modules 
+{
+    /** Adds modules selected as favourite to DB.
+     *  
+     * @param user
+     * @param IDs 
      */
-    public void setModules(String user, String IDs) {
+    public void setFavModules(String user, String IDs)
+    {
         Connection con;
+        String[] idArray = IDs.replaceFirst("^,", "").split(",");
 
-        String[] arr = IDs.replaceFirst("^,", "").split(",");
-
-        Statement statement = null;
-
-        try {
+        try 
+        {
             con = DBConnection.createConnection();
-            statement = con.createStatement();
-            PreparedStatement st;
+            PreparedStatement prepStatement;
 
-            for (int x = 0; x < arr.length; x++) {
-                int choice = Integer.parseInt(arr[x]);
-
-                System.out.println("TEEEESSSSTTTT " + user + ", " + arr[x]);
-
-                st = con.prepareStatement("INSERT INTO student_modules (studentID, moduleID) values (?,?)");
-                st.setString(1, user);
-                st.setInt(2, choice);
-                st.executeUpdate();
-                st.clearParameters();
+            for (int x = 0; x < idArray.length; x++) 
+            {
+                int choice = Integer.parseInt(idArray[x]);
+                prepStatement = con.prepareStatement("INSERT INTO student_modules (studentID, moduleID) VALUES (?,?)");
+                prepStatement.setString(1, user);
+                prepStatement.setInt(2, choice);
+                prepStatement.executeUpdate();
+                prepStatement.clearParameters();
             }
-
             con.close();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
-    public void setModulesChoice(String user, String module) {
+    /** Removes selected modules from favourites.
+     * 
+     * @param user
+     * @param module 
+     */
+    public void removeFavModule(String user, String module)
+    {
         Connection con;
+        int moduleID = Integer.parseInt(module);
 
-        int mod = Integer.parseInt(module);
-
-        Statement statement = null;
-
-        try {
+        try 
+        {
             con = DBConnection.createConnection();
-            statement = con.createStatement();
-            PreparedStatement st;
+            PreparedStatement prepStatement;
 
-            System.out.println("CHOOOOOIIIIIICEE " + user + ", " + mod);
-
-            st = con.prepareStatement("DELETE from student_modules where studentID = ? and moduleID = ?");
-            st.setString(1, user);
-            st.setInt(2, mod);
-            st.executeUpdate();
-            st.clearParameters();
+            prepStatement = con.prepareStatement("DELETE from student_modules where studentID = ? and moduleID = ?");
+            prepStatement.setString(1, user);
+            prepStatement.setInt(2, moduleID);
+            prepStatement.executeUpdate();
+            prepStatement.clearParameters();
 
             con.close();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
     }
 
-    public ArrayList<Module> getChoices(String user) {
-
-        ResultSet resultPOS = null;
-        Statement statement = null;
-        ArrayList<Module> modCho = new ArrayList<Module>();
+    /** Pull modules from DB and return them.
+     * 
+     * @param user
+     * @return ArrayList<Module>
+     */
+    public ArrayList<Module> getModules(String user)
+    {
+        ResultSet resultPOS     = null;
+        ResultSet resultModules = null;
+        Statement statement     = null;
+        Statement statement1    = null;
+        ArrayList<Module> moduleList = new ArrayList<>();
 
         try {
             Connection con;
             con = DBConnection.createConnection();
             statement = con.createStatement();
+            
 
             resultPOS = statement.executeQuery("SELECT moduleID FROM student_modules WHERE studentID =" + user);
-
-            while (resultPOS.next()) {
-                if (resultPOS != null) {
-
-                    // int i = resultPOS.getInt("moduleID");
-                    Statement statement1 = con.createStatement();
-                    ResultSet addModules = statement1.executeQuery("SELECT Name FROM module WHERE ID=" + resultPOS.getInt("moduleID"));
-                    while (addModules.next()) {
-                        Module mod = new Module();
-
-                        System.out.println("QQQQQQQ");
-                        System.out.println("Module ID:" + resultPOS.getInt("moduleID"));
-                        System.out.println("Name: " + addModules.getString("Name"));
-
-                        mod.setID(resultPOS.getInt("moduleID"));
-                        mod.setName(addModules.getString("Name"));
-                        modCho.add(mod);
+            while (resultPOS.next()) 
+            {
+                if (resultPOS != null) 
+                {
+                    statement1 = con.createStatement();
+                    resultModules = statement1.executeQuery("SELECT Name FROM module WHERE ID=" + resultPOS.getInt("moduleID"));
+                    while (resultModules.next()) 
+                    {
+                        Module module = new Module();
+                        module.setID( resultPOS.getInt("moduleID") );
+                        module.setName( resultModules.getString("Name") );
+                        moduleList.add(module);
                     }
                 }
             }
             con.close();
-            return modCho;
-
+            return moduleList;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return null;
     }
+    
 }
