@@ -2,7 +2,6 @@ package Models;
 
 import Beans.Question;
 import Beans.QuizDetails;
-import Beans.QuizResults;
 import Util.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,41 +12,41 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
- *
+ * Refactored 18/03 by Philipp.
  * @author Admin
  */
-public class Result {
-    
-    /**
+public class Result 
+{
+    /** Using Student ID and Quiz ID the relevant DB-table ID of the completed quiz for the student are returned.
+     * 
     * @ param the Student's ID and the Quiz's ID
     * @ return the Result ID for the specified Student for the specified Quiz
     */
-    public int getStudentResult(int studentID, int quizID) {
-        int resultID=-1;
-        
+    public int getStudentResult(int studentID, int quizID) 
+    {
+        int completedQuizID = -1;
         Connection con;
         Statement statement = null;
-        ResultSet rs = null;
+        ResultSet completedQuizIDs = null;
         
-         try {
+        try 
+        {
             con = DBConnection.createConnection(); //establishing connection
             statement = con.createStatement();
-            rs = statement.executeQuery("Select ID from completed_quiz where userID = " + studentID + " AND QuizID = " + quizID);
             
-            while (rs.next()) // Until next row is present otherwise it returns false
+            completedQuizIDs = statement.executeQuery("SELECT ID FROM completed_quiz WHERE userID = " + studentID + " AND QuizID = " + quizID);
+            while (completedQuizIDs.next())
             {
-                //get quiz id value
-                resultID = rs.getInt("ID");
-                System.out.println("Result ID: " + resultID);
+                completedQuizID = completedQuizIDs.getInt("ID"); // Get quiz id
             }
-            con.close();
             
-         }catch (SQLException e) {
+            con.close();
+        } catch (SQLException e) {
             e.printStackTrace();
             return -1;
         }
         
-        return resultID;
+        return completedQuizID;
     }
     
 }
