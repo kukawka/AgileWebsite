@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Models;
 
 import Beans.Module;
@@ -16,138 +11,137 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
- *
- * @author Krasi+philipp PairProg
+ * Refactored 18/03 by Philipp.
+ * @author Krasi + Philipp PairProg
  */
-public class MainPageModel {
-
-    /* Upon mainpage loading the Programmes of Study (PoS) will be pulled from the Database and used to populate the 
-     * available buttons in the Nav-bar on the side.
-    COMMENTICO
-     * 
+public class MainPageModel 
+{
+    /* As the MainPage loads all Programmes of Study (PoS) will be pulled from the Database 
+     * to populate the Nav-Bar.
      */
-    public ArrayList<ProgrammeOfStudy> getPOS() {
-
+    public ArrayList<ProgrammeOfStudy> getPOS() 
+    {
+        Connection con;
         ResultSet resultPOS = null;
         Statement statement = null;
-        ArrayList<ProgrammeOfStudy> poses = new ArrayList<ProgrammeOfStudy>();
-        try {
-            Connection con;
+        ArrayList<ProgrammeOfStudy> poses = new ArrayList<>();
+        
+        try 
+        {
             con = DBConnection.createConnection();
             statement = con.createStatement();
             resultPOS = statement.executeQuery("SELECT * FROM programme_of_study");
 
-            while (resultPOS.next()) {
-                if (resultPOS != null) {
-                    ProgrammeOfStudy pos = new ProgrammeOfStudy();
-                    pos.setID(resultPOS.getInt("ID"));
-                    pos.setName(resultPOS.getString("Name"));
-                    // pos.setModules(getModules(resultPOS.getInt("ID")));
-                    poses.add(pos);
-                }
+            while (resultPOS.next()) 
+            {
+                ProgrammeOfStudy pos = new ProgrammeOfStudy();
+                pos.setID( resultPOS.getInt("ID") );
+                pos.setName( resultPOS.getString("Name") );
+                poses.add(pos);
             }
             con.close();
             return poses;
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return null;
+        return null; // DB Conn failed or no PoS found.
     }
 
-    /* Upon selection of a PoS all related modules will be pulled from the DB and used to populate the side Nav-bar further.
- *
+    /* Upon selection of a PoS all relevant modules will be pulled from the DB.
+     * 
      */
-    public ArrayList<Module> getModules(int ID, String userID) {
-
-        ResultSet resultModules = null;
-        Statement statement = null;
-        ArrayList<Module> modules = new ArrayList<Module>();
-        try {
-            Connection con;
+    public ArrayList<Module> getModules(int ID, String userID) 
+    {
+        Connection con;
+        ResultSet resultModules   = null;
+        Statement statement       = null;
+        ArrayList<Module> modules = new ArrayList<>();
+        
+        try 
+        {
             con = DBConnection.createConnection();
             statement = con.createStatement();
             Statement statement1 = con.createStatement();
+            
             resultModules = statement.executeQuery("SELECT ID,Name FROM module WHERE POS=" + ID);
-            while (resultModules.next()) {
-                if (resultModules != null) {
-                    Module module = new Module();
-                    module.setID(resultModules.getInt("ID"));
-                    module.setName(resultModules.getString("Name"));
-                    //module.setQuizzes(getQuizzes(resultModules.getInt("ID")));
-                    ResultSet choiceResult = statement1.executeQuery("SELECT studentID, moduleID from student_modules where studentID =" + userID + " and moduleID ="+resultModules.getInt("ID"));
-                    if(choiceResult.first() == true)
-                    {
-                        module.setChoice(1);
-                    }
-                    modules.add(module);
+            while (resultModules.next()) 
+            {
+                Module module = new Module();
+                module.setID( resultModules.getInt("ID") );
+                module.setName( resultModules.getString("Name") );
+                
+                ResultSet choiceResult = statement1.executeQuery("SELECT studentID,moduleID FROM student_modules WHERE studentID =" + userID + " and moduleID=" + resultModules.getInt("ID"));
+                if(choiceResult.first() == true)
+                {
+                    module.setChoice(1);
                 }
+                modules.add(module);
             }
             con.close();
             return modules;
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return null;
+        
+        return null; // No modules found or DB Conn failure.
     }
 
-    /* Selecting a module will lead to all quizzes for that module to be pulled from the DB and displayed on the entire page beside the Nav-bar.
- * @params ID of selected module
+    /* When selecting a module its' quizzes will be pulled from the DB and displayed.
+     * 
+     * @params ID of selected module
      */
-    public ArrayList<Quiz> getQuizzes(int ID, String userType, int userID) {
+    public ArrayList<Quiz> getQuizzes(int ID, String userType, int userID) 
+    {
         ResultSet resultQuizzes = null;
-        Statement statement = null;
-        ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
-        try {
-            Connection con;
+        Statement statement     = null;
+        ArrayList<Quiz> quizzes = new ArrayList<>();
+        Connection con;
+        
+        try 
+        {
             con = DBConnection.createConnection();
             statement = con.createStatement();
-            if (userType.equals("Staff")) {
+            
+            if (userType.equals("Staff")) 
+            {
                 resultQuizzes = statement.executeQuery("SELECT ID,Title FROM quiz WHERE moduleID=" + ID);
-                while (resultQuizzes.next()) {
-                    if (resultQuizzes != null) {
-                        Quiz quiz = new Quiz();
-                        quiz.setID(resultQuizzes.getInt("ID"));
-                        quiz.setName(resultQuizzes.getString("Title"));
-                        //module.setQuizzes(getQuizzes(resultModules.getInt("ID")));
-                        quizzes.add(quiz);
-                    }
+                while (resultQuizzes.next()) 
+                {
+                    Quiz quiz = new Quiz();
+                    quiz.setID( resultQuizzes.getInt("ID") );
+                    quiz.setName( resultQuizzes.getString("Title") );
+                    quizzes.add(quiz);
                 }
             }
-            if (userType.equals("Student")) {
+            if (userType.equals("Student")) 
+            {
                 resultQuizzes = statement.executeQuery("SELECT ID,Title FROM quiz WHERE moduleID=" + ID + " AND Available=1");
-                while (resultQuizzes.next()) {
-                    if (resultQuizzes != null) {
-                        Quiz quiz = new Quiz();
-                        quiz.setID(resultQuizzes.getInt("ID"));
-                        quiz.setName(resultQuizzes.getString("Title"));
-                        //module.setQuizzes(getQuizzes(resultModules.getInt("ID")));
-                        quizzes.add(quiz);
-                    }
+                while (resultQuizzes.next()) 
+                {
+                    Quiz quiz = new Quiz();
+                    quiz.setID( resultQuizzes.getInt("ID") );
+                    quiz.setName( resultQuizzes.getString("Title") );
+                    quizzes.add(quiz);
                 }
                 ResultSet completedQuizzes = statement.executeQuery("SELECT quizID FROM completed_quiz WHERE userID=" + userID);
-                ArrayList<Integer> ids = new ArrayList<Integer>();
-                while (completedQuizzes.next()) {
-                    if (completedQuizzes != null) {
-                        ids.add(completedQuizzes.getInt("quizID"));
-                    }
-                }
-                for(int i=0;i<quizzes.size();i++)
+                ArrayList<Integer> ids = new ArrayList<>();
+                while (completedQuizzes.next()) 
                 {
-                    if(ids.contains(quizzes.get(i).getID())) quizzes.get(i).setCompletion(true);
-                    else quizzes.get(i).setCompletion(false);
+                    ids.add( completedQuizzes.getInt("quizID") );
+                }
+                for (int i=0; i < quizzes.size(); i++)
+                {
+                    if (ids.contains( quizzes.get(i).getID() )) 
+                        quizzes.get(i).setCompletion(true);
+                    else 
+                        quizzes.get(i).setCompletion(false);
                 }
             }
             con.close();
             return quizzes;
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return null;
     }
 }
