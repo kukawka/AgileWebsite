@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Beans;
 
 import java.util.ArrayList;
@@ -34,7 +29,6 @@ public class QuizResults {
         return mini;
     }
 
-    
     public void setAverage(double average) {
         this.average = average;
     }
@@ -46,8 +40,6 @@ public class QuizResults {
     public void setMini(int mini) {
         this.mini = mini;
     }
-    
-    
     
     public void setScores(ArrayList<Integer> scores){
         this.scores=scores ;
@@ -85,7 +77,7 @@ public class QuizResults {
         return firstnames ;
     }
     
-        public ArrayList<String> getSurnames(){
+    public ArrayList<String> getSurnames(){
         return surnames ;
     }
         
@@ -96,7 +88,5 @@ public class QuizResults {
     public ArrayList<String> getDates(){
         return dates ;
     }
-    
-    
     
 }

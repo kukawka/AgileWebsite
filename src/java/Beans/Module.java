@@ -15,7 +15,6 @@ public class Module {
     String name="" ;
     int id=0 ;
     int choice=0;
-    //ArrayList<Quiz> quiz=new ArrayList<Quiz>() ;
     
     public void setName(String name){
         this.name=name ;
@@ -40,13 +39,5 @@ public class Module {
     public int getChoice(){
         return choice;
     }
-    /*
-     public void setQuizzes(ArrayList<Quiz> quiz){
-        this.quiz=quiz ;
-    }
     
-    public ArrayList<Quiz> getQuizzes(){
-        return quiz ;
-    }
-*/
 }

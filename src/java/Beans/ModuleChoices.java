@@ -12,7 +12,6 @@ package Beans;
 public class ModuleChoices {
     String name="" ;
     int id=0 ;
-    //ArrayList<Quiz> quiz=new ArrayList<Quiz>() ;
     
     public void setName(String name){
         this.name=name ;

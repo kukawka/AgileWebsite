@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class ProgrammeOfStudy {
     String name="" ;
     int id=0 ;
-    ArrayList<Module> modules=new ArrayList<Module>() ;
+    ArrayList<Module> modules=new ArrayList<>() ;
     
     public void setName(String name){
         this.name=name ;

@@ -5,10 +5,8 @@
  */
 package Beans;
 
-import java.util.ArrayList;
-
 /**
- *
+ * 
  * @author musakolo
  */
 public class Answer {
