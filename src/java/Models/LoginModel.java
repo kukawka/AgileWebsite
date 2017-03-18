@@ -30,7 +30,7 @@ public class LoginModel
         {
             con = DBConnection.createConnection();
             statement = con.createStatement();
-            resultSet = statement.executeQuery("SELECT ID,Password, Type FROM user"); 
+            resultSet = statement.executeQuery("SELECT ID,Password,Type FROM user"); 
             
             while (resultSet.next())
             {
