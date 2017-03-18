@@ -41,24 +41,22 @@ public class StaffEditQuiz extends HttpServlet {
         int numOfQuestions = Integer.valueOf(request.getParameter("QuestionNumber"));
         int QuizID = (Integer) session.getAttribute("QuizID");
         QuizDetails quizDetail = (QuizDetails) session.getAttribute("QuizDetails");
-        //int QuizID = Integer.valueOf(request.getParameter("QuizID"));
 
         System.out.println("Number of questions: " + numOfQuestions);
 
         String title = request.getParameter("title");
         boolean availability = false;
         if (request.getParameter("availability") != null) {
-                    availability = true;
-                }
-        
+            availability = true;
+        }
+
         for (int i = 0; i < numOfQuestions; i++) {
             int questionID = Integer.parseInt(request.getParameter("id" + (i)));
             String questionText = request.getParameter("QuestionText" + (i));
             String explanationText = request.getParameter("ExplanationText" + (i));
-            //int QuizID = Integer.valueOf(request.getParameter("ID" + (i + 1)));
-            //int questionNumber = Integer.valueOf(request.getParameter("questionnumbertext"+(i+1)+(j+1)));
-            // questionID = quiz.EditQuestion(QuizID, (i + 1);
-            quiz.EditQuestion(questionText, explanationText, questionID);
+            if (!(questionText.equals(quizDetail.getQuestions().get(i).getQuestionText()) && explanationText.equals(quizDetail.getQuestions().get(i).getExplanation()))) {
+                quiz.EditQuestion(questionText, explanationText, questionID);
+            }
             System.out.println("Question " + (i) + " Updated!");
 
             for (int j = 0; j < quizDetail.getQuestions().get(i).getAnswers().size(); j++) {
@@ -69,12 +67,16 @@ public class StaffEditQuiz extends HttpServlet {
                     correct = 1;
                 }
 
-                quiz.EditAnswer(answerText, answerID, correct);
+                if (!(answerText.equals(quizDetail.getQuestions().get(i).getAnswers().get(j).getText()) && correct==(quizDetail.getQuestions().get(i).getAnswers().get(j).getCorrect()))) {
+                    quiz.EditAnswer(answerText, answerID, correct);
+                }
                 System.out.println("Answer " + (j) + " for Question" + (i) + " updated!");
             }
             System.out.println("Quiz " + QuizID + " updated!");
         }
-        quiz.EditQuiz(availability, title, QuizID); 
+        if (!(availability == (quizDetail.getAvailability()) && title.equals(quizDetail.getTitle()))) {
+            quiz.EditQuiz(availability, title, QuizID);
+        }
         session.setAttribute("QuizDetails", quiz.getQuiz(QuizID));
         response.sendRedirect("./Quiz");
     }
