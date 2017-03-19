@@ -3,6 +3,7 @@ package Servlets;
 import Beans.LoggedIn;
 import Models.MainPageModel;
 import Models.Modules;
+
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,14 +14,22 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpSession;
 
 /**
- * Refactored 18/03 by Philipp.
- * @author Javier
+ * Refactored 19/03 by Philipp.
+ * @author Javi
  */
 @WebServlet(name = "GetModules", urlPatterns = {"/GetModules", "/Modules", "/EditModules"})
 public class GetModules extends HttpServlet 
 {
+    /**
+     * 
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException 
+     */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException 
     {
         HttpSession session = request.getSession();
         LoggedIn login = (LoggedIn) session.getAttribute("LoggedIn");
@@ -47,6 +56,13 @@ public class GetModules extends HttpServlet
         rd.forward(request, response);
     }
 
+    /**
+     * 
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException 
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {

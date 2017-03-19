@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Servlets;
-
 
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -16,47 +10,47 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
+ * Refactored 19/03 by Philipp
  * @author Dagi
  */
 @WebServlet(name = "FilterByDate", urlPatterns = {"/FilterByDate",})
-public class FilterByDate extends HttpServlet {
-
+public class FilterByDate extends HttpServlet 
+{
+    /**
+     * 
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException 
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-        System.out.println("I'm here");
-        String dateFrom = request.getParameter("dateFrom");
-        String dateTo = request.getParameter("dateTo");
+            throws ServletException, IOException 
+    {
+        String dateFrom = request.getParameter("dateFrom"); // Start date,
+        String dateTo = request.getParameter("dateTo");     // End date of filter.
 
-        
         HttpSession session = request.getSession();
         session.setAttribute("Filtered", true);
         session.setAttribute("dateFrom", dateFrom);
         session.setAttribute("dateTo", dateTo);
 
-       response.sendRedirect("GetResults");
-        /* RequestDispatcher rd = request.getRequestDispatcher("/GetResults");
-        rd.forward(request, response);*/
-        
-        /*
-        if (request.getRequestURI().equals("GetResults")) {
-            RequestDispatcher rd = request.getRequestDispatcher("/GetResults");
-            rd.forward(request, response);
-        } else if (request.getServletPath().equals("RelevantResults")) {
-            RequestDispatcher rd = request.getRequestDispatcher("/RelevantResults");
-            rd.forward(request, response);
-        }*/
+        response.sendRedirect("GetResults");
     }
     
-        @Override
+    /**
+     * 
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException 
+     */
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException 
+    {
         RequestDispatcher rd = request.getRequestDispatcher("/GetResults");
         rd.forward(request, response);
-        
     }
-
 
 }
