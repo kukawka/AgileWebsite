@@ -58,7 +58,7 @@
                     <ul class="nav navbar-nav">
                         <% LoggedIn login = (LoggedIn) session.getAttribute("LoggedIn");%>
                         <form method="Post" action="MainPage" id='info'>
-                            <p>Information about the user.<i> <br>Username: <%=login.getUsername()%><br>Type: <%=login.getType()%> </i></p>
+                            <p>Information about the user.<i> <br>Login_ID: <%=login.getUsername()%><br>Type: <%=login.getType()%> </i></p>
                         </form>
                         <li class="active"><a href="mainpage.jsp" >Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
                         <li id="pos" ><a>

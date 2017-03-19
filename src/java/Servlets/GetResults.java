@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Servlets;
 
-import Beans.LoggedIn;
-import Beans.QuizResults;
-import Models.LoginModel;
-import Models.Quiz;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,42 +10,47 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
+ * Refactored 19/03 by Philipp
  * @author Dagi
  */
 @WebServlet(name = "GetResults", urlPatterns = {"/GetResults","/QuizResults","/RelevantResults"})
-public class GetResults extends HttpServlet {
-
-    /*@Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        int quizID = Integer.parseInt(request.getParameter("ID"));
-        //String type = request.getParameter("type");
-        HttpSession session = request.getSession();
-
-        QuizResults qResults=new QuizResults() ;
-        Quiz q=new Quiz() ;
-        qResults= q.getQuizResults(quizID);
-            session.setAttribute("QuizResults", qResults);
-            response.sendRedirect("/AgileWebsite/GetResults");
-    }*/
-    
-        @Override
+public class GetResults extends HttpServlet 
+{
+    /**
+     * 
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException 
+     */
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        //if(request.getContextPath().equals("AgileWebsite/Quiz")){
+            throws ServletException, IOException 
+    {
         HttpSession session = request.getSession();
-        
-        if(request.getServletPath().equals("/GetResults")){
-        RequestDispatcher rd = request.getRequestDispatcher("/staffViewResults.jsp");
-        rd.forward(request, response);
+       
+        if(request.getServletPath().equals("/GetResults"))
+        {
+            RequestDispatcher rd = request.getRequestDispatcher("/staffViewResults.jsp");
+            rd.forward(request, response);
         }
-        else if(request.getServletPath().equals("/RelevantResults") || session.getAttribute("relevantStudents")!=null){
+        // Show only results of students who take the module.
+        else if(request.getServletPath().equals("/RelevantResults") || session.getAttribute("relevantStudents")!=null)
+        {
             session.setAttribute("relevantStudents", null);
             RequestDispatcher rd = request.getRequestDispatcher("/staffViewRelevantResults.jsp");
-        rd.forward(request, response);
-            
+            rd.forward(request, response);
         }
+    }
+    
+    /** Returns a short description of the servlet.
+     * 
+     * @return String
+     */
+    @Override
+    public String getServletInfo() 
+    {
+        return "Applies the RESTful interface";
     }
 
 }

@@ -1,4 +1,3 @@
-
 package Beans;
 
 import java.util.ArrayList;
@@ -7,44 +6,38 @@ import java.util.ArrayList;
  *
  * @author Dagi
  */
-public class QuizDetails {
-    String title="" ;
-    boolean availability=false ; 
-    ArrayList<Question> questions = new ArrayList<Question>();
-    String date = "" ;
-    //Encapsulated fields- added a getter and setters for each 
-    
+public class QuizDetails 
+{
+    String title = "";
+    boolean availability = false; 
+    ArrayList<Question> questions = new ArrayList<>();
+    String date = "";
     
     public void setTitle(String title){
-        this.title=title ;
+        this.title = title;
     }
-    
     public String getTitle(){
-        return title ;
+        return title;
     }
      public void setAvailability(boolean availability){
-        this.availability=availability ;
+        this.availability = availability ;
     }
-    
     public boolean getAvailability(){
-        return availability ;
+        return availability;
     }
     
-      public void setQuestions(ArrayList<Question> questions){
-        this.questions=questions ;
+    public void setQuestions(ArrayList<Question> questions){
+        this.questions = questions;
     }
-    
     public ArrayList<Question> getQuestions(){
-        return questions ;
+        return questions;
     }
     
     public void setDate(String date){
-        this.date=date ;
+        this.date = date;
     }
-    
     public String getDate(){
-        return date ;
+        return date;
     }
-    
     
 }

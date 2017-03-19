@@ -1,12 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Servlets;
 
 import Beans.LoggedIn;
-import Models.LoginModel;
+
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,22 +12,40 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
- * @author Dagi
+ * Refactored 19/03 by Philipp
+ * @author Javier and Dagi
  */
 @WebServlet(name = "Logout", urlPatterns = {"/Logout",})
-public class Logout extends HttpServlet {
-
+public class Logout extends HttpServlet 
+{
+    /**
+     * 
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException 
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
+            throws ServletException, IOException 
+    {
         HttpSession session = request.getSession();
         LoggedIn login = new LoggedIn();
         login.setLogedout();
         session.setAttribute("LoggedIn", null);
+        
         RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
         rd.forward(request, response);
+    }
+    
+    /** Returns a short description of the servlet.
+     * 
+     * @return String
+     */
+    @Override
+    public String getServletInfo() 
+    {
+        return "Logs out user or staff";
     }
 
 }

@@ -58,8 +58,9 @@
                 <h1><%=request.getAttribute("heading")%></h1>
                 <% if ((login.getType()).equals("Student")) { %>
                 <div class="sort">
-                    <select onChange="sortUsingNestedText()">
-                        <option value="" disabled selected>Sort quizzes:</option>
+                    <label for="favoritefood">Sort quizzes by: </label>
+                    <select class="Sorting">
+                        <option value="Nothing" >Nothing</option>
                         <option value="Ascending">Ascending</option>
                         <option value="Descending">Descending</option>
                         <option value="Completed">Completed</option>
@@ -93,19 +94,19 @@
                             }
                             if ((login.getType()).equals("Student")) {  // if the person is Student it will send them to take the quiz
                         %>
-                        <form method="Post" action="TakeQuiz">
+                        <form method="Get" action="TakeQuiz">
                             <%
                                 }
                             %>  
-                            <input type="hidden" name="quizID" value="<%=quiz.get(i).getID()%>"/>
+                            <input type="hidden" class="quizID" name="quizID" value="<%=quiz.get(i).getID()%>"/>
                             <input type="submit" class="name" name="info" id="submit2" value="<%=quiz.get(i).getName()%>"/>
                             
-                                <% if ((login.getType()).equals("Student") && quiz.get(i).getCompletion()) { %>
-                                <div class="btnhandler" >    
+                                
+                                <div class="btnhandler" <% if (!((login.getType()).equals("Student") && quiz.get(i).getCompletion())) { %> style="display: none;"<% } %> >    
                                     
                                 <span class="glyphicon glyphicon-ok"></span>
                                 </div>
-                                      <% } %> 
+                                     
                                 
                             
     
@@ -118,8 +119,10 @@
         </div>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+        <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+        <script src="<%= request.getContextPath() %>/js/quizSorting.js"></script>
         <script>
-
+            
             $('.grid').isotope({
                 itemSelector: '.grid-item',
                 masonry: {
@@ -139,15 +142,6 @@
                     $('body').height(Math.max(height1, height3, height2));
                 }
             }
-            
-            function sortUsingNestedText() {
-    var items = $('.grid').children("div").sort(function(a, b) {
-        var vA = $("input.name", a).text();
-        var vB = $("input.name", b).text();
-        return (vA < vB) ? -1 : (vA > vB) ? 1 : 0;
-    });
-    parent.append(items);
-}
             $(document).ready(function () {
                 htmlbodyHeightUpdate()
                 $(window).resize(function () {

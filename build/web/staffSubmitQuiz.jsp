@@ -114,8 +114,8 @@
                         %>
                             <br>
                             <h4>Question <%=i+1%></h4>
-                            <li>Question Text: <input type="text" name=<%="questiontext"+(i+1)%> maxlength="1024"></li>
-                            <li>Explanation Text: <input type="text" name=<%="explanationtext"+(i+1)%>  maxlength="1024"></li>   
+                            <li>Question Text: <input type="text" name=<%="questiontext"+(i+1)%> maxlength="1024" required></li>
+                            <li>Explanation Text: <input type="text" name=<%="explanationtext"+(i+1)%>  maxlength="1024" ></li>   
                             <br>
 
                             
@@ -126,7 +126,7 @@
                                 //Answer Info
                                 %>
                                    <h5>Answer <%=j+1%>:</h5>
-                                   <li>Answer Text: <input type="text" name=<%="answertext"+(i+1)+(j+1)%>  maxlength="255"></li>
+                                   <li>Answer Text: <input type="text" name=<%="answertext"+(i+1)+(j+1)%>  maxlength="255" required></li>
                                    <li>Correct: <input type="checkbox" name=<%="correct"+(i+1)+(j+1)%>  value="1"> Yes</li> 
                                    <br>
                                 <%

@@ -16,7 +16,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>View Results</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/mainpage_style.css"/>
         <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/results.css"/>
@@ -56,10 +56,11 @@
                     <li role="presentation" id="irrel"><a href="GetResults">All Students</a></li>
                     <li role="presentation" class="active" id="rel"><a href="#">Relevant Students Only</a></li>
 
-                    <form class="navbar-form navbar-left">
+                    <form class="navbar-form navbar-left"  method="POST" action="LookUpStudentResult">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="ID of a Student">
-                        </div>
+                            <input type="text" class="form-control" placeholder="ID of a Student" name="lookupID">
+                            <input type="hidden" name="relevantStudents" value="yes">
+                        </div>     
                         <button type="submit" class="btn btn-default">Look Up</button>
                     </form>
                     <form class="navbar-form navbar-left">
@@ -109,10 +110,10 @@
             </div>
 
             <br>
+            <!-- ref /*Ref: http://codepen.io/anon/pen/rymEZj*/ -->
             <div class="tbl-header">
                 <table cellpadding="0" cellspacing="0" border="0" class="results">
                     <thead class="results">
-                        <!--<table class="table table-bordered">-->
                         <tr class="results">
                             <th class="results">Matriculation No</th>
                             <th class="results">Firstname</th>
@@ -130,7 +131,17 @@
                     <tbody class="results">
 
                         <% if (!(Boolean) session.getAttribute("Filtered")) {
-                                for (int i = 0; i < matricNum.size(); i++) {%>
+                                for (int i = 0; i < matricNum.size(); i++) {
+                                    //if ID to be displayed != ID looking for
+                                    System.out.println("lookupID in " + i + ": " + session.getAttribute("lookupID"));
+                                    if (session.getAttribute("lookupID")!=null && !((matricNum.get(i)).equals(session.getAttribute("lookupID"))))
+                                    {
+                                        //do nothing                                                   
+                                    }
+                                    else
+                                    {
+                        
+                        %>
                         <tr>
                             <td class="results"><%= matricNum.get(i)%></td>
                             <td class="results"><%= firstnames.get(i)%></td>
@@ -139,7 +150,7 @@
                             <td class="results" style="background-color: #ffb3b3;"><%= scores.get(i)%></td>
                             <td class="results"><%= dates.get(i)%></td>
                         </tr>
-                        <%}
+                        <%}}session.setAttribute("lookupID", null); //reset matriculation number lookup
                         } else {
                             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                             Date dateTo = sdf.parse((String) session.getAttribute("dateTo"));

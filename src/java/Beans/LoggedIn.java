@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Beans;
 
 /**
@@ -10,36 +5,36 @@ package Beans;
  * @author Dagi
  */
 public class LoggedIn {
-    boolean logedin=false;
-    String Username=null;
-    String Type=null;
+    boolean logedin = false;
+    String Username = null;
+    String Type = null;
+    
     public void LogedIn(){
-        
     }
     
     public void setUsername(String name){
-        this.Username=name;
+        this.Username = name;
     }
     public String getUsername(){
         return Username;
     }
     
     public void setType(String type){
-        this.Type=type;
+        this.Type = type;
     }
     public String getType(){
         return Type;
     }
    
     public void setLogedin(){
-        logedin=true;
+        logedin = true;
     }
     public void setLogedout(){
-        logedin=false;
+        logedin = false;
     }
     
     public void setLoginState(boolean logedin){
-        this.logedin=logedin;
+        this.logedin = logedin;
     }
     public boolean getlogedin(){
         return logedin;

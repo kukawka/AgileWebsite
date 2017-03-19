@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Models;
 
 import Util.DBConnection;
@@ -12,37 +7,41 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- *
+ * Refactored 18/03 by Philipp.
  * @author Dagi
  */
-public class LoginModel {
-
-    public String authenticateLogin(String username, String password) {
-
+public class LoginModel 
+{
+    /* Verify entered Login credentials.
+     *
+     */
+    public String authenticateLogin(String username, String password) 
+    {
         Connection con;
         Statement statement = null;
         ResultSet resultSet = null;
 
         String userNameDB = "";
         String passwordDB = "";
-        String typeDB = "";
-
-        try {
-            con = DBConnection.createConnection(); //establishing connection
-            /*if (con == null) {
-                return true;
-            }*/
+        String typeDB     = "";
+        boolean matched   = false;
+        
+        try 
+        {
+            con = DBConnection.createConnection();
             statement = con.createStatement();
-            resultSet = statement.executeQuery("select ID,Password, Type from user"); //Here table name is users and userName,password are columns. fetching all the records and storing in a resultSet.
-            while (resultSet.next()) // Until next row is present otherwise it return false
+            resultSet = statement.executeQuery("SELECT ID,Password,Type FROM user"); 
+            
+            while (resultSet.next())
             {
-                userNameDB = resultSet.getString("ID"); //fetch the values present in database
+                userNameDB = resultSet.getString("ID");
                 passwordDB = resultSet.getString("Password");
-                typeDB=resultSet.getString("Type");
+                typeDB     = resultSet.getString("Type");
 
-                if (username.equals(userNameDB)
-                        && password.equals(passwordDB)) {
-                    return typeDB; ////If the user entered values are already present in database, which means user has already registered so I will return SUCCESS message.
+                if (username.equals(userNameDB) && password.equals(passwordDB)) 
+                {
+                    matched = true;// User credential match found in DB.
+                    break;
                 }
             }
             resultSet.close();
@@ -51,7 +50,11 @@ public class LoginModel {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null; // Just returning appropriate message otherwise
+        
+        if(matched == true)
+            return typeDB;
+        else
+            return null; // User/Password not found or wrong.
     }
 
 }

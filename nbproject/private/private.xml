@@ -7,9 +7,12 @@
             <file>file:/C:/Users/javis/University/3rd%20Year/2nd%20Semester/Agile/Sprint%202/AgileWebsite/src/java/Beans/Module.java</file>
             <file>file:/C:/Users/javis/University/3rd%20Year/2nd%20Semester/Agile/Sprint%202/AgileWebsite/web/studentModules.jsp</file>
             <file>file:/C:/Users/javis/University/3rd%20Year/2nd%20Semester/Agile/Sprint%202/AgileWebsite/src/java/Servlets/LookUpStudentResult.java</file>
+            <file>file:/C:/Users/javis/University/3rd%20Year/2nd%20Semester/Agile/Sprint%202/AgileWebsite/src/java/Servlets/GetResults.java</file>
+            <file>file:/C:/Users/javis/University/3rd%20Year/2nd%20Semester/Agile/Sprint%202/AgileWebsite/src/java/Models/Quiz.java</file>
             <file>file:/C:/Users/javis/University/3rd%20Year/2nd%20Semester/Agile/Sprint%202/AgileWebsite/src/java/Models/MainPageModel.java</file>
             <file>file:/C:/Users/javis/University/3rd%20Year/2nd%20Semester/Agile/Sprint%202/AgileWebsite/src/java/Servlets/MainPage.java</file>
             <file>file:/C:/Users/javis/University/3rd%20Year/2nd%20Semester/Agile/Sprint%202/AgileWebsite/src/java/Servlets/GetModules.java</file>
+            <file>file:/C:/Users/javis/University/3rd%20Year/2nd%20Semester/Agile/Sprint%202/AgileWebsite/src/java/Servlets/GetQuizDetails.java</file>
         </group>
     </open-files>
 </project-private>

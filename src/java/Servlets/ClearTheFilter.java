@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Servlets;
 
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,34 +9,37 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
+ * Refactored 19/03 by Philipp
  * @author Dagi
  */
 @WebServlet(name = "ClearTheFilter", urlPatterns = {"/ClearTheFilter",})
-public class ClearTheFilter extends HttpServlet {
-
+public class ClearTheFilter extends HttpServlet 
+{
+    /** Clears the filters used by Staff for filtering results of quizzes.
+     * 
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException 
+     */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-        
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+        throws ServletException, IOException 
+    {
         HttpSession session = request.getSession();
         session.setAttribute("Filtered", false);
 
-       response.sendRedirect("GetResults");
-        /* RequestDispatcher rd = request.getRequestDispatcher("/GetResults");
-        rd.forward(request, response);*/
-        
-        /*
-        if (request.getRequestURI().equals("GetResults")) {
-            RequestDispatcher rd = request.getRequestDispatcher("/GetResults");
-            rd.forward(request, response);
-        } else if (request.getServletPath().equals("RelevantResults")) {
-            RequestDispatcher rd = request.getRequestDispatcher("/RelevantResults");
-            rd.forward(request, response);
-        }*/
+        response.sendRedirect("GetResults");
     }
     
-
-
+    /** Returns a short description of the servlet.
+     * 
+     * @return String
+     */
+    @Override
+    public String getServletInfo() 
+    {
+        return "Sets the filter attribute to false to remove the filter";
+    }
+    
 }

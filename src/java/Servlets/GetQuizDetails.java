@@ -1,64 +1,80 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Servlets;
 
 import Beans.QuizDetails;
 import Beans.QuizResults;
-import Models.MainPageModel;
+import Models.Quiz;
+
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import Models.Quiz;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpSession;
 
 /**
- *
+ * Refactored 19/03 by Philipp
  * @author Javi
  */
 @WebServlet(name = "GetQuizDetails", urlPatterns = {"/GetQuizDetails","/Quiz"})
-public class GetQuizDetails extends HttpServlet {
-
+public class GetQuizDetails extends HttpServlet 
+{
+    /** Acquire quiz results for Staff to inspect.
+     * 
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException 
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException 
+    {
         int quizID = Integer.parseInt(request.getParameter("quizID"));
         Quiz quiz = new Quiz();
 
-        QuizDetails quizDetails = new QuizDetails() ;
-        QuizResults qResults=new QuizResults() ;
-        QuizResults relQResults=new QuizResults() ;
+        QuizDetails quizDetails = new QuizDetails();
+        QuizResults quizResults = new QuizResults();
+        QuizResults relQResults = new QuizResults();
         
-        //get details
-        quizDetails=quiz.getQuiz(quizID);
+        // Get quiz details.
+        quizDetails = quiz.getQuiz(quizID);
+        quizResults = quiz.getQuizResults(quizID);
+        relQResults = quiz.getRelevantQuizResults(quizID);
         
-        //get results and stats
-        Quiz q=new Quiz() ;
-        qResults= q.getQuizResults(quizID);
-        relQResults=q.getRelevantQuizResults(quizID);
-        
-
         HttpSession session = request.getSession();
         session.setAttribute("QuizID", quizID);
         session.setAttribute("QuizDetails", quizDetails);
-        session.setAttribute("QuizResults", qResults);
+        session.setAttribute("QuizResults", quizResults);
         session.setAttribute("RelevantQuizResults", relQResults);
-        response.sendRedirect("./Quiz");
         
+        response.sendRedirect("./Quiz");
     }
     
+    /**
+     * 
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException 
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException 
+    {
         RequestDispatcher rd = request.getRequestDispatcher("/staffViewQuiz.jsp");
         rd.forward(request, response);
-        
+    }
+    
+    /** Returns a short description of the servlet.
+     * 
+     * @return String
+     */
+    @Override
+    public String getServletInfo() 
+    {
+        return "Gets all the details for a chosen Quiz as session attributes";
     }
 
 }
