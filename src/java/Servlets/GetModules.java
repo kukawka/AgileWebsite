@@ -5,6 +5,9 @@ import Models.MainPageModel;
 import Models.Modules;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -48,7 +51,11 @@ public class GetModules extends HttpServlet
         }
         
         MainPageModel mainPageModel = new MainPageModel();
-        request.setAttribute("pos", mainPageModel.getPOS());
+        try {
+            request.setAttribute("pos", mainPageModel.getPOS());
+        } catch (SQLException ex) {
+            Logger.getLogger(GetModules.class.getName()).log(Level.SEVERE, null, ex);
+        }
         request.setAttribute("modules", mainPageModel.getModules(Integer.parseInt(request.getParameter("id")), login.getUsername()));
         request.setAttribute("type", "modules");
 
@@ -71,7 +78,11 @@ public class GetModules extends HttpServlet
         MainPageModel mainPageModel = new MainPageModel();
         Modules modules = new Modules();
         
-        request.setAttribute("pos", mainPageModel.getPOS());
+        try {
+            request.setAttribute("pos", mainPageModel.getPOS());
+        } catch (SQLException ex) {
+            Logger.getLogger(GetModules.class.getName()).log(Level.SEVERE, null, ex);
+        }
         request.setAttribute("choice", modules.getModules(login.getUsername()));
         
         String servletPath = request.getServletPath();

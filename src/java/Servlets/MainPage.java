@@ -5,7 +5,10 @@ import Beans.Quiz;
 import Models.MainPageModel;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -63,7 +66,11 @@ public class MainPage extends HttpServlet
         if (request.getParameter("type").equals("Programme of Study")) 
         {
             request.setAttribute("type", "pos");
-            request.setAttribute("items", mainPageModel.getPOS());
+            try {
+                request.setAttribute("items", mainPageModel.getPOS());
+            } catch (SQLException ex) {
+                Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
+            }
             RequestDispatcher rd = request.getRequestDispatcher("/mainpage.jsp");
             rd.forward(request, response);
         } 
