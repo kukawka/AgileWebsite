@@ -9,6 +9,6 @@ and open the template in the editor.
 */
 
 body{
-  background: -webkit-linear-gradient(left, #25c481, #25b7c4);
-  background: linear-gradient(to right, #25c481, #25b7c4);
+  background: -webkit-linear-gradient(left,    #185a9d,   #43cea2);
+  background: linear-gradient(to right,  #185a9d,  #43cea2);
 }
