@@ -2,49 +2,7 @@
 <%@page import="Beans.LoggedIn"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <!-- Style for drop-down -->
-        <style>
-            .dropbtn {
-                background-color: #4CAF50;
-                color: white;
-                padding: 16px;
-                font-size: 16px;
-                border: none;
-                cursor: pointer;
-            }
-
-            .dropbtn:hover, .dropbtn:focus {
-                background-color: #3e8e41;
-            }
-
-            .dropdown {
-                position: relative;
-                display: inline-block;
-            }
-
-            .dropdown-content {
-                display: none;
-                position: absolute;
-                background-color: #f9f9f9;
-                min-width: 160px;
-                overflow: auto;
-                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-                z-index: 1;
-            }
-
-            .dropdown-content a {
-                color: black;
-                padding: 12px 16px;
-                text-decoration: none;
-                display: block;
-            }
-
-            .dropdown a:hover {background-color: #f1f1f1}
-
-            .show {display:block;}
-        </style>
-        
+    <head>       
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Submit a Quiz</title>
         <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/mainpage_style.css"/>
@@ -92,9 +50,6 @@
             
     </head>
     <body>
-        <header>
-        
-        </header>
                 <body bgcolor="c0d13e">
                 <nav class="navbar navbar-inverse sidebar" role="navigation">
             <div class="container-fluid">
@@ -180,7 +135,6 @@
                             
                             <div id=<%="answerHolder"+(i+1)%>>
                                 </div>
-                            <!-- <p id="demo"></p> -->
                             
                             <script>
                             function myFunction() {
@@ -257,20 +211,13 @@
                             </script>                      
                        <%
                         }
-                        %>
-                            
+                        %>             
               </ul>
                 <br/>
                 <input type="submit" value="Submit Quiz"> 
             </form>
            </div>
            </div>
-
         </article>
-        <footer>
-            <ul>
-                <%--<li class="footer"><a href="/">Home</a></li>--%>
-            </ul>
-        </footer>
     </body>
 </html>

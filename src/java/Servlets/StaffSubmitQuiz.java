@@ -7,7 +7,6 @@
 //package uk.ac.dundee.computing.aec.instagrim.servlets;
 package Servlets;
 
-//import com.datastax.driver.core.Cluster;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -16,22 +15,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-//import uk.ac.dundee.computing.aec.instagrim.lib.CassandraHosts;
-//import uk.ac.dundee.computing.aec.instagrim.models.User;
 
 //Quiz
 import Models.Quiz;
 
 /**
  *
- * @author Administrator
+ * @author sophia
  */
 @WebServlet(name = "StaffSubmitQuiz", urlPatterns = {"/StaffSubmitQuiz"})
 public class StaffSubmitQuiz extends HttpServlet {
-    //Cluster cluster=null;
+    
     public void init(ServletConfig config) throws ServletException {
-        // TODO Auto-generated method stub
-        //cluster = CassandraHosts.getCluster();
     }
 
     /**
@@ -53,12 +48,11 @@ public class StaffSubmitQuiz extends HttpServlet {
 
         for (int i=0; i<numOfQuestions; i++)
         {
-            int questionID=-1; //if questionID<0 ssomething is wrong
+            int questionID=-1;
 
             String questionText = request.getParameter("questiontext"+(i+1));
             String explanationText = request.getParameter("explanationtext"+(i+1));
             
-            //int questionNumber = Integer.valueOf(request.getParameter("questionnumbertext"+(i+1)+(j+1)));
             
             questionID=qz.SubmitQuestion(questionText, explanationText, quizID, (i+1));
             System.out.println("Question " +(i+1)+ " submitted!");
@@ -92,7 +86,8 @@ public class StaffSubmitQuiz extends HttpServlet {
        RequestDispatcher rd=request.getRequestDispatcher("/successfulcreation.jsp");
        rd.forward(request,response);
     }
-
+    
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
@@ -107,7 +102,8 @@ public class StaffSubmitQuiz extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+        return "Acquires the core information needed to Create a Quiz"
+                + "from a Staff member (question texts & explanations, answers).";
+    }
 
 }

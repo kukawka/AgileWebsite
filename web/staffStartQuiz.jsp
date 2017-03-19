@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <%--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">--%>
         <title>Submit a Quiz</title>
         <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/mainpage_style.css"/>
         
@@ -61,8 +60,7 @@
                     </button>
                     <a class="navbar-brand" href="#">QuizUp</a>
                 </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                
+                <!-- Collect the nav links, forms, and other content for toggling -->            
                 <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <% LoggedIn login = (LoggedIn) session.getAttribute("LoggedIn");%>
@@ -84,13 +82,8 @@
                 </div>
               
             </div>
-        </nav>
-        <header>
-        
-        </header>
-       
-        <article>
-            
+        </nav>     
+        <article>       
           <div class="main">
             <form method="POST"  action="StaffStartQuiz">
                 <ul>
@@ -100,26 +93,15 @@
                     <li>Quiz Title: <input type="text" name="title" minlength="4" required="required"></li>
                     
                      <input type="hidden" name="moduleID" value=<%=request.getAttribute("moduleID")%>>
-                    <li>ModuleID: <%=request.getAttribute("moduleID")%></li>
-                    
-                    <%--<li>ModuleID: <input type="text" name="moduleID" minlength="1" maxlength="10"  required ="required"></li>--%>
-                    
+                    <li>ModuleID: <%=request.getAttribute("moduleID")%></li>                  
                     <li>Availability: <input type="checkbox" name="available" value="1"> Yes </li>
                     <li>Number of questions to provide: <input type="number" name="questionsnumber" minlength="1" min="1" max="100" required="required"></li><br>
                 </ul>
                 <br/>
                 <input type="submit" value="Start Quiz"> 
             </form>
-            </div>
-                    
-                    
+            </div>                   
           </div>
-
         </article>
-        <footer>
-            <ul>
-                <%--<li class="footer"><a href="/">Home</a></li>--%>
-            </ul>
-        </footer>
     </body>
 </html>
