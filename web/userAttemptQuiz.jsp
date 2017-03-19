@@ -4,7 +4,8 @@ Created on : Feb 23, 2017, 10:13:40 AM
 Author     : Atanas
 --%>
 
-    <%@page import="java.util.ArrayList"%>
+    <%@page import="Beans.Answer"%>
+<%@page import="java.util.ArrayList"%>
     <%@page import="Beans.QuizDetails"%>
     <%@page contentType="text/html" pageEncoding="UTF-8"%>
     <!DOCTYPE html>
@@ -38,7 +39,7 @@ Author     : Atanas
                     <!-- If the quiz exists get the data for the user !!!!!!!! -->
                     <% if (quizDetails.getAvailability()) {%>
                     <input  class="btn btn-lg btn-primary" id='button' onclick="showDiv()" value="Start Quiz" style="margin-left: 40%; margin-top: 15%; width: 300px; height: 100px;" />
-                    <%if(taken == -1){%>
+                    <%if(taken != -1){%>
                     <input  class="btn btn-lg btn-info" id='buttonSummary' onclick="showSummary()" value="Show Summary" style="margin-left: 40%; margin-top: 2%; width: 300px; height: 100px;" />
                     <!-- If the quiz dosn't exist get the data for the user -->
                     <%}} else {%> 
@@ -53,41 +54,47 @@ Author     : Atanas
 
             <% for (int x = 0; x < quizDetails.getQuestions().size(); x++) {
             questAnswers = questAnswers + quizDetails.getQuestions().get(x).getAnswers().size();
-            ArrayList<String> answers = quizDetails.getQuestions().get(x).getAnswers();
+            ArrayList<Answer> answers = quizDetails.getQuestions().get(x).getAnswers();
             String[] abcd = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"}; // 26
             
             %>
 
             <!-- Default panel contents -->
             <div class="quiz">
+            <form id= "target" action="TakeQuiz" method="POST">
                 <h2 class="quiz-question"><b>Q<%=x + 1%>. <%= quizDetails.getQuestions().get(x).getQuestionText()%></b></h2>
-                <p><b><h5>Explanation:</b><%= quizDetails.getQuestions().get(x).getExplanation()%></h5></p>
+                <div class="explanation" style="display: none"><p><b><h5>Explanation:</b><%= quizDetails.getQuestions().get(x).getExplanation()%></h5></p></div>
                 <!-- List group -->
                 <ul data-quiz-question=<%=x + 1%>>
+                <input type="" id="SavedQuestion<%=x%>" name="SavedQuestion<%=x+1%>" value="">
+
                     <% 
-                    questCorrAnswers = questCorrAnswers + quizDetails.getQuestions().get(x).getCorrectAnswers().size();
+                    
+                    int number=0;
                     for (Integer y = 0; y < answers.size() ; y++) {
                     
                     %>
-                    <li class="quiz-answer" style="background-color: #eaeae1" data-quiz-answer=<%=abcd[y]%>><%=abcd[y]%>)<%= answers.get(y)%>
+                    <li class="quiz-answer" style="background-color: #eaeae1" data-quiz-answer=<%=abcd[y]%>><%=abcd[y]%>)<%= answers.get(y).getText()%>
                         <%
-                            
-                            for(Integer j = 0; j < quizDetails.getQuestions().get(x).getCorrectAnswers().size() ; j++)
-                            {
-                                if(quizDetails.getQuestions().get(x).getCorrectAnswers().get(j)==y ) {
+                                if(answers.get(y).getCorrect()== 1) {
+                                     number++;
                                      correctAnswers = correctAnswers + abcd[y];
-                                }
-                            }
+                                } 
+                            
                         %> 
                     </li>
-                    <% } %>
+                    <% }
+                        questCorrAnswers = questCorrAnswers + number;
+                     %>
                 </ul>
             </div>
             <% }%>
 
         <p id="demo3"></p>
+        
+        <input  id="scored" name="score" value="" />
         <input  class="btn btn-lg btn-primary" id='submitButton' onclick="submitQuiz()" value="Submit" style="margin-left: 42%" />
-
+        </form>
         </div><div class="quiz-result"></div>
 
         <div id="showSummaryDiv" style="display: none;">
