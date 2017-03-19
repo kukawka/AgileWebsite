@@ -19,43 +19,20 @@
         <TITLE>Your Title Here</TITLE>
     </HEAD>
     <BODY BGCOLOR="fff">
-        <nav class="navbar navbar-inverse sidebar" role="navigation">
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">QuizUp</a>
-                </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <% LoggedIn login = (LoggedIn) session.getAttribute("LoggedIn");%>
-                        <form method="Post" action="MainPage" id='info'>
-                            <p>Information about the user.<i> <br>Username: <%=login.getUsername()%><br>Type: <%=login.getType()%> </i></p>
-                        </form>
-                        <li class="active"><a href="mainpage.jsp" >Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
-                        <li id="pos" ><a>
-
-                                <form method="Post" action="MainPage">
-                                    <input type="submit" name="type" value="Programme of Study" id="submit">
-                                </form>
-                                <form method="Post" action="MainPage">
-                                    <input type="submit" name="type" value="Favourites" id="submit">
-                                </form>
-                            </a>
-                        <li class="active"><a href="index.jsp" >Log Out<span style="font-size:16px;"  class="pull-right hidden-xs showopacity glyphicon glyphicon-log-out"></span></a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <% LoggedIn login = (LoggedIn) session.getAttribute("LoggedIn");%>
+		<jsp:include page="/navBar.jsp" />
+		
         <div class="main">
             <div class="page-header">
-                <h1><%=request.getAttribute("heading")%></h1>
+			
+                <div style="display: inline-block; width:500px;">
+                <h1  style="width:20%; display: inline-block;">&nbsp&nbsp&nbsp<%=request.getAttribute("heading")%></h1>
+                <h1 style='width:60%; ; float:right; display: inline-block; margin-bottom:-150px;'>
+                <form method="Get" action="StaffStartQuiz" >
+                        <input type="hidden" name="moduleID" value="<%=request.getParameter("id")%>">
+                        <input type="submit" id="submit1" style="font-size:30px;border-style:none;font-family: 'Raleway',sans-serif;"  value="Create a Quiz &#10010;"/>
+                </form> </h1>
+                </div>
                 <% if ((login.getType()).equals("Student")) { %>
                 <div class="sort">
                     <label for="favoritefood">Sort quizzes by: </label>
@@ -75,18 +52,11 @@
                     if ((login.getType()).equals("Staff")) {   // gives the creation option to the Staff member
 
                 %>  
-
-                <div class="grid-item">
-                    <form method="Get" action="StaffStartQuiz">
-                        <input type="hidden" name="moduleID" value="<%=request.getParameter("id")%>">
-                        <input type="submit" name="info" id="submit1" value="CREATE"/>  
-                    </form> 
-                </div>      
                 <%
                     }
                     for (int i = 0; i < quiz.size(); i++) {
                 %>
-                <div class="grid-item">
+                <div class="grid-item" style="width:400px;">
                     <%if ((login.getType()).equals("Staff")) { // if the person is Staff it will send them to the quiz details
                     %>
                     <form method="Post" action="GetQuizDetails">
@@ -94,7 +64,7 @@
                             }
                             if ((login.getType()).equals("Student")) {  // if the person is Student it will send them to take the quiz
                         %>
-                        <form method="Get" action="TakeQuiz">
+                        <form method="Post" action="TakeQuiz">
                             <%
                                 }
                             %>  
