@@ -42,5 +42,15 @@ public class GetResults extends HttpServlet
             rd.forward(request, response);
         }
     }
+    
+    /** Returns a short description of the servlet.
+     * 
+     * @return String
+     */
+    @Override
+    public String getServletInfo() 
+    {
+        return "Applies the RESTful interface";
+    }
 
 }

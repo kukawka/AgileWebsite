@@ -39,4 +39,14 @@ public class GetStats extends HttpServlet
         }
     }
     
+    /** Returns a short description of the servlet.
+     * 
+     * @return String
+     */
+    @Override
+    public String getServletInfo() 
+    {
+        return "Applies the restful interface";
+    }
+    
 }

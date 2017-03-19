@@ -66,5 +66,15 @@ public class GetQuizDetails extends HttpServlet
         RequestDispatcher rd = request.getRequestDispatcher("/staffViewQuiz.jsp");
         rd.forward(request, response);
     }
+    
+    /** Returns a short description of the servlet.
+     * 
+     * @return String
+     */
+    @Override
+    public String getServletInfo() 
+    {
+        return "Gets all the details for a chosen Quiz as session attributes";
+    }
 
 }

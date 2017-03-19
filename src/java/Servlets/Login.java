@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Refactored 19/03 by Philipp
- * @author Dagi
+ * @author Javier and Dagi
  */
 @WebServlet(name = "Login", urlPatterns = {"/Login",})
 public class Login extends HttpServlet 
@@ -51,6 +51,16 @@ public class Login extends HttpServlet
             RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
             rd.forward(request, response);
         }
+    }
+    
+    /** Returns a short description of the servlet.
+     * 
+     * @return String
+     */
+    @Override
+    public String getServletInfo() 
+    {
+        return "Logs in user or staff member";
     }
 
 }
