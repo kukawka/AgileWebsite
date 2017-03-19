@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 
-        <TITLE>Your Title Here</TITLE>
+        <TITLE>Main Page</TITLE>
     </HEAD>
     <BODY BGCOLOR="fff">
         <nav class="navbar navbar-inverse sidebar" role="navigation">

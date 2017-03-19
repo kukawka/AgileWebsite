@@ -1,8 +1,6 @@
 package Models;
 
 import Beans.Module;
-import Beans.ModuleChoices;
-import Beans.ProgrammeOfStudy;
 import Util.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,6 +8,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+/**
+ * @author Javier
+ */
 
 public class Modules 
 {

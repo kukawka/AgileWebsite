@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Refactored 18/03 by Philipp.
- * @author Javi
+ * @author Javier
  */
 @WebServlet(name = "GetModules", urlPatterns = {"/GetModules", "/Modules", "/EditModules"})
 public class GetModules extends HttpServlet 
