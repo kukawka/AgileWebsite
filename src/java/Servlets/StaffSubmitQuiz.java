@@ -62,12 +62,15 @@ public class StaffSubmitQuiz extends HttpServlet {
             
             questionID=qz.SubmitQuestion(questionText, explanationText, quizID, (i+1));
             System.out.println("Question " +(i+1)+ " submitted!");
-
-            for (int j=0; j<4; j++)
+            
+            int numOfAnswers=Integer.parseInt(request.getParameter("numOfAnswers"+(i+1)));
+            
+            for (int j=0; j<numOfAnswers; j++)
             {
                 //post the info of every answer
                 String answerText = request.getParameter("answertext"+(i+1)+(j+1));
                 String correct = request.getParameter("correct"+(i+1)+(j+1)); //will be 1 or null
+                
                 
                 int correctInt;
 

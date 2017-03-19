@@ -105,7 +105,7 @@
                     <%--<li>ModuleID: <input type="text" name="moduleID" minlength="1" maxlength="10"  required ="required"></li>--%>
                     
                     <li>Availability: <input type="checkbox" name="available" value="1"> Yes </li>
-                    <li>Number of questions to provide: <input type="number" name="questionsnumber" minlength="1" required="required"></li><br>
+                    <li>Number of questions to provide: <input type="number" name="questionsnumber" minlength="1" min="1" max="100" required="required"></li><br>
                 </ul>
                 <br/>
                 <input type="submit" value="Start Quiz"> 
