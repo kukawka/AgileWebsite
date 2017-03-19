@@ -27,8 +27,8 @@
                 </form>
             </div>
         </nav>
-
-        <h1>Hello <%=login.getUsername()%>!</h1>
+        
+        <h1>Hello  <%=login.getUsername()%>!</h1>
         <%=login.getType()%>
         </br>
         <a href="staffStartQuiz.jsp">Create Quiz</a>

@@ -13,7 +13,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Statistics</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/mainpage_style.css"/>
 
@@ -21,6 +21,7 @@
 
     </head>
     <body>
+        <jsp:include page="/navBar.jsp" />
         <%
             QuizResults quizResults = (QuizResults) session.getAttribute("QuizResults");
         %>
@@ -83,24 +84,7 @@
         </script>
         <!-- The chart was taken from:
                 https://developers.google.com/chart/interactive/docs/gallery/linechart -->
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#">QuizUp</a>
-                </div>
-                <ul class="nav nav-tabs">
-                    <li role="presentation" class="active" id="irrel"><a href="#">All Students</a></li>
-                    <li role="presentation"  id="rel"><a href="RelevantStats">Relevant Students Only</a></li>
-
-                    <form class="navbar-form navbar-left">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="ID of a Student">
-                        </div>
-                        <button type="submit" class="btn btn-default">Look Up</button>
-                    </form></ul>
-            </div><!-- /.container-fluid -->
-        </nav>
+       
 
         <div class="main">
             <div style="margin-left: 3%;">
