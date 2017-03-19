@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Servlets;
 
 import Util.Scheduler;
@@ -19,37 +14,51 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
+ * Refactored 19/03 by Philipp
  * @author Dagi
  */
 @WebServlet(name = "ScheduleAvailability", urlPatterns = {"/ScheduleAvailability",})
-public class ScheduleAvailability extends HttpServlet {
-
+public class ScheduleAvailability extends HttpServlet 
+{
+    /**
+     * 
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException 
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException 
+    {
         String dateInString = request.getParameter("date");
         HttpSession session = request.getSession();
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        //String dateInString = "7-Jun-2013";
         Date date = null;
 
-        try {
-
+        try 
+        {
             date = formatter.parse(dateInString);
-            System.out.println(date);
-            System.out.println(formatter.format(date));
 
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        //Scheduler test = new Scheduler(date, "test");
         Scheduler test = new Scheduler(new Date(System.currentTimeMillis() + 8000), "blah2");
         test.start();
+        
         RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
         rd.forward(request, response);
     }
-
+    
+    /** Returns a short description of the servlet.
+     * 
+     * @return String
+     */
+    @Override
+    public String getServletInfo() 
+    {
+        return "Used to schedule when a quiz becomes available.";
+    }
 }
