@@ -289,7 +289,7 @@ public class Quiz {
 
     }
 
-    /** [TODO]
+    /** Retrieve details of a completed quiz.
      * 
      * @param quizID
      * @return 
