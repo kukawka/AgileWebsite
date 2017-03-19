@@ -4,10 +4,10 @@ $(".Sorting").change(function () {
     var text = [];
     var ids = [];
     var completed=[];
-    $('.grid-item').show();
+    
     if ($(this).val() === 'Ascending' || $(this).val() === 'Descending')
     {
-        
+        $('.grid-item').show();
         $('.grid-item').each(function (i) {
             text.push($(this).find('.name').val());
         });

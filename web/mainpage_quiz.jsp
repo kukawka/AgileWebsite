@@ -58,6 +58,7 @@
                 <h1><%=request.getAttribute("heading")%></h1>
                 <% if ((login.getType()).equals("Student")) { %>
                 <div class="sort">
+                    <label for="favoritefood">Sort quizzes by: </label>
                     <select class="Sorting">
                         <option value="Nothing" >Nothing</option>
                         <option value="Ascending">Ascending</option>
