@@ -1,3 +1,6 @@
+//package uk.ac.dundee.computing.aec.instagrim.servlets;
+package Servlets;
+
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -15,14 +18,11 @@ import java.time.format.DateTimeFormatter;
 
 /**
  *
- * @author Administrator
+ * @author sophia
  */
 @WebServlet(name = "StaffStartQuiz", urlPatterns = {"/StaffStartQuiz"})
 public class StaffStartQuiz extends HttpServlet {
-    //Cluster cluster=null;
     public void init(ServletConfig config) throws ServletException {
-        // TODO Auto-generated method stub
-        //cluster = CassandraHosts.getCluster();
     }
 
     /**
@@ -56,27 +56,12 @@ public class StaffStartQuiz extends HttpServlet {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate creationDate = LocalDate.now();
 
-        int questionsnumber = Integer.valueOf(request.getParameter("questionsnumber"));
-
-        
+        int questionsnumber = Integer.valueOf(request.getParameter("questionsnumber"));       
         
         int quizID=0;
         Quiz qz=new Quiz();
         quizID = qz.RegisterQuiz(title, moduleID, availableInt, creationDate);
-        System.out.println("Quiz " +quizID+ " initial information submitted!");
-        ///////////////Check if Quiz can be made - future development////////////////
-        /* 
-        if (quizID>0)
-        {
-             //response.sendRedirect("/SubmissionSuccess");
-        }
-        else
-        {
-              //response.sendRedirect("/SubmissionError");
-        }
-        */
-        /////////////////////////////////////////////////////////////////////////////
-        
+        System.out.println("Quiz " +quizID+ " initial information submitted!");      
         
         RequestDispatcher rd = request.getRequestDispatcher("/staffSubmitQuiz.jsp");
         
@@ -87,6 +72,7 @@ public class StaffStartQuiz extends HttpServlet {
         response.sendRedirect("/staffSubmitQuiz.jsp");
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {    
@@ -104,7 +90,8 @@ public class StaffStartQuiz extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+        return "Acquires the initial information needed to start Creating a Quiz"
+                + "from a Staff member (title, availability, # of questions).";
+    }
 
 }
