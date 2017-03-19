@@ -66,7 +66,7 @@ Author     : Atanas
                 <div class="explanation" style="display: none"><p><b><h5>Explanation:</b><%= quizDetails.getQuestions().get(x).getExplanation()%></h5></p></div>
                 <!-- List group -->
                 <ul data-quiz-question=<%=x + 1%>>
-                <input type="" id="SavedQuestion<%=x%>" name="SavedQuestion<%=x+1%>" value="">
+                <input type="" id="SavedQuestion<%=x%>" name="SavedQuestion<%=x%>" value="">
 
                     <% 
                     
@@ -93,7 +93,7 @@ Author     : Atanas
         <p id="demo3"></p>
         
         <input  id="scored" name="score" value="" />
-        <input  class="btn btn-lg btn-primary" id='submitButton' onclick="submitQuiz()" value="Submit" style="margin-left: 42%" />
+        <input   type="submit" class="btn btn-lg btn-primary" id='submitButton' onclick="submitQuiz()" value="Submit" style="margin-left: 42%" />
         </form>
         </div><div class="quiz-result"></div>
 

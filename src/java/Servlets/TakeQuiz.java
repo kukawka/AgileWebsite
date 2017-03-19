@@ -36,8 +36,16 @@ public class TakeQuiz extends HttpServlet {
         LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
         int score = Integer.parseInt(request.getParameter("score"));
         int quizID = (Integer) session.getAttribute("QuizID");
+        QuizDetails quizDetails = (QuizDetails) session.getAttribute("QuizDetails") ;
         LocalDate date = LocalDate.now();
-        taking.saveCompletedQuiz(lg.getUsername(), quizID, 1, date);
+        taking.saveCompletedQuiz(lg.getUsername(), quizID, score, date);
+        int id=taking.getSavedQuizID(lg.getUsername(), quizID);
+        for(int i=0; i<quizDetails.getQuestions().size();i++)
+        {
+            taking.saveGivenAnswer(id,(i+1),request.getParameter("SavedQuestion"+i));
+        }
+        
+        
         RequestDispatcher rd = request.getRequestDispatcher("/userAttemptQuiz.jsp");
         rd.forward(request, response);
     }
@@ -46,7 +54,7 @@ public class TakeQuiz extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int quizID = Integer.parseInt(request.getParameter("quizID"));
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(); 
         LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
         Quiz quiz = new Quiz();
         Result result = new Result();
@@ -54,7 +62,7 @@ public class TakeQuiz extends HttpServlet {
         QuizDetails quizDetails = new QuizDetails() ;
         
         quizDetails=quiz.getQuiz(quizID);
-
+        
         session.setAttribute("taken",taken);
         session.setAttribute("QuizID",quizID);
         session.setAttribute("QuizDetails", quizDetails);
@@ -63,9 +71,8 @@ public class TakeQuiz extends HttpServlet {
         RequestDispatcher rd = request.getRequestDispatcher("/userAttemptQuiz.jsp");
         rd.forward(request, response);
         
-    }
-    
-    
-    
+    }  
 
 }
+
+
