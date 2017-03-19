@@ -1,47 +1,53 @@
 package Models;
 
+import Beans.Question;
+import Beans.QuizDetails;
+import Beans.QuizResults;
 import Util.DBConnection;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
- * Refactored 18/03 by Philipp.
+ *
  * @author Admin
  */
-public class Result 
-{
-    /** Using Student ID and Quiz ID the relevant DB-table ID of the completed quiz for the student are returned.
-     * 
+public class Result {
+    
+    /**
     * @ param the Student's ID and the Quiz's ID
     * @ return the Result ID for the specified Student for the specified Quiz
     */
-    public int getStudentResult(int studentID, int quizID) 
-    {
-        int completedQuizID = -1;
+    public int getStudentResult(int studentID, int quizID) {
+        int resultID=-1;
+        
         Connection con;
         Statement statement = null;
-        ResultSet completedQuizIDs = null;
+        ResultSet rs = null;
         
-        try 
-        {
+         try {
             con = DBConnection.createConnection(); //establishing connection
             statement = con.createStatement();
+            rs = statement.executeQuery("Select ID from completed_quiz where userID = " + studentID + " AND QuizID = " + quizID);
             
-            completedQuizIDs = statement.executeQuery("SELECT ID FROM completed_quiz WHERE userID = " + studentID + " AND QuizID = " + quizID);
-            while (completedQuizIDs.next())
+            while (rs.next()) // Until next row is present otherwise it returns false
             {
-                completedQuizID = completedQuizIDs.getInt("ID"); // Get quiz id
+                //get quiz id value
+                resultID = rs.getInt("ID");
+                System.out.println("Result ID: " + resultID);
             }
-            
             con.close();
-        } catch (SQLException e) {
+            
+         }catch (SQLException e) {
             e.printStackTrace();
             return -1;
         }
         
-        return completedQuizID;
+        return resultID;
     }
     
 }
