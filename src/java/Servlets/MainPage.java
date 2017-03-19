@@ -92,7 +92,7 @@ public class MainPage extends HttpServlet
     @Override
     public String getServletInfo() 
     {
-        return "Short description";
+        return "Displays Programmes of Study, Modules, Quizzes on the according jsp pages.";
     }
 
 }
