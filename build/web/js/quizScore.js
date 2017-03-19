@@ -7,6 +7,8 @@ Author     : Atanas, Krasi Philipp
 function submitQuiz() {
   // scroll to answer section
   document.getElementById('submitButton').style.display = "none";
+  for(var c = 0; c < document.getElementsByClassName('explanation').length; c++)
+  document.getElementsByClassName('explanation')[c].style.display = "block";
   $('html, body').animate({
   scrollTop: $('.quiz-result').offset().top
   });
@@ -64,13 +66,21 @@ for(i=0; i<qT.dataset.questionTotal; i++)
 }
 //stored = questCorrAns.dataset.questCorrAnswers[iterator];
 
-document.getElementById("demo").innerHTML = stored;
-document.getElementById("demo2").innerHTML = stored2;
+//document.getElementById("demo").innerHTML = stored;
+//document.getElementById("demo2").innerHTML = stored2;
   /*this.questAndAns = [	
     { question: 1, answer: 'a' },
     { question: 2, answer: 'b' },
     { question: 3, answer: 'd' },
     ]*/
+var collectScore = 0.00;
+var maxScore = 0.00;
+
+for(m = 0; m < questCorrAns.dataset.questCorrAnswers.length; m++)
+{
+  maxScore = maxScore + parseInt(questCorrAns.dataset.questCorrAnswers[m]);
+}
+
 
 
 
@@ -83,7 +93,8 @@ this._pickAnswer = function($answer, $answers){
     
   }
   this._calcResult = function(){
-    var numberOfCorrectAnswers = 0;
+    var numberOfCorrectAnswers = 0.00;
+    var numberOfWrongAnswers = 0.00;
     $('ul[data-quiz-question]').each(function(i)
     {
       //document.getElementById("demo3").innerHTML += " ||| ";
@@ -110,7 +121,7 @@ this._pickAnswer = function($answer, $answers){
           //chosenAnswers.push($(this).find(activeAnswers[w]).data('quiz-answer').toString());
         }*/
         $($(this).find(".active")).each(function(j){
-        document.getElementById("demo3").innerHTML += " Q:" + j + " Correct Answer: " + $(this).data('quiz-answer').toString();
+        //document.getElementById("demo3").innerHTML += " Q:" + j + " Correct Answer: " + $(this).data('quiz-answer').toString();
         chosenAnswers.push($(this).data('quiz-answer').toString());
       });
         //document.getElementById("demo3").innerHTML += "HIIII      ";
@@ -119,11 +130,12 @@ this._pickAnswer = function($answer, $answers){
         //if ( a.question == $this.data('quiz-question')) {
           for(var x = 0; x < a.answer.length; x++)
           {
-            correctAnswers.push(a.answer[x]);
+            correctAnswers.push(a.answer[x]);  // collects correct answers for current question
           }
         //}
       //document.getElementById("demo3").innerHTML += "OUTPUT1: " + correctAnswers.length;
       var matchPosition = -1;
+      var wrongAnswer = -1;
       for(var k = 0; k < chosenAnswers.length; k++)
       {
         //document.getElementById("demo3").innerHTML += correctAnswers.toString();
@@ -132,7 +144,11 @@ this._pickAnswer = function($answer, $answers){
           if ( chosenAnswers[k] == correctAnswers[p] ) 
           {
             matchPosition = k;
-          }  
+          } 
+          else if ( chosenAnswers[k] != correctAnswers[p])
+          {
+            wrongAnswer = k;
+          }
         }
         if(matchPosition != -1)
         {  
@@ -142,13 +158,8 @@ this._pickAnswer = function($answer, $answers){
           $($(this).find(".active")).each(function(j)
           {
             if(j == matchPosition)
-              {
-                document.getElementById("demo3").innerHTML += " T Score: ";                
-                var storeScore = numberOfCorrectAnswers;
-                var qMaxScore = questCorrAns[j]; //Maximum score for current question 21223
-                var qScore = qMaxScore + score;
-                if (qScore < 0) qScore = 0;
-                else if (qScore > qMaxScore) qScore = qMaxScore;
+              {   
+                //numberOfCorrectAnswers++;
                 $(this).addClass('correct');
               }
           });
@@ -163,9 +174,20 @@ this._pickAnswer = function($answer, $answers){
           //document.getElementById("demo3").innerHTML += "HIIII    4  ";
           $($(this).find(".active")).each(function(j)
           {
-            if(j == k)$(this).addClass('incorrect');
-            document.getElementById("demo3").innerHTML += " F Score: ";
-            numberOfCorrectAnswers --;
+            if(j == wrongAnswer)
+            {
+              $(this).addClass('incorrect');
+              //document.getElementById("demo3").innerHTML += " F Score: ";
+              /*document.getElementById("demo3").innerHTML += "Q" + i + "A" + j + " ";
+              numberOfWrongAnswers ++;
+              if (numberOfWrongAnswers >= numberOfCorrectAnswers) 
+                {
+                  numberOfWrongAnswers = 0;
+                  numberOfCorrectAnswers = 0;
+                }
+              else numberOfCorrectAnswers = numberOfCorrectAnswers - numberOfWrongAnswers;*/
+            }
+
           });
           //$(this).find(".active")[k].addClass('incorrect');
           //matchPosition = -1;
@@ -183,23 +205,88 @@ this._pickAnswer = function($answer, $answers){
           if(correctAnswers[x] == $(this).data('quiz-answer').toString())$(this).addClass('correct');
         });
       }
+
+
+      /*collectScore.push(numberOfCorrectAnswers - numberOfWrongAnswers);
+      numberOfCorrectAnswers = 0;
+      numberOfWrongAnswers = 0;*/
     });
     //Quiz Summary TODO
 
-    if ( numberOfCorrectAnswers < qT.dataset.questionTotal/3 ) {
-      return {code: 'bad', text: 'Bad'};
+    $('ul[data-quiz-question]').each(function(i)
+    {
+      $($(this).find(".active")).each(function(j)
+      {
+        //document.getElementById("demo3").innerHTML += " Correct-Loop: " + "Q" + i + "A" + j;
+        if($(this).hasClass('correct')) numberOfCorrectAnswers++;
+        
+      });
+      //document.getElementById("demo3").innerHTML += " Correct: " + numberOfCorrectAnswers;
+
+      $($(this).find(".active")).each(function(j)
+      {
+        //document.getElementById("demo3").innerHTML += " Wrong-Loop: " + "Q" + i + "A" + j;
+        if($(this).hasClass('incorrect')) numberOfWrongAnswers++;
+      });
+      //document.getElementById("demo3").innerHTML += " Wrong: " + numberOfWrongAnswers;
+
+      if(numberOfWrongAnswers >= numberOfCorrectAnswers)
+      {
+        numberOfCorrectAnswers = 0;
+        numberOfWrongAnswers = 0;
+      }
+      else numberOfCorrectAnswers = numberOfCorrectAnswers - numberOfWrongAnswers;
+
+      collectScore += numberOfCorrectAnswers;
+      numberOfCorrectAnswers = 0;
+      numberOfWrongAnswers = 0;
+
+      //if(numberOfWrongAnswers >= numberOfCorrectAnswers) numberOfWrongAnswers = 0;
+    });
+    // SAVING SUMMARY DATA
+    var str = "";
+    $('ul[data-quiz-question]').each(function(i)
+    {
+      $($(this).find(".quiz-answer")).each(function(j)
+      {
+        if($(this).hasClass('active'))
+        {
+          str +=  j;
+          
+        }
+      });
+      $('#SavedQuestion'+i).val(str);
+      str = "";
+    });
+
+
+    if ( Math.round((collectScore/maxScore)*100) < 40 ) {
+      //document.getElementById("demo3").innerHTML += " Score: " + Math.round((collectScore/maxScore)*100) + "% / " + maxScore;// + "CS: " + collectScore.toString(); 
+      //document.getElementById("scored").value=Math.round((collectScore/maxScore)*100);
+      $("#scored").val(Math.round((collectScore/maxScore)*100));
+      //if(document.getElementById("scored").value!=="")$( "#target" ).submit();
+      return {code: 'bad', text: Math.round((collectScore/maxScore)*100) + "%"};
     }
-    else if ( numberOfCorrectAnswers < qT.dataset.questionTotal/2 ) {
-      return {code: 'mid', text: 'Moderate'};
+    else if ( Math.round((collectScore/maxScore)*100) < 70 ) {
+      //document.getElementById("demo3").innerHTML += " Score: " + Math.round((collectScore/maxScore)*100) + "% / " + maxScore;// + "CS: " + collectScore.toString();
+     //document.getElementById("scored").value= Math.round((collectScore/maxScore)*100);
+$("#scored").val(Math.round((collectScore/maxScore)*100));
+      //if(document.getElementById("scored").value!=="")$( "#target" ).submit();
+      return {code: 'mid', text: Math.round((collectScore/maxScore)*100) + "%"};
     }
-    else if ( numberOfCorrectAnswers >= qT.dataset.questionTotal/1.5 ) {
-      return {code: 'good', text: 'Excellent'};
+    else if ( Math.round((collectScore/maxScore)*100) >= 70 ) {
+      //document.getElementById("demo3").innerHTML += " Score: " + Math.round((collectScore/maxScore)*100) + "% / " + maxScore;// + "CS: " + collectScore.toString();
+      //document.getElementById("scored").value =Math.round((collectScore/maxScore)*100);
+      $("#scored").val(Math.round((collectScore/maxScore)*100));
+      //if(document.getElementById("scored").value!=="")$( "#target" ).submit();
+      return {code: 'good', text: Math.round((collectScore/maxScore)*100) + "%"};
     }
     else {
       return {code: 'debug', text: 'Debugging'};
     }
   }
 
+//$( "#target" ).submit();
   //Calculates the score for a single question
  
    

@@ -52,5 +52,15 @@ public class FilterByDate extends HttpServlet
         RequestDispatcher rd = request.getRequestDispatcher("/GetResults");
         rd.forward(request, response);
     }
+    
+    /** Returns a short description of the servlet.
+     * 
+     * @return String
+     */
+    @Override
+    public String getServletInfo() 
+    {
+        return "Sets the attributes to enabling filtering according to users preference";
+    }
 
 }

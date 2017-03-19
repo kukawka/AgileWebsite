@@ -19,7 +19,7 @@ public class MainPageModel
     /* As the MainPage loads all Programmes of Study (PoS) will be pulled from the Database 
      * to populate the Nav-Bar.
      */
-    public ArrayList<ProgrammeOfStudy> getPOS() throws SQLException 
+    public ArrayList<ProgrammeOfStudy> getPOS()
     {
         Connection con = null;
         ResultSet resultPOS = null;
@@ -39,19 +39,12 @@ public class MainPageModel
                 pos.setName( resultPOS.getString("Name") );
                 poses.add(pos);
             }
-            
+            con.close();
             return poses;
         } catch (SQLException e) {
             e.printStackTrace();
             return null; // DB Conn failed or no PoS found.
         }
-        finally { //finally runs before a return in the try block
-            if( con != null && !con.isClosed() )
-            {
-                con.close();
-            }
-        }
-        
     }
 
     /* Upon selection of a PoS all relevant modules will be pulled from the DB.

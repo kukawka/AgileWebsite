@@ -32,4 +32,14 @@ public class ClearTheFilter extends HttpServlet
         response.sendRedirect("GetResults");
     }
     
+    /** Returns a short description of the servlet.
+     * 
+     * @return String
+     */
+    @Override
+    public String getServletInfo() 
+    {
+        return "Sets the filter attribute to false to remove the filter";
+    }
+    
 }

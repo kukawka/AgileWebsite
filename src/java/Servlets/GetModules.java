@@ -86,5 +86,15 @@ public class GetModules extends HttpServlet
             rd.forward(request, response);
         }
     }
+    
+    /** Returns a short description of the servlet.
+     * 
+     * @return String
+     */
+    @Override
+    public String getServletInfo() 
+    {
+        return "Allows user to add or remove the modules they want to select/be part of.";
+    }
 
 }
