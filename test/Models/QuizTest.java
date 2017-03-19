@@ -224,5 +224,53 @@ public class QuizTest extends TestCase {
         
         assertNotNull("Database connection failed", result);
     }
+    
+    /**
+     * Test of getResults method, of class Quiz.
+     */
+    @Test
+    public void testEditQuiz() {
+        System.out.println("SubmitEditQuiz");
+        boolean wentThroughCode = true;
+        
+        boolean availability = false;
+        String title="testing_update_quiz";
+        int id = 1;
+
+        instance.EditQuiz(availability, title, id);
+        //if edit fails, the code will never return back to this test method
+        assertTrue("Quiz was edited succesfully.", wentThroughCode); 
+    
+    }
+    
+    @Test
+    public void testEditQuestion() {
+        System.out.println("SubmitEditQuestion");
+        boolean wentThroughCode = true;
+        
+        String text = "testing_update_question";
+        String exp = "testing_update_question_exp";
+        int ID = 1;
+
+        instance.EditQuestion(text, exp, ID);
+        //if edit fails, the code will never return back to this test method
+        assertTrue("Quiz was edited succesfully.", wentThroughCode); 
+    
+    }
+    
+    @Test
+    public void testEditAnswer() {
+        System.out.println("SubmitEditAnswer");
+        boolean wentThroughCode = true;
+        
+        String text = "testing_update_answer";
+        int ID = 1;
+        int correct = 1;
+        
+        instance.EditAnswer(text, ID, correct);
+        //if edit fails, the code will never return back to this test method
+        assertTrue("Quiz was edited succesfully.", wentThroughCode); 
+    
+    }
 
 }
