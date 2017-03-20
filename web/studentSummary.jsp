@@ -81,18 +81,18 @@
                 
 %>
         <div class="quiz-result bad" >
-            <%=score%>
+            <%=score%>%
         </div>
 <%} 
 else if(score<70){ %>
 
 <div class="quiz-result mid" >
-            <%=score%>
+            <%=score%>%
         </div>
 <% } else if(score>70)
 {%>
 <div class="quiz-result good">
-            <%=score%>
+            <%=score%>%
         </div>
     <%
 

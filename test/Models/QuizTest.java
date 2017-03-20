@@ -127,7 +127,7 @@ public class QuizTest extends TestCase {
 
     /**
      * Test of RegisterQuiz method, of class Quiz.
-     */
+     *//*
     @Test
     public void testRegisterQuiz() {
         System.out.println("RegisterQuiz");
@@ -144,10 +144,10 @@ public class QuizTest extends TestCase {
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
-
+*/
     /**
      * Test of SubmitQuestion method, of class Quiz.
-     */
+     *//*
     @Test
     public void testSubmitQuestion() {
         System.out.println("SubmitQuestion");
@@ -163,10 +163,10 @@ public class QuizTest extends TestCase {
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
-
+*/
     /**
      * Test of SubmitAnswer method, of class Quiz.
-     */
+     *//*
     @Test
     public void testSubmitAnswer() {
         System.out.println("SubmitAnswer");
@@ -182,7 +182,7 @@ public class QuizTest extends TestCase {
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
-
+*/
     /**
      * Test of getResults method, of class Quiz.
      */
