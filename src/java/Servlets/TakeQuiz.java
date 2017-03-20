@@ -11,7 +11,6 @@ import Models.Quiz;
 import Models.Result;
 import Models.TakingQuizModel;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.time.LocalDate;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -45,9 +44,7 @@ public class TakeQuiz extends HttpServlet {
             taking.saveGivenAnswer(id,(i+1),request.getParameter("SavedQuestion"+i));
         }
         
-        
-        RequestDispatcher rd = request.getRequestDispatcher("/userAttemptQuiz.jsp");
-        rd.forward(request, response);
+       response.sendRedirect("./StudentSummary");
     }
     
         @Override
