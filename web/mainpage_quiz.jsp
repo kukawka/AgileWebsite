@@ -64,7 +64,7 @@
                             }
                             if ((login.getType()).equals("Student")) {  // if the person is Student it will send them to take the quiz
                         %>
-                        <form method="Post" action="TakeQuiz">
+                        <form method="Get" action="TakeQuiz">
                             <%
                                 }
                             %>  
