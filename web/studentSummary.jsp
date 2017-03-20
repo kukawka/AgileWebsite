@@ -25,7 +25,7 @@
         %>
         <div class="page-header">
             <h1 style="color:black; margin-left: 5%;"><b><%= quizDetails.getTitle()%></b><small style="font-size: 20px; color:lightgrey; margin-left: 5%;">Date: <%= date%></small></h1>
-             <a  class="btn btn-lg btn-info pull-right"   href="MainPage"  style="margin-left: 38%; margin-right: 3%; margin-top:-5%; width: 150px; height: 50px; line-height: 25px;" >Go Back</a>
+             <a  class="btn btn-lg btn-info pull-right"   href="main.jsp"  style="margin-left: 38%; margin-right: 3%; margin-top:-5%; width: 150px; height: 50px; line-height: 25px;" >Home</a>
         </div>
 
         

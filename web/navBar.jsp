@@ -60,15 +60,11 @@
                         <form method="Post" action="MainPage" id='info'>
                             <p>Information about the user.<i> <br>Login_ID: <%=login.getUsername()%><br>Type: <%=login.getType()%> </i></p>
                         </form>
-                        <li class="active"><a href="mainpage.jsp" >Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
+                        <li class="active"><a href="main.jsp" >Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
                         <li id="pos" ><a>
 
                                 <form method="Post" action="MainPage" style="    margin-bottom: 0em;" >
                                     <input type="submit" name="type" value="Programme of Study" id="submit">
-                                </form>
-                                <br>
-                                <form method="Post" action="MainPage" style="margin-bottom: 0em;">
-                                    <input type="submit" name="type" value="Favourites" id="submit">
                                 </form>
                             </a>
 
@@ -76,10 +72,7 @@
 
                         <li class="active" >
                             <a href="Modules"> Modules
-                                <!--<form method="Get" action="Modules">-->
-                                   <!-- <input type="submit" value="Modules" id="submit">-->
                                     <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-book"></span>
-                                <!--</form>-->
                             </a>
                         </li>
 

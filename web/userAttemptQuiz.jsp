@@ -31,20 +31,18 @@ Author     : Atanas
         <div class="page-header">
             <h1 style="color:black; margin-left: 5%;"><b><%= quizDetails.getTitle()%></b><small style="font-size: 20px; color:lightgrey; margin-left: 5%;">Date: <%= quizDetails.getDate()%></small></h1>
         </div>
-        
+       
             <div class="form-group" style="width: 100%;">
-            </div>
-            <div class="form-group" style="width: 100%;">
-                <div class="quizContent">
+                <div class="quizContent" >
                     <!-- If the quiz exists get the data for the user !!!!!!!! -->
                     <% if (quizDetails.getAvailability()) {%>
-                    <input  class="btn btn-lg btn-primary" id='button' onclick="showDiv()" value="Start Quiz" style="margin-left: 40%; margin-top: 15%; width: 300px; height: 100px;" />
+                    <input  class="btn btn-lg btn-primary" id='button' onclick="showDiv()" value="Start Quiz" style="margin-left: 40%; margin-top: 5%; width: 300px; height: 100px;" />
                     <%if(taken != -1){%>
                     <form id= "target" action="StudentSummary" method="POST">
                     <input type="submit" class="btn btn-lg btn-info" id='buttonSummary' onclick="showSummary()" value="Show Summary" style="margin-left: 40%; margin-top: 2%; width: 300px; height: 100px;" />
                     <!-- If the quiz doesn't exist get the data for the user -->
                     </form>
-                    <a  class="btn btn-lg btn-info" id='buttonBack' href="MainPage"  style="margin-left: 40%; margin-top: 2%; width: 300px; height: 100px; line-height: 75px;" >Go Back</a>
+                    <a  class="btn btn-lg btn-info" id='buttonBack' href="main.jsp"  style="margin-left: 40%; margin-top: 2%; width: 300px; height: 100px; line-height: 75px;" >Home</a>
                     
                     <%}} else {%> 
 
