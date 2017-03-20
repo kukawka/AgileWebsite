@@ -48,7 +48,7 @@ public class GetResultsTest {
         HttpServletRequest request = null;
         HttpServletResponse response = null;
         GetResults instance = new GetResults();
-        instance.doPost(request, response);
+       // instance.doPost(request, response);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

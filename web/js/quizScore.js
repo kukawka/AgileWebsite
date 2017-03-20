@@ -12,7 +12,7 @@ function submitQuiz() {
   $('html, body').animate({
   scrollTop: $('.quiz-result').offset().top
   });
-  document.getElementById("demo3").innerHTML = "Reached.";
+  //document.getElementById("demo3").innerHTML = "Reached.";
   quiz._showResult( quiz._calcResult() ); //BROKEN AS FUCK TODO
   $('.quiz-answer').off('click'); //BROKEN AS FUCK TOD 
 }
@@ -30,6 +30,7 @@ function showSummary()
   document.getElementById('showSummaryDiv').style.display = "block";
   document.getElementById('buttonSummary').style.display = "none";
   document.getElementById('button').style.display = "none";
+
 }
 
 var Quiz = function(){

@@ -15,8 +15,6 @@ Author     : Atanas
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
         <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/quizScore.css"/>
-        
-        <TITLE>Take Quiz</TITLE>
     </head>
     <body>
 
@@ -33,9 +31,10 @@ Author     : Atanas
         <div class="page-header">
             <h1 style="color:black; margin-left: 5%;"><b><%= quizDetails.getTitle()%></b><small style="font-size: 20px; color:lightgrey; margin-left: 5%;">Date: <%= quizDetails.getDate()%></small></h1>
         </div>
-       
             <div class="form-group" style="width: 100%;">
-                <div class="quizContent" >
+            </div>
+            <div class="form-group" style="width: 100%;">
+                <div class="quizContent">
                     <!-- If the quiz exists get the data for the user !!!!!!!! -->
                     <% if (quizDetails.getAvailability()) {%>
                     <input  class="btn btn-lg btn-primary" id='button' onclick="showDiv()" value="Start Quiz" style="margin-left: 40%; margin-top: 5%; width: 300px; height: 100px;" />
@@ -44,14 +43,14 @@ Author     : Atanas
                     <input type="submit" class="btn btn-lg btn-info" id='buttonSummary' onclick="showSummary()" value="Show Summary" style="margin-left: 40%; margin-top: 2%; width: 300px; height: 100px;" />
                     <!-- If the quiz doesn't exist get the data for the user -->
                     </form>
-                    <a  class="btn btn-lg btn-info" id='buttonBack' href="main.jsp"  style="margin-left: 40%; margin-top: 2%; width: 300px; height: 100px; line-height: 75px;" >Home</a>
+                     <a  class="btn btn-lg btn-info" id='buttonBack' href="main.jsp"  style="margin-left: 40%; margin-top: 2%; width: 300px; height: 100px; line-height: 75px;" >Home</a>
                     
                     <%}} else {%> 
 
                     <%}%>
                 </div>
             </div>
-       
+
 
         
         <div id="showDiv" style="display: none;">
@@ -94,10 +93,10 @@ Author     : Atanas
             </div>
             <% }%>
 
-      <!--  <p id="demo3"></p> -->
+        <p id="demo3"></p>
         
         <input  type="hidden" id="scored" name="score" value="" />
-        <input   type="submit" class="btn btn-lg btn-primary" id='submitButton' onclick="submitQuiz()" value="Submit" style="margin-left: 42%" />
+        <input   type="submit" class="btn btn-lg btn-primary" id='submitButton' onclick="submitQuiz()" value="Submit" style="margin-left: 42%; width:10%;" />
         </form>
         </div><div class="quiz-result"></div>
 
