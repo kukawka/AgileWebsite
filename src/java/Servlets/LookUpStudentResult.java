@@ -32,7 +32,7 @@ public class LookUpStudentResult extends HttpServlet
         String lookupID = request.getParameter("lookupID");
         session.setAttribute("lookupID", lookupID);
         
-        if ((request.getParameter("relevantStudents"))==null)
+        if ((request.getParameter("relevantStudents")) == null)
         {
             response.sendRedirect("GetResults");
         }
@@ -41,6 +41,16 @@ public class LookUpStudentResult extends HttpServlet
             session.setAttribute("relevantStudents", "yes");  
             response.sendRedirect("RelevantResults");
         }
+    }
+    
+    /** Returns a short description of the servlet.
+     * 
+     * @return String
+     */
+    @Override
+    public String getServletInfo() 
+    {
+        return "Retrieves results of a quiz for Staff to inspect.";
     }
     
 }

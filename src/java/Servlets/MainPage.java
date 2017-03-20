@@ -66,11 +66,13 @@ public class MainPage extends HttpServlet
         if (request.getParameter("type").equals("Programme of Study")) 
         {
             request.setAttribute("type", "pos");
-            try {
+            try 
+            {
                 request.setAttribute("items", mainPageModel.getPOS());
             } catch (SQLException ex) {
                 Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
             RequestDispatcher rd = request.getRequestDispatcher("/mainpage.jsp");
             rd.forward(request, response);
         } 
@@ -79,6 +81,7 @@ public class MainPage extends HttpServlet
             request.setAttribute("type", "module");
             request.setAttribute("heading", request.getParameter("info"));
             request.setAttribute("items", mainPageModel.getModules(Integer.parseInt(request.getParameter("id")),log.getUsername()));
+            
             RequestDispatcher rd = request.getRequestDispatcher("/mainpage.jsp");
             rd.forward(request, response);
         } 
@@ -87,6 +90,7 @@ public class MainPage extends HttpServlet
             request.setAttribute("heading", request.getParameter("info"));
             ArrayList<Quiz> quizzes = mainPageModel.getQuizzes(Integer.parseInt(request.getParameter("id")), log.getType(), Integer.parseInt(log.getUsername()));
             request.setAttribute("items", quizzes);
+            
             RequestDispatcher rd = request.getRequestDispatcher("/mainpage_quiz.jsp");
             rd.forward(request, response);
         }

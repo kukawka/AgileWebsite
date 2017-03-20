@@ -46,32 +46,7 @@
         <%
             QuizDetails quizDetails = (QuizDetails) session.getAttribute("QuizDetails");
         %>
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#">QuizUp</a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li role="presentation" id="irrel"><a href="GetResults">All Students</a></li>
-                    <li role="presentation" class="active" id="rel"><a href="#">Relevant Students Only</a></li>
-
-                    <form class="navbar-form navbar-left"  method="POST" action="LookUpStudentResult">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="ID of a Student" name="lookupID">
-                            <input type="hidden" name="relevantStudents" value="yes">
-                        </div>     
-                        <button type="submit" class="btn btn-default">Look Up</button>
-                    </form>
-                    <form class="navbar-form navbar-left">
-                        <button type="button" class="btn btn-default btn-info filtering" data-toggle="modal" data-target="#myModal">Filter by Date Range</button>
-                    </form>
-                    <form class="navbar-form navbar-left" method="POST" action="ClearTheFilter">
-                        <button type="submit" class="btn btn-default btn-warning filtering">Clear the Filter</button>
-                    </form>
-                </ul>
-            </div><!-- /.container-fluid -->
-        </nav>
+        <jsp:include page="/navBar.jsp" />
         <!--<div class="main">-->
         <div style="margin-left: 5%; margin-right: 5%;" >
             <div class="page-header">

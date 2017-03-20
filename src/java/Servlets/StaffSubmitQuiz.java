@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-//package uk.ac.dundee.computing.aec.instagrim.servlets;
 package Servlets;
+
+import Models.Quiz;
 
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -16,18 +11,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//Quiz
-import Models.Quiz;
-
 /**
- *
+ * Refactored 19/03 by Philipp
  * @author sophia
  */
 @WebServlet(name = "StaffSubmitQuiz", urlPatterns = {"/StaffSubmitQuiz"})
-public class StaffSubmitQuiz extends HttpServlet {
+public class StaffSubmitQuiz extends HttpServlet 
+{
     
-    public void init(ServletConfig config) throws ServletException {
-    }
+    public void init(ServletConfig config) throws ServletException 
+    {}
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -39,69 +32,68 @@ public class StaffSubmitQuiz extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException 
+    {
 
-        Quiz qz = new Quiz();
-        
-        int numOfQuestions=Integer.valueOf(request.getParameter("questionsnumber")); 
-        int quizID=Integer.valueOf(request.getParameter("quizID"));
+        Quiz quiz          = new Quiz();
+        int numOfQuestions = Integer.valueOf(request.getParameter("questionsnumber")); 
+        int quizID         = Integer.valueOf(request.getParameter("quizID"));
 
-        for (int i=0; i<numOfQuestions; i++)
+        for (int i = 0; i < numOfQuestions; i++)
         {
-            int questionID=-1;
-
-            String questionText = request.getParameter("questiontext"+(i+1));
+            int questionID = -1;
+            String questionText    = request.getParameter("questiontext"+(i+1));
             String explanationText = request.getParameter("explanationtext"+(i+1));
             
+            questionID = quiz.SubmitQuestion(questionText, explanationText, quizID, (i+1));
             
-            questionID=qz.SubmitQuestion(questionText, explanationText, quizID, (i+1));
-            System.out.println("Question " +(i+1)+ " submitted!");
-            
-            int numOfAnswers=Integer.parseInt(request.getParameter("numOfAnswers"+(i+1)));
-            
-            for (int j=0; j<numOfAnswers; j++)
+            int numOfAnswers = Integer.parseInt(request.getParameter("numOfAnswers"+(i+1)));
+            for (int j = 0; j < numOfAnswers; j++)
             {
                 //post the info of every answer
                 String answerText = request.getParameter("answertext"+(i+1)+(j+1));
-                String correct = request.getParameter("correct"+(i+1)+(j+1)); //will be 1 or null
-                
-                
+                String correct    = request.getParameter("correct"+(i+1)+(j+1)); // Will be 1 or null.
                 int correctInt;
 
                 if (correct!=null)
                 {
-                    correctInt=1;
+                    correctInt = 1;
                 }
                 else
                 {
-                    correctInt=0;
+                    correctInt = 0;
                 }
-                
-                qz.SubmitAnswer(answerText, correctInt, questionID);
-                System.out.println("Answer " +(j+1)+ " for Question" +(i+1)+ " submitted!");
-                
+                quiz.SubmitAnswer(answerText, correctInt, questionID);
             }
-             System.out.println("Quiz " +quizID+ " information submitted!");
         }
-       RequestDispatcher rd=request.getRequestDispatcher("/successfulcreation.jsp");
-       rd.forward(request,response);
+        
+        RequestDispatcher rd=request.getRequestDispatcher("/successfulcreation.jsp");
+        rd.forward(request,response);
     }
     
+    /**
+     * 
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException 
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        RequestDispatcher rd=request.getRequestDispatcher("/staffSubmitQuiz.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/staffSubmitQuiz.jsp");
         rd.forward(request,response);
     }
 
     /**
      * Returns a short description of the servlet.
      *
-     * @return a String containing servlet description
+     * @return String
      */
     @Override
-    public String getServletInfo() {
+    public String getServletInfo() 
+    {
         return "Acquires the core information needed to Create a Quiz"
                 + "from a Staff member (question texts & explanations, answers).";
     }

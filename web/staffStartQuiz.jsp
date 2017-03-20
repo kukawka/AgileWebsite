@@ -48,60 +48,47 @@
             });</script>
     </head>
     <body bgcolor="c0d13e">
-        <nav class="navbar navbar-inverse sidebar" role="navigation">
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">QuizUp</a>
-                </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->            
-                <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <% LoggedIn login = (LoggedIn) session.getAttribute("LoggedIn");%>
-                         <form method="Post" action="MainPage" id='info'>
-                             <p>Information about the user.<i> <br>Username: <%=login.getUsername()%><br>Type: <%=login.getType()%> </i></p>
-                                </form>
-                        <li class="active"><a href="mainpage.jsp" >Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
-                        <li id="pos" ><a>
-                               
-                                 <form method="Post" action="MainPage">
-                                    <input type="submit" name="type" value="Programme of Study" id="submit">
-                                </form>
-                                <form method="Post" action="MainPage">
-                                    <input type="submit" name="type" value="Favourites" id="submit">
-                                </form>
-                                </a>
-                                <li class="active"><a href="index.jsp" >Log Out<span style="font-size:16px;"  class="pull-right hidden-xs showopacity glyphicon glyphicon-log-out"></span></a></li>
-                    </ul>
-                </div>
-              
-            </div>
-        </nav>     
+         <jsp:include page="/navBar.jsp" />
         <article>       
           <div class="main">
             <form method="POST"  action="StaffStartQuiz">
-                <ul>
+              
+                    
                     <%-- Quiz Information --%>
-                    <h2>Submit a Quiz</h2>
-                    <h3>Quiz Options:</h3>
-                    <li>Quiz Title: <input type="text" name="title" minlength="4" required="required"></li>
+                    <center><h2>Submit a Quiz</h2></center>
+                    <br>
+                    <form>
+                       <div class="panel panel-default" style="width:75%;">
+                       <div class="panel-heading">Quiz Options:</div>
+                       <div class="panel-body">
+                          
+                        <input class="form-control" placeholder="Quiz Title:" style="width:30%;" type="text" name="title" minlength="4" required="required"><br>
                     
                      <input type="hidden" name="moduleID" value=<%=request.getAttribute("moduleID")%>>
-                    <li>ModuleID: <%=request.getAttribute("moduleID")%></li>                  
-                    <li>Availability: <input type="checkbox" name="available" value="1"> Yes </li>
-                    <li>Number of questions to provide: <input type="number" name="questionsnumber" minlength="1" min="1" max="100" required="required"></li><br>
-                </ul>
+                     <label>ModuleID: <%=request.getAttribute("moduleID")%><br></label>
+                    
+                    <%--<li>ModuleID: <input type="text" name="moduleID" minlength="1" maxlength="10"  required ="required"></li>--%>
+                    <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="available" value="1" style="">Availability
+                                    </label>
+                                </div>
+                   
+                     <input class="form-control" placeholder="Number of questions to provide:" style="width:30%;" type="number" name="questionsnumber" minlength="1" required="required">   <br>
+               
                 <br/>
-                <input type="submit" value="Start Quiz"> 
-            </form>
-            </div>                   
+                <input class="btn btn-sm btn-success" style="border-style:solid;" type="submit" value="Start Quiz"> 
+                    </form>
+                        
+                        </div>
+              </div>
+            </form>                   
           </div>
         </article>
+		 <footer>
+            <ul>
+                <%--<li class="footer"><a href="/">Home</a></li>--%>
+            </ul>
+        </footer>
     </body>
 </html>

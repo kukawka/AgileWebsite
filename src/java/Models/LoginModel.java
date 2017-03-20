@@ -12,8 +12,11 @@ import java.sql.Statement;
  */
 public class LoginModel 
 {
-    /* Verify entered Login credentials.
-     *
+    /** Verify entered Login credentials.
+     * 
+     * @param username
+     * @param password
+     * @return String
      */
     public String authenticateLogin(String username, String password) 
     {
@@ -44,6 +47,7 @@ public class LoginModel
                     break;
                 }
             }
+            
             resultSet.close();
             statement.close();
             con.close();

@@ -24,7 +24,7 @@
         <div class="main">
             <div class="page-header" style="margin-left: 2%;">
 
-                <h1>Your Module Choices <button type="button" class="btn btn-lg btn-primary" style=" color: white; margin-left: 20px; text-decoration: none;"><a href="EditModules" style="color:white;">Add/Delete Modules &nbsp;<span class="glyphicon glyphicon-pencil"</span></a></button></h1>
+                <h1>Your Module Choices <button type="button" class="btn2 btn-lg btn-primary" style=" color: white; margin-left: 20px; text-decoration: none;"><a href="EditModules" style="color:white;">Add/Delete Modules &nbsp;<span class="glyphicon glyphicon-pencil"</span></a></button></h1>
 
             </div> 
 
@@ -41,7 +41,8 @@
 
                     <input type="hidden" name="id" value="<%=mod.get(i).getID()%>"/>
                     <input type="hidden" name="type" value="quiz"/>
-                    <input class="Inner1" type="submit" name="info" value="<%=mod.get(i).getName()%>"/>
+                    <input id="submit1" type="submit" name="info" value="<%=mod.get(i).getName()%>"/>
+                   
                 </form>
             </div>
 

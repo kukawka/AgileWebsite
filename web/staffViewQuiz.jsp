@@ -13,7 +13,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Quiz Inspector</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/mainpage_style.css"/>
         <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/viewQuiz.css"/>
@@ -55,7 +55,7 @@
             });
         </script>
     </head>
-    <body>
+    <body >
         <%
             QuizDetails quizDetails = (QuizDetails) session.getAttribute("QuizDetails");
             session.setAttribute("Filtered", false);
@@ -63,58 +63,14 @@
         <%
             int ID = (Integer) session.getAttribute("QuizID");
         %>
-        <nav class="navbar navbar-inverse sidebar" role="navigation" style="position: fixed;">
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">QuizUp</a>
-                </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <% LoggedIn login = (LoggedIn) session.getAttribute("LoggedIn");%>
-                        <form method="Post" action="MainPage" id='info'>
-                            <p>Information about the user.<i> <br>Username: <%=login.getUsername()%><br>Type: <%=login.getType()%> </i></p>
-                        </form>
-                        <li class="active"><a href="mainpage.jsp" >Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
-                        <li id="pos" ><a>
-
-                                <form method="Post" action="MainPage">
-                                    <input type="submit" name="type" value="Programme of Study" id="submit">
-                                </form>
-                                <br>
-                                <form method="Post" action="MainPage">
-                                    <input type="submit" name="type" value="Favourites" id="submit">
-                                </form>
-                            </a>
-                        <li class="active">
-                            <a>
-                                <form method="POST"  action="Logout">
-                                    <button type="submit" style="float:left; background:none; border:none; margin:0; padding:0;">Log out</button>
-                                    <span style="font-size:16px;"  class="pull-right hidden-xs showopacity glyphicon glyphicon-log-out"></span>
-                                </form>
-                            </a>
-
-                        </li>
-
-
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <div class="main">
+        <jsp:include page="/navBar.jsp" />
+        <div class="main" >
             <div style="margin-left: 3%; margin-top: 0%; padding-top: 0px;">
                 <div class="page-header">
-                    <h1> Quiz Inspector</h1>
+                    <h1 style="color: #ffffff; font-family: 'Raleway',sans-serif; font-size: 66px; font-weight: 800; line-height: 72px;;text-transform: uppercase;"> Quiz Inspector</h1>
                 </div>
                 <div class="col-md-5 col-lg-5">
-                    <h2 style="color: #fff;"><b>Quiz Title: </b><%= quizDetails.getTitle()%></h2> 
+                    <h2 style="color: #ffffff; font-family: 'Raleway',sans-serif; font-size: 66px; font-weight: 800; line-height: 72px;;text-transform: uppercase;"><b>Quiz Title:<br></b><%= quizDetails.getTitle()%></h2><br>
                     <div class="checkbox">
                         <label style="color: #fff;">
                             <% if (quizDetails.getAvailability()) {%>
@@ -129,15 +85,15 @@
                 <div class="col-md-2 col-lg-2"></div>
                 <div class="col-md-5 col-lg-5">
                     <div class="list-group" >
-                        <button type="button" class="list-group-item list-group-item-info"><a href="Stats" style="" id="edit">See Statistics <span class="glyphicon glyphicon-stats"</span></a></button>
+                        <button type="button" class="btn btn-1 btn-1e"><a href="Stats" style="" id="edit">See Statistics <span class="glyphicon glyphicon-stats"</span></a></button>
                         <!-- <form method="POST" action="GetResults" style="margin-left: 0%; ">-->
-                        <button type="button" class="list-group-item list-group-item-warning"><a href="GetResults" >See All Results <span class="glyphicon glyphicon-sort-by-order" aria-hidden="true"></span></a></button>
+                        <button type="button" class="btn btn-1 btn-1e"><a href="GetResults" >See All Results <span class="glyphicon glyphicon-sort-by-order" aria-hidden="true"></span></a></button>
                              <!--<input type="hidden" value="<%= ID%>" id="ID" name="ID">
                          </form>-->
-                        <button type="button" class="list-group-item-success list-group-item" id="edit"><a href="staffEditQuiz.jsp" style="" id="edit">Edit Quiz &nbsp;<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></button>
-                        <button  class="list-group-item list-group-item-danger" data-toggle="modal" data-target="#myModal">Schedule Availability <span class="glyphicon glyphicon-list-alt"</button>
-                        <button  class="list-group-item list-group-item-danger active" id='button' onclick="showDiv()" value="See Questions">See All Questions <span class="glyphicon glyphicon-plus"></button>
-        
+                        <button type="button" class="btn btn-1 btn-1e" id="edit"><a href="staffEditQuiz.jsp" style="" id="edit">Edit Quiz &nbsp;<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></button>
+                        <button class="btn btn-1 btn-1e" data-toggle="modal" data-target="#myModal"> Schedule Availability <span class="glyphicon glyphicon-list-alt"</button>
+                        <button  class="btn btn-1 btn-1e" id='button' onclick="showDiv()" value="See Questions">See All Questions <span class="glyphicon glyphicon-plus"></button>
+                        
                     </div>
                 </div>
                 <!-- Reference: https://formden.com/blog/date-picker-->

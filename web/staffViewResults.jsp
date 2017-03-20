@@ -15,7 +15,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Student Results</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/mainpage_style.css"/>
         <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/results.css"/>
@@ -49,7 +49,7 @@
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">QuizUp</a>
+                    <a class="navbar-brand" href="mainpage.jsp">QuizUp</a>
                 </div>
                 <ul class="nav navbar-nav">
                     <li role="presentation" class="active"  id="irrel"><a href="#">All Students</a></li>
@@ -60,13 +60,13 @@
                             <input type="text" class="form-control" placeholder="ID of a Student" name="lookupID">
                         </div>
                         <%-- <form class="navbar-form navbar-left" method="POST" action="LookUpStudentResult"> --%>
-                        <button type="submit" class="btn btn-default">Look Up</button>
+                        <button type="submit" class="btn1 btn-default">Look Up</button>
                         </form>
                     <form class="navbar-form navbar-left">
-                        <button type="button" class="btn btn-default btn-info filtering" data-toggle="modal" data-target="#myModal">Filter by Date Range</button>
+                        <button type="button" class="btn1 btn-default btn-info filtering" data-toggle="modal" data-target="#myModal">Filter by Date Range</button>
                     </form>
                     <form class="navbar-form navbar-left" method="POST" action="ClearTheFilter">
-                        <button type="submit" class="btn btn-default btn-warning filtering">Clear the Filter</button>
+                        <button type="submit" class="btn1 btn-default btn-warning filtering">Clear the Filter</button>
                     </form>
                 </ul>
 

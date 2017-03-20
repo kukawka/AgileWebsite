@@ -181,13 +181,13 @@ section{
     margin-right:1%;
     margin-bottom:1%;
     float: left;
-    width:150px;
-    height:50px;
+    width:500px;
+    height:60px;
     background: #fff;
     border: 2px solid #333;
     border-color: hsla(0, 0%, 0%, 0.7);
 }
-.btn{color:#aaa;
+.btn2{color:#aaa;
      font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
      font-style:italic;
 }
@@ -199,14 +199,23 @@ input#submit{
     border-style:none;
 }
 input#submit1{
-    word-wrap: break-word;
-    width:100%;
-    height:100%;
-    background:#1a1a1a;
-    border-style: solid;
-    font-size:1em;
-    color:#fff;
-    cursor:pointer;
+    border: 2px solid #333;
+	font-family: inherit;
+	font-size: inherit;
+	color: inherit;
+	background: none;
+	cursor: pointer;
+	display: inline-block;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: 700;
+	outline: none;
+	position: relative;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+        width:100%;
+        height:100%;
 }
 input#submit1:hover {
     background: rgba(0,0,0,0);
@@ -223,14 +232,25 @@ input#submit2:hover {
     color: #1a1a1a;
     box-shadow: inset 0 0 0 3px #1a1a1a;
 }
-input#submit2{float:left;
-              width:85%;
-              height:100%;
-              background:#1a1a1a;
-              border-style: solid;
-              font-size:1em;
-              color:#fff;
-              cursor:pointer;
+input#submit2{border: none;
+    border-right:solid 2px;
+    float:left;
+	font-family: inherit;
+	font-size: inherit;
+	color: inherit;
+	background: none;
+	cursor: pointer;
+	display: inline-block;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: 700;
+	outline: none;
+	position: relative;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+        width:85%;
+        height:100%;
 }
 span#edit{float:right;
           margin-right:5%;
@@ -240,9 +260,9 @@ span#edit{float:right;
 
 .btnhandler{float:left;
             height:100%;
-            width:13%;
-            margin-top:5px;
-            margin-left:2.5px;
+            width:10%;
+            margin-top:16px;
+            margin-left:13px;
 }
 .grid-item a{
     float:right;
@@ -262,33 +282,9 @@ span#edit{float:right;
 
 }
 
-.Inner, .Inner1{
-    border-radius: 10px;
-    border: 3px solid #91033E;
-    word-wrap: break-word;
-    width:100%;
-    height:100%;
-    font-size:1.5em;
-
-    background-color: white;
-
-}
-
-.Inner1{
-    border: 3px solid #177D05;
-}
-
-.Inner:hover {
-    background: rgba(232, 118, 166, 0.3);
-}
-
-.Inner1:hover {
-    background: rgba(101, 217, 80, 0.3);
-
-}
 
 .bttonTrue, .bttonFalse{
-    height: 100%;
+    height: 50%;
     border: none;
     border-radius:0px 10px 10px 0px;
     background-color: white;
@@ -302,7 +298,98 @@ span#edit{float:right;
 }
 
 .bttonFalse:hover {
-    background: rgba(232, 118, 166, 0.3);
+    color: rgba(232, 118, 166, 0.3);
 
+}
+.btn {
+	border: none;
+	font-family: inherit;
+	font-size: inherit;
+	color: inherit;
+	background: none;
+	cursor: pointer;
+	padding: 25px 80px;
+	display: inline-block;
+	margin: 15px 30px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: 700;
+	outline: none;
+	position: relative;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+.btn:after {
+	content: '';
+	position: absolute;
+	z-index: -1;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+/* Button 1e */
+.btn-1e {
+	overflow: hidden;
+}
+
+.btn-1e:after {
+	width: 100%;
+	height: 0;
+	top: 50%;
+	left: 50%;
+	background: #fff;
+	opacity: 0;
+	-webkit-transform: translateX(-50%) translateY(-50%) rotate(45deg);
+	-moz-transform: translateX(-50%) translateY(-50%) rotate(45deg);
+	-ms-transform: translateX(-50%) translateY(-50%) rotate(45deg);
+	transform: translateX(-50%) translateY(-50%) rotate(45deg);
+}
+
+.btn-1e:hover,
+.btn-1e:active {
+	color: black;
+}
+
+.btn-1e:hover:after {
+	height: 260%;
+	opacity: 1;
+}
+
+.btn-1e:active:after {
+	height: 400%;
+	opacity: 1;
+}
+.btn-1 {
+    border: 3px solid #fff;
+    color: #fff;
+}
+.btn-1e a{
+color: inherit;
+}
+.btn-1e a:hover{text-decoration:none;}
+.modulebutton{
+        border: 2px solid #333;
+	font-family: inherit;
+	font-size: inherit;
+	color: inherit;
+	background: none;
+	cursor: pointer;
+	display: inline-block;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: 700;
+	outline: none;
+	position: relative;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+        width:100%;
+        height:100%;
+}
+.modulebutton:hover {
+    background: rgba(0,0,0,0);
+    color: #1a1a1a;
+    box-shadow: inset 0 0 0 3px #1a1a1a;
 }
 

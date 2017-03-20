@@ -1,6 +1,7 @@
 package Models;
 
 import Beans.Module;
+
 import Util.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,6 +11,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
+ * Refactored 18/03 and 19/03 by Philipp and Javier.
  * @author Javier
  */
 
@@ -60,7 +62,7 @@ public class Modules
             con = DBConnection.createConnection();
             PreparedStatement prepStatement;
 
-            prepStatement = con.prepareStatement("DELETE from student_modules where studentID = ? and moduleID = ?");
+            prepStatement = con.prepareStatement("DELETE FROM student_modules WHERE studentID = ? AND moduleID = ?");
             prepStatement.setString(1, user);
             prepStatement.setInt(2, moduleID);
             prepStatement.executeUpdate();

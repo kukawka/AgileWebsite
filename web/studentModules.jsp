@@ -28,7 +28,7 @@
                 <form method="Post" action="GetModules">
                     <input type="hidden" name="id" value="<%=request.getParameter("id")%>"/> <!-- this value sends you to that pos after submitting choices -->   
                     <input type='hidden' id= 'hiddenField' name="moduleChoice" value='' />
-                    <input type="submit" class="btn btn-lg btn-primary" id='button' style=" color: white; float: right; position: relative; bottom: 55px; margin-right: 20px; display: none;" value="Submit Choices"/>
+                    <input type="submit" class="btn2 btn-lg btn-primary" id='button' style=" color: white; float: right; position: relative; bottom: 55px; margin-right: 20px; display: none;" value="Submit Choices"/>
                 </form>
 
 
@@ -43,7 +43,7 @@
 
                     <input type="hidden" name="id" value="<%=pos.get(i).getID()%>"/>
                     <input type="hidden" name="type" value="module"/>
-                    <input class="Inner" type="submit" name="info" value="<%=pos.get(i).getName()%>"/>
+                    <input id="submit1" type="submit" name="info" value="<%=pos.get(i).getName()%>"/>
                 </form>
 
             </div>
@@ -66,10 +66,10 @@
 
             <div class="Outer">
                 <input type="hidden" name="id" value="<%=mod.get(i).getID()%>"/>
-                <div class="Inner1" style="text-align: center; vertical-align: middle; line-height: 80px;">
+                <div class="modulebutton" style="text-align: center; vertical-align: middle; line-height: 80px;">
                     <%=mod.get(i).getName()%>
                     <% if(mod.get(i).getChoice() == 0){ %>
-                    <button class="bttonTrue" id="<%=mod.get(i).getID()%>" onClick="reply_click(this.id)">&#10003;</button>
+                    <button class="bttonTrue" id="<%=mod.get(i).getID()%>" onClick="reply_click(this.id)">ADD</button>
                     <% } else { %>
 
                     <form method="Post" action="GetModules">
@@ -92,14 +92,15 @@
         <style>
 
             .bttonTrue, .bttonFalse{
+                
+                
                 height: 100%;
                 border: none;
-                border-radius:0px 8px 8px 0px;
-                background-color: white;
+                border-radius:0px 0px 0px 0px;
+                background-color:inherit;
                 float: right;
                 cursor: pointer;
             }
-
             .bttonTrue{
                 color:green;
             }
