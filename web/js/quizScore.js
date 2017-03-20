@@ -22,6 +22,7 @@ function showDiv()
   document.getElementById('showDiv').style.display = "block";
   document.getElementById('button').style.display = "none";
   document.getElementById('buttonSummary').style.display = "none";
+  document.getElementById('buttonBack').style.display = "none";
 }
 
 function showSummary()

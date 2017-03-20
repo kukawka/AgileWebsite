@@ -31,19 +31,19 @@ Author     : Atanas
         <div class="page-header">
             <h1 style="color:black; margin-left: 5%;"><b><%= quizDetails.getTitle()%></b><small style="font-size: 20px; color:lightgrey; margin-left: 5%;">Date: <%= quizDetails.getDate()%></small></h1>
         </div>
-        
+       
             <div class="form-group" style="width: 100%;">
-            </div>
-            <div class="form-group" style="width: 100%;">
-                <div class="quizContent">
+                <div class="quizContent" >
                     <!-- If the quiz exists get the data for the user !!!!!!!! -->
                     <% if (quizDetails.getAvailability()) {%>
-                    <input  class="btn btn-lg btn-primary" id='button' onclick="showDiv()" value="Start Quiz" style="margin-left: 40%; margin-top: 15%; width: 300px; height: 100px;" />
+                    <input  class="btn btn-lg btn-primary" id='button' onclick="showDiv()" value="Start Quiz" style="margin-left: 40%; margin-top: 5%; width: 300px; height: 100px;" />
                     <%if(taken != -1){%>
                     <form id= "target" action="StudentSummary" method="POST">
                     <input type="submit" class="btn btn-lg btn-info" id='buttonSummary' onclick="showSummary()" value="Show Summary" style="margin-left: 40%; margin-top: 2%; width: 300px; height: 100px;" />
-                    <!-- If the quiz dosn't exist get the data for the user -->
+                    <!-- If the quiz doesn't exist get the data for the user -->
                     </form>
+                    <a  class="btn btn-lg btn-info" id='buttonBack' href="main.jsp"  style="margin-left: 40%; margin-top: 2%; width: 300px; height: 100px; line-height: 75px;" >Home</a>
+                    
                     <%}} else {%> 
 
                     <%}%>
@@ -68,7 +68,7 @@ Author     : Atanas
                 <div class="explanation" style="display: none"><p><b><h5>Explanation:</b><%= quizDetails.getQuestions().get(x).getExplanation()%></h5></p></div>
                 <!-- List group -->
                 <ul data-quiz-question=<%=x + 1%>>
-                <input type="" id="SavedQuestion<%=x%>" name="SavedQuestion<%=x%>" value="">
+                <input type="hidden" id="SavedQuestion<%=x%>" name="SavedQuestion<%=x%>" value="">
 
                     <% 
                     
@@ -92,9 +92,9 @@ Author     : Atanas
             </div>
             <% }%>
 
-        <p id="demo3"></p>
+      <!--  <p id="demo3"></p> -->
         
-        <input  id="scored" name="score" value="" />
+        <input  type="hidden" id="scored" name="score" value="" />
         <input   type="submit" class="btn btn-lg btn-primary" id='submitButton' onclick="submitQuiz()" value="Submit" style="margin-left: 42%" />
         </form>
         </div><div class="quiz-result"></div>
