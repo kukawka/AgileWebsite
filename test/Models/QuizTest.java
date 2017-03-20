@@ -58,14 +58,14 @@ public class QuizTest extends TestCase {
         QuizResults result = instance.getQuizResults(1);
 
         //there're currently 3 scores for the quiz so first of all I need to check if 3 scores are retrieved
-        assertEquals("The right number of scores wasn't returned", 3, result.getScores().size());
-        assertNotEquals("Not all scores were returned", 2, result.getScores().size());
-        assertNotEquals("Only one score was returned", 1, result.getScores().size());
+        assertEquals("The right number of scores wasn't returned", 1, result.getScores().size());
+        assertNotEquals("Not all scores were returned", 10, result.getScores().size());
+        assertNotEquals("Only one score was returned", 0, result.getScores().size());
         assertNotEquals("Too many scores were returned", 4, result.getScores().size());
 
-        assertNotEquals("The right average wasn't returned ", 67.5, result.getAverage());
-        assertNotEquals("The right max wasn't returned", 87, result.getMaxi());
-        assertNotEquals("The right max wasn't returned", 39, result.getMini());
+        assertNotEquals("The right average wasn't returned ", 100, result.getAverage());
+        assertNotEquals("The right max wasn't returned", 99, result.getMaxi());
+        assertNotEquals("The right max wasn't returned", 30, result.getMini());
 
         QuizResults expResult = new QuizResults();
         //to be continued
@@ -79,29 +79,29 @@ public class QuizTest extends TestCase {
     @Test
     public void testGetQuiz() {
         System.out.println("getQuiz");
-        int quizID = 2;
+        int quizID = 1;
 
         QuizDetails expResult = new QuizDetails();
-        expResult.setTitle("QuizTest11");
-        expResult.setAvailability(true);
-        expResult.setDate("2017-02-17");
+        expResult.setTitle("testing_update_quiz");
+        expResult.setAvailability(false);
+        expResult.setDate("2017-03-20");
         ArrayList<Question> questions = new ArrayList<Question>();
         Question q1 = new Question();
         //q1.setCorrectAnswerID(0);
-        q1.setQuestionText("wddd");
-        q1.setExplanation("asfas");
+        q1.setQuestionText("testing_update_question");
+        q1.setExplanation("testing_update_question_exp");
         questions.add(q1);
 
         Question q2 = new Question();
         //q2.setCorrectAnswerID(1);
-        q2.setQuestionText("AAAA");
-        q2.setExplanation("ffff");
+        q2.setQuestionText("Tick all the animals (Q2)");
+        q2.setExplanation("Animals are animals  you animal (Explan Q2)");
         questions.add(q2);
 
         Question q3 = new Question();
         //q3.setCorrectAnswerID(-1);
-        q3.setQuestionText("ffff");
-        q3.setExplanation("www");
+        q3.setQuestionText("Who let the dogs out? (Q3)");
+        q3.setExplanation("Song by band Baha Men");
         questions.add(q3);
 
         expResult.setQuestions(questions);
@@ -203,13 +203,11 @@ public class QuizTest extends TestCase {
         int maxi = 79;
         int mini = 65;
         scores.add(65);
-        scores.add(79);
         matricNum.add("4");
-        matricNum.add("6");
-        dates.add("2017-03-03");
-        dates.add("2017-02-20");
-        surnames.add("Smith");
-        surnames.add("Burns");
+
+        dates.add("2017-03-20");
+        surnames.add("Kostov");
+
         expResult.setDates(dates);
         expResult.setSurnames(surnames);
         expResult.setMatricNum(matricNum);
@@ -218,9 +216,9 @@ public class QuizTest extends TestCase {
         assertNotEquals("Too many results were returned", (expResult.getScores().size())+1, result.getScores().size());
         assertNotEquals("Too few results were returned", (expResult.getScores().size())-1, result.getScores().size());
         assertEquals("The right number of results wasn't returned", expResult.getScores().size(), result.getScores().size());
-        assertEquals("The right student's data wasn't returned", expResult.getSurnames().get(1), result.getSurnames().get(1));
-        assertEquals("The right date wasn't returned", expResult.getDates().get(1), result.getDates().get(1));
-        assertEquals("The right student wasn't returned", expResult.getMatricNum().get(1), result.getMatricNum().get(1));
+        assertEquals("The right student's data wasn't returned", expResult.getSurnames().get(0), result.getSurnames().get(0));
+        assertEquals("The right date wasn't returned", expResult.getDates().get(0), result.getDates().get(0));
+        //assertEquals("The right student wasn't returned", expResult.getMatricNum().get(1), result.getMatricNum().get(1));
         
         assertNotNull("Database connection failed", result);
     }

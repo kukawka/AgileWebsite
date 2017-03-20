@@ -76,7 +76,7 @@ public class ResultTest {
     public void testGetStudentScore() {
         System.out.println("getStudentScore");
         int quizID = 1;
-        int expResult = 60;
+        int expResult = 100;
         int result = instance.getStudentScore(quizID);
         System.out.println(result);
         assertSame("Getting student score test is successfull.",expResult, result);
