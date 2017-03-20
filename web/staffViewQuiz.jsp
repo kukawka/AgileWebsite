@@ -134,7 +134,7 @@
                         <div class="panel panel-default" style="margin-left: -15px;">
                             <!-- Default panel contents -->
 
-                            <div class="panel-heading"><h4><%=x + 1%>. <%= quizDetails.getQuestions().get(x).getQuestionText()%><button type="button" class="list-group-item list-group-item-warning" data-toggle="modal" data-target="#myModal">See Results <span class="glyphicon glyphicon-sort-by-order" aria-hidden="true"></span></button></h4></div>
+                            <div class="panel-heading"><h4><%=x + 1%>. <%= quizDetails.getQuestions().get(x).getQuestionText()%></h4></div>
                             <div class="panel-body">
                                 <p><b><h5>Explanation: </b> <%= quizDetails.getQuestions().get(x).getExplanation()%></h5></p>
                             </div>
