@@ -91,7 +91,7 @@
                              <!--<input type="hidden" value="<%= ID%>" id="ID" name="ID">
                          </form>-->
                         <button type="button" class="btn btn-1 btn-1e" id="edit"><a href="staffEditQuiz.jsp" style="" id="edit">Edit Quiz &nbsp;<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></button>
-                        <button class="btn btn-1 btn-1e" data-toggle="modal" data-target="#myModal"> Schedule Availability <span class="glyphicon glyphicon-list-alt"</button>
+                        <!-- <button class="btn btn-1 btn-1e" data-toggle="modal" data-target="#myModal"> Schedule Availability <span class="glyphicon glyphicon-list-alt"</button> -->
                         <button  class="btn btn-1 btn-1e" id='button' onclick="showDiv()" value="See Questions">See All Questions <span class="glyphicon glyphicon-plus"></button>
                         
                     </div>
