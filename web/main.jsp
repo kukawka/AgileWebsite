@@ -16,7 +16,7 @@
     <body>
         <jsp:include page="/navBar.jsp" />
         <div class="main">
-            WELCOME TO QUIZUP
+            <img style="margin-left:10%;margin-top:5%;" src="<%=request.getContextPath()%>/css/img/logo.png">
         </DIV>
     </body>
 </html>

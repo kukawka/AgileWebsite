@@ -52,8 +52,9 @@ body {
   border-color: tomato;
 }
 .quiz-answer.active.correct:before {
-  outline: 2px solid springgreen;
   outline-offset: 2px;
+  content: '✓';
+  line-height: 0.8;
 }
 .quiz-answer.active.incorrect:before {
   outline: 2px solid tomato;
