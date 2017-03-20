@@ -21,12 +21,13 @@ public class Modules
      *  
      * @param user
      * @param IDs 
+     * return Test variable for unit testing
      */
-    public void setFavModules(String user, String IDs)
+    public int setFavModules(String user, String IDs)
     {
         Connection con;
         String[] idArray = IDs.replaceFirst("^,", "").split(",");
-
+        int test = 0;
         try 
         {
             con = DBConnection.createConnection();
@@ -38,25 +39,28 @@ public class Modules
                 prepStatement = con.prepareStatement("INSERT INTO student_modules (studentID, moduleID) VALUES (?,?)");
                 prepStatement.setString(1, user);
                 prepStatement.setInt(2, choice);
-                prepStatement.executeUpdate();
+                test = prepStatement.executeUpdate();
                 prepStatement.clearParameters();
             }
             con.close();
+            return test;
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return test;
     }
 
     /** Removes selected modules from favourites.
      * 
      * @param user
      * @param module 
+     * return Test variable for unit testing
      */
-    public void removeFavModule(String user, String module)
+    public int removeFavModule(String user, String module)
     {
         Connection con;
         int moduleID = Integer.parseInt(module);
-
+        int test=0;
         try 
         {
             con = DBConnection.createConnection();
@@ -65,14 +69,15 @@ public class Modules
             prepStatement = con.prepareStatement("DELETE FROM student_modules WHERE studentID = ? AND moduleID = ?");
             prepStatement.setString(1, user);
             prepStatement.setInt(2, moduleID);
-            prepStatement.executeUpdate();
+            test = prepStatement.executeUpdate();
             prepStatement.clearParameters();
 
             con.close();
+            return test;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        return test;
     }
 
     /** Pull modules from DB and return them.
