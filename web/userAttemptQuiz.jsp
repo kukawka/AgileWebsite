@@ -31,7 +31,7 @@ Author     : Atanas
         <div class="page-header">
             <h1 style="color:black; margin-left: 5%;"><b><%= quizDetails.getTitle()%></b><small style="font-size: 20px; color:lightgrey; margin-left: 5%;">Date: <%= quizDetails.getDate()%></small></h1>
         </div>
-        <form class="form-horizontal" style="width: 100%;">
+        
             <div class="form-group" style="width: 100%;">
             </div>
             <div class="form-group" style="width: 100%;">
@@ -40,14 +40,16 @@ Author     : Atanas
                     <% if (quizDetails.getAvailability()) {%>
                     <input  class="btn btn-lg btn-primary" id='button' onclick="showDiv()" value="Start Quiz" style="margin-left: 40%; margin-top: 15%; width: 300px; height: 100px;" />
                     <%if(taken != -1){%>
-                    <input  class="btn btn-lg btn-info" id='buttonSummary' onclick="showSummary()" value="Show Summary" style="margin-left: 40%; margin-top: 2%; width: 300px; height: 100px;" />
+                    <form id= "target" action="StudentSummary" method="POST">
+                    <input type="submit" class="btn btn-lg btn-info" id='buttonSummary' onclick="showSummary()" value="Show Summary" style="margin-left: 40%; margin-top: 2%; width: 300px; height: 100px;" />
                     <!-- If the quiz dosn't exist get the data for the user -->
+                    </form>
                     <%}} else {%> 
 
                     <%}%>
                 </div>
             </div>
-        </form>
+       
 
         
         <div id="showDiv" style="display: none;">
@@ -97,9 +99,6 @@ Author     : Atanas
         </form>
         </div><div class="quiz-result"></div>
 
-        <div id="showSummaryDiv" style="display: none;">
-            <p>THIS IS WORKING</p>
-        </div>
 
         <span id="questionTotal" data-question-total=<%=quizDetails.getQuestions().size()%>></span>
         <span id="questionAnswer" data-question-answer="<%=correctAnswers%>"></span> <!-- Sending the correct answers -->
