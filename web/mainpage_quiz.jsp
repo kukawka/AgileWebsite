@@ -16,25 +16,27 @@
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 
-        <TITLE>Your Title Here</TITLE>
+        <TITLE>Quiz Page</TITLE>
     </HEAD>
     <BODY BGCOLOR="fff">
         <% LoggedIn login = (LoggedIn) session.getAttribute("LoggedIn");%>
-		<jsp:include page="/navBar.jsp" />
-		
+        <jsp:include page="/navBar.jsp" />
+
         <div class="main">
             <div class="page-header">
-			
-                <div style="display: inline-block; width:500px;">
-                <h1  style="width:20%; display: inline-block;">&nbsp&nbsp&nbsp<%=request.getAttribute("heading")%></h1>
-                <h1 style='width:60%; ; float:right; display: inline-block; margin-bottom:-150px;'>
+
+
+                <h1>&nbsp&nbsp&nbsp<%=request.getAttribute("heading")%></h1>
+                <%if (login.getType().equals("Staff")) {%>
                 <form method="Get" action="StaffStartQuiz" >
-                        <input type="hidden" name="moduleID" value="<%=request.getParameter("id")%>">
-                        <input type="submit" id="submit1" style="font-size:30px;border-style:none;font-family: 'Raleway',sans-serif;"  value="Create a Quiz &#10010;"/>
-                </form> </h1>
-                </div>
+                    <input type="hidden" name="moduleID" value="<%=request.getParameter("id")%>">
+                    <input type="submit" id="submit1" style="font-size:25px; border-style:none; font-family: 'Raleway',sans-serif; width:300px; height:50px; margin-left: 25px; margin-top: 15px; border: 1px solid grey;"  value="Create a Quiz &#10010;"/>
+                </form>
+                <% } %>
+
+
                 <% if ((login.getType()).equals("Student")) { %>
-                <div class="sort">
+                <div class="sort" style="margin-top: -25px;">
                     <label for="favoritefood">Sort quizzes by: </label>
                     <select class="Sorting">
                         <option value="Nothing" >Nothing</option>
@@ -44,7 +46,9 @@
                     </select>
                 </div>
                 <% } %>
-            </div><br><div class="grid">
+            </div>
+            <br>
+            <div class="grid">
 
                 <%
 
@@ -52,8 +56,7 @@
                     if ((login.getType()).equals("Staff")) {   // gives the creation option to the Staff member
 
                 %>  
-                <%
-                    }
+                <%                    }
                     for (int i = 0; i < quiz.size(); i++) {
                 %>
                 <div class="grid-item" style="width:400px;">
@@ -70,16 +73,16 @@
                             %>  
                             <input type="hidden" class="quizID" name="quizID" value="<%=quiz.get(i).getID()%>"/>
                             <input type="submit" class="name" name="info" id="submit2" value="<%=quiz.get(i).getName()%>"/>
-                            
-                                
-                                <div class="btnhandler" <% if (!((login.getType()).equals("Student") && quiz.get(i).getCompletion())) { %> style="display: none;"<% } %> >    
-                                    
+
+
+                            <div class="btnhandler" <% if (!((login.getType()).equals("Student") && quiz.get(i).getCompletion())) { %> style="display: none;"<% } %> >    
+
                                 <span class="glyphicon glyphicon-ok"></span>
-                                </div>
-                                     
-                                
-                            
-    
+                            </div>
+
+
+
+
                         </form> 
                 </div>
                 <%
@@ -90,9 +93,9 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
         <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-        <script src="<%= request.getContextPath() %>/js/quizSorting.js"></script>
+        <script src="<%= request.getContextPath()%>/js/quizSorting.js"></script>
         <script>
-            
+
             $('.grid').isotope({
                 itemSelector: '.grid-item',
                 masonry: {
